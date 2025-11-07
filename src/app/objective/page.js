@@ -1,0 +1,125 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { IoArrowBack, IoCheckmarkCircle } from "react-icons/io5";
+import { useLanguage } from "@/hooks/useLanguage";
+
+export default function ObjectivePage() {
+  const router = useRouter();
+  const { t, lang } = useLanguage();
+  const [objective, setObjective] = useState("");
+
+  // جلب الـ CV الحالي من localStorage
+  useEffect(() => {
+    const cv = JSON.parse(localStorage.getItem("currentCV"));
+    if (cv && cv.objective) setObjective(cv.objective);
+  }, []);
+
+  const handleBack = () => router.back();
+
+  const handleSave = () => {
+    if (!objective.trim()) {
+      alert(t["pleaseEnterObjective"] || t["Please enter your career objective"]);
+      return;
+    }
+
+    const cv = JSON.parse(localStorage.getItem("currentCV")) || {};
+    const updated = { ...cv, objective, lastUpdated: new Date().toISOString() };
+    localStorage.setItem("currentCV", JSON.stringify(updated));
+
+    alert(t["savedSuccessfully"] || t["Career Objective Saved Successfully!"]);
+    router.back();
+  };
+
+  const tips = [
+    t["tip1"] || t["Keep it brief (2-3 sentences)"],
+    t["tip2"] || t["Mention your career goals"],
+    t["tip3"] || t["Highlight what you can offer"],
+    t["tip4"] || t["Tailor it to the specific job"],
+  ];
+
+  const examples = [
+    t["example1"] ||
+      t["Seeking a challenging position in software development where I can utilize my programming skills and contribute to innovative projects while continuing to learn and grow professionally."],
+    t["example2"] ||
+      t["To obtain a marketing manager position in a dynamic organization where I can apply my 5 years of experience in digital marketing to drive brand growth and increase market share."],
+  ];
+
+  return (
+    <div
+      className={`min-h-screen flex flex-col bg-white ${lang === "ar" ? "text-right" : "text-left"}`}
+      dir={lang === "ar" ? "rtl" : "ltr"}
+      style={{ fontFamily: lang === "ar" ? "Cairo, sans-serif" : "Poppins, sans-serif" }}
+    >
+      {/* Header */}
+      <header className="bg-teal-600 text-white py-4 px-6 flex items-center justify-between">
+        <button onClick={handleBack} className="p-2 hover:text-gray-200">
+          <IoArrowBack size={22} />
+        </button>
+        <h1 className="text-xl font-bold">{t["careerObjective"] || t["Career Objective"]}</h1>
+        <div className="w-6" />
+      </header>
+
+      {/* Content */}
+      <main className="flex-1 overflow-y-auto p-6 space-y-8">
+        {/* Objective Input */}
+        <div>
+          <label className="block text-gray-700 font-semibold mb-2">
+            {t["yourCareerObjective"] || t["Your Career Objective"]}
+          </label>
+          <textarea
+            className="w-full border border-gray-200 rounded-xl p-4 text-gray-800 bg-gray-50 focus:ring-2 focus:ring-teal-500 focus:outline-none"
+            rows={8}
+            maxLength={500}
+            placeholder={
+              t["objectivePlaceholder"] ||
+              t["Example: Seeking a challenging position in a reputable organization where I can utilize my skills and knowledge for the organization's growth..."]
+            }
+            value={objective}
+            onChange={(e) => setObjective(e.target.value)}
+          />
+          <p className="text-right text-sm text-gray-500 mt-1">
+            {objective.length}/500 {t["characters"] || t["characters"]}
+          </p>
+        </div>
+
+        {/* Tips */}
+        <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
+          <h3 className="font-bold text-gray-800 mb-3">{t["tipsTitle"] || t["Tips for a great objective:"]}</h3>
+          <ul className="space-y-2">
+            {tips.map((tip, i) => (
+              <li key={i} className="flex items-center gap-2 text-gray-600">
+                <IoCheckmarkCircle size={18} className="text-teal-600" />
+                <span>{tip}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Examples */}
+        <div className="bg-green-50 border-l-4 border-teal-500 p-5 rounded-xl">
+          <h3 className="font-bold text-teal-800 mb-3">{t["goodExamples"] || t["Good Examples:"]}</h3>
+          {examples.map((ex, i) => (
+            <blockquote
+              key={i}
+              className="bg-white border border-green-100 p-3 rounded-lg text-gray-700 italic mb-3"
+            >
+              “{ex}”
+            </blockquote>
+          ))}
+        </div>
+      </main>
+
+      {/* Save Button */}
+      <div className="p-5 border-t border-gray-200 bg-white">
+        <button
+          onClick={handleSave}
+          className="w-full bg-teal-600 hover:bg-teal-700 text-white py-3 rounded-xl font-bold transition"
+        >
+          {t["saveObjective"] || t["Save Objective"]}
+        </button>
+      </div>
+    </div>
+  );
+}

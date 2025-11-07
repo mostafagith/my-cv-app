@@ -1,0 +1,213 @@
+"use client";
+import { useEffect, useState } from "react";
+import { IoArrowBack, IoTrashOutline, IoAddCircleOutline, IoCheckmarkCircle } from "react-icons/io5";
+import { useRouter } from "next/navigation";
+import { useLanguage } from "@/hooks/useLanguage";
+
+export default function ReferencesPage() {
+  const router = useRouter();
+  const { t, lang } = useLanguage();
+
+  const [references, setReferences] = useState([]);
+
+  // ✅ تحميل البيانات من currentCV
+  useEffect(() => {
+    const savedCV = JSON.parse(localStorage.getItem("currentCV") || "{}");
+    if (savedCV.references) {
+      setReferences(savedCV.references);
+    } else {
+      setReferences([
+        {
+          id: Date.now().toString(),
+          name: "",
+          jobTitle: "",
+          company: "",
+          email: "",
+          phone: "",
+        },
+      ]);
+    }
+  }, []);
+
+  // ✅ حفظ التغييرات في localStorage داخل currentCV
+  const saveToLocalStorage = (updatedRefs) => {
+    const savedCV = JSON.parse(localStorage.getItem("currentCV") || "{}");
+    const updatedCV = { ...savedCV, references: updatedRefs };
+    localStorage.setItem("currentCV", JSON.stringify(updatedCV));
+  };
+
+  const handleAddReference = () => {
+    const newRef = {
+      id: Date.now().toString(),
+      name: "",
+      jobTitle: "",
+      company: "",
+      email: "",
+      phone: "",
+    };
+    const updated = [...references, newRef];
+    setReferences(updated);
+  };
+
+  const handleChange = (index, field, value) => {
+    const updated = [...references];
+    updated[index][field] = value;
+    setReferences(updated);
+  };
+
+  const handleRemoveReference = (index) => {
+    if (references.length === 1) {
+      alert(t["You must have at least one reference"]);
+      return;
+    }
+
+    if (confirm(t["Are you sure you want to remove this reference?"])) {
+      const updated = references.filter((_, i) => i !== index);
+      setReferences(updated);
+      saveToLocalStorage(updated);
+    }
+  };
+
+  const handleSave = () => {
+    const hasEmptyFields = references.some(
+      (ref) => !ref.name.trim() || !ref.jobTitle.trim() || !ref.company.trim()
+    );
+    if (hasEmptyFields) {
+      alert(t["Please fill name, job title, and company for all references"]);
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const invalidEmail = references.some(
+      (ref) => ref.email && !emailRegex.test(ref.email)
+    );
+    if (invalidEmail) {
+      alert(t["Please enter valid email addresses"]);
+      return;
+    }
+
+    saveToLocalStorage(references);
+    alert(t["References Saved Successfully!"]);
+    router.back();
+  };
+
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Header */}
+      <div className="bg-teal-600 text-white flex items-center justify-between px-6 py-5">
+        <button onClick={() => router.back()} className="p-2">
+          <IoArrowBack size={24} />
+        </button>
+        <h1 className="text-xl font-bold">{t["References"]}</h1>
+        <div className="w-6" />
+      </div>
+
+      <div className="max-w-3xl mx-auto p-6">
+        <h2 className="text-2xl font-bold mb-2 text-gray-800">{t["Professional References"]}</h2>
+        <p className="text-gray-500 mb-6">{t["Add people who can recommend you professionally"]}</p>
+
+        {references.map((ref, index) => (
+          <div key={ref.id} className="bg-gray-50 border border-gray-200 rounded-xl p-5 mb-4">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-teal-600 font-semibold">
+                {t["Reference"]} {index + 1}
+              </h3>
+              {references.length > 1 && (
+                <button onClick={() => handleRemoveReference(index)}>
+                  <IoTrashOutline size={20} className="text-red-500" />
+                </button>
+              )}
+            </div>
+
+            <div className="space-y-3">
+              <div>
+                <label className="font-medium text-sm text-gray-700">{t["Reference's Name *"]}</label>
+                <input
+                  className="w-full border border-gray-300 rounded-md p-2 mt-1"
+                  placeholder={t["Enter full name"]}
+                  value={ref.name}
+                  onChange={(e) => handleChange(index, "name", e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label className="font-medium text-sm text-gray-700">{t["Job Title *"]}</label>
+                <input
+                  className="w-full border border-gray-300 rounded-md p-2 mt-1"
+                  placeholder={t["Enter job title"]}
+                  value={ref.jobTitle}
+                  onChange={(e) => handleChange(index, "jobTitle", e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label className="font-medium text-sm text-gray-700">{t["Company Name *"]}</label>
+                <input
+                  className="w-full border border-gray-300 rounded-md p-2 mt-1"
+                  placeholder={t["Enter company name"]}
+                  value={ref.company}
+                  onChange={(e) => handleChange(index, "company", e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label className="font-medium text-sm text-gray-700">{t["Email Address"]}</label>
+                <input
+                  className="w-full border border-gray-300 rounded-md p-2 mt-1"
+                  placeholder={t["Enter email address"]}
+                  type="email"
+                  value={ref.email}
+                  onChange={(e) => handleChange(index, "email", e.target.value)}
+                />
+              </div>
+
+              <div>
+                <label className="font-medium text-sm text-gray-700">{t["Phone Number"]}</label>
+                <input
+                  className="w-full border border-gray-300 rounded-md p-2 mt-1"
+                  placeholder={t["Enter phone number"]}
+                  value={ref.phone}
+                  onChange={(e) => handleChange(index, "phone", e.target.value)}
+                />
+              </div>
+            </div>
+          </div>
+        ))}
+
+        <button
+          onClick={handleAddReference}
+          className="flex items-center justify-center w-full border-2 border-dashed border-teal-500 text-teal-600 py-3 rounded-lg mb-6"
+        >
+          <IoAddCircleOutline size={22} />
+          <span className="ml-2 font-medium">{t["Add Another Reference"]}</span>
+        </button>
+
+        <button
+          onClick={handleSave}
+          className="w-full bg-teal-600 text-white py-3 rounded-lg font-bold"
+        >
+          {t["Save References"]}
+        </button>
+
+        {/* Tips Section */}
+        <div className="bg-gray-50 border border-gray-200 rounded-xl p-5 mt-8">
+          <h3 className="font-semibold text-gray-800 mb-3">{t["Reference Tips:"]}</h3>
+          <ul className="space-y-2 text-gray-600">
+            <li className="flex items-center">
+              <IoCheckmarkCircle size={16} className="text-teal-500 mr-2" />
+              {t["Ask for permission before listing someone"]}
+            </li>
+            <li className="flex items-center">
+              <IoCheckmarkCircle size={16} className="text-teal-500 mr-2" />
+              {t["Choose people who know your work well"]}
+            </li>
+            <li className="flex items-center">
+              <IoCheckmarkCircle size={16} className="text-teal-500 mr-2" />
+              {t["Include 2-3 professional references"]}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
