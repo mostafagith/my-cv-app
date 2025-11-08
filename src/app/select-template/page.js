@@ -9,7 +9,6 @@ import { Globe } from "lucide-react";
 
 export default function SelectTemplate() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const { t, lang,changeLang } = useLanguage();
 
   const [selectedTemplate, setSelectedTemplate] = useState(null);
