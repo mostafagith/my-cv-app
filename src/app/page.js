@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Globe, Share2, Gift, Bell, Settings, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/hooks/useLanguage";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 function AdMobBannerPlaceholder() {
   return (
@@ -23,7 +23,14 @@ export default function HomePage() {
   const [openLang, setOpenLang] = useState(false);
 
   const toggleLangMenu = () => setOpenLang(!openLang);
+const [cvs, setCvs] = useState([]);
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedCvs = JSON.parse(localStorage.getItem("cvs") || "[]");
+      setCvs(savedCvs);
+    }
+  }, []);
   return (
     <div
       className={`min-h-screen bg-gray-50 font-sans transition-all duration-300 ${
@@ -154,7 +161,7 @@ export default function HomePage() {
           </h2>
 
           <div className="flex flex-col sm:flex-row gap-4 mt-4">
-            {JSON.parse(localStorage.getItem("cvs")).length>0?
+            {cvs.length>0?
             
               <Link
                 href="/create"
