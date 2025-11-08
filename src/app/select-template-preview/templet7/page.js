@@ -39,14 +39,14 @@ const [cvData, setCvData] = useState(null);
       content.style.border = "none";
       content.style.borderRadius = "0";
       content.style.padding = "32px";
-      content.style.maxWidth = "896px";
-      content.style.width = "896px";
+      content.style.maxWidth = "650px";
+      content.style.width = "650px";
 
       const canvas = await html2canvas(content, {
         scale: 2,
         useCORS: true,
         backgroundColor: "#ffffff",
-        width: 896,
+        width: 650,
         windowWidth: 1200,
       });
 
@@ -192,8 +192,8 @@ const [cvData, setCvData] = useState(null);
             position: absolute;
             left: 0;
             top: 0;
-            width: 210mm !important;
-            max-width: 210mm !important;
+            width: 650 !important;
+            max-width: 650 !important;
             box-shadow: none !important;
             border: none !important;
             border-radius: 0 !important;

@@ -42,16 +42,16 @@ export default function PdfPreview() {
       content.style.border = "none";
       content.style.borderRadius = "0";
       content.style.padding = "32px";
-      content.style.maxWidth = "896px";
-      content.style.width = "896px";
+      content.style.maxWidth = "650px";
+      content.style.width = "650px";
 
       // إنشاء Canvas بجودة عالية
       const canvas = await html2canvas(content, {
         scale: 2,
         useCORS: true,
         backgroundColor: "#ffffff",
-        width: 896,
-        windowWidth: 1200,
+        width: 650,
+        windowWidth: 650,
       });
 
       const imgData = canvas.toDataURL("image/jpeg", 0.9);
@@ -199,8 +199,8 @@ export default function PdfPreview() {
             position: absolute;
             left: 0;
             top: 0;
-            width: 210mm !important;
-            max-width: 210mm !important;
+            width: 600px !important;
+            max-width: 600px  !important;
             box-shadow: none !important;
             border: none !important;
             border-radius: 0 !important;
@@ -543,6 +543,267 @@ export default function PdfPreview() {
             ))}
           </div>
         )}
+
+        {/* EDUCATION */}
+{education?.length > 0 && (
+  <div className="section" style={{ marginBottom: "16px" }}>
+    <div
+      style={{
+        fontSize: "18px",
+        fontWeight: "bold",
+        color: "#000",
+        textTransform: "uppercase",
+      }}
+    >
+      EDUCATION
+    </div>
+    <div
+      style={{
+        height: "1.5px",
+        backgroundColor: "#000000a4",
+        borderRadius: "2px",
+        marginBottom: "6px",
+      }}
+    ></div>
+
+    {education.map((edu, i) => (
+      <div key={i} style={{ marginBottom: "15px" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginBottom: "4px",
+          }}
+        >
+          <div style={{ fontWeight: "bold", fontSize: "16px", color: "#000" }}>
+            {edu.degree || "Degree"}
+          </div>
+          <div style={{ fontSize: "14px", color: "#000", fontWeight: 600 }}>
+            {edu.startDate || ""} {edu.endDate ? " - " + edu.endDate : ""}
+          </div>
+        </div>
+        {edu.institution && (
+          <div
+            style={{
+              fontSize: "14px",
+              color: "#666",
+              fontStyle: "italic",
+              marginBottom: "6px",
+            }}
+          >
+            {edu.institution}
+          </div>
+        )}
+        {edu.description && (
+          <div style={{ marginLeft: "10px" }}>
+            {edu.description
+              .split("\n")
+              .filter((p) => p.trim())
+              .map((p, j) => (
+                <div
+                  key={j}
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    marginBottom: "4px",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: "20px",
+                      color: "#333",
+                      marginRight: "4px",
+                    }}
+                  >
+                    •
+                  </span>
+                  <span style={{ fontSize: "14px", color: "#333", flex: 1 }}>
+                    {p.trim()}
+                  </span>
+                </div>
+              ))}
+          </div>
+        )}
+      </div>
+    ))}
+  </div>
+)}
+
+{/* SKILLS */}
+{skills?.length > 0 && (
+  <div className="section" style={{ marginBottom: "16px" }}>
+    <div
+      style={{
+        fontSize: "18px",
+        fontWeight: "bold",
+        color: "#000",
+        textTransform: "uppercase",
+      }}
+    >
+      SKILLS
+    </div>
+    <div
+      style={{
+        height: "1.5px",
+        backgroundColor: "#000000a4",
+        borderRadius: "2px",
+        marginBottom: "6px",
+      }}
+    ></div>
+
+    <div style={{ marginLeft: "10px" }}>
+      {skills.map((skill, i) => (
+        <div
+          key={i}
+          style={{
+            display: "flex",
+            alignItems: "flex-start",
+            marginBottom: "4px",
+          }}
+        >
+          <span
+            style={{
+              fontSize: "20px",
+              color: "#333",
+              marginRight: "4px",
+            }}
+          >
+            •
+          </span>
+          <span
+            style={{
+              fontSize: "14px",
+              color: "#333",
+              flex: 1,
+            }}
+          >
+            {typeof skill === "object"
+              ? skill.name || "Skill"
+              : skill}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
+
+{/* LANGUAGES */}
+{languages?.length > 0 && (
+  <div className="section" style={{ marginBottom: "16px" }}>
+    <div
+      style={{
+        fontSize: "18px",
+        fontWeight: "bold",
+        color: "#000",
+        textTransform: "uppercase",
+      }}
+    >
+      LANGUAGES
+    </div>
+    <div
+      style={{
+        height: "1.5px",
+        backgroundColor: "#000000a4",
+        borderRadius: "2px",
+        marginBottom: "6px",
+      }}
+    ></div>
+
+    <div style={{ marginLeft: "10px" }}>
+      {languages.map((lang, i) => (
+        <div
+          key={i}
+          style={{
+            display: "flex",
+            alignItems: "flex-start",
+            marginBottom: "4px",
+          }}
+        >
+          <span
+            style={{
+              fontSize: "20px",
+              color: "#333",
+              marginRight: "4px",
+            }}
+          >
+            •
+          </span>
+          <span
+            style={{
+              fontSize: "14px",
+              color: "#333",
+              flex: 1,
+            }}
+          >
+            {lang.name}
+            {lang.proficiency ? ` (${lang.proficiency})` : ""}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
+
+{/* CERTIFICATES & COURSES */}
+{certificates?.length > 0 && (
+  <div className="section" style={{ marginBottom: "16px" }}>
+    <div
+      style={{
+        fontSize: "18px",
+        fontWeight: "bold",
+        color: "#000",
+        textTransform: "uppercase",
+      }}
+    >
+      COURSES & CERTIFICATIONS
+    </div>
+    <div
+      style={{
+        height: "1.5px",
+        backgroundColor: "#000000a4",
+        borderRadius: "2px",
+        marginBottom: "6px",
+      }}
+    ></div>
+
+    <div style={{ marginLeft: "10px" }}>
+      {certificates.map((cert, i) => (
+        <div
+          key={i}
+          style={{
+            display: "flex",
+            alignItems: "flex-start",
+            marginBottom: "4px",
+          }}
+        >
+          <span
+            style={{
+              fontSize: "20px",
+              color: "#333",
+              marginRight: "4px",
+            }}
+          >
+            •
+          </span>
+          <span
+            style={{
+              fontSize: "14px",
+              color: "#333",
+              flex: 1,
+            }}
+          >
+            {cert.name}
+            {cert.date ? ` - ${cert.date}` : ""}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
+
+
+
+
 
         
 
