@@ -159,7 +159,7 @@ const [openLang, setOpenLang] = useState(false);
 
       <div className="py-3 px-5 md:py-6 md:px-20">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-2xl font-extrabold text-teal-700">
+          <h1 className="text-xl font-extrabold text-teal-700 md:text-2xl">
             {t.createPageTitle || "My CVs"}
           </h1>
           <button
