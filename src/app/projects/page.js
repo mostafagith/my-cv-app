@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { IoArrowBack, IoTrashOutline, IoAddCircleOutline } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/hooks/useLanguage";
+import toast from "react-hot-toast";
 
 export default function ProjectsDetails() {
   const router = useRouter();
@@ -64,7 +65,7 @@ export default function ProjectsDetails() {
 
   const handleRemoveProject = (index) => {
     if (projects.length === 1) {
-      alert(t["You must have at least one project entry"]);
+      toast.error(t["You must have at least one project entry"]);
       return;
     }
     if (confirm(t["Are you sure you want to remove this project?"])) {
@@ -74,13 +75,21 @@ export default function ProjectsDetails() {
   };
 
   const handleSave = () => {
-    const hasEmptyFields = projects.some(
-      (p) => !p.title.trim() || !p.description.trim()
-    );
-    if (hasEmptyFields) {
-      alert(t["Please fill project title and description for all projects"]);
-      return;
+
+    for (let i = 0; i < projects.length; i++) {
+      const project = projects[i];
+
+      if (!project.title?.trim()) {
+        toast.error(`${t["please_enter_project_title"]} (Project ${i + 1})`);
+        return; // دلوقتي هيخرج من handleSave كامل
+      }
+
+      if (!project.description?.trim()) {
+        toast.error(`${t["please_enter_project_description"]} (Project ${i + 1})`);
+        return; // هيخرج من handleSave كامل
+      }
     }
+
     // ✅ نجيب الـ CV القديم بدل ما نمسحه
     const storedCV = JSON.parse(localStorage.getItem("currentCV")) || {};
 
@@ -89,8 +98,10 @@ export default function ProjectsDetails() {
 
     // ✅ نحفظ الـ CV كامل
     localStorage.setItem("currentCV", JSON.stringify(storedCV));
-    alert(t["Projects saved successfully!"]);
-    router.back();
+    toast.success(t.saved_successfully); 
+    setTimeout(()=>{
+      router.back();
+    },1000) 
   };
 
   return (
@@ -98,7 +109,7 @@ export default function ProjectsDetails() {
       {/* Header */}
       <div className="bg-teal-500 text-white flex items-center justify-between px-5 py-5">
         <button onClick={handleBack}>
-          <IoArrowBack size={24} />
+          <IoArrowBack size={24} className="cursor-pointer" />
         </button>
         <h1 className="text-xl font-bold">{t["Projects Details"]}</h1>
         <div className="w-6" />
@@ -124,7 +135,7 @@ export default function ProjectsDetails() {
               {projects.length > 1 && (
                 <button
                   onClick={() => handleRemoveProject(index)}
-                  className="text-red-500"
+                  className="text-red-500 cursor-pointer"
                 >
                   <IoTrashOutline size={20} />
                 </button>
@@ -133,9 +144,10 @@ export default function ProjectsDetails() {
 
             <div className="space-y-3">
               <div>
-                <label className="block text-sm font-semibold mb-1">
-                  {t["Project Title"]} *
+                <label className="font-semibold text-gray-700">
+                  {t["Project Title"]} <span className="text-red-500">*</span>
                 </label>
+                
                 <input
                   className="w-full border rounded-lg p-2"
                   value={project.title}
@@ -147,8 +159,8 @@ export default function ProjectsDetails() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold mb-1">
-                  {t["Project Description"]} *
+                <label className="font-semibold text-gray-700">
+                  {t["Project Description"]} <span className="text-red-500">*</span>
                 </label>
                 <textarea
                   className="w-full border rounded-lg p-2 h-28 resize-none"
@@ -227,7 +239,7 @@ export default function ProjectsDetails() {
 
         <button
           onClick={handleAddProject}
-          className="flex items-center justify-center gap-2 border-2 border-dashed border-teal-500 text-teal-500 w-full py-2 rounded-lg mb-5"
+          className="flex items-center cursor-pointer justify-center gap-2 border-2 border-dashed border-teal-500 text-teal-500 w-full py-2 rounded-lg mb-5"
         >
           <IoAddCircleOutline size={20} />
           {t["Add Another Project"]}
@@ -235,7 +247,7 @@ export default function ProjectsDetails() {
 
         <button
           onClick={handleSave}
-          className="bg-teal-500 text-white w-full py-3 rounded-lg font-semibold"
+          className="bg-teal-500 text-white w-full py-3 rounded-lg font-semibold cursor-pointer"
         >
           {t["Save Projects"]}
         </button>

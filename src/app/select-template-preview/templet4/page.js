@@ -289,7 +289,8 @@ export default function PdfPreview() {
           border: 'none',
           color: 'white',
           cursor: 'pointer',
-          borderRadius: '4px'
+          borderRadius: '4px',
+          cursor:"pointer"
         }}>
           <IoArrowBack size={18} />
         </button>

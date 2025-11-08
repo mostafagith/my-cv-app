@@ -51,7 +51,7 @@ const [cvs, setCvs] = useState([]);
   <div className="relative flex-shrink-0">
     <button
       onClick={toggleLangMenu}
-      className="p-2 bg-white/20 rounded-full hover:bg-white/30 transition"
+      className="p-2 bg-white/20 rounded-full hover:bg-white/30 transition cursor-pointer"
     >
       <Globe size={22} className="text-white" />
     </button>
@@ -68,7 +68,7 @@ const [cvs, setCvs] = useState([]);
             changeLang("en");
             setOpenLang(false);
           }}
-          className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+          className="block cursor-pointer px-4 py-2 hover:bg-gray-100 w-full text-left"
         >
           🇺🇸 en - English
         </button>
@@ -78,7 +78,7 @@ const [cvs, setCvs] = useState([]);
             changeLang("ar");
             setOpenLang(false);
           }}
-          className="block px-4 py-2 hover:bg-gray-100 w-full text-right"
+          className="block cursor-pointer px-4 py-2 hover:bg-gray-100 w-full text-right"
         >
           🇸🇦 ar - عربي
         </button>
@@ -88,7 +88,7 @@ const [cvs, setCvs] = useState([]);
             changeLang("fr");
             setOpenLang(false);
           }}
-          className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+          className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
         >
           🇫🇷 fr - Français
         </button>
@@ -98,7 +98,7 @@ const [cvs, setCvs] = useState([]);
             changeLang("es");
             setOpenLang(false);
           }}
-          className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+          className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
         >
           🇪🇸 es - Español
         </button>
@@ -108,7 +108,7 @@ const [cvs, setCvs] = useState([]);
             changeLang("de");
             setOpenLang(false);
           }}
-          className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+          className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
         >
           🇩🇪 de - Deutsch
         </button>
@@ -118,7 +118,7 @@ const [cvs, setCvs] = useState([]);
             changeLang("it");
             setOpenLang(false);
           }}
-          className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+          className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
         >
           🇮🇹 it - Italiano
         </button>
@@ -128,7 +128,7 @@ const [cvs, setCvs] = useState([]);
             changeLang("pt");
             setOpenLang(false);
           }}
-          className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+          className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
         >
           🇵🇹 pt - Português
         </button>

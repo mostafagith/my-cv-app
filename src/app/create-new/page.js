@@ -184,14 +184,14 @@ const [openLang, setOpenLang] = useState(false);
       style={{ fontFamily: lang === "ar" ? "Cairo, sans-serif" : "Poppins, sans-serif" }}
     >
       <div className="bg-teal-500 py-3 px-5 md:py-6 md:px-20 flex items-center justify-between mb-4">
-        <button onClick={handleBack} className="text-white text-xl">
+        <button onClick={handleBack} className="text-white cursor-pointer text-xl">
           <ChevronRight />
         </button>
         <h1 className="text-white font-bold text-xl text-center flex-1">{t['createNewCv']}</h1>
         <div className="relative">
     <button
       onClick={toggleLangMenu}
-      className="p-2 bg-white/20 rounded-full hover:bg-white/30 transition"
+      className="p-2 bg-white/20 cursor-pointer rounded-full hover:bg-white/30 transition"
     >
       <Globe size={22} className="text-white" />
     </button>
@@ -208,7 +208,7 @@ const [openLang, setOpenLang] = useState(false);
             changeLang("en");
             setOpenLang(false);
           }}
-          className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+          className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
         >
           🇺🇸 en - English
         </button>
@@ -218,7 +218,7 @@ const [openLang, setOpenLang] = useState(false);
             changeLang("ar");
             setOpenLang(false);
           }}
-          className="block px-4 py-2 hover:bg-gray-100 w-full text-right"
+          className="block cursor-pointer px-4 py-2 hover:bg-gray-100 w-full text-right"
         >
           🇸🇦 ar - عربي
         </button>
@@ -228,7 +228,7 @@ const [openLang, setOpenLang] = useState(false);
             changeLang("fr");
             setOpenLang(false);
           }}
-          className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+          className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
         >
           🇫🇷 fr - Français
         </button>
@@ -238,7 +238,7 @@ const [openLang, setOpenLang] = useState(false);
             changeLang("es");
             setOpenLang(false);
           }}
-          className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+          className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
         >
           🇪🇸 es - Español
         </button>
@@ -248,7 +248,7 @@ const [openLang, setOpenLang] = useState(false);
             changeLang("de");
             setOpenLang(false);
           }}
-          className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+          className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
         >
           🇩🇪 de - Deutsch
         </button>
@@ -258,7 +258,7 @@ const [openLang, setOpenLang] = useState(false);
             changeLang("it");
             setOpenLang(false);
           }}
-          className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+          className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
         >
           🇮🇹 it - Italiano
         </button>
@@ -268,7 +268,7 @@ const [openLang, setOpenLang] = useState(false);
             changeLang("pt");
             setOpenLang(false);
           }}
-          className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+          className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
         >
           🇵🇹 pt - Português
         </button>
@@ -285,10 +285,10 @@ const [openLang, setOpenLang] = useState(false);
                 <p className="text-sm text-gray-600 mt-1">{t.createNewSubtitle || "Fill sections below to build your CV"}</p>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
+            <div className="flex flex-col  sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
                 <button
                 onClick={resetCV}
-                className="flex items-center justify-center gap-2 bg-white border border-gray-200 px-3 py-2 rounded-lg shadow-sm hover:shadow-md w-full sm:w-auto"
+                className="flex cursor-pointer items-center justify-center gap-2 bg-white border border-gray-200 px-3 py-2 rounded-lg shadow-sm hover:shadow-md w-full sm:w-auto"
                 >
                 <ClipboardList size={18} />
                 <span className="text-sm text-gray-700">{t.reset || "Reset"}</span>
@@ -296,7 +296,7 @@ const [openLang, setOpenLang] = useState(false);
 
                 <button
                   onClick={finalizeAndSave}
-                  className={`flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-white w-full sm:w-auto ${
+                  className={`flex items-center cursor-pointer justify-center gap-2 px-4 py-2 rounded-lg text-white w-full sm:w-auto ${
                       percentage < 50 ? "bg-gray-400 cursor-not-allowed" : "bg-teal-600 hover:bg-teal-700"
                   }`}
                   disabled={percentage < 50}
@@ -348,7 +348,7 @@ const [openLang, setOpenLang] = useState(false);
                   <span className="text-sm text-gray-500">{/* could show completion indicator per-section */}</span>
                   <button
                     onClick={() => openSection(sec.key)}
-                    className="p-2 rounded-md bg-teal-600 text-white hover:bg-teal-700"
+                    className="p-2 rounded-md bg-teal-600 text-white hover:bg-teal-700 cursor-pointer"
                     aria-label={`Open ${sec.key}`}
                   >
                     <ChevronRight size={18} />

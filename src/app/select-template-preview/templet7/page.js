@@ -217,14 +217,14 @@ const [cvData, setCvData] = useState(null);
 
       {/* HEADER */}
       <header className="bg-teal-600 text-white py-3 px-5 md:py-6 md:px-20 flex items-center justify-between shadow">
-        <button onClick={handleBack} className="p-1 hover:bg-teal-700 rounded">
+        <button onClick={handleBack} className="cursor-pointer p-1 hover:bg-teal-700 rounded cursor-pointer">
           ← Back
         </button>
-        <h1 className="font-bold text-sm md:text-base">CV Preview</h1>
+        <h1 className="font-bold text-sm md:text-base ">CV Preview</h1>
         <button
           onClick={handleGenerateAndDownload}
           disabled={isGenerating}
-          className={`flex items-center gap-1 bg-white text-teal-600 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
+          className={`flex items-center cursor-pointer gap-1 bg-white text-teal-600 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
             isGenerating ? "opacity-60" : "hover:bg-teal-50"
           }`}
         >

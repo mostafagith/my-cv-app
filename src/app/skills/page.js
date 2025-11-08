@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { IoArrowBack, IoTrashOutline, IoAddCircleOutline } from "react-icons/io5";
 import { useLanguage } from '@/hooks/useLanguage';
+import toast from "react-hot-toast";
 
 export default function Skills() {
   const router = useRouter();
@@ -29,7 +30,7 @@ export default function Skills() {
 
   const handleRemoveSkill = (index) => {
     if (skills.length === 1) {
-      alert(t['mustHaveAtLeastOneSkill']);
+      toast.error(t["mustHaveAtLeastOneSkill"]);
       return;
     }
     if (confirm(t['confirmRemoveSkill'])) {
@@ -38,15 +39,17 @@ export default function Skills() {
   };
 
   const handleSave = () => {
-    if (skills.some(s => !s.name.trim())) {
-      alert(t['fillAllSkillNames']);
+    if (skills.some(s => !s.name?.trim())) {
+      toast.error(t['fillAllSkillNames']);
       return;
     }
     const cv = JSON.parse(localStorage.getItem("currentCV")) || {};
     cv.skills = skills;
     localStorage.setItem("currentCV", JSON.stringify(cv));
-    alert(t['skillsSavedSuccessfully']);
-    router.back();
+    toast.success(t.saved_successfully); 
+    setTimeout(()=>{
+      router.back();
+    },1000)
   };
 
   const getLevelDescription = (level) => {
@@ -64,7 +67,7 @@ export default function Skills() {
     <div className="min-h-screen bg-white p-4 md:p-8">
       {/* Header */}
       <div className="flex items-center justify-between bg-teal-600 text-white p-4 rounded-md mb-6">
-        <button onClick={() => router.back()}><IoArrowBack size={24} /></button>
+        <button className="cursor-pointer" onClick={() => router.back()}><IoArrowBack size={24} /></button>
         <h1 className="text-xl font-bold">{t.skills}</h1>
         <div className="w-6" />
       </div>
@@ -75,7 +78,7 @@ export default function Skills() {
             <div className="flex justify-between items-center mb-3">
               <h2 className="font-semibold text-teal-600">{t.skill} {idx + 1}</h2>
               {skills.length > 1 && (
-                <button onClick={() => handleRemoveSkill(idx)} className="text-red-500">
+                <button onClick={() => handleRemoveSkill(idx)} className="cursor-pointer text-red-500">
                   <IoTrashOutline size={20} />
                 </button>
               )}
@@ -94,7 +97,7 @@ export default function Skills() {
                 <button
                   key={lvl}
                   onClick={() => handleSkillChange(idx, "level", lvl)}
-                  className={`w-10 h-10 flex items-center justify-center border rounded-md ${skill.level === lvl ? 'bg-teal-600 text-white' : 'bg-white'}`}
+                  className={` cursor-pointer w-10 h-10 flex items-center justify-center border rounded-md ${skill.level === lvl ? 'bg-teal-600 text-white' : 'bg-white'}`}
                 >
                   {lvl}
                 </button>
@@ -104,12 +107,12 @@ export default function Skills() {
           </div>
         ))}
 
-        <button onClick={handleAddSkill} className="flex items-center space-x-2 border border-teal-600 text-teal-600 p-2 rounded-md">
+        <button onClick={handleAddSkill} className="flex cursor-pointer items-center space-x-2 border border-teal-600 text-teal-600 p-2 rounded-md">
           <IoAddCircleOutline size={20} />
           <span>{t.addAnotherSkill}</span>
         </button>
 
-        <button onClick={handleSave} className="w-full bg-teal-600 text-white p-3 rounded-md font-bold">
+        <button onClick={handleSave} className="w-full cursor-pointer bg-teal-600 text-white p-3 rounded-md font-bold">
           {t['saveSkills']}
         </button>
       </div>

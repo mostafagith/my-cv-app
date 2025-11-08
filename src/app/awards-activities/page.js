@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { IoTrophyOutline, IoPeople, IoHeart, IoMedal, IoTrash, IoPencil, IoCheckmarkCircle } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/hooks/useLanguage";
+import toast from "react-hot-toast";
 
 export default function AwardsActivities() {
   const { t, lang } = useLanguage();
@@ -39,8 +40,13 @@ const resetForm = () => {
 };
 
 const handleAddAwardActivity = () => {
-  if (!name.trim() || !organization.trim()) {
-    alert(t["Please enter name and organization"]);
+  if (!name.trim()) {
+    toast.error(t["please_enter_name"]);
+    return;
+  }
+
+  if (!organization.trim()) {
+    toast.error(t["please_enter_organization"]);
     return;
   }
 
@@ -51,7 +57,7 @@ const handleAddAwardActivity = () => {
         ? { ...item, name, type, organization, date, description }
         : item
     );
-    alert(t["Updated successfully!"]);
+    toast.success(t["Updated successfully!"]);
   } else {
     updatedList = [
       ...awardsActivities,
@@ -64,7 +70,7 @@ const handleAddAwardActivity = () => {
         description,
       },
     ];
-    alert(t["Added successfully!"]);
+    toast.success(t["Added successfully!"]);
   }
 
   setAwardsActivities(updatedList);
@@ -86,7 +92,7 @@ const handleDelete = (id) => {
     const updated = awardsActivities.filter((item) => item.id !== id);
     setAwardsActivities(updated);
     saveToLocalStorage(updated);
-    alert(t["Deleted successfully!"]);
+    toast.success(t["Deleted successfully!"]);
   }
 };
 
@@ -94,8 +100,10 @@ const handleSaveAll = () => {
   const savedCV = JSON.parse(localStorage.getItem("currentCV") || "{}");
   const updatedCV = { ...savedCV, awardsActivities };
   localStorage.setItem("currentCV", JSON.stringify(updatedCV));
-  alert(t["Awards & Activities saved successfully!"]);
-  router.back();
+  toast.success(t["Awards & Activities saved successfully!"]);
+  setTimeout(()=>{
+      router.back();
+  },1000) 
 };
 
 
@@ -128,7 +136,7 @@ const handleSaveAll = () => {
           {["Award", "Activity", "Volunteer", "Competition"].map((typeOption) => (
             <button
               key={typeOption}
-              className={`px-3 py-2 rounded-lg border flex items-center gap-2 ${
+              className={`px-3 py-2 rounded-lg border flex items-center cursor-pointer gap-2 ${
                 type === typeOption
                   ? "bg-teal-600 text-white"
                   : "border-gray-300 text-gray-700"
@@ -171,14 +179,14 @@ const handleSaveAll = () => {
           {editingId && (
             <button
               onClick={resetForm}
-              className="flex-1 bg-gray-500 text-white py-2 rounded"
+              className="flex-1 bg-gray-500 text-white cursor-pointer py-2 rounded"
             >
               {t["Cancel"]}
             </button>
           )}
           <button
             onClick={handleAddAwardActivity}
-            className="flex-1 bg-teal-600 text-white py-2 rounded"
+            className="flex-1 cursor-pointer bg-teal-600 text-white py-2 cursor-pointer rounded"
           >
             {editingId ? t["Update"] : t["Add"]}
           </button>
@@ -210,10 +218,10 @@ const handleSaveAll = () => {
                 </div>
                 <div className="flex gap-2">
                   <button onClick={() => handleEdit(item)}>
-                    <IoPencil className="text-teal-600" />
+                    <IoPencil className="text-teal-600 cursor-pointer" />
                   </button>
                   <button onClick={() => handleDelete(item.id)}>
-                    <IoTrash className="text-red-500" />
+                    <IoTrash className="text-red-500 cursor-pointer" />
                   </button>
                 </div>
               </div>
@@ -226,7 +234,7 @@ const handleSaveAll = () => {
 
       <button
         onClick={handleSaveAll}
-        className="mt-8 bg-teal-600 text-white px-6 py-3 rounded-lg flex items-center gap-2"
+        className="mt-8 bg-teal-600 text-white cursor-pointer px-6 py-3 rounded-lg flex items-center gap-2"
       >
         <IoCheckmarkCircle />
         {t["Save & Finish"]}

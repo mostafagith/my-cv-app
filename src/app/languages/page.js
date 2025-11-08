@@ -30,7 +30,7 @@ export default function LanguagesPage() {
 
   const addLanguage = () => {
     if (!languageName.trim()) {
-      alert(t["Please enter a language name"]);
+      toast.error(t["Please enter a language name"]);
       return;
     }
 
@@ -41,7 +41,7 @@ export default function LanguagesPage() {
           ? { ...lang, name: languageName.trim(), proficiency: proficiency || t["Intermediate"] }
           : lang
       );
-      alert(t["Language updated successfully!"]);
+      toast.success(t["Language updated successfully!"]);
     } else {
       const newLang = {
         id: Date.now().toString(),
@@ -49,7 +49,7 @@ export default function LanguagesPage() {
         proficiency: proficiency || t["Intermediate"],
       };
       updated = [...languages, newLang];
-      alert(t["Language added successfully!"]);
+      toast.success(t["Language added successfully!"]);
     }
 
     setLanguages(updated);
@@ -70,13 +70,15 @@ export default function LanguagesPage() {
       const updated = languages.filter((lang) => lang.id !== id);
       setLanguages(updated);
       saveToLocalStorage(updated);
-      alert(t["Language removed successfully!"]);
+      toast.success(t["Language removed successfully!"]);
     }
   };
 
   const handleSave = () => {
-    alert(t["Languages saved successfully!"]);
-    router.back();
+    toast.success(t.saved_successfully); 
+    setTimeout(()=>{
+      router.back();
+    },1000)
   };
 
   const proficiencyLevels = [
@@ -90,7 +92,7 @@ export default function LanguagesPage() {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <div className="bg-teal-600 text-white flex items-center justify-between px-6 py-5">
-        <button onClick={() => router.back()} className="p-2">
+        <button onClick={() => router.back()} className="p-2 cursor-pointer">
           <IoArrowBack size={24} />
         </button>
         <h1 className="text-xl font-bold">{t["Languages"]}</h1>
@@ -115,7 +117,7 @@ export default function LanguagesPage() {
           {proficiencyLevels.map((level) => (
             <button
               key={level}
-              className={`px-4 py-2 rounded-full border ${
+              className={`px-4 py-2 rounded-full border cursor-pointer ${
                 proficiency === level
                   ? "bg-teal-600 text-white border-teal-600"
                   : "bg-gray-100 border-gray-300 text-gray-700"
@@ -135,14 +137,14 @@ export default function LanguagesPage() {
                 setProficiency("");
                 setEditingId(null);
               }}
-              className="flex-1 bg-gray-200 text-gray-700 py-3 rounded-md font-bold"
+              className="flex-1 bg-gray-200 text-gray-700 py-3 cursor-pointer rounded-md font-bold"
             >
               {t["Cancel"]}
             </button>
           )}
           <button
             onClick={addLanguage}
-            className="flex-1 bg-teal-600 text-white py-3 rounded-md font-bold flex items-center justify-center gap-2"
+            className="flex-1 bg-teal-600 text-white cursor-pointer py-3 rounded-md font-bold flex items-center justify-center gap-2"
           >
             {editingId ? <IoCheckmark /> : <IoAdd />}
             {editingId ? t["Update Language"] : t["Add Language"]}
@@ -168,10 +170,10 @@ export default function LanguagesPage() {
               </div>
               <div className="flex gap-3">
                 <button onClick={() => editLanguage(lang)}>
-                  <IoCheckmark size={20} className="text-teal-600" />
+                  <IoCheckmark size={20} className="text-teal-600 cursor-pointer" />
                 </button>
                 <button onClick={() => removeLanguage(lang.id)}>
-                  <IoTrashOutline size={20} className="text-red-500" />
+                  <IoTrashOutline size={20} className="text-red-500 cursor-pointer" />
                 </button>
               </div>
             </div>
@@ -180,7 +182,7 @@ export default function LanguagesPage() {
 
         <button
           onClick={handleSave}
-          className="w-full bg-teal-600 text-white py-3 rounded-lg font-bold mt-6"
+          className="w-full bg-teal-600 text-white py-3 rounded-lg font-bold mt-6 cursor-pointer"
         >
           {t["Save Languages"]}
         </button>

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { IoArrowBack, IoCheckmarkCircle } from "react-icons/io5";
 import { useLanguage } from "@/hooks/useLanguage";
+import toast from "react-hot-toast";
 
 export default function ObjectivePage() {
   const router = useRouter();
@@ -20,7 +21,7 @@ export default function ObjectivePage() {
 
   const handleSave = () => {
     if (!objective.trim()) {
-      alert(t["pleaseEnterObjective"] || t["Please enter your career objective"]);
+      toast.error(t["pleaseEnterObjective"] || t["Please enter your career objective"]);
       return;
     }
 
@@ -28,8 +29,11 @@ export default function ObjectivePage() {
     const updated = { ...cv, objective, lastUpdated: new Date().toISOString() };
     localStorage.setItem("currentCV", JSON.stringify(updated));
 
-    alert(t["savedSuccessfully"] || t["Career Objective Saved Successfully!"]);
-    router.back();
+    toast.success(t["savedSuccessfully"] || t["Career Objective Saved Successfully!"]);
+
+    setTimeout(()=>{
+      router.back();
+    },1000)
   };
 
   const tips = [
@@ -54,7 +58,7 @@ export default function ObjectivePage() {
     >
       {/* Header */}
       <header className="bg-teal-600 text-white py-4 px-6 flex items-center justify-between">
-        <button onClick={handleBack} className="p-2 hover:text-gray-200">
+        <button onClick={handleBack} className="p-2 hover:text-gray-200 cursor-pointer">
           <IoArrowBack size={22} />
         </button>
         <h1 className="text-xl font-bold">{t["careerObjective"] || t["Career Objective"]}</h1>
@@ -115,7 +119,7 @@ export default function ObjectivePage() {
       <div className="p-5 border-t border-gray-200 bg-white">
         <button
           onClick={handleSave}
-          className="w-full bg-teal-600 hover:bg-teal-700 text-white py-3 rounded-xl font-bold transition"
+          className="w-full cursor-pointer bg-teal-600 hover:bg-teal-700 text-white py-3 rounded-xl font-bold transition"
         >
           {t["saveObjective"] || t["Save Objective"]}
         </button>

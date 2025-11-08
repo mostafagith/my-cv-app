@@ -56,13 +56,13 @@ export default function DownloadsPage() {
               <div className="flex gap-2">
                 <button
                   onClick={() => handleDownload(item)}
-                  className="flex-1 flex items-center justify-center gap-1 px-2 py-1 rounded-lg bg-teal-600 text-white hover:bg-teal-700 text-sm"
+                  className="flex-1 cursor-pointer flex items-center justify-center gap-1 px-2 py-1 rounded-lg bg-teal-600 text-white hover:bg-teal-700 text-sm"
                 >
                   <IoDownloadOutline size={16} /> Download
                 </button>
                 <button
                   onClick={() => handleDelete(index)}
-                  className="flex-1 flex items-center justify-center gap-1 px-2 py-1 rounded-lg bg-red-600 text-white hover:bg-red-700 text-sm"
+                  className="flex-1 flex items-center  cursor-pointerjustify-center gap-1 px-2 py-1 rounded-lg bg-red-600 text-white hover:bg-red-700 text-sm"
                 >
                   <IoTrashOutline size={16} /> Delete
                 </button>

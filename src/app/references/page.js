@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { IoArrowBack, IoTrashOutline, IoAddCircleOutline, IoCheckmarkCircle } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/hooks/useLanguage";
+import toast from "react-hot-toast";
 
 export default function ReferencesPage() {
   const router = useRouter();
@@ -57,7 +58,7 @@ export default function ReferencesPage() {
 
   const handleRemoveReference = (index) => {
     if (references.length === 1) {
-      alert(t["You must have at least one reference"]);
+      toast.error(t["You must have at least one reference"]);
       return;
     }
 
@@ -69,26 +70,36 @@ export default function ReferencesPage() {
   };
 
   const handleSave = () => {
-    const hasEmptyFields = references.some(
-      (ref) => !ref.name.trim() || !ref.jobTitle.trim() || !ref.company.trim()
-    );
-    if (hasEmptyFields) {
-      alert(t["Please fill name, job title, and company for all references"]);
-      return;
-    }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const invalidEmail = references.some(
-      (ref) => ref.email && !emailRegex.test(ref.email)
-    );
-    if (invalidEmail) {
-      alert(t["Please enter valid email addresses"]);
-      return;
-    }
+    for (let i = 0; i < references.length; i++) {
+  const ref = references[i];
+
+  if (!ref.name?.trim()) {
+    toast.error(`${t["please_enter_reference_name"]} (Reference ${i + 1})`);
+    return;
+  }
+
+  if (!ref.jobTitle?.trim()) {
+    toast.error(`${t["please_enter_reference_job_title"]} (Reference ${i + 1})`);
+    return;
+  }
+
+  if (!ref.company?.trim()) {
+    toast.error(`${t["please_enter_reference_company"]} (Reference ${i + 1})`);
+    return;
+  }
+
+  if (ref.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ref.email)) {
+    toast.error(`${t["please_enter_valid_reference_email"]} (Reference ${i + 1})`);
+    return;
+  }
+}
 
     saveToLocalStorage(references);
-    alert(t["References Saved Successfully!"]);
-    router.back();
+    toast.success(t["References Saved Successfully!"]);
+    setTimeout(()=>{
+        router.back();
+    },1000) 
   };
 
   return (
@@ -96,7 +107,7 @@ export default function ReferencesPage() {
       {/* Header */}
       <div className="bg-teal-600 text-white flex items-center justify-between px-6 py-5">
         <button onClick={() => router.back()} className="p-2">
-          <IoArrowBack size={24} />
+          <IoArrowBack size={24} className="cursor-pointer" />
         </button>
         <h1 className="text-xl font-bold">{t["References"]}</h1>
         <div className="w-6" />
@@ -114,14 +125,16 @@ export default function ReferencesPage() {
               </h3>
               {references.length > 1 && (
                 <button onClick={() => handleRemoveReference(index)}>
-                  <IoTrashOutline size={20} className="text-red-500" />
+                  <IoTrashOutline size={20} className="text-red-500 cursor-pointer" />
                 </button>
               )}
             </div>
 
             <div className="space-y-3">
               <div>
-                <label className="font-medium text-sm text-gray-700">{t["Reference's Name *"]}</label>
+                <label className="font-semibold text-gray-700">
+                  {t["Reference's Name"]} <span className="text-red-500">*</span>
+              </label>
                 <input
                   className="w-full border border-gray-300 rounded-md p-2 mt-1"
                   placeholder={t["Enter full name"]}
@@ -131,7 +144,9 @@ export default function ReferencesPage() {
               </div>
 
               <div>
-                <label className="font-medium text-sm text-gray-700">{t["Job Title *"]}</label>
+                <label className="font-semibold text-gray-700">
+                  {t["Job Title"]} <span className="text-red-500">*</span>
+                </label>
                 <input
                   className="w-full border border-gray-300 rounded-md p-2 mt-1"
                   placeholder={t["Enter job title"]}
@@ -141,7 +156,9 @@ export default function ReferencesPage() {
               </div>
 
               <div>
-                <label className="font-medium text-sm text-gray-700">{t["Company Name *"]}</label>
+                <label className="font-semibold text-gray-700">
+                  {t["Company Name"]} <span className="text-red-500">*</span>
+                </label>
                 <input
                   className="w-full border border-gray-300 rounded-md p-2 mt-1"
                   placeholder={t["Enter company name"]}
@@ -176,7 +193,7 @@ export default function ReferencesPage() {
 
         <button
           onClick={handleAddReference}
-          className="flex items-center justify-center w-full border-2 border-dashed border-teal-500 text-teal-600 py-3 rounded-lg mb-6"
+          className="flex cursor-pointer items-center justify-center w-full border-2 border-dashed border-teal-500 text-teal-600 py-3 rounded-lg mb-6"
         >
           <IoAddCircleOutline size={22} />
           <span className="ml-2 font-medium">{t["Add Another Reference"]}</span>
@@ -184,7 +201,7 @@ export default function ReferencesPage() {
 
         <button
           onClick={handleSave}
-          className="w-full bg-teal-600 text-white py-3 rounded-lg font-bold"
+          className="w-full bg-teal-600 text-white cursor-pointer py-3 rounded-lg font-bold"
         >
           {t["Save References"]}
         </button>

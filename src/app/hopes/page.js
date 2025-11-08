@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/hooks/useLanguage";
 import { IoArrowBack, IoBulbOutline, IoCheckmarkCircle } from "react-icons/io5";
+import toast from "react-hot-toast";
 
 export default function Hopes() {
   const router = useRouter();
@@ -21,7 +22,7 @@ export default function Hopes() {
 
   const handleSave = () => {
     if (!hopes.trim()) {
-      alert(t["Please enter your hopes and aspirations"]);
+      toast.error(t["Please enter your hopes and aspirations"]);
       return;
     }
 
@@ -37,8 +38,10 @@ export default function Hopes() {
     // Save back to localStorage
     localStorage.setItem("currentCV", JSON.stringify(updatedCV));
 
-    alert(t["Hopes saved successfully!"]);
-    router.back();
+    toast.success(t["Hopes saved successfully!"]);
+    setTimeout(()=>{
+        router.back();
+    },1000)
   };
 
   const handleBack = () => {
@@ -56,7 +59,7 @@ export default function Hopes() {
     <div className="min-h-screen bg-white flex flex-col">
       {/* Header */}
       <div className="bg-teal-500 text-white py-5 px-6 flex items-center justify-between">
-        <button onClick={handleBack} className="p-2">
+        <button onClick={handleBack} className="p-2 cursor-pointer">
           <IoArrowBack size={22} />
         </button>
         <h1 className="text-lg font-bold">{t["Hopes & Aspirations"]}</h1>
@@ -118,7 +121,7 @@ export default function Hopes() {
         <button
           onClick={handleSave}
           disabled={!hopes.trim()}
-          className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl text-white font-semibold transition ${
+          className={`w-full cursor-pointer flex items-center justify-center gap-2 py-3 rounded-xl text-white font-semibold transition ${
             !hopes.trim()
               ? "bg-gray-400 cursor-not-allowed"
               : "bg-teal-500 hover:bg-teal-600"

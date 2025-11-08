@@ -220,8 +220,8 @@ export default function PdfPreview() {
       `}</style>
 
       {/* HEADER */}
-      <header className="bg-teal-600 text-white py-3 px-5 md:py-6 md:px-20 flex items-center justify-between shadow">
-        <button onClick={handleBack} className="p-1 hover:bg-teal-700 rounded">
+      <header className="bg-teal-600 text-white py-3 px-5 md:py-6 md:px-20 flex items-center cursor-pointer justify-between shadow">
+        <button onClick={handleBack} className="p-1 hover:bg-teal-700 rounded cursor-pointer">
           <IoArrowBack size={18} />
         </button>
         <h1 className="font-bold text-sm md:text-base">CV Preview</h1>
@@ -229,7 +229,7 @@ export default function PdfPreview() {
         <button
           onClick={handleGenerateAndDownload}
           disabled={isGenerating}
-          className={`flex items-center gap-1 bg-white text-teal-600 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
+          className={`flex items-center cursor-pointer gap-1 bg-white text-teal-600 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
             isGenerating ? "opacity-60" : "hover:bg-teal-50"
           }`}
         >
@@ -238,7 +238,7 @@ export default function PdfPreview() {
         </button>
       </header>
 
-      {/* MAIN */}id="cv-template"
+      {/* MAIN */}
       <main className="flex-1 flex justify-center py-2 px-1 md:py-4 md:px-8 overflow-y-auto" dir="ltr">
         <div
         id="cv-template"

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { IoArrowBack, IoTrashOutline, IoAddCircleOutline } from 'react-icons/io5';
 import { useLanguage } from '@/hooks/useLanguage';
+import toast from "react-hot-toast";
 
 export default function ExperienceDetails() {
   const router = useRouter();
@@ -52,7 +53,7 @@ export default function ExperienceDetails() {
 
   const handleRemoveExperience = (index) => {
     if (experiences.length === 1) {
-      alert(t['mustHaveAtLeastOne']);
+      toast.error(t["mustHaveAtLeastOne"]);
       return;
     }
     if (confirm(t['confirmRemoveExperience'])) {
@@ -61,25 +62,37 @@ export default function ExperienceDetails() {
   };
 
   const handleSave = () => {
-    const hasEmpty = experiences.some(exp => !exp.company?.trim() || !exp.jobTitle?.trim());
-    if (hasEmpty) {
-      alert(t['fillRequiredFields']);
-      return;
-    }
+    console.log(t)
+    for (let i = 0; i < experiences.length; i++) {
+  const exp = experiences[i];
+
+  if (!exp.company?.trim()) {
+    toast.error(`${t.please_enter_company_name} (${i + 1})`);
+    return;
+  }
+
+  if (!exp.jobTitle?.trim()) {
+    toast.error(`${t['please_enter_job_title']} (${i + 1})`);
+    return;
+  }
+}
+
 
     const cv = JSON.parse(localStorage.getItem('currentCV') || '{}');
     cv.experience = experiences;
     localStorage.setItem('currentCV', JSON.stringify(cv));
 
-    alert(t['experienceSaved']);
-    router.back();
+    toast.success(t.saved_successfully); 
+    setTimeout(()=>{
+      router.back();
+    },1000) 
   };
 
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
       <div className="bg-teal-500 px-5 py-4 flex items-center justify-between">
-        <button onClick={handleBack} className="text-white text-xl">
+        <button onClick={handleBack} className="text-white cursor-pointer text-xl">
           <IoArrowBack />
         </button>
         <h1 className="text-white font-bold text-xl flex-1 text-center">{t['experienceDetails']}</h1>
@@ -96,14 +109,16 @@ export default function ExperienceDetails() {
             <div className="flex justify-between items-center">
               <h3 className="font-bold text-teal-500">{t['experience']} {index + 1}</h3>
               {experiences.length > 1 && (
-                <button onClick={() => handleRemoveExperience(index)} className="text-red-500">
+                <button onClick={() => handleRemoveExperience(index)} className="text-red-500 cursor-pointer">
                   <IoTrashOutline size={20} />
                 </button>
               )}
             </div>
 
             <div className="space-y-2">
-              <label className="font-semibold text-gray-700">{t['companyName']} *</label>
+              <label className="font-semibold text-gray-700">
+                {t['companyName']} <span className="text-red-500">*</span>
+              </label>              
               <input
                 type="text"
                 value={exp.company}
@@ -114,7 +129,9 @@ export default function ExperienceDetails() {
             </div>
 
             <div className="space-y-2">
-              <label className="font-semibold text-gray-700">{t['jobTitle']} *</label>
+              <label className="font-semibold text-gray-700">
+                {t['jobTitle']} <span className="text-red-500">*</span>
+              </label>
               <input
                 type="text"
                 value={exp.jobTitle}
@@ -185,14 +202,14 @@ export default function ExperienceDetails() {
 
         <button
           onClick={handleAddExperience}
-          className="flex items-center justify-center gap-2 border border-teal-500 border-dashed rounded-md py-2 text-teal-500 font-semibold"
+          className="flex items-center  justify-center gap-2 border border-teal-500 cursor-pointer border-dashed rounded-md py-2 text-teal-500 font-semibold"
         >
           <IoAddCircleOutline size={20} /> {t['addAnotherExperience']}
         </button>
 
         <button
           onClick={handleSave}
-          className="bg-teal-500 w-full py-3 rounded-md text-white font-bold"
+          className="bg-teal-500  w-full py-3 rounded-md text-white font-bold cursor-pointer"
         >
           {t['saveExperience']}
         </button>

@@ -52,7 +52,7 @@ const [openLang, setOpenLang] = useState(false);
     <div className="min-h-screen bg-white flex flex-col">
       {/* Header */}
       <div className="bg-teal-500  py-3 px-5 md:py-6 md:px-20 flex items-center justify-between shadow-md">
-        <button onClick={handleBack} className="text-white p-2 hover:bg-teal-600 rounded-full transition">
+        <button onClick={handleBack} className="cursor-pointer text-white p-2 hover:bg-teal-600 rounded-full transition">
           <IoArrowBack size={22} />
         </button>
         <h1 className="text-lg font-bold text-white">{t["choose_template"]}</h1>
@@ -60,7 +60,7 @@ const [openLang, setOpenLang] = useState(false);
           <div className="relative flex-shrink-0">
             <button
               onClick={toggleLangMenu}
-              className="p-2 bg-white/20 rounded-full hover:bg-white/30 transition"
+              className="p-2 bg-white/20 cursor-pointer rounded-full hover:bg-white/30 transition"
             >
               <Globe size={22} className="text-white" />
             </button>
@@ -77,7 +77,7 @@ const [openLang, setOpenLang] = useState(false);
                     changeLang("en");
                     setOpenLang(false);
                   }}
-                  className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+                  className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
                 >
                   🇺🇸 en - English
                 </button>
@@ -87,7 +87,7 @@ const [openLang, setOpenLang] = useState(false);
                     changeLang("ar");
                     setOpenLang(false);
                   }}
-                  className="block px-4 py-2 hover:bg-gray-100 w-full text-right"
+                  className="block cursor-pointer px-4 py-2 hover:bg-gray-100 w-full text-right"
                 >
                   🇸🇦 ar - عربي
                 </button>
@@ -97,7 +97,7 @@ const [openLang, setOpenLang] = useState(false);
                     changeLang("fr");
                     setOpenLang(false);
                   }}
-                  className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+                  className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
                 >
                   🇫🇷 fr - Français
                 </button>
@@ -107,7 +107,7 @@ const [openLang, setOpenLang] = useState(false);
                     changeLang("es");
                     setOpenLang(false);
                   }}
-                  className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+                  className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
                 >
                   🇪🇸 es - Español
                 </button>
@@ -117,7 +117,7 @@ const [openLang, setOpenLang] = useState(false);
                     changeLang("de");
                     setOpenLang(false);
                   }}
-                  className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+                  className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
                 >
                   🇩🇪 de - Deutsch
                 </button>
@@ -127,7 +127,7 @@ const [openLang, setOpenLang] = useState(false);
                     changeLang("it");
                     setOpenLang(false);
                   }}
-                  className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+                  className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
                 >
                   🇮🇹 it - Italiano
                 </button>
@@ -137,7 +137,7 @@ const [openLang, setOpenLang] = useState(false);
                     changeLang("pt");
                     setOpenLang(false);
                   }}
-                  className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+                  className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
                 >
                   🇵🇹 pt - Português
                 </button>

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { IoArrowBack, IoTrash, IoPencil, IoAdd, IoCheckmarkCircle } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/hooks/useLanguage";
+import toast from "react-hot-toast";
 
 export default function CertificatesPage() {
   const router = useRouter();
@@ -39,9 +40,18 @@ export default function CertificatesPage() {
   };
 
   const handleAddCertificate = () => {
-    if (!name.trim() || !issuer.trim()) {
-      alert(t["Please enter certificate name and issuer"]);
-      return;
+    for (let i = 0; i < certificates.length; i++) {
+      const certificate = certificates[i];
+
+      if (!certificate.name?.trim()) {
+        toast.error(`${t["please_enter_certificate_name"]} (${t["certificate"]} ${i + 1})`);
+        return;
+      }
+
+      if (!certificate.issuer?.trim()) {
+        toast.error(`${t["please_enter_certificate_issuer"]} (${t["certificate"]} ${i + 1})`);
+        return;
+      }
     }
 
     const newCertificate = {
@@ -57,10 +67,10 @@ export default function CertificatesPage() {
       updatedCertificates = certificates.map((c) =>
         c.id === editingId ? newCertificate : c
       );
-      alert(t["Certificate updated successfully!"]);
+      toast.success(t["Certificate updated successfully!"]);
     } else {
       updatedCertificates = [...certificates, newCertificate];
-      alert(t["Certificate added successfully!"]);
+      toast.success(t["Certificate added successfully!"]);
     }
 
     saveToLocalStorage(updatedCertificates);
@@ -79,21 +89,23 @@ export default function CertificatesPage() {
     if (confirm(t["Are you sure you want to delete this certificate?"])) {
       const updatedCertificates = certificates.filter((c) => c.id !== id);
       saveToLocalStorage(updatedCertificates);
-      alert(t["Certificate deleted successfully!"]);
+      toast.success(t["Certificate deleted successfully!"]);
       resetForm();
     }
   };
 
   const handleSave = () => {
-    alert(t["Certificates saved successfully!"]);
-    router.back();
+    toast.success(t["Certificates saved successfully!"]); 
+    setTimeout(()=>{
+      router.back();
+    },1000) 
   };
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
       {/* Header */}
       <header className="bg-teal-500 text-white py-4 px-6 flex justify-between items-center">
-        <button onClick={() => router.back()} className="p-2 hover:bg-teal-600 rounded-full">
+        <button onClick={() => router.back()} className="p-2 hover:bg-teal-600 cursor-pointer rounded-full">
           <IoArrowBack size={22} />
         </button>
         <h1 className="text-xl font-bold">{t["Certificates"]}</h1>
@@ -119,7 +131,9 @@ export default function CertificatesPage() {
           </h3>
 
           <div>
-            <label className="font-medium text-sm text-gray-700">{t["Certificate Name *"]}</label>
+            <label className="font-semibold text-gray-700">
+                {t["Certificate Name"]} <span className="text-red-500">*</span>
+            </label>
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -129,7 +143,9 @@ export default function CertificatesPage() {
           </div>
 
           <div>
-            <label className="font-medium text-sm text-gray-700">{t["Issuing Organization *"]}</label>
+            <label className="font-semibold text-gray-700">
+                {t["Issuing Organization"]} <span className="text-red-500">*</span>
+            </label>
             <input
               value={issuer}
               onChange={(e) => setIssuer(e.target.value)}
@@ -162,7 +178,7 @@ export default function CertificatesPage() {
             {editingId && (
               <button
                 onClick={resetForm}
-                className="flex-1 bg-gray-500 text-white p-2 rounded-lg font-semibold hover:bg-gray-600"
+                className="flex-1 bg-gray-500 cursor-pointer text-white p-2 rounded-lg font-semibold hover:bg-gray-600"
               >
                 {t["Cancel"]}
               </button>
@@ -170,7 +186,7 @@ export default function CertificatesPage() {
             <button
               onClick={handleAddCertificate}
               disabled={!name.trim() || !issuer.trim()}
-              className={`flex-1 flex items-center justify-center gap-2 text-white p-2 rounded-lg font-semibold ${
+              className={`flex-1 flex cursor-pointer items-center justify-center gap-2 text-white p-2 rounded-lg font-semibold ${
                 !name.trim() || !issuer.trim()
                   ? "bg-gray-400 cursor-not-allowed"
                   : "bg-teal-500 hover:bg-teal-600"
@@ -205,13 +221,13 @@ export default function CertificatesPage() {
                   <div className="flex gap-2">
                     <button
                       onClick={() => handleEdit(cert)}
-                      className="p-2 bg-green-50 border border-green-200 rounded-lg hover:bg-green-100"
+                      className="p-2 cursor-pointer bg-green-50 border border-green-200 rounded-lg hover:bg-green-100"
                     >
                       <IoPencil size={18} className="text-teal-600" />
                     </button>
                     <button
                       onClick={() => handleDelete(cert.id)}
-                      className="p-2 bg-red-50 border border-red-200 rounded-lg hover:bg-red-100"
+                      className="p-2 bg-red-50 border cursor-pointer border-red-200 rounded-lg hover:bg-red-100"
                     >
                       <IoTrash size={18} className="text-red-600" />
                     </button>
@@ -233,7 +249,7 @@ export default function CertificatesPage() {
         {/* Save Button */}
         <button
           onClick={handleSave}
-          className="w-full flex items-center justify-center gap-2 bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 rounded-xl"
+          className="w-full flex cursor-pointer items-center justify-center gap-2 bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 rounded-xl"
         >
           <IoCheckmarkCircle size={22} />
           {t["Save & Finish"]}

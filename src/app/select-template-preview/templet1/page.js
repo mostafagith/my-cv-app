@@ -212,7 +212,7 @@ export default function PdfPreview() {
 
       {/* Header */}
       <header className="bg-teal-600 text-white py-3 px-5 md:py-6 md:px-20 flex items-center justify-between shadow">
-        <button onClick={handleBack} className="p-1 hover:bg-teal-700 rounded">
+        <button onClick={handleBack} className="p-1 hover:bg-teal-700 rounded cursor-pointer">
           <IoArrowBack size={18} />
         </button>
         <h1 className="font-bold text-sm md:text-base">CV Preview</h1>
@@ -221,7 +221,7 @@ export default function PdfPreview() {
           <button
             onClick={handleGenerateAndDownload}
             disabled={isGenerating}
-            className={`flex items-center gap-1 bg-white text-teal-600 px-2 py-1 md:px-3 md:py-1.5 rounded-lg text-xs font-semibold transition ${
+            className={`flex cursor-pointer items-center gap-1 bg-white text-teal-600 px-2 py-1 md:px-3 md:py-1.5 rounded-lg text-xs font-semibold transition ${
               isGenerating ? "opacity-60" : "hover:bg-teal-50"
             }`}
             title="Download PDF to Share"

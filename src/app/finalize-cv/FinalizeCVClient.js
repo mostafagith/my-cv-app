@@ -1,6 +1,6 @@
 "use client";
 export const dynamic = "force-dynamic";
-
+import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
@@ -73,7 +73,7 @@ const [openLang, setOpenLang] = useState(false);
   const handleSaveCV = () => {
   if (isSaving) return;
   if (!cvTitle.trim()) {
-    alert(t["Please enter a title for your CV"]);
+    toast.error(t["Please enter a title for your CV"]);
     return;
   }
 
@@ -117,7 +117,7 @@ const [openLang, setOpenLang] = useState(false);
 
   const handlePreview = () => {
     const cv = JSON.parse(localStorage.getItem("currentCV") || "{}");
-    if (!cv) return alert(t["No CV data to preview"]);
+    if (!cv) return toast.error(t["No CV data to preview"]);
     router.push(`/preview-cv?cvData=${encodeURIComponent(JSON.stringify(cv))}`);
   };
 
@@ -126,7 +126,7 @@ const [openLang, setOpenLang] = useState(false);
       {/* Header */}
       <div className="bg-teal-500  py-3 px-5 md:py-6 md:px-20 flex items-center justify-between gap-4">
           {/* زر الرجوع */}
-          <button onClick={handleBack} className="p-2 flex-shrink-0 text-white">
+          <button onClick={handleBack} className="p-2 flex-shrink-0 cursor-pointer text-white">
             <IoArrowBack size={22} />
           </button>
 
@@ -139,7 +139,7 @@ const [openLang, setOpenLang] = useState(false);
           <div className="relative flex-shrink-0">
             <button
               onClick={toggleLangMenu}
-              className="p-2 bg-white/20 rounded-full hover:bg-white/30 transition"
+              className="p-2 bg-white/20 cursor-pointer rounded-full hover:bg-white/30 transition"
             >
               <Globe size={22} className="text-white" />
             </button>
@@ -156,7 +156,7 @@ const [openLang, setOpenLang] = useState(false);
                     changeLang("en");
                     setOpenLang(false);
                   }}
-                  className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+                  className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
                 >
                   🇺🇸 en - English
                 </button>
@@ -166,7 +166,7 @@ const [openLang, setOpenLang] = useState(false);
                     changeLang("ar");
                     setOpenLang(false);
                   }}
-                  className="block px-4 py-2 hover:bg-gray-100 w-full text-right"
+                  className="block cursor-pointer px-4 py-2 hover:bg-gray-100 w-full text-right"
                 >
                   🇸🇦 ar - عربي
                 </button>
@@ -176,7 +176,7 @@ const [openLang, setOpenLang] = useState(false);
                     changeLang("fr");
                     setOpenLang(false);
                   }}
-                  className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+                  className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
                 >
                   🇫🇷 fr - Français
                 </button>
@@ -186,7 +186,7 @@ const [openLang, setOpenLang] = useState(false);
                     changeLang("es");
                     setOpenLang(false);
                   }}
-                  className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+                  className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
                 >
                   🇪🇸 es - Español
                 </button>
@@ -196,7 +196,7 @@ const [openLang, setOpenLang] = useState(false);
                     changeLang("de");
                     setOpenLang(false);
                   }}
-                  className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+                  className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
                 >
                   🇩🇪 de - Deutsch
                 </button>
@@ -206,7 +206,7 @@ const [openLang, setOpenLang] = useState(false);
                     changeLang("it");
                     setOpenLang(false);
                   }}
-                  className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+                  className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
                 >
                   🇮🇹 it - Italiano
                 </button>
@@ -216,7 +216,7 @@ const [openLang, setOpenLang] = useState(false);
                     changeLang("pt");
                     setOpenLang(false);
                   }}
-                  className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+                  className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
                 >
                   🇵🇹 pt - Português
                 </button>
@@ -267,14 +267,14 @@ const [openLang, setOpenLang] = useState(false);
           />
         </div>
 
-        {/* Preview Button */}
+        {/* Preview Button
         <button
           onClick={handlePreview}
-          className="w-full flex items-center justify-center gap-2 py-3 border border-teal-300 rounded-xl bg-teal-50 text-teal-600 font-semibold"
+          className="w-full flex cursor-pointer items-center justify-center gap-2 py-3 border border-teal-300 rounded-xl bg-teal-50 text-teal-600 font-semibold"
         >
           <IoEyeOutline size={20} />
           {t["Preview CV"]}
-        </button>
+        </button> */}
 
         {/* CV Summary */}
         {currentCV && (
@@ -302,7 +302,7 @@ const [openLang, setOpenLang] = useState(false);
         <button
           onClick={handleSaveCV}
           disabled={completionStatus.percentage < 50 || isSaving}
-          className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl text-white font-semibold transition ${
+          className={`w-full flex items-center cursor-pointer justify-center gap-2 py-3 rounded-xl text-white font-semibold transition ${
             completionStatus.percentage < 50 || isSaving
               ? "bg-gray-400 cursor-not-allowed"
               : "bg-teal-600 hover:bg-teal-700"

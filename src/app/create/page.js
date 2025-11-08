@@ -71,7 +71,7 @@ const [openLang, setOpenLang] = useState(false);
   <div className="relative">
     <button
       onClick={toggleLangMenu}
-      className="p-2 bg-white/20 rounded-full hover:bg-white/30 transition"
+      className="p-2 cursor-pointer bg-white/20 rounded-full hover:bg-white/30 transition"
     >
       <Globe size={22} className="text-white" />
     </button>
@@ -88,7 +88,7 @@ const [openLang, setOpenLang] = useState(false);
             changeLang("en");
             setOpenLang(false);
           }}
-          className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+          className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
         >
           🇺🇸 en - English
         </button>
@@ -98,7 +98,7 @@ const [openLang, setOpenLang] = useState(false);
             changeLang("ar");
             setOpenLang(false);
           }}
-          className="block px-4 py-2 hover:bg-gray-100 w-full text-right"
+          className="block cursor-pointer px-4 py-2 hover:bg-gray-100 w-full text-right"
         >
           🇸🇦 ar - عربي
         </button>
@@ -108,7 +108,7 @@ const [openLang, setOpenLang] = useState(false);
             changeLang("fr");
             setOpenLang(false);
           }}
-          className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+          className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
         >
           🇫🇷 fr - Français
         </button>
@@ -118,7 +118,7 @@ const [openLang, setOpenLang] = useState(false);
             changeLang("es");
             setOpenLang(false);
           }}
-          className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+          className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
         >
           🇪🇸 es - Español
         </button>
@@ -128,7 +128,7 @@ const [openLang, setOpenLang] = useState(false);
             changeLang("de");
             setOpenLang(false);
           }}
-          className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+          className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
         >
           🇩🇪 de - Deutsch
         </button>
@@ -138,7 +138,7 @@ const [openLang, setOpenLang] = useState(false);
             changeLang("it");
             setOpenLang(false);
           }}
-          className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+          className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
         >
           🇮🇹 it - Italiano
         </button>
@@ -148,7 +148,7 @@ const [openLang, setOpenLang] = useState(false);
             changeLang("pt");
             setOpenLang(false);
           }}
-          className="block px-4 py-2 hover:bg-gray-100 w-full text-left"
+          className="block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer text-left "
         >
           🇵🇹 pt - Português
         </button>
@@ -164,7 +164,7 @@ const [openLang, setOpenLang] = useState(false);
           </h1>
           <button
             onClick={handleCreateNew}
-            className="flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-xl shadow-lg transition-transform hover:scale-105"
+            className="flex items-center cursor-pointer gap-2 bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-xl shadow-lg transition-transform hover:scale-105"
           >
             <PlusCircle size={20} />
             <span>{t.createNew || "Create New"}</span>
@@ -219,7 +219,7 @@ const [openLang, setOpenLang] = useState(false);
                     onClick={() =>
                       setMenuIndex(menuIndex === index ? null : index)
                     }
-                    className="p-2 rounded-full hover:bg-gray-100 transition"
+                    className="p-2 cursor-pointer rounded-full hover:bg-gray-100 transition"
                   >
                     <MoreVertical size={18} />
                   </button>
@@ -229,13 +229,13 @@ const [openLang, setOpenLang] = useState(false);
                     <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
                       <button
                         onClick={() => handleEdit(cv)}
-                        className="flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        className="flex cursor-pointer items-center gap-2 w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >
                         <Edit size={16} /> {t.edit || "Edit"}
                       </button>
                       <button
                         onClick={() => handleDelete(index)}
-                        className="flex items-center gap-2 w-full px-3 py-2 text-sm text-red-600 hover:bg-gray-100"
+                        className="flex cursor-pointer items-center gap-2 w-full px-3 py-2 text-sm text-red-600 hover:bg-gray-100"
                       >
                         <Trash2 size={16} /> {t.delete || "Delete"}
                       </button>
