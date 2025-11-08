@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { IoArrowBack, IoTrashOutline, IoAdd, IoCheckmark } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/hooks/useLanguage";
+import toast from "react-hot-toast";
 
 export default function LanguagesPage() {
   const router = useRouter();
