@@ -154,13 +154,26 @@ export default function HomePage() {
           </h2>
 
           <div className="flex flex-col sm:flex-row gap-4 mt-4">
-            <Link
-              href="/create"
-              className="flex-1 bg-teal-600 hover:bg-teal-700 transition p-4 rounded-xl flex items-center justify-between shadow-xl text-white font-bold text-lg"
-            >
+            {JSON.parse(localStorage.getItem("cvs")).length>0?
+            
+              <Link
+                href="/create"
+                className="flex-1 bg-teal-600 hover:bg-teal-700 transition p-4 rounded-xl flex items-center justify-between shadow-xl text-white font-bold text-lg"
+              >
               <span>{t.create}</span>
               <ArrowRight size={24} />
             </Link>
+
+              : 
+              <Link
+                href="/create-new"
+                className="flex-1 bg-teal-600 hover:bg-teal-700 transition p-4 rounded-xl flex items-center justify-between shadow-xl text-white font-bold text-lg"
+              >
+              <span>{t.create}</span>
+              <ArrowRight size={24} />
+            </Link>
+        
+          }
 
             <Link
               href="/downloads"
