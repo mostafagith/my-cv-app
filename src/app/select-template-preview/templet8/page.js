@@ -5,10 +5,12 @@ import { IoArrowBack, IoDownloadOutline } from "react-icons/io5";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas-pro";
 import toast from "react-hot-toast";
+import { useLanguage } from "@/hooks/useLanguage";
+
 export default function PdfPreview() {
   const [cvData, setCvData] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
-
+const { t } = useLanguage();
   const safeGetItem = (key) => {
   try {
     return localStorage.getItem(key) || sessionStorage.getItem(key);

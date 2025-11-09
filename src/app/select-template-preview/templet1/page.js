@@ -3,12 +3,15 @@
 import { useEffect, useState } from "react";
 import { IoArrowBack, IoDownloadOutline } from "react-icons/io5";
 import jsPDF from "jspdf";
+import { useLanguage } from "@/hooks/useLanguage";
+
 import html2canvas from "html2canvas-pro";
 import toast from "react-hot-toast";
 
 export default function PdfPreview() {
   const [cvData, setCvData] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
+const { t } = useLanguage();
 
   // ---------------- Safe Storage ----------------
 const safeGetItem = (key) => {
