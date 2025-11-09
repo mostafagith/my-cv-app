@@ -6,11 +6,6 @@ import { ChevronRight, CheckCircle, ClipboardList } from "lucide-react";
 import { useLanguage } from "@/hooks/useLanguage";
 import { Globe } from "lucide-react";
 
-/**
- * CreateNew page (web) -- shows progress + grid of sections.
- * - reads/writes current CV from localStorage key "currentCV"
- * - clicking a section saves currentCV (if absent create empty template) and navigates to /create/[sectionKey]
- */
 
 const SECTION_DEFINITIONS = [
   { key: "personal-details", titleKey: "personal", icon: "person" },
@@ -56,105 +51,128 @@ export default function CreateNewPage() {
     };
   }
 
-  // load or init currentCV from localStorage
-  useEffect(() => {
+// helpers for safe storage
+const safeSetItem = (key, value) => {
+  try {
+    localStorage.setItem(key, value);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
     try {
-      const raw = localStorage.getItem("currentCV");
-      console.log(raw,"UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUu")
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        setCurrentCV(parsed);
-      } else {
-        const empty = makeEmptyCV();
-        localStorage.setItem("currentCV", JSON.stringify(empty));
-        setCurrentCV(empty);
-      }
-    } catch (err) {
-      console.error("Error reading currentCV from localStorage", err);
+      sessionStorage.setItem(key, value);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
+    }
+  }
+};
+
+const safeGetItem = (key) => {
+  try {
+    return localStorage.getItem(key) || sessionStorage.getItem(key);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      return sessionStorage.getItem(key);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
+      return null;
+    }
+  }
+};
+
+const safeParse = (str) => {
+  try {
+    return JSON.parse(str);
+  } catch {
+    return null;
+  }
+};
+
+// ------------------------ main logic ------------------------
+
+useEffect(() => {
+  const raw = safeGetItem("currentCV");
+  console.log(raw, "currentCV raw value");
+  if (raw) {
+    const parsed = safeParse(raw);
+    if (parsed) setCurrentCV(parsed);
+    else {
       const empty = makeEmptyCV();
-      localStorage.setItem("currentCV", JSON.stringify(empty));
+      safeSetItem("currentCV", JSON.stringify(empty));
       setCurrentCV(empty);
     }
-  }, []);
-
-  // compute completion status
-  const computeStatus = (cv) => {
-    if (!cv) return { completed: 0, total: SECTION_DEFINITIONS.length, percentage: 0 };
-
-    let c = 0;
-    // Personal (fullName & email)
-    if (cv.personalDetails && cv.personalDetails.fullName && cv.personalDetails.email) c++;
-    console.log(c,"dddddddddddd")
-    // Education
-    if (cv.education && cv.education.length > 0 && cv.education.some(e => e.course || e.institution)) c++;
-    // Experience
-    if (cv.experience && cv.experience.length > 0 && cv.experience.some(e => e.company || e.jobTitle)) c++;
-    // Skills
-    if (cv.skills && cv.skills.length > 0 && cv.skills.some(s => s.name)) c++;
-    // Languages
-    if (cv.languages && cv.languages.length > 0 && cv.languages.some(l => l.name)) c++;
-    // Objective
-    if (cv.objective && cv.objective.trim()) c++;
-    // Projects
-    if (cv.projects && cv.projects.length > 0 && cv.projects.some(p => p.title)) c++;
-    // Certificates
-    if (cv.certificates && cv.certificates.length > 0 && cv.certificates.some(cert => cert.name)) c++;
-    // Awards
-    if (cv.awardsActivities && cv.awardsActivities.length > 0 && cv.awardsActivities.some(a => a.name)) c++;
-    // References
-    if (cv.references && cv.references.length > 0 && cv.references.some(r => r.name)) c++;
-    // Hopes
-    if (cv.hopes && cv.hopes.trim()) c++;
-
-    const pct = Math.round((c / SECTION_DEFINITIONS.length) * 100);
-    return { completed: c, total: SECTION_DEFINITIONS.length, percentage: pct };
-  };
-
-  // update progress whenever currentCV changes
-  useEffect(() => {
-    const status = computeStatus(currentCV);
-    setCompleted(status.completed);
-    setTotal(status.total);
-    setPercentage(status.percentage);
-  }, [currentCV]);
-
-  // navigate to section page: save currentCV then navigate
-  const openSection = (sectionKey) => {
-    const cvToSave = currentCV || makeEmptyCV();
-    // ensure lastUpdated
-    cvToSave.lastUpdated = new Date().toISOString();
-    localStorage.setItem("currentCV", JSON.stringify(cvToSave));
-    // navigate to /create/[sectionKey]
-    router.push(`/${encodeURIComponent(sectionKey)}`);
-  };
-
-  const finalizeAndSave = () => {
-    // for now: save draft to "cvs" list then go to finalize page
-    try {
-      const rawList = localStorage.getItem("cvs");
-      const list = rawList ? JSON.parse(rawList) : [];
-      const cvToSave = currentCV || makeEmptyCV();
-      cvToSave.lastUpdated = new Date().toISOString();
-      // if exists in list (by id) update, else push
-      const idx = list.findIndex(item => item.id === cvToSave.id);
-      if (idx >= 0) list[idx] = cvToSave;
-      else list.unshift(cvToSave);
-      localStorage.setItem("cvs", JSON.stringify(list));
-      // also save currentCV
-      localStorage.setItem("currentCV", JSON.stringify(cvToSave));
-      // navigate to finalize page
-      router.push("/finalize-cv");
-    } catch (err) {
-      console.error("Failed to finalize/save CV", err);
-      alert(t.saveError || "Failed to save CV");
-    }
-  };
-
-  const resetCV = () => {
+  } else {
     const empty = makeEmptyCV();
-    localStorage.setItem("currentCV", JSON.stringify(empty));
+    safeSetItem("currentCV", JSON.stringify(empty));
     setCurrentCV(empty);
-  };
+  }
+}, []);
+
+// compute completion status
+const computeStatus = (cv) => {
+  if (!cv) return { completed: 0, total: SECTION_DEFINITIONS.length, percentage: 0 };
+
+  let c = 0;
+  if (cv.personalDetails?.fullName && cv.personalDetails?.email) c++;
+  if (cv.education?.length && cv.education.some(e => e.course || e.institution)) c++;
+  if (cv.experience?.length && cv.experience.some(e => e.company || e.jobTitle)) c++;
+  if (cv.skills?.length && cv.skills.some(s => s.name)) c++;
+  if (cv.languages?.length && cv.languages.some(l => l.name)) c++;
+  if (cv.objective?.trim()) c++;
+  if (cv.projects?.length && cv.projects.some(p => p.title)) c++;
+  if (cv.certificates?.length && cv.certificates.some(cert => cert.name)) c++;
+  if (cv.awardsActivities?.length && cv.awardsActivities.some(a => a.name)) c++;
+  if (cv.references?.length && cv.references.some(r => r.name)) c++;
+  if (cv.hopes?.trim()) c++;
+
+  const pct = Math.round((c / SECTION_DEFINITIONS.length) * 100);
+  return { completed: c, total: SECTION_DEFINITIONS.length, percentage: pct };
+};
+
+// update progress whenever currentCV changes
+useEffect(() => {
+  const status = computeStatus(currentCV);
+  setCompleted(status.completed);
+  setTotal(status.total);
+  setPercentage(status.percentage);
+}, [currentCV]);
+
+// navigate to section page: save currentCV then navigate
+const openSection = (sectionKey) => {
+  const cvToSave = currentCV || makeEmptyCV();
+  cvToSave.lastUpdated = new Date().toISOString();
+  safeSetItem("currentCV", JSON.stringify(cvToSave));
+  router.push(`/${encodeURIComponent(sectionKey)}`);
+};
+
+// finalize and save CV
+const finalizeAndSave = () => {
+  try {
+    const rawList = safeGetItem("cvs");
+    const list = rawList ? safeParse(rawList) || [] : [];
+    const cvToSave = currentCV || makeEmptyCV();
+    cvToSave.lastUpdated = new Date().toISOString();
+
+    const idx = list.findIndex(item => item.id === cvToSave.id);
+    if (idx >= 0) list[idx] = cvToSave;
+    else list.unshift(cvToSave);
+
+    safeSetItem("cvs", JSON.stringify(list));
+    safeSetItem("currentCV", JSON.stringify(cvToSave));
+
+    router.push("/finalize-cv");
+  } catch (err) {
+    console.error("Failed to finalize/save CV", err);
+    alert(t.failed_to_save_cv || "Failed to save CV");
+  }
+};
+
+// reset CV
+const resetCV = () => {
+  const empty = makeEmptyCV();
+  safeSetItem("currentCV", JSON.stringify(empty));
+  setCurrentCV(empty);
+};
+
 
   // small helper to render icon (uses lucide-react icons by name fallback)
   const Icon = ({ name }) => {

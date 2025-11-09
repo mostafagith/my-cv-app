@@ -11,30 +11,70 @@ export default function ObjectivePage() {
   const { t, lang } = useLanguage();
   const [objective, setObjective] = useState("");
 
-  // جلب الـ CV الحالي من localStorage
-  useEffect(() => {
-    const cv = JSON.parse(localStorage.getItem("currentCV"));
-    if (cv && cv.objective) setObjective(cv.objective);
-  }, []);
-
-  const handleBack = () => router.back();
-
-  const handleSave = () => {
-    if (!objective.trim()) {
-      toast.error(t["pleaseEnterObjective"] || t["Please enter your career objective"]);
-      return;
+  // ---------------- Safe Storage ----------------
+const safeSetItem = (key, value) => {
+  try {
+    localStorage.setItem(key, value);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      sessionStorage.setItem(key, value);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
     }
+  }
+};
 
-    const cv = JSON.parse(localStorage.getItem("currentCV")) || {};
-    const updated = { ...cv, objective, lastUpdated: new Date().toISOString() };
-    localStorage.setItem("currentCV", JSON.stringify(updated));
+const safeGetItem = (key) => {
+  try {
+    return localStorage.getItem(key) || sessionStorage.getItem(key);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      return sessionStorage.getItem(key);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
+      return null;
+    }
+  }
+};
 
-    toast.success(t["savedSuccessfully"] || t["Career Objective Saved Successfully!"]);
+// ---------------- Load Objective ----------------
+useEffect(() => {
+  const cv = JSON.parse(safeGetItem("currentCV") || "{}");
+  if (cv.objective) setObjective(cv.objective);
+}, []);
 
-    setTimeout(()=>{
+// ---------------- Save Objective ----------------
+const handleSave = () => {
+  if (!objective.trim()) {
+    toast.error(t["pleaseEnterObjective"] || t["Please enter your career objective"]);
+    return;
+  }
+
+  const cv = JSON.parse(safeGetItem("currentCV") || "{}");
+  const updated = { ...cv, objective, lastUpdated: new Date().toISOString() };
+  safeSetItem("currentCV", JSON.stringify(updated));
+
+  toast.success(t["savedSuccessfully"] || t["Career Objective Saved Successfully!"]);
+
+  setTimeout(() => {
+    router.back();
+  }, 1000);
+};
+
+// ---------------- Back ----------------
+const handleBack = () => {
+  const cv = JSON.parse(safeGetItem("currentCV") || "{}");
+  if (objective === cv.objective) {
+    router.back();
+  } else {
+    if (confirm(t["You have unsaved changes. Do you want to go back?"])) {
       router.back();
-    },1000)
-  };
+    }
+  }
+};
+
 
   const tips = [
     t["tip1"] || t["Keep it brief (2-3 sentences)"],

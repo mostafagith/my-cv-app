@@ -15,63 +15,96 @@ import { Globe } from "lucide-react";
 
 export default function FinalizeCV() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  useEffect(() => {
+const searchParams = useSearchParams();
+const { t, lang, changeLang } = useLanguage();
+
+const [cvTitle, setCvTitle] = useState("");
+const [completionStatus, setCompletionStatus] = useState({
+  completed: 0,
+  total: 11,
+  percentage: 0,
+});
+const [isSaving, setIsSaving] = useState(false);
+const [isEditMode, setIsEditMode] = useState(false);
+const [currentCV, setCurrentCV] = useState(null);
+const [openLang, setOpenLang] = useState(false);
+
+const toggleLangMenu = () => setOpenLang(!openLang);
+
+// ---------------- Safe Storage ----------------
+const safeSetItem = (key, value) => {
+  try {
+    localStorage.setItem(key, value);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      sessionStorage.setItem(key, value);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
+    }
+  }
+};
+
+const safeGetItem = (key) => {
+  try {
+    return localStorage.getItem(key) || sessionStorage.getItem(key);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      return sessionStorage.getItem(key);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
+      return null;
+    }
+  }
+};
+
+// ---------------- Check edit mode ----------------
+useEffect(() => {
   if (!searchParams) return;
   const editMode = searchParams.get("isEditMode") === "true";
   setIsEditMode(editMode);
 }, [searchParams]);
-  const { t, lang,changeLang } = useLanguage();
 
-  const [cvTitle, setCvTitle] = useState("");
-  const [completionStatus, setCompletionStatus] = useState({
-    completed: 0,
-    total: 11,
-    percentage: 0,
-  });
-  const [isSaving, setIsSaving] = useState(false);
-  const [isEditMode, setIsEditMode] = useState(false);
-  const [currentCV, setCurrentCV] = useState(null);
-const [openLang, setOpenLang] = useState(false);
+// ---------------- Load current CV ----------------
+useEffect(() => {
+  const savedCV = JSON.parse(safeGetItem("currentCV") || "{}");
+  setCurrentCV(savedCV);
 
-  const toggleLangMenu = () => setOpenLang(!openLang);
-  useEffect(() => {
-    
+  if (savedCV) {
+    setCvTitle(savedCV.title || `My CV - ${new Date().toLocaleDateString()}`);
+    setCompletionStatus(getCompletionStatus(savedCV));
+  }
+}, []);
 
-    const savedCV = JSON.parse(localStorage.getItem("currentCV") || "{}");
-    setCurrentCV(savedCV);
+// ---------------- Compute completion ----------------
+const getCompletionStatus = (cv) => {
+  if (!cv) return { completed: 0, total: 11, percentage: 0 };
 
-    if (savedCV) {
-      setCvTitle(savedCV.title || `My CV - ${new Date().toLocaleDateString()}`);
-      setCompletionStatus(getCompletionStatus(savedCV));
-    }
-  }, []);
+  let completed = 0;
+  const total = 11;
 
-  const getCompletionStatus = (cv) => {
-    if (!cv) return { completed: 0, total: 11, percentage: 0 };
+  if (cv.personalDetails?.fullName && cv.personalDetails?.email) completed++;
+  if (cv.education?.some((e) => e.course && e.institution)) completed++;
+  if (cv.experience?.some((e) => e.company && e.jobTitle)) completed++;
+  if (cv.skills?.some((s) => s.name)) completed++;
+  if (cv.objective?.trim()) completed++;
+  if (cv.hopes?.trim()) completed++;
+  if (cv.summary?.trim()) completed++;
+  if (cv.references?.some((r) => r.name && r.company)) completed++;
+  if (cv.awardsActivities?.length > 0) completed++;
+  if (cv.certificates?.length > 0) completed++;
+  if (cv.languages?.length > 0) completed++;
+  if (cv.projects?.length > 0) completed++;
 
-    let completed = 0;
-    const total = 11;
+  const percentage = Math.round((completed / total) * 100);
+  return { completed, total, percentage };
+};
 
-    if (cv.personalDetails?.fullName && cv.personalDetails?.email) completed++;
-    if (cv.education?.some((e) => e.course && e.institution)) completed++;
-    if (cv.experience?.some((e) => e.company && e.jobTitle)) completed++;
-    if (cv.skills?.some((s) => s.name)) completed++;
-    if (cv.objective?.trim()) completed++;
-    if (cv.hopes?.trim()) completed++;
-    if (cv.summary?.trim()) completed++;
-    if (cv.references?.some((r) => r.name && r.company)) completed++;
-    if (cv.awardsActivities?.length > 0) completed++;
-    if (cv.certificates?.length > 0) completed++;
-    if (cv.languages?.length > 0) completed++;
-    if (cv.projects?.length > 0) completed++;
-
-    const percentage = Math.round((completed / total) * 100);
-    return { completed, total, percentage };
-  };
-
-  const handleSaveCV = () => {
+// ---------------- Save CV ----------------
+const handleSaveCV = () => {
   if (isSaving) return;
+
   if (!cvTitle.trim()) {
     toast.error(t["Please enter a title for your CV"]);
     return;
@@ -82,44 +115,43 @@ const [openLang, setOpenLang] = useState(false);
   // بيانات الـ CV الحالي
   const cv = {
     ...currentCV,
-    id: currentCV?.id || Date.now(), // لو مفيش id نعمل واحد جديد
+    id: currentCV?.id || Date.now(),
     title: cvTitle.trim(),
     lastUpdated: new Date().toISOString(),
   };
 
   // حفظ الـ currentCV
-  localStorage.setItem("currentCV", JSON.stringify(cv));
+  safeSetItem("currentCV", JSON.stringify(cv));
 
-  // --- حفظه داخل مجلد cvs ---
-  const existingCvs = JSON.parse(localStorage.getItem("cvs") || "[]");
+  // حفظه داخل مجلد cvs
+  const existingCvs = JSON.parse(safeGetItem("cvs") || "[]");
 
-  // لو الـ CV موجود قبل كده، نحدثه بدل ما نكرره
   const updatedCvs = existingCvs.some((item) => item.id === cv.id)
     ? existingCvs.map((item) => (item.id === cv.id ? cv : item))
     : [...existingCvs, cv];
 
-  localStorage.setItem("cvs", JSON.stringify(updatedCvs));
-  console.log(localStorage.getItem("cvs"))
-  //--- توجيه للصفحة التالية ---
+  safeSetItem("cvs", JSON.stringify(updatedCvs));
+
+  // توجيه للصفحة التالية
   router.push(
-    `/select-template?cvTitle=${encodeURIComponent(
-      cvTitle
-    )}&isEditMode=${isEditMode}`
+    `/select-template?cvTitle=${encodeURIComponent(cvTitle)}&isEditMode=${isEditMode}`
   );
 };
 
+// ---------------- Back with confirmation ----------------
+const handleBack = () => {
+  if (confirm(t["You have unsaved changes. Are you sure you want to go back?"])) {
+    router.back();
+  }
+};
 
-  const handleBack = () => {
-    if (confirm(t["You have unsaved changes. Are you sure you want to go back?"])) {
-      router.back();
-    }
-  };
+// ---------------- Preview CV ----------------
+const handlePreview = () => {
+  const cv = JSON.parse(safeGetItem("currentCV") || "{}");
+  if (!cv || Object.keys(cv).length === 0) return toast.error(t["No CV data to preview"]);
+  router.push(`/preview-cv?cvData=${encodeURIComponent(JSON.stringify(cv))}`);
+};
 
-  const handlePreview = () => {
-    const cv = JSON.parse(localStorage.getItem("currentCV") || "{}");
-    if (!cv) return toast.error(t["No CV data to preview"]);
-    router.push(`/preview-cv?cvData=${encodeURIComponent(JSON.stringify(cv))}`);
-  };
 
   return (
     <div className="min-h-screen bg-white flex flex-col">

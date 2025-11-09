@@ -6,26 +6,60 @@ import { IoDownloadOutline, IoTrashOutline } from "react-icons/io5";
 export default function DownloadsPage() {
   const [downloads, setDownloads] = useState([]);
 
-  useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("downloads") || "[]");
-    setDownloads(stored);
-  }, []);
+  // Helpers للـ storage
+const safeSetItem = (key, value) => {
+  try {
+    localStorage.setItem(key, value);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      sessionStorage.setItem(key, value);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
+    }
+  }
+};
 
-  const handleDownload = (item) => {
-    const link = document.createElement("a");
-    link.href = item.data;
-    link.download = item.fileName;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+const safeGetItem = (key) => {
+  try {
+    return localStorage.getItem(key) || sessionStorage.getItem(key);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      return sessionStorage.getItem(key);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
+      return null;
+    }
+  }
+};
 
-  const handleDelete = (index) => {
-    const updated = [...downloads];
-    updated.splice(index, 1);
-    setDownloads(updated);
-    localStorage.setItem("downloads", JSON.stringify(updated));
-  };
+// ------------------ استخدام الكود ------------------
+
+// تحميل الملفات المحفوظة عند mount
+useEffect(() => {
+  const stored = safeGetItem("downloads");
+  if (stored) setDownloads(JSON.parse(stored));
+}, []);
+
+// تحميل ملف
+const handleDownload = (item) => {
+  const link = document.createElement("a");
+  link.href = item.data;
+  link.download = item.fileName;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
+// حذف ملف
+const handleDelete = (index) => {
+  const updated = [...downloads];
+  updated.splice(index, 1);
+  setDownloads(updated);
+  safeSetItem("downloads", JSON.stringify(updated));
+};
+
 
   if (downloads.length === 0) {
     return (

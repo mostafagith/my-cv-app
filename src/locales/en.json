@@ -302,5 +302,6 @@
   "please_enter_reference_name": "Please enter the reference name",
   "please_enter_reference_job_title": "Please enter the reference job title",
   "please_enter_reference_company": "Please enter the reference company",
-  "please_enter_valid_reference_email": "Please enter a valid email address"
+  "please_enter_valid_reference_email": "Please enter a valid email address",
+  "failed_to_save_cv": "Failed to save CV"
 }

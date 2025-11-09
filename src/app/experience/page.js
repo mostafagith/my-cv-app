@@ -12,34 +12,41 @@ export default function ExperienceDetails() {
 
   const [experiences, setExperiences] = useState([]);
 
-  useEffect(() => {
-    const cv = JSON.parse(localStorage.getItem('currentCV') || '{}');
-    if (cv.experience && cv.experience.length > 0) {
-      setExperiences(cv.experience);
-    } else {
-      setExperiences([{
-        id: Date.now().toString(),
-        company: '',
-        jobTitle: '',
-        startDate: '',
-        endDate: '',
-        details: '',
-        location: '',
-        employmentType: ''
-      }]);
+// ---------------- Safe storage helpers ----------------
+const safeSetItem = (key, value) => {
+  try {
+    localStorage.setItem(key, value);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      sessionStorage.setItem(key, value);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
     }
-  }, []);
+  }
+};
 
-  const handleBack = () => router.back();
+const safeGetItem = (key) => {
+  try {
+    return localStorage.getItem(key) || sessionStorage.getItem(key);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      return sessionStorage.getItem(key);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
+      return null;
+    }
+  }
+};
 
-  const handleChange = (index, field, value) => {
-    const updated = [...experiences];
-    updated[index][field] = value;
-    setExperiences(updated);
-  };
-
-  const handleAddExperience = () => {
-    setExperiences([...experiences, {
+// ---------------- useEffect لتحميل الخبرات ----------------
+useEffect(() => {
+  const cv = JSON.parse(safeGetItem('currentCV') || '{}');
+  if (cv.experience && cv.experience.length > 0) {
+    setExperiences(cv.experience);
+  } else {
+    setExperiences([{
       id: Date.now().toString(),
       company: '',
       jobTitle: '',
@@ -49,44 +56,65 @@ export default function ExperienceDetails() {
       location: '',
       employmentType: ''
     }]);
-  };
+  }
+}, []);
 
-  const handleRemoveExperience = (index) => {
-    if (experiences.length === 1) {
-      toast.error(t["mustHaveAtLeastOne"]);
+// ---------------- دوال التحكم ----------------
+const handleBack = () => router.back();
+
+const handleChange = (index, field, value) => {
+  const updated = [...experiences];
+  updated[index][field] = value;
+  setExperiences(updated);
+};
+
+const handleAddExperience = () => {
+  setExperiences([...experiences, {
+    id: Date.now().toString(),
+    company: '',
+    jobTitle: '',
+    startDate: '',
+    endDate: '',
+    details: '',
+    location: '',
+    employmentType: ''
+  }]);
+};
+
+const handleRemoveExperience = (index) => {
+  if (experiences.length === 1) {
+    toast.error(t["mustHaveAtLeastOne"]);
+    return;
+  }
+  if (confirm(t['confirmRemoveExperience'])) {
+    setExperiences(experiences.filter((_, i) => i !== index));
+  }
+};
+
+// ---------------- حفظ الخبرات ----------------
+const handleSave = () => {
+  for (let i = 0; i < experiences.length; i++) {
+    const exp = experiences[i];
+
+    if (!exp.company?.trim()) {
+      toast.error(`${t.please_enter_company_name} (${i + 1})`);
       return;
     }
-    if (confirm(t['confirmRemoveExperience'])) {
-      setExperiences(experiences.filter((_, i) => i !== index));
+    if (!exp.jobTitle?.trim()) {
+      toast.error(`${t['please_enter_job_title']} (${i + 1})`);
+      return;
     }
-  };
-
-  const handleSave = () => {
-    console.log(t)
-    for (let i = 0; i < experiences.length; i++) {
-  const exp = experiences[i];
-
-  if (!exp.company?.trim()) {
-    toast.error(`${t.please_enter_company_name} (${i + 1})`);
-    return;
   }
 
-  if (!exp.jobTitle?.trim()) {
-    toast.error(`${t['please_enter_job_title']} (${i + 1})`);
-    return;
-  }
-}
+  const cv = JSON.parse(safeGetItem('currentCV') || '{}');
+  cv.experience = experiences;
+  safeSetItem('currentCV', JSON.stringify(cv));
 
-
-    const cv = JSON.parse(localStorage.getItem('currentCV') || '{}');
-    cv.experience = experiences;
-    localStorage.setItem('currentCV', JSON.stringify(cv));
-
-    toast.success(t.saved_successfully); 
-    setTimeout(()=>{
-      router.back();
-    },1000) 
-  };
+  toast.success(t.saved_successfully); 
+  setTimeout(() => {
+    router.back();
+  }, 1000);
+};
 
   return (
     <div className="min-h-screen bg-white">

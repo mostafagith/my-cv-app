@@ -14,31 +14,62 @@ export default function CreatePage() {
 const [openLang, setOpenLang] = useState(false);
 
   const toggleLangMenu = () => setOpenLang(!openLang);
-  // تحميل البيانات من localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("cvs");
-    if (saved) setCvs(JSON.parse(saved));
-  }, []);
-
-  // حذف CV
-  function handleDelete(index) {
-    const updated = cvs.filter((_, i) => i !== index);
-    setCvs(updated);
-    localStorage.setItem("cvs", JSON.stringify(updated));
-    setMenuIndex(null);
+  // Helpers للـ storage
+const safeSetItem = (key, value) => {
+  try {
+    localStorage.setItem(key, value);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      sessionStorage.setItem(key, value);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
+    }
   }
+};
 
-  // تعديل CV → نحفظه كـ currentCV وندخل على صفحة التعديل
-  function handleEdit(cv) {
-    localStorage.setItem("currentCV", JSON.stringify(cv));
-    window.location.href = "/create-new?isEditMode=true";
+const safeGetItem = (key) => {
+  try {
+    return localStorage.getItem(key) || sessionStorage.getItem(key);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      return sessionStorage.getItem(key);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
+      return null;
+    }
   }
+};
 
-  // ➕ إنشاء CV جديد
-  function handleCreateNew() {
-    localStorage.removeItem("currentCV"); // ✅ امسح الـ CV الحالي
-    window.location.href = "/create-new"; // ✅ روح على صفحة الإنشاء
-  }
+// ------------------ استخدام الكود ------------------
+
+// تحميل الـ CVs عند mount
+useEffect(() => {
+  const saved = safeGetItem("cvs");
+  if (saved) setCvs(JSON.parse(saved));
+}, []);
+
+// حذف CV
+function handleDelete(index) {
+  const updated = cvs.filter((_, i) => i !== index);
+  setCvs(updated);
+  safeSetItem("cvs", JSON.stringify(updated));
+  setMenuIndex(null);
+}
+
+// تعديل CV → نحفظه كـ currentCV وندخل على صفحة التعديل
+function handleEdit(cv) {
+  safeSetItem("currentCV", JSON.stringify(cv));
+  window.location.href = "/create-new?isEditMode=true";
+}
+
+// إنشاء CV جديد
+function handleCreateNew() {
+  safeSetItem("currentCV", ""); // امسح الـ CV الحالي
+  window.location.href = "/create-new";
+}
+
 
   // تنسيق التاريخ
   function formatDate(dateString) {

@@ -8,31 +8,44 @@ import toast from "react-hot-toast";
 
 export default function EducationDetails() {
   const router = useRouter();
-  const { t } = useLanguage();
-  const [educations, setEducations] = useState([]);
+const { t } = useLanguage();
+const [educations, setEducations] = useState([]);
 
-  useEffect(() => {
-    const cv = JSON.parse(localStorage.getItem('currentCV') || '{}');
-    if (cv.education && cv.education.length > 0) {
-      setEducations(cv.education);
-    } else {
-      setEducations([{
-        id: Date.now().toString(),
-        course: '',
-        degree: '',
-        institution: '',
-        grade: '',
-        startDate: '',
-        endDate: '',
-        isCurrentlyStudying: false
-      }]);
+// ---------------- Safe storage helpers ----------------
+const safeSetItem = (key, value) => {
+  try {
+    localStorage.setItem(key, value);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      sessionStorage.setItem(key, value);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
     }
-  }, []);
+  }
+};
 
-  const handleBack = () => router.back();
+const safeGetItem = (key) => {
+  try {
+    return localStorage.getItem(key) || sessionStorage.getItem(key);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      return sessionStorage.getItem(key);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
+      return null;
+    }
+  }
+};
 
-  const handleAddEducation = () => {
-    setEducations([...educations, {
+// ---------------- useEffect لتحميل التعليم ----------------
+useEffect(() => {
+  const cv = JSON.parse(safeGetItem('currentCV') || '{}');
+  if (cv.education && cv.education.length > 0) {
+    setEducations(cv.education);
+  } else {
+    setEducations([{
       id: Date.now().toString(),
       course: '',
       degree: '',
@@ -42,74 +55,85 @@ export default function EducationDetails() {
       endDate: '',
       isCurrentlyStudying: false
     }]);
-  };
+  }
+}, []);
 
-  const handleEducationChange = (index, field, value) => {
-    const updated = [...educations];
-    updated[index][field] = value;
-    setEducations(updated);
-    console.log(educations)
-  };
+// ---------------- دوال التحكم ----------------
+const handleBack = () => router.back();
 
-  const handleCurrentlyStudyingChange = (index, value) => {
-    const updated = [...educations];
-    updated[index].isCurrentlyStudying = value;
-    updated[index].endDate = value ? t['present'] : '';
-    setEducations(updated);
-  };
+const handleAddEducation = () => {
+  setEducations([...educations, {
+    id: Date.now().toString(),
+    course: '',
+    degree: '',
+    institution: '',
+    grade: '',
+    startDate: '',
+    endDate: '',
+    isCurrentlyStudying: false
+  }]);
+};
 
-  const handleRemoveEducation = (index) => {
-    if (educations.length === 1) {
-      toast.error(t['mustHaveAtLeastOne']);
-      
+const handleEducationChange = (index, field, value) => {
+  const updated = [...educations];
+  updated[index][field] = value;
+  setEducations(updated);
+};
+
+const handleCurrentlyStudyingChange = (index, value) => {
+  const updated = [...educations];
+  updated[index].isCurrentlyStudying = value;
+  updated[index].endDate = value ? t['present'] : '';
+  setEducations(updated);
+};
+
+const handleRemoveEducation = (index) => {
+  if (educations.length === 1) {
+    toast.error(t['mustHaveAtLeastOne']);
+    return;
+  }
+  if (confirm(t['confirmRemoveEducation'])) {
+    setEducations(educations.filter((_, i) => i !== index));
+  }
+};
+
+// ---------------- حفظ التعليم ----------------
+const handleSave = () => {
+  for (let i = 0; i < educations.length; i++) {
+    const edu = educations[i];
+
+    if (!edu.course?.trim()) {
+      toast.error(`${t['please_enter_course']} (${i + 1})`);
       return;
     }
-    if (confirm(t['confirmRemoveEducation'])) {
-      setEducations(educations.filter((_, i) => i !== index));
+    if (!edu.degree?.trim()) {
+      toast.error(`${t['please_enter_degree']} (${i + 1})`);
+      return;
     }
-  };
-
-  const handleSave = () => {
-    for (let i = 0; i < educations.length; i++) {
-  const edu = educations[i];
-
-  if (!edu.course?.trim()) {
-    toast.error(`${t['please_enter_course']} (${i + 1})`);
-    return;
+    if (!edu.institution?.trim()) {
+      toast.error(`${t['please_enter_institution']} (${i + 1})`);
+      return;
+    }
+    if (!edu.startDate?.trim()) {
+      toast.error(`${t['please_enter_start_date']} (${i + 1})`);
+      return;
+    }
+    if (!edu.isCurrentlyStudying && !edu.endDate?.trim()) {
+      toast.error(`${t['please_enter_end_date']} (${i + 1})`);
+      return;
+    }
   }
 
-  if (!edu.degree?.trim()) {
-    toast.error(`${t['please_enter_degree']} (${i + 1})`);
-    return;
-  }
+  const cv = JSON.parse(safeGetItem('currentCV') || '{}');
+  cv.education = educations;
+  safeSetItem('currentCV', JSON.stringify(cv));
 
-  if (!edu.institution?.trim()) {
-    toast.error(`${t['please_enter_institution']} (${i + 1})`);
-    return;
-  }
+  toast.success(t.saved_successfully || "Saved successfully!"); 
+  setTimeout(() => {
+    router.back();
+  }, 1000);
+};
 
-  if (!edu.startDate?.trim()) {
-    toast.error(`${t['please_enter_start_date']} (${i + 1})`);
-    return;
-  }
-
-  if (!edu.isCurrentlyStudying && !edu.endDate?.trim()) {
-    toast.error(`${t['please_enter_end_date']} (${i + 1})`);
-    return;
-  }
-}
-
-
-
-    const cv = JSON.parse(localStorage.getItem('currentCV') || '{}');
-    cv.education = educations;
-    localStorage.setItem('currentCV', JSON.stringify(cv));
-
-    toast.success(t.saved_successfully || "Saved successfully!"); 
-    setTimeout(()=>{
-      router.back();
-    },1000) 
-  };
 
   return (
     <div className="min-h-screen bg-white">

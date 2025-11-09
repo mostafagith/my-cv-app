@@ -24,79 +24,111 @@ export default function SectionDetailsPage() {
     photoPreview: null,
   });
 
-  // ✅ تحميل البيانات من localStorage
-  useEffect(() => {
-    const cv = JSON.parse(localStorage.getItem("currentCV") || "{}");
-    if (cv.personalDetails) {
-      setFormData(cv.personalDetails);
+  // ---------------- Safe Storage ----------------
+const safeSetItem = (key, value) => {
+  try {
+    localStorage.setItem(key, value);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      sessionStorage.setItem(key, value);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
     }
-  }, []);
+  }
+};
 
-  const handleInputChange = (field, value) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+const safeGetItem = (key) => {
+  try {
+    return localStorage.getItem(key) || sessionStorage.getItem(key);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      return sessionStorage.getItem(key);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
+      return null;
+    }
+  }
+};
+
+// ---------------- Load Personal Details ----------------
+useEffect(() => {
+  const cv = JSON.parse(safeGetItem("currentCV") || "{}");
+  if (cv.personalDetails) {
+    setFormData(cv.personalDetails);
+  }
+}, []);
+
+// ---------------- Handle Input Change ----------------
+const handleInputChange = (field, value) => {
+  setFormData((prev) => ({ ...prev, [field]: value }));
+};
+
+// ---------------- Handle Image ----------------
+const handleImageChange = (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onloadend = () => {
+    const base64String = reader.result;
+    setFormData((prev) => ({
+      ...prev,
+      photo: file,
+      photoPreview: base64String,
+    }));
   };
+  reader.readAsDataURL(file);
+};
 
-  // ✅ تحويل الصورة إلى Base64 وتخزينها
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+const deleteImage = () => {
+  setFormData((prev) => ({ ...prev, photo: null, photoPreview: null }));
+};
 
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const base64String = reader.result;
-      setFormData((prev) => ({
-        ...prev,
-        photo: file,
-        photoPreview: base64String,
-      }));
-    };
-    reader.readAsDataURL(file); // ← هنا التحويل إلى Base64
-  };
+// ---------------- Save Personal Details ----------------
+const handleSave = () => {
+  if (!formData.fullName?.trim()) {
+    toast.error(t.please_enter_full_name);
+    return;
+  }
 
-  const deleteImage = () => {
-    setFormData((prev) => ({ ...prev, photo: null, photoPreview: null }));
-  };
+  if (!formData.email?.trim()) {
+    toast.error(t.please_enter_email);
+    return;
+  }
 
-  const handleSave = () => {
-    console.log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
-    if (!formData.fullName?.trim()) {
-      toast.error(t.please_enter_full_name);
-      return;
-    }
-    if (!formData.email?.trim()) {
-      toast.error(t.please_enter_email);
-      return;
-    }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(formData.email)) {
+    toast.error(t.invalid_email_format);
+    return;
+  }
 
-    if (!emailRegex.test(formData.email)) {
-      toast.error(t.invalid_email_format); // خلي عندك ترجمة للرسالة دي
-      return;
-    }
-    const phoneRegex = /^\+?\d{10,15}$/;
+  const phoneRegex = /^\+?\d{10,15}$/;
+  if (!formData.phone) {
+    toast.error(t.please_enter_phone);
+    return;
+  }
 
-    if (!formData.phone) {
-      toast.error(t.please_enter_phone);
-      return;
-    }
+  if (!phoneRegex.test(formData.phone)) {
+    toast.error(t.invalid_phone_format);
+    return;
+  }
 
-    if (!phoneRegex.test(formData.phone)) {
-      toast.error(t.invalid_phone_format); // خلي عندك ترجمة للرسالة دي
-      return;
-    }
-    
+  // حفظ البيانات داخل currentCV
+  const cv = JSON.parse(safeGetItem("currentCV") || "{}");
+  cv.personalDetails = formData;
+  safeSetItem("currentCV", JSON.stringify(cv));
 
-    const cv = JSON.parse(localStorage.getItem("currentCV") || "{}");
-    cv.personalDetails = formData;
-    localStorage.setItem("currentCV", JSON.stringify(cv));
+  toast.success(t.saved_successfully || "Saved successfully!");
+  setTimeout(() => {
+    router.push("/create-new");
+  }, 1000);
+};
 
-    toast.success(t.saved_successfully || "Saved successfully!"); 
-    setTimeout(()=>{
-      router.push("/create-new");
-    },1000)   
-  };
+// ---------------- Handle Back ----------------
+const handleBack = () => router.back();
 
-  const handleBack = () => router.back();
 
   return (
     <div className="min-h-screen bg-gray-50">

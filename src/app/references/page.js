@@ -12,95 +12,125 @@ export default function ReferencesPage() {
   const [references, setReferences] = useState([]);
 
   // ✅ تحميل البيانات من currentCV
-  useEffect(() => {
-    const savedCV = JSON.parse(localStorage.getItem("currentCV") || "{}");
-    if (savedCV.references) {
-      setReferences(savedCV.references);
-    } else {
-      setReferences([
-        {
-          id: Date.now().toString(),
-          name: "",
-          jobTitle: "",
-          company: "",
-          email: "",
-          phone: "",
-        },
-      ]);
+  // ---------------- Safe Storage ----------------
+const safeSetItem = (key, value) => {
+  try {
+    localStorage.setItem(key, value);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      sessionStorage.setItem(key, value);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
     }
-  }, []);
+  }
+};
 
-  // ✅ حفظ التغييرات في localStorage داخل currentCV
-  const saveToLocalStorage = (updatedRefs) => {
-    const savedCV = JSON.parse(localStorage.getItem("currentCV") || "{}");
-    const updatedCV = { ...savedCV, references: updatedRefs };
-    localStorage.setItem("currentCV", JSON.stringify(updatedCV));
+const safeGetItem = (key) => {
+  try {
+    return localStorage.getItem(key) || sessionStorage.getItem(key);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      return sessionStorage.getItem(key);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
+      return null;
+    }
+  }
+};
+
+// ---------------- Load References ----------------
+useEffect(() => {
+  const savedCV = JSON.parse(safeGetItem("currentCV") || "{}");
+  if (savedCV.references) {
+    setReferences(savedCV.references);
+  } else {
+    setReferences([
+      {
+        id: Date.now().toString(),
+        name: "",
+        jobTitle: "",
+        company: "",
+        email: "",
+        phone: "",
+      },
+    ]);
+  }
+}, []);
+
+// ---------------- Save to Storage ----------------
+const saveToLocalStorage = (updatedRefs) => {
+  const savedCV = JSON.parse(safeGetItem("currentCV") || "{}");
+  const updatedCV = { ...savedCV, references: updatedRefs };
+  safeSetItem("currentCV", JSON.stringify(updatedCV));
+};
+
+// ---------------- Handlers ----------------
+const handleAddReference = () => {
+  const newRef = {
+    id: Date.now().toString(),
+    name: "",
+    jobTitle: "",
+    company: "",
+    email: "",
+    phone: "",
   };
+  const updated = [...references, newRef];
+  setReferences(updated);
+};
 
-  const handleAddReference = () => {
-    const newRef = {
-      id: Date.now().toString(),
-      name: "",
-      jobTitle: "",
-      company: "",
-      email: "",
-      phone: "",
-    };
-    const updated = [...references, newRef];
+const handleChange = (index, field, value) => {
+  const updated = [...references];
+  updated[index][field] = value;
+  setReferences(updated);
+};
+
+const handleRemoveReference = (index) => {
+  if (references.length === 1) {
+    toast.error(t["You must have at least one reference"]);
+    return;
+  }
+
+  if (confirm(t["Are you sure you want to remove this reference?"])) {
+    const updated = references.filter((_, i) => i !== index);
     setReferences(updated);
-  };
+    saveToLocalStorage(updated);
+  }
+};
 
-  const handleChange = (index, field, value) => {
-    const updated = [...references];
-    updated[index][field] = value;
-    setReferences(updated);
-  };
+const handleSave = () => {
+  for (let i = 0; i < references.length; i++) {
+    const ref = references[i];
 
-  const handleRemoveReference = (index) => {
-    if (references.length === 1) {
-      toast.error(t["You must have at least one reference"]);
+    if (!ref.name?.trim()) {
+      toast.error(`${t["please_enter_reference_name"]} (Reference ${i + 1})`);
       return;
     }
 
-    if (confirm(t["Are you sure you want to remove this reference?"])) {
-      const updated = references.filter((_, i) => i !== index);
-      setReferences(updated);
-      saveToLocalStorage(updated);
+    if (!ref.jobTitle?.trim()) {
+      toast.error(`${t["please_enter_reference_job_title"]} (Reference ${i + 1})`);
+      return;
     }
-  };
 
-  const handleSave = () => {
+    if (!ref.company?.trim()) {
+      toast.error(`${t["please_enter_reference_company"]} (Reference ${i + 1})`);
+      return;
+    }
 
-    for (let i = 0; i < references.length; i++) {
-  const ref = references[i];
-
-  if (!ref.name?.trim()) {
-    toast.error(`${t["please_enter_reference_name"]} (Reference ${i + 1})`);
-    return;
+    if (ref.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ref.email)) {
+      toast.error(`${t["please_enter_valid_reference_email"]} (Reference ${i + 1})`);
+      return;
+    }
   }
 
-  if (!ref.jobTitle?.trim()) {
-    toast.error(`${t["please_enter_reference_job_title"]} (Reference ${i + 1})`);
-    return;
-  }
+  saveToLocalStorage(references);
+  toast.success(t["References Saved Successfully!"]);
+  setTimeout(() => {
+    router.back();
+  }, 1000);
+};
 
-  if (!ref.company?.trim()) {
-    toast.error(`${t["please_enter_reference_company"]} (Reference ${i + 1})`);
-    return;
-  }
-
-  if (ref.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ref.email)) {
-    toast.error(`${t["please_enter_valid_reference_email"]} (Reference ${i + 1})`);
-    return;
-  }
-}
-
-    saveToLocalStorage(references);
-    toast.success(t["References Saved Successfully!"]);
-    setTimeout(()=>{
-        router.back();
-    },1000) 
-  };
 
   return (
     <div className="min-h-screen bg-white">

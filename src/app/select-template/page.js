@@ -16,11 +16,40 @@ export default function SelectTemplate() {
 const [openLang, setOpenLang] = useState(false);
 
   const toggleLangMenu = () => setOpenLang(!openLang);
-  // تحميل بيانات الـ CV من localStorage
-  useEffect(() => {
-    const savedCV = JSON.parse(localStorage.getItem("currentCV") || "{}");
-    setCvData(savedCV);
-  }, []);
+  // ---------------- Safe Storage ----------------
+const safeSetItem = (key, value) => {
+  try {
+    localStorage.setItem(key, value);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      sessionStorage.setItem(key, value);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
+    }
+  }
+};
+
+const safeGetItem = (key) => {
+  try {
+    return localStorage.getItem(key) || sessionStorage.getItem(key);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      return sessionStorage.getItem(key);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
+      return null;
+    }
+  }
+};
+
+// ---------------- Load CV Data ----------------
+useEffect(() => {
+  const savedCV = JSON.parse(safeGetItem("currentCV") || "{}");
+  setCvData(savedCV);
+}, []);
+
 
   // بيانات التيمبلتس
   const templates = [

@@ -17,82 +17,124 @@ export default function CertificatesPage() {
   const [description, setDescription] = useState("");
   const [editingId, setEditingId] = useState(null);
 
-  // ✅ تحميل البيانات من localStorage
-  useEffect(() => {
-    const storedCV = JSON.parse(localStorage.getItem("currentCV")) || {};
-    setCertificates(storedCV.certificates || []);
-  }, []);
+ // Helpers للـ storage
+const safeSetItem = (key, value) => {
+  try {
+    localStorage.setItem(key, value);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      sessionStorage.setItem(key, value);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
+    }
+  }
+};
 
-  // ✅ حفظ البيانات داخل localStorage بدون حذف القديم
-  const saveToLocalStorage = (newCertificates) => {
-    const storedCV = JSON.parse(localStorage.getItem("currentCV")) || {};
-    storedCV.certificates = newCertificates;
-    localStorage.setItem("currentCV", JSON.stringify(storedCV));
-    setCertificates(newCertificates);
+const safeGetItem = (key) => {
+  try {
+    return localStorage.getItem(key) || sessionStorage.getItem(key);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      return sessionStorage.getItem(key);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
+      return null;
+    }
+  }
+};
+
+const safeParse = (str) => {
+  try {
+    return JSON.parse(str);
+  } catch {
+    return {};
+  }
+};
+
+// ------------------------ main logic ------------------------
+
+// تحميل الشهادات عند mount
+useEffect(() => {
+  const storedCV = safeParse(safeGetItem("currentCV"));
+  setCertificates(storedCV.certificates || []);
+}, []);
+
+// حفظ الشهادات بدون حذف القديم
+const saveToLocalStorage = (newCertificates) => {
+  const storedCV = safeParse(safeGetItem("currentCV"));
+  const updatedCV = { ...storedCV, certificates: newCertificates };
+  safeSetItem("currentCV", JSON.stringify(updatedCV));
+  setCertificates(newCertificates);
+};
+
+// إعادة تهيئة الفورم
+const resetForm = () => {
+  setName("");
+  setIssuer("");
+  setDate("");
+  setDescription("");
+  setEditingId(null);
+};
+
+// إضافة أو تعديل شهادة
+const handleAddCertificate = () => {
+  // التحقق من كل شهادة موجودة مسبقاً
+  for (let i = 0; i < certificates.length; i++) {
+    const certificate = certificates[i];
+    if (!certificate.name?.trim()) {
+      toast.error(`${t["please_enter_certificate_name"]} (${t["certificate"]} ${i + 1})`);
+      return;
+    }
+    if (!certificate.issuer?.trim()) {
+      toast.error(`${t["please_enter_certificate_issuer"]} (${t["certificate"]} ${i + 1})`);
+      return;
+    }
+  }
+
+  const newCertificate = {
+    id: editingId || Date.now().toString(),
+    name: name.trim(),
+    issuer: issuer.trim(),
+    date: date.trim(),
+    description: description.trim(),
   };
 
-  const resetForm = () => {
-    setName("");
-    setIssuer("");
-    setDate("");
-    setDescription("");
-    setEditingId(null);
-  };
+  let updatedCertificates;
+  if (editingId) {
+    updatedCertificates = certificates.map((c) =>
+      c.id === editingId ? newCertificate : c
+    );
+    toast.success(t["Certificate updated successfully!"]);
+  } else {
+    updatedCertificates = [...certificates, newCertificate];
+    toast.success(t["Certificate added successfully!"]);
+  }
 
-  const handleAddCertificate = () => {
-    for (let i = 0; i < certificates.length; i++) {
-      const certificate = certificates[i];
+  saveToLocalStorage(updatedCertificates);
+  resetForm();
+};
 
-      if (!certificate.name?.trim()) {
-        toast.error(`${t["please_enter_certificate_name"]} (${t["certificate"]} ${i + 1})`);
-        return;
-      }
+// تعديل شهادة
+const handleEdit = (certificate) => {
+  setName(certificate.name);
+  setIssuer(certificate.issuer);
+  setDate(certificate.date || "");
+  setDescription(certificate.description || "");
+  setEditingId(certificate.id);
+};
 
-      if (!certificate.issuer?.trim()) {
-        toast.error(`${t["please_enter_certificate_issuer"]} (${t["certificate"]} ${i + 1})`);
-        return;
-      }
-    }
-
-    const newCertificate = {
-      id: editingId || Date.now().toString(),
-      name: name.trim(),
-      issuer: issuer.trim(),
-      date: date.trim(),
-      description: description.trim(),
-    };
-
-    let updatedCertificates;
-    if (editingId) {
-      updatedCertificates = certificates.map((c) =>
-        c.id === editingId ? newCertificate : c
-      );
-      toast.success(t["Certificate updated successfully!"]);
-    } else {
-      updatedCertificates = [...certificates, newCertificate];
-      toast.success(t["Certificate added successfully!"]);
-    }
-
+// حذف شهادة
+const handleDelete = (id) => {
+  if (confirm(t["Are you sure you want to delete this certificate?"])) {
+    const updatedCertificates = certificates.filter((c) => c.id !== id);
     saveToLocalStorage(updatedCertificates);
+    toast.success(t["Certificate deleted successfully!"]);
     resetForm();
-  };
+  }
+};
 
-  const handleEdit = (certificate) => {
-    setName(certificate.name);
-    setIssuer(certificate.issuer);
-    setDate(certificate.date || "");
-    setDescription(certificate.description || "");
-    setEditingId(certificate.id);
-  };
-
-  const handleDelete = (id) => {
-    if (confirm(t["Are you sure you want to delete this certificate?"])) {
-      const updatedCertificates = certificates.filter((c) => c.id !== id);
-      saveToLocalStorage(updatedCertificates);
-      toast.success(t["Certificate deleted successfully!"]);
-      resetForm();
-    }
-  };
 
   const handleSave = () => {
     toast.success(t["Certificates saved successfully!"]); 

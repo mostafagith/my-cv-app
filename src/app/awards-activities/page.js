@@ -17,19 +17,60 @@ export default function AwardsActivities() {
   const [description, setDescription] = useState("");
   const [editingId, setEditingId] = useState(null);
 
-  useEffect(() => {
-  const savedCV = JSON.parse(localStorage.getItem("currentCV") || "{}");
+  // Helpers for safe storage
+const safeSetItem = (key, value) => {
+  try {
+    localStorage.setItem(key, value);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      sessionStorage.setItem(key, value);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
+    }
+  }
+};
+
+const safeGetItem = (key) => {
+  try {
+    return localStorage.getItem(key) || sessionStorage.getItem(key);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      return sessionStorage.getItem(key);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
+      return null;
+    }
+  }
+};
+
+const safeParse = (str) => {
+  try {
+    return JSON.parse(str);
+  } catch {
+    return {};
+  }
+};
+
+// ------------------------ main logic ------------------------
+
+// load awardsActivities on mount
+useEffect(() => {
+  const savedCV = safeParse(safeGetItem("currentCV"));
   if (savedCV.awardsActivities) {
     setAwardsActivities(savedCV.awardsActivities);
   }
 }, []);
 
+// save awardsActivities to storage
 const saveToLocalStorage = (data) => {
-  const savedCV = JSON.parse(localStorage.getItem("currentCV") || "{}");
+  const savedCV = safeParse(safeGetItem("currentCV"));
   const updatedCV = { ...savedCV, awardsActivities: data };
-  localStorage.setItem("currentCV", JSON.stringify(updatedCV));
+  safeSetItem("currentCV", JSON.stringify(updatedCV));
 };
 
+// reset form fields
 const resetForm = () => {
   setName("");
   setType("Award");
@@ -39,6 +80,7 @@ const resetForm = () => {
   setEditingId(null);
 };
 
+// add or update award/activity
 const handleAddAwardActivity = () => {
   if (!name.trim()) {
     toast.error(t["please_enter_name"]);
@@ -78,6 +120,7 @@ const handleAddAwardActivity = () => {
   resetForm();
 };
 
+// edit an award/activity
 const handleEdit = (item) => {
   setName(item.name);
   setType(item.type);
@@ -87,6 +130,7 @@ const handleEdit = (item) => {
   setEditingId(item.id);
 };
 
+// delete an award/activity
 const handleDelete = (id) => {
   if (confirm(t["Are you sure you want to delete this item?"])) {
     const updated = awardsActivities.filter((item) => item.id !== id);
@@ -96,15 +140,18 @@ const handleDelete = (id) => {
   }
 };
 
+// save all and go back
 const handleSaveAll = () => {
-  const savedCV = JSON.parse(localStorage.getItem("currentCV") || "{}");
+  const savedCV = safeParse(safeGetItem("currentCV"));
   const updatedCV = { ...savedCV, awardsActivities };
-  localStorage.setItem("currentCV", JSON.stringify(updatedCV));
+  safeSetItem("currentCV", JSON.stringify(updatedCV));
   toast.success(t["Awards & Activities saved successfully!"]);
-  setTimeout(()=>{
-      router.back();
-  },1000) 
+  
+  setTimeout(() => {
+    router.back();
+  }, 1000);
 };
+
 
 
   const getTypeIcon = (type) => {

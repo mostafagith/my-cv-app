@@ -15,65 +15,98 @@ export default function LanguagesPage() {
   const [editingId, setEditingId] = useState(null);
 
   // ✅ Load from currentCV
-  useEffect(() => {
-    const savedCV = JSON.parse(localStorage.getItem("currentCV") || "{}");
-    if (savedCV.languages) {
-      setLanguages(savedCV.languages);
+  // ---------------- Safe Storage ----------------
+const safeSetItem = (key, value) => {
+  try {
+    localStorage.setItem(key, value);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      sessionStorage.setItem(key, value);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
     }
-  }, []);
+  }
+};
 
-  // ✅ Save to localStorage inside currentCV
-  const saveToLocalStorage = (updated) => {
-    const savedCV = JSON.parse(localStorage.getItem("currentCV") || "{}");
-    const updatedCV = { ...savedCV, languages: updated };
-    localStorage.setItem("currentCV", JSON.stringify(updatedCV));
-  };
-
-  const addLanguage = () => {
-    if (!languageName.trim()) {
-      toast.error(t["Please enter a language name"]);
-      return;
+const safeGetItem = (key) => {
+  try {
+    return localStorage.getItem(key) || sessionStorage.getItem(key);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      return sessionStorage.getItem(key);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
+      return null;
     }
+  }
+};
 
-    let updated;
-    if (editingId) {
-      updated = languages.map((lang) =>
-        lang.id === editingId
-          ? { ...lang, name: languageName.trim(), proficiency: proficiency || t["Intermediate"] }
-          : lang
-      );
-      toast.success(t["Language updated successfully!"]);
-    } else {
-      const newLang = {
-        id: Date.now().toString(),
-        name: languageName.trim(),
-        proficiency: proficiency || t["Intermediate"],
-      };
-      updated = [...languages, newLang];
-      toast.success(t["Language added successfully!"]);
-    }
+// ---------------- Load Languages ----------------
+useEffect(() => {
+  const savedCV = JSON.parse(safeGetItem("currentCV") || "{}");
+  if (savedCV.languages) {
+    setLanguages(savedCV.languages);
+  }
+}, []);
 
+// ---------------- Save Languages ----------------
+const saveToLocalStorage = (updated) => {
+  const savedCV = JSON.parse(safeGetItem("currentCV") || "{}");
+  const updatedCV = { ...savedCV, languages: updated };
+  safeSetItem("currentCV", JSON.stringify(updatedCV));
+};
+
+// ---------------- Add / Edit Language ----------------
+const addLanguage = () => {
+  if (!languageName.trim()) {
+    toast.error(t["Please enter a language name"]);
+    return;
+  }
+
+  let updated;
+  if (editingId) {
+    updated = languages.map((lang) =>
+      lang.id === editingId
+        ? { ...lang, name: languageName.trim(), proficiency: proficiency || t["Intermediate"] }
+        : lang
+    );
+    toast.success(t["Language updated successfully!"]);
+  } else {
+    const newLang = {
+      id: Date.now().toString(),
+      name: languageName.trim(),
+      proficiency: proficiency || t["Intermediate"],
+    };
+    updated = [...languages, newLang];
+    toast.success(t["Language added successfully!"]);
+  }
+
+  setLanguages(updated);
+  saveToLocalStorage(updated);
+  setLanguageName("");
+  setProficiency("");
+  setEditingId(null);
+};
+
+// ---------------- Edit ----------------
+const editLanguage = (language) => {
+  setLanguageName(language.name);
+  setProficiency(language.proficiency);
+  setEditingId(language.id);
+};
+
+// ---------------- Remove ----------------
+const removeLanguage = (id) => {
+  if (confirm(t["Are you sure you want to remove this language?"])) {
+    const updated = languages.filter((lang) => lang.id !== id);
     setLanguages(updated);
     saveToLocalStorage(updated);
-    setLanguageName("");
-    setProficiency("");
-    setEditingId(null);
-  };
+    toast.success(t["Language removed successfully!"]);
+  }
+};
 
-  const editLanguage = (language) => {
-    setLanguageName(language.name);
-    setProficiency(language.proficiency);
-    setEditingId(language.id);
-  };
-
-  const removeLanguage = (id) => {
-    if (confirm(t["Are you sure you want to remove this language?"])) {
-      const updated = languages.filter((lang) => lang.id !== id);
-      setLanguages(updated);
-      saveToLocalStorage(updated);
-      toast.success(t["Language removed successfully!"]);
-    }
-  };
 
   const handleSave = () => {
     toast.success(t.saved_successfully); 

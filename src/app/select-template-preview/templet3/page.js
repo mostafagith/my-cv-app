@@ -9,17 +9,45 @@ export default function PdfPreview() {
   const [cvData, setCvData] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
 
-  useEffect(() => {
-    const storedCV = JSON.parse(localStorage.getItem("currentCV") || "{}");
-    if (storedCV && Object.keys(storedCV).length > 0) {
-      setCvData(storedCV);
-    } else {
-      alert("No CV data found!");
-      if (typeof window !== "undefined" && window.history.length > 1) {
-        window.history.back();
-      }
+  const safeGetItem = (key) => {
+  try {
+    return localStorage.getItem(key) || sessionStorage.getItem(key);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      return sessionStorage.getItem(key);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
+      return null;
     }
-  }, []);
+  }
+};
+const safeSetItem = (key, value) => {
+  try {
+    localStorage.setItem(key, value);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      sessionStorage.setItem(key, value);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
+    }
+  }
+};
+// ---------------- Load CV Data ----------------
+useEffect(() => {
+  const stored = safeGetItem("currentCV");
+  const parsedCV = stored ? JSON.parse(stored) : null;
+
+  if (parsedCV && Object.keys(parsedCV).length > 0) {
+    setCvData(parsedCV);
+  } else {
+    alert(t["No CV data found!"] || "No CV data found!");
+    if (typeof window !== "undefined" && window.history.length > 1) {
+      window.history.back();
+    }
+  }
+}, []);
 
   // ✅ دالة التوليد المحترفة مع padding بين الصفحات
   const handleGenerateAndDownload = async () => {
@@ -118,7 +146,7 @@ export default function PdfPreview() {
 
       pdf.save(fileName);
       try {
-        const existingDownloads = JSON.parse(localStorage.getItem("downloads") || "[]");
+        const existingDownloads = safeGetItem("downloads");
 
         // تحويل PDF إلى Base64
         const pdfBase64 = pdf.output("datauristring"); // هيرجع 'data:application/pdf;base64,...'
@@ -129,7 +157,7 @@ export default function PdfPreview() {
           data: pdfBase64, // هنا خزّنا الـ PDF كامل
         });
 
-        localStorage.setItem("downloads", JSON.stringify(existingDownloads));
+        safeSetItem("downloads", JSON.stringify(existingDownloads));
       } catch (err) {
         console.error("Failed to save download info in localStorage:", err);
       }

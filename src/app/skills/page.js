@@ -11,46 +11,83 @@ export default function Skills() {
   const { t } = useLanguage();
   const [skills, setSkills] = useState([]);
 
-  // Load skills from localStorage (currentCV)
-  useEffect(() => {
-    const cv = JSON.parse(localStorage.getItem("currentCV")) || {};
-    if (cv.skills?.length > 0) setSkills(cv.skills);
-    else setSkills([{ id: Date.now().toString(), name: "", level: 0 }]);
-  }, []);
-
-  const handleAddSkill = () => {
-    setSkills([...skills, { id: Date.now().toString(), name: "", level: 0 }]);
-  };
-
-  const handleSkillChange = (index, field, value) => {
-    const newSkills = [...skills];
-    newSkills[index][field] = value;
-    setSkills(newSkills);
-  };
-
-  const handleRemoveSkill = (index) => {
-    if (skills.length === 1) {
-      toast.error(t["mustHaveAtLeastOneSkill"]);
-      return;
+  // دوال آمنة للقراءة والكتابة
+const safeGetItem = (key, fallback = "[]") => {
+  try {
+    const value = localStorage.getItem(key);
+    if (value) return JSON.parse(value);
+  } catch (err) {
+    console.warn(`localStorage getItem failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      const value = sessionStorage.getItem(key);
+      if (value) return JSON.parse(value);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
     }
-    if (confirm(t['confirmRemoveSkill'])) {
-      setSkills(skills.filter((_, i) => i !== index));
-    }
-  };
+  }
+  return JSON.parse(fallback);
+};
 
-  const handleSave = () => {
-    if (skills.some(s => !s.name?.trim())) {
-      toast.error(t['fillAllSkillNames']);
-      return;
+const safeSetItem = (key, value) => {
+  try {
+    localStorage.setItem(key, value);
+  } catch (err) {
+    console.warn(`localStorage setItem failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      sessionStorage.setItem(key, value);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
     }
-    const cv = JSON.parse(localStorage.getItem("currentCV")) || {};
-    cv.skills = skills;
-    localStorage.setItem("currentCV", JSON.stringify(cv));
-    toast.success(t.saved_successfully); 
-    setTimeout(()=>{
-      router.back();
-    },1000)
-  };
+  }
+};
+
+// useEffect لتحميل المهارات
+useEffect(() => {
+  const cv = safeGetItem("currentCV", "{}");
+  if (cv.skills?.length > 0) setSkills(cv.skills);
+  else setSkills([{ id: Date.now().toString(), name: "", level: 0 }]);
+}, []);
+
+// إضافة مهارة جديدة
+const handleAddSkill = () => {
+  setSkills([...skills, { id: Date.now().toString(), name: "", level: 0 }]);
+};
+
+// تعديل مهارة
+const handleSkillChange = (index, field, value) => {
+  const newSkills = [...skills];
+  newSkills[index][field] = value;
+  setSkills(newSkills);
+};
+
+// حذف مهارة
+const handleRemoveSkill = (index) => {
+  if (skills.length === 1) {
+    toast.error(t["mustHaveAtLeastOneSkill"]);
+    return;
+  }
+  if (confirm(t["confirmRemoveSkill"])) {
+    setSkills(skills.filter((_, i) => i !== index));
+  }
+};
+
+// حفظ المهارات
+const handleSave = () => {
+  if (skills.some(s => !s.name?.trim())) {
+    toast.error(t["fillAllSkillNames"]);
+    return;
+  }
+
+  const cv = safeGetItem("currentCV", "{}");
+  cv.skills = skills;
+  safeSetItem("currentCV", JSON.stringify(cv));
+
+  toast.success(t.saved_successfully);
+  setTimeout(() => {
+    router.back();
+  }, 1000);
+};
+
 
   const getLevelDescription = (level) => {
     switch (level) {

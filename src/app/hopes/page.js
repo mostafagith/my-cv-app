@@ -13,47 +13,79 @@ export default function Hopes() {
   const [hopes, setHopes] = useState("");
   const [isSaved, setIsSaved] = useState(false);
 
-  // Load from localStorage
-  useEffect(() => {
-    const storedCV = JSON.parse(localStorage.getItem("currentCV") || "{}");
-    setHopes(storedCV?.hopes || "");
-    setIsSaved(!!storedCV?.hopes);
-  }, []);
-
-  const handleSave = () => {
-    if (!hopes.trim()) {
-      toast.error(t["Please enter your hopes and aspirations"]);
-      return;
+ // ---------------- Safe Storage ----------------
+const safeSetItem = (key, value) => {
+  try {
+    localStorage.setItem(key, value);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      sessionStorage.setItem(key, value);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
     }
+  }
+};
 
-    // Get currentCV or empty object
-    const currentCV = JSON.parse(localStorage.getItem("currentCV") || "{}");
+const safeGetItem = (key) => {
+  try {
+    return localStorage.getItem(key) || sessionStorage.getItem(key);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      return sessionStorage.getItem(key);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
+      return null;
+    }
+  }
+};
 
-    // Update hopes section
-    const updatedCV = {
-      ...currentCV,
-      hopes,
-    };
+// ---------------- Load Hopes ----------------
+useEffect(() => {
+  const storedCV = JSON.parse(safeGetItem("currentCV") || "{}");
+  setHopes(storedCV?.hopes || "");
+  setIsSaved(!!storedCV?.hopes);
+}, []);
 
-    // Save back to localStorage
-    localStorage.setItem("currentCV", JSON.stringify(updatedCV));
+// ---------------- Save Hopes ----------------
+const handleSave = () => {
+  if (!hopes.trim()) {
+    toast.error(t["Please enter your hopes and aspirations"]);
+    return;
+  }
 
-    toast.success(t["Hopes saved successfully!"]);
-    setTimeout(()=>{
-        router.back();
-    },1000)
+  // Get currentCV or empty object
+  const currentCV = JSON.parse(safeGetItem("currentCV") || "{}");
+
+  // Update hopes section
+  const updatedCV = {
+    ...currentCV,
+    hopes,
   };
 
-  const handleBack = () => {
-    const currentCV = JSON.parse(localStorage.getItem("currentCV") || "{}");
-    if (isSaved || hopes === currentCV?.hopes) {
+  safeSetItem("currentCV", JSON.stringify(updatedCV));
+
+  toast.success(t["Hopes saved successfully!"]);
+  setIsSaved(true);
+
+  setTimeout(() => {
+    router.back();
+  }, 1000);
+};
+
+// ---------------- Back with unsaved changes ----------------
+const handleBack = () => {
+  const currentCV = JSON.parse(safeGetItem("currentCV") || "{}");
+  if (isSaved || hopes === currentCV?.hopes) {
+    router.back();
+  } else {
+    if (confirm(t["You have unsaved changes. Do you want to go back?"])) {
       router.back();
-    } else {
-      if (confirm(t["You have unsaved changes. Do you want to go back?"])) {
-        router.back();
-      }
     }
-  };
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-white flex flex-col">

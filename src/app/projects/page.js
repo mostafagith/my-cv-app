@@ -11,98 +11,121 @@ export default function ProjectsDetails() {
   const { t, lang } = useLanguage();
   const [projects, setProjects] = useState([]);
 
-  // 🧠 تحميل المشاريع من localStorage
-  useEffect(() => {
-    const storedCV = localStorage.getItem("currentCV");
-    if (storedCV) {
-      const parsedCV = JSON.parse(storedCV);
-      setProjects(parsedCV.projects || []);
-    } else {
-      setProjects([
-        {
-          id: Date.now().toString(),
-          title: "",
-          description: "",
-          technologies: "",
-          projectUrl: "",
-          startDate: "",
-          endDate: "",
-        },
-      ]);
+  // ---------------- Safe Storage ----------------
+const safeSetItem = (key, value) => {
+  try {
+    localStorage.setItem(key, value);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      sessionStorage.setItem(key, value);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
     }
-  }, []);
+  }
+};
 
-  // 🔁 تحديث البيانات في localStorage
-  const updateLocalStorage = (updatedProjects) => {
-    setProjects(updatedProjects);
-    const storedCV = JSON.parse(localStorage.getItem("currentCV")) || {};
-    storedCV.projects = updatedProjects;
-    localStorage.setItem("currentCV", JSON.stringify(storedCV));
+const safeGetItem = (key) => {
+  try {
+    return localStorage.getItem(key) || sessionStorage.getItem(key);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      return sessionStorage.getItem(key);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
+      return null;
+    }
+  }
+};
+
+// ---------------- Load Projects ----------------
+useEffect(() => {
+  const storedCV = safeGetItem("currentCV");
+  if (storedCV) {
+    const parsedCV = JSON.parse(storedCV);
+    setProjects(parsedCV.projects || []);
+  } else {
+    setProjects([
+      {
+        id: Date.now().toString(),
+        title: "",
+        description: "",
+        technologies: "",
+        projectUrl: "",
+        startDate: "",
+        endDate: "",
+      },
+    ]);
+  }
+}, []);
+
+// ---------------- Update Local Storage ----------------
+const updateLocalStorage = (updatedProjects) => {
+  setProjects(updatedProjects);
+  const storedCV = JSON.parse(safeGetItem("currentCV") || "{}");
+  storedCV.projects = updatedProjects;
+  safeSetItem("currentCV", JSON.stringify(storedCV));
+};
+
+// ---------------- Handlers ----------------
+const handleBack = () => router.back();
+
+const handleChange = (index, field, value) => {
+  const updated = [...projects];
+  updated[index][field] = value;
+  updateLocalStorage(updated);
+};
+
+const handleAddProject = () => {
+  const newProject = {
+    id: Date.now().toString(),
+    title: "",
+    description: "",
+    technologies: "",
+    projectUrl: "",
+    startDate: "",
+    endDate: "",
   };
+  updateLocalStorage([...projects, newProject]);
+};
 
-  const handleBack = () => {
-    router.back();
-  };
-
-  const handleChange = (index, field, value) => {
-    const updated = [...projects];
-    updated[index][field] = value;
+const handleRemoveProject = (index) => {
+  if (projects.length === 1) {
+    toast.error(t["You must have at least one project entry"]);
+    return;
+  }
+  if (confirm(t["Are you sure you want to remove this project?"])) {
+    const updated = projects.filter((_, i) => i !== index);
     updateLocalStorage(updated);
-  };
+  }
+};
 
-  const handleAddProject = () => {
-    const newProject = {
-      id: Date.now().toString(),
-      title: "",
-      description: "",
-      technologies: "",
-      projectUrl: "",
-      startDate: "",
-      endDate: "",
-    };
-    updateLocalStorage([...projects, newProject]);
-  };
+const handleSave = () => {
+  for (let i = 0; i < projects.length; i++) {
+    const project = projects[i];
 
-  const handleRemoveProject = (index) => {
-    if (projects.length === 1) {
-      toast.error(t["You must have at least one project entry"]);
+    if (!project.title?.trim()) {
+      toast.error(`${t["please_enter_project_title"]} (Project ${i + 1})`);
       return;
     }
-    if (confirm(t["Are you sure you want to remove this project?"])) {
-      const updated = projects.filter((_, i) => i !== index);
-      updateLocalStorage(updated);
+
+    if (!project.description?.trim()) {
+      toast.error(`${t["please_enter_project_description"]} (Project ${i + 1})`);
+      return;
     }
-  };
+  }
 
-  const handleSave = () => {
+  const storedCV = JSON.parse(safeGetItem("currentCV") || "{}");
+  storedCV.projects = projects;
+  safeSetItem("currentCV", JSON.stringify(storedCV));
 
-    for (let i = 0; i < projects.length; i++) {
-      const project = projects[i];
+  toast.success(t.saved_successfully);
+  setTimeout(() => {
+    router.back();
+  }, 1000);
+};
 
-      if (!project.title?.trim()) {
-        toast.error(`${t["please_enter_project_title"]} (Project ${i + 1})`);
-        return; // دلوقتي هيخرج من handleSave كامل
-      }
-
-      if (!project.description?.trim()) {
-        toast.error(`${t["please_enter_project_description"]} (Project ${i + 1})`);
-        return; // هيخرج من handleSave كامل
-      }
-    }
-
-    // ✅ نجيب الـ CV القديم بدل ما نمسحه
-    const storedCV = JSON.parse(localStorage.getItem("currentCV")) || {};
-
-    // ✅ نحدث المشاريع فقط
-    storedCV.projects = projects;
-
-    // ✅ نحفظ الـ CV كامل
-    localStorage.setItem("currentCV", JSON.stringify(storedCV));
-    toast.success(t.saved_successfully); 
-    setTimeout(()=>{
-      router.back();
-    },1000) 
-  };
 
   return (
     <div className="min-h-screen bg-white">
