@@ -149,7 +149,8 @@ useEffect(() => {
 
       pdf.save(fileName);
       try {
-        const existingDownloads = safeGetItem("downloads");
+        const existing = safeGetItem("downloads");
+  const existingDownloads = existing ? JSON.parse(existing):[];
 
         // تحويل PDF إلى Base64
         const pdfBase64 = pdf.output("datauristring"); // هيرجع 'data:application/pdf;base64,...'

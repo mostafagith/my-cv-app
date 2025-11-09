@@ -144,7 +144,8 @@ useEffect(() => {
       pdf.save(fileName);
       
       try {
-        const existingDownloads = safeGetItem("downloads");
+        const existing = safeGetItem("downloads");
+  const existingDownloads = existing ? JSON.parse(existing):[];
         const pdfBase64 = pdf.output("datauristring");
         existingDownloads.push({
           fileName,

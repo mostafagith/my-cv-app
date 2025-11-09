@@ -145,7 +145,8 @@ useEffect(() => {
       pdf.save(fileName);
       
       try {
-  const existingDownloads = safeGetItem("downloads");
+  const existing = safeGetItem("downloads");
+  const existingDownloads = existing ? JSON.parse(existing):[];
   existingDownloads.push({
     fileName,
     date: new Date().toISOString(),

@@ -26,6 +26,20 @@ const { t } = useLanguage();
   }
 };
 
+// تحويل PDF إلى Base64
+  const safeSetItem = (key, value) => {
+  try {
+    localStorage.setItem(key, value);
+  } catch (err) {
+    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
+    try {
+      sessionStorage.setItem(key, value);
+    } catch (e) {
+      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
+    }
+  }
+};
+
 // ---------------- Load CV Data ----------------
 useEffect(() => {
   const stored = safeGetItem("currentCV");
@@ -140,21 +154,10 @@ useEffect(() => {
       
 
 try {
-  const existingDownloads = safeGetItem("downloads");
+  const existing = safeGetItem("downloads");
+  const existingDownloads = existing ? JSON.parse(existing):[];
 
-  // تحويل PDF إلى Base64
-  const safeSetItem = (key, value) => {
-  try {
-    localStorage.setItem(key, value);
-  } catch (err) {
-    console.warn(`localStorage failed for key "${key}", fallback to sessionStorage`, err);
-    try {
-      sessionStorage.setItem(key, value);
-    } catch (e) {
-      console.error(`Both localStorage and sessionStorage failed for key "${key}"`, e);
-    }
-  }
-};
+  
   const pdfBase64 = pdf.output("datauristring"); // 'data:application/pdf;base64,...'
 
   existingDownloads.push({
