@@ -19,28 +19,36 @@ function AdMobBannerPlaceholder() {
 }
 
 export default function HomePage() {
-  const { t, lang, changeLang } = useLanguage();
+  const { t, lang } = useLanguage();
   const router = useRouter();
   const [openLang, setOpenLang] = useState(false);
-
-  const toggleLangMenu = () => setOpenLang(!openLang);
   const [cvs, setCvs] = useState([]);
   const [showShareModal, setShowShareModal] = useState(false);
   const [copied, setCopied] = useState(false);
 
+  const [shareUrl, setShareUrl] = useState("");
+  const [pageTitle, setPageTitle] = useState("");
+
+  // Load CVs from localStorage
   useEffect(() => {
     if (typeof window !== "undefined") {
       const savedCvs = JSON.parse(localStorage.getItem("cvs") || "[]");
       setCvs(savedCvs);
+
+      // Share data
+      setShareUrl(window.location.href);
+      setPageTitle(document.title);
     }
   }, []);
 
-  const shareUrl = typeof window !== "undefined" ? window.location.href : "";
+  const toggleLangMenu = () => setOpenLang(!openLang);
 
   const handleShare = async () => {
+    if (!shareUrl || !pageTitle) return;
+
     const shareData = {
-      title: document.title,
-      text: document.title,
+      title: pageTitle,
+      text: pageTitle,
       url: shareUrl,
     };
 
@@ -76,7 +84,7 @@ export default function HomePage() {
   };
 
   const encoded = encodeURIComponent(shareUrl);
-  const encodedTitle = encodeURIComponent(document.title);
+  const encodedTitle = encodeURIComponent(pageTitle);
 
   return (
     <div
@@ -93,7 +101,7 @@ export default function HomePage() {
 
       {/* Icons Row */}
       <div className="flex justify-around bg-orange-50 py-4 px-2 shadow-md">
-        <IconButton icon={<Share2/>} label={t.share} onClick={handleShare}  />
+        <IconButton icon={<Share2 />} label={t.share} onClick={handleShare} />
         <IconButton icon={<Gift />} label={t.reward} onClick={() => console.log("Rewarded Ad")} />
         <IconButton icon={<Bell />} label={t.notifications} />
         <IconButton icon={<Settings />} label={t.settings} />
@@ -155,31 +163,67 @@ export default function HomePage() {
           >
             <h3 className="text-lg font-semibold mb-4">مشاركة الرابط</h3>
             <div className="grid grid-cols-3 gap-4">
-              <a href={`https://wa.me/?text=${encodedTitle}%20${encoded}`} target="_blank" rel="noreferrer" className="text-center hover:underline">
+              <a
+                href={`https://wa.me/?text=${encodedTitle}%20${encoded}`}
+                target="_blank"
+                rel="noreferrer"
+                className="text-center hover:underline"
+              >
                 واتساب
               </a>
-              <a href={`https://t.me/share/url?url=${encoded}&text=${encodedTitle}`} target="_blank" rel="noreferrer" className="text-center hover:underline">
+              <a
+                href={`https://t.me/share/url?url=${encoded}&text=${encodedTitle}`}
+                target="_blank"
+                rel="noreferrer"
+                className="text-center hover:underline"
+              >
                 تيليجرام
               </a>
-              <a href={`https://www.facebook.com/sharer/sharer.php?u=${encoded}`} target="_blank" rel="noreferrer" className="text-center hover:underline">
+              <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=${encoded}`}
+                target="_blank"
+                rel="noreferrer"
+                className="text-center hover:underline"
+              >
                 فيسبوك
               </a>
-              <a href={`https://twitter.com/intent/tweet?url=${encoded}&text=${encodedTitle}`} target="_blank" rel="noreferrer" className="text-center hover:underline">
+              <a
+                href={`https://twitter.com/intent/tweet?url=${encoded}&text=${encodedTitle}`}
+                target="_blank"
+                rel="noreferrer"
+                className="text-center hover:underline"
+              >
                 تويتر
               </a>
-              <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encoded}`} target="_blank" rel="noreferrer" className="text-center hover:underline">
+              <a
+                href={`https://www.linkedin.com/sharing/share-offsite/?url=${encoded}`}
+                target="_blank"
+                rel="noreferrer"
+                className="text-center hover:underline"
+              >
                 لينكدإن
               </a>
-              <a href={`mailto:?subject=${encodedTitle}&body=${encodedTitle}%20${encoded}`} target="_blank" rel="noreferrer" className="text-center hover:underline">
+              <a
+                href={`mailto:?subject=${encodedTitle}&body=${encodedTitle}%20${encoded}`}
+                target="_blank"
+                rel="noreferrer"
+                className="text-center hover:underline"
+              >
                 إيميل
               </a>
             </div>
 
             <div className="mt-4 flex gap-2">
-              <button onClick={copyLink} className="flex-1 p-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition">
+              <button
+                onClick={copyLink}
+                className="flex-1 p-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition"
+              >
                 {copied ? "تم النسخ ✓" : "نسخ الرابط"}
               </button>
-              <button onClick={() => setShowShareModal(false)} className="flex-1 p-2 bg-gray-300 rounded-lg hover:bg-gray-400 transition">
+              <button
+                onClick={() => setShowShareModal(false)}
+                className="flex-1 p-2 bg-gray-300 rounded-lg hover:bg-gray-400 transition"
+              >
                 إغلاق
               </button>
             </div>
