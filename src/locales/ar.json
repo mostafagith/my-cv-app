@@ -406,5 +406,7 @@
   "spanish": "إسباني",
   "german": "ألماني",
   "italian": "إيطالي",
-  "portuguese": "برتغالي"
+  "portuguese": "برتغالي",
+  "no_downloads_yet": "لا توجد تحميلات بعد.",
+  "download":"تحميل"
 }
