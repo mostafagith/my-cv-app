@@ -1,5 +1,5 @@
 "use client";
-import { useLanguage } from "@/hooks/useLanguage";
+import { useLanguage } from "@/context/LanguageContext";
 import { FaWhatsapp } from "react-icons/fa";
 
 export default function ContactPage() {

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useLanguage } from "@/hooks/useLanguage";
+import { useLanguage } from "@/context/LanguageContext";
 import { IoArrowBack, IoBulbOutline, IoCheckmarkCircle } from "react-icons/io5";
 import toast from "react-hot-toast";
 

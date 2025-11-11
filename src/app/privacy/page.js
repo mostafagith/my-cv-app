@@ -1,5 +1,5 @@
 "use client";
-import { useLanguage } from "@/hooks/useLanguage";
+import { useLanguage } from "@/context/LanguageContext";
 import { Globe } from "lucide-react";
 import { useState } from "react";
 import Navbar from "@/components/Navbar";

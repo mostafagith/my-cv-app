@@ -5,7 +5,7 @@ import { IoArrowBack, IoDownloadOutline } from "react-icons/io5";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas-pro";
 import toast from "react-hot-toast";
-import { useLanguage } from "@/hooks/useLanguage";
+import { useLanguage } from "@/context/LanguageContext";
 import { useCVLanguage } from "@/hooks/useCVLanguage";
 
 export default function PdfPreview() {

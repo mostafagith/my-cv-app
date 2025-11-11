@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { IoArrowBack, IoInformationCircle, IoCheckmark } from "react-icons/io5";
-import { useLanguage } from "@/hooks/useLanguage";
+import { useLanguage } from "@/context/LanguageContext";
 import { useCVLanguage } from "@/hooks/useCVLanguage";
 
 import { Globe } from "lucide-react";

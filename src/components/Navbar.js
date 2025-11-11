@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X, Globe } from "lucide-react";
-import { useLanguage } from "@/hooks/useLanguage";
+import { useLanguage } from "@/context/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {

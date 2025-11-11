@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { IoDownloadOutline, IoTrashOutline } from "react-icons/io5";
 import Navbar from "@/components/Navbar";
-import { useLanguage } from "@/hooks/useLanguage";
+import { useLanguage } from "@/context/LanguageContext";
 import toast from "react-hot-toast";
 
 // استيراد react-pdf بشكل ديناميكي (client-side only)

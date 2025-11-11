@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { IoTrophyOutline, IoPeople, IoHeart, IoMedal, IoTrash, IoPencil, IoCheckmarkCircle } from "react-icons/io5";
 import { useRouter } from "next/navigation";
-import { useLanguage } from "@/hooks/useLanguage";
+import { useLanguage } from "@/context/LanguageContext";
 import toast from "react-hot-toast";
 
 export default function AwardsActivities() {

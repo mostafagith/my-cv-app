@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { IoArrowBack, IoTrash, IoPencil, IoAdd, IoCheckmarkCircle } from "react-icons/io5";
 import { useRouter } from "next/navigation";
-import { useLanguage } from "@/hooks/useLanguage";
+import { useLanguage } from "@/context/LanguageContext";
 import toast from "react-hot-toast";
 
 export default function CertificatesPage() {

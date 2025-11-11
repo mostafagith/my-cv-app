@@ -1,6 +1,6 @@
 "use client";
 import Navbar from "@/components/Navbar";
-import { useLanguage } from "@/hooks/useLanguage";
+import { useLanguage } from "@/context/LanguageContext";
 export default function AtsSystemPage() {
   const { t } = useLanguage();
 

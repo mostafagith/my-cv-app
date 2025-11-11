@@ -1,5 +1,5 @@
 "use client";
-import { useLanguage } from "@/hooks/useLanguage";
+import { useLanguage } from "@/context/LanguageContext";
 import Navbar from "@/components/Navbar";
 
 export default function AboutPage() {

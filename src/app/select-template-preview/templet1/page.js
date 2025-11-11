@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { IoArrowBack, IoDownloadOutline } from "react-icons/io5";
 import jsPDF from "jspdf";
-import { useLanguage } from "@/hooks/useLanguage";
+import { useLanguage } from "@/context/LanguageContext";
 import { useCVLanguage } from "@/hooks/useCVLanguage";
 
 import html2canvas from "html2canvas-pro";

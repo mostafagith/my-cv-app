@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { IoArrowBack, IoCheckmarkCircle } from "react-icons/io5";
-import { useLanguage } from "@/hooks/useLanguage";
+import { useLanguage } from "@/context/LanguageContext";
 import toast from "react-hot-toast";
 
 export default function ObjectivePage() {

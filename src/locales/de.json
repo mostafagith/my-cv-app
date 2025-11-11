@@ -5,7 +5,7 @@
   "notifications": "Benachrichtigungen",
   "settings": "Einstellungen",
   "resume_section": "Lebenslauf / CV",
-  "create": "Erstellen",
+  "create": "Lebenslauf erstellen",
   "downloads": "Downloads",
   "createPageTitle": "Meine CVs",
   "createNew": "Neu erstellen",
@@ -410,7 +410,15 @@
   "no_downloads_yet": "Noch keine Downloads.",
   "download":"Herunterladen",
   "confirm_delete": "Möchten Sie wirklich löschen",
-    "yes": "Ja",
-    "no": "Nein",
-    "deleted_success": "Datei erfolgreich gelöscht!"
+  "yes": "Ja",
+  "no": "Nein",
+  "deleted_success": "Datei erfolgreich gelöscht!",
+  "site_language": "Website-Sprache",
+  "cv_language": "CV-Sprache",
+   "choose_your_template": "Wählen Sie Ihre perfekte Vorlage",
+  "view_professional_examples": "Sehen Sie sich professionelle Lebenslaufbeispiele an und bearbeiten Sie sie ganz einfach.",
+  "why_our_cv_builder": "Warum unseren Lebenslauf-Builder wählen?",
+  "cv_importance": "Ihr Lebenslauf ist Ihr erster Eindruck beim Arbeitgeber. Mit unseren professionellen Tools und Vorlagen heben Sie sich positiv ab.",
+  "easy_to_use": "Unsere Plattform ist einfach und benutzerfreundlich – erstellen Sie Ihren Lebenslauf in wenigen Minuten, auch ohne Designkenntnisse.",
+  "ready_to_start": "Starten Sie jetzt kostenlos, erstellen Sie Ihren Lebenslauf online und teilen Sie ihn jederzeit von jedem Gerät aus."
 }

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { MoreVertical, Trash2, Edit, PlusCircle } from "lucide-react";
-import { useLanguage } from "@/hooks/useLanguage";
+import { useLanguage } from "@/context/LanguageContext";
 import { Globe, Share2, Gift, Bell, Settings, ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 

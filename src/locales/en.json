@@ -5,7 +5,7 @@
   "notifications": "Notifications",
   "settings": "Settings",
   "resume_section": "Resume / CV",
-  "create": "Create",
+  "create": "Create Cv",
   "downloads": "Downloads",
   "createPageTitle": "My CVs",
   "createNew": "Create New",
@@ -408,7 +408,15 @@
   "no_downloads_yet": "No downloads yet.",
   "download":"Download",
   "confirm_delete": "Are you sure you want to delete",
-    "yes": "Yes",
-    "no": "No",
-    "deleted_success": "File deleted successfully!"
+  "yes": "Yes",
+  "no": "No",
+  "deleted_success": "File deleted successfully!",
+  "site_language": "Site Language",
+  "cv_language": "CV Language",
+  "choose_your_template": "Choose your perfect template",
+  "view_professional_examples": "Browse professional CV examples and start editing easily.",
+  "why_our_cv_builder": "Why choose our CV Builder?",
+  "cv_importance": "Your CV is your first impression to employers, and we help you make it stand out with professional tools and templates.",
+  "easy_to_use": "Our platform is simple and intuitive — you can create your CV in minutes, even without design experience.",
+  "ready_to_start": "Start now for free, build your CV online, and share it easily anytime from any device."
 }

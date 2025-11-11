@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Globe, Share2, Gift, Bell, Settings, ArrowRight } from "lucide-react";
-import { useLanguage } from "@/hooks/useLanguage";
+import { useLanguage } from "@/context/LanguageContext";
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 
@@ -85,7 +85,18 @@ export default function HomePage() {
 
   const encoded = encodeURIComponent(shareUrl);
   const encodedTitle = encodeURIComponent(pageTitle);
-
+const templates = [
+  { id: "templet10", name: "Template 10", image: "/templates/templet10.jpg", page: "/templet10" },
+  { id: "templet9", name: "Template 9", image: "/templates/templet9.jpg", page: "/templet9" },
+  { id: "creative", name: "Creative", image: "/templates/creative.jpg", page: "/templet4" },
+  { id: "templet2", name: "Template 2", image: "/templates/templet2.jpg", page: "/templet2" },
+  { id: "templet3", name: "Template 3", image: "/templates/templet3.jpg", page: "/templet3" },
+  { id: "executive", name: "Executive", image: "/templates/executive.jpg", page: "/templet5" },
+  { id: "academic", name: "Academic", image: "/templates/academic.jpg", page: "/templet6" },
+  { id: "templet1", name: "Template 1", image: "/templates/templet1.jpg", page: "/templet1" },
+    { id: "templet7", name: "Template 7", image: "/templates/templet7.jpg", page: "/templet7" },
+    { id: "templet8", name: "Template 8", image: "/templates/templet8.jpg", page: "/templet8" },
+  ];
   return (
     <div
       className={`min-h-screen bg-gray-50 font-sans transition-all duration-300 ${
@@ -104,11 +115,11 @@ export default function HomePage() {
         <IconButton icon={<Share2 />} label={t.share} onClick={handleShare} />
         <IconButton icon={<Gift />} label={t.reward} onClick={() => console.log("Rewarded Ad")} />
         <IconButton icon={<Bell />} label={t.notifications} />
-        <IconButton icon={<Settings />} label={t.settings} />
+        <IconButton icon={<Settings />} label={t.settings} onClick={()=> router.push("/setting")} />
       </div>
 
       {/* Banner Ad Placeholder */}
-      <AdMobBannerPlaceholder />
+      {/* <AdMobBannerPlaceholder /> */}
 
       {/* Main Content */}
       <main className="flex-1 py-3 px-5 md:py-6 md:px-20">
@@ -230,6 +241,63 @@ export default function HomePage() {
           </div>
         </div>
       )}
+
+      {/* Templates Grid */}
+            <div className="text-center py-10 bg-gradient-to-b from-gray-50 to-white">
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
+                {t.choose_your_template}
+              </h2>
+              <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto">
+                {t.view_professional_examples}
+              </p>
+            </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 py-3 px-5 md:py-6 md:px-20">
+                {templates.map((template) => (
+                  <div
+                    key={template.id}
+                    className={`relative border-2 border-gray-200 hover:border-teal-500 overflow-hidden cursor-pointer transition transform hover:scale-[1.02]`}
+                  >
+                    <div className="relative w-full ">
+                      <img
+                        onClick={()=> router.push("/create-new")}
+                        src={template.image}
+                        alt={template.name}
+                        fill
+                        className="object-contain"
+                      />
+                      
+                    </div>
+                    {/* <div className="p-3 text-center">
+                      <p className="font-semibold text-gray-800">{template.name}</p>
+                    </div> */}
+                  </div>
+                ))}
+              </div>
+<section className="py-12 bg-gray-50 text-center">
+  <div className="max-w-4xl mx-auto px-4">
+    <h3 className="text-2xl font-bold text-gray-900 mb-4">
+      {t.why_our_cv_builder}
+    </h3>
+    <p className="text-gray-600 leading-relaxed mb-3">
+      {t.cv_importance}
+    </p>
+    <p className="text-gray-600 leading-relaxed mb-3">
+      {t.easy_to_use}
+    </p>
+    <p className="text-gray-600 leading-relaxed">
+      {t.ready_to_start}
+    </p>
+    <div className="mt-6">
+      <Link
+        href="/create-new"
+        className="flex-1 bg-teal-600 hover:bg-teal-700 transition text-center p-4 rounded-xl shadow-xl text-white font-bold text-lg"
+      >
+        <span>{t.create}</span>
+        {/* <ArrowRight size={24} /> */}
+      </Link>
+    </div>
+  </div>
+</section>
 
       {/* Footer */}
       <footer className="bg-gradient-to-r from-teal-800 to-teal-600 text-white py-10 mt-20">

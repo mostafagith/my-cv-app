@@ -5,7 +5,7 @@
   "notifications": "Notifications",
   "settings": "Paramètres",
   "resume_section": "Curriculum Vitae / CV",
-  "create": "Créer",
+  "create": "Créer un CV",
   "downloads": "Téléchargements",
   "createPageTitle": "Mes CVs",
   "createNew": "Créer Nouveau",
@@ -410,7 +410,15 @@
   "no_downloads_yet": "Aucun téléchargement pour le moment.",
   "download":"Télécharger",
   "confirm_delete": "Êtes-vous sûr de vouloir supprimer",
-    "yes": "Oui",
-    "no": "Non",
-    "deleted_success": "Fichier supprimé avec succès!"
+  "yes": "Oui",
+  "no": "Non",
+  "deleted_success": "Fichier supprimé avec succès!",
+  "site_language": "Langue du site",
+  "cv_language": "Langue du CV",
+   "choose_your_template": "Choisissez le modèle parfait pour vous",
+  "view_professional_examples": "Découvrez des exemples de CV professionnels et commencez à les modifier facilement.",
+  "why_our_cv_builder": "Pourquoi choisir notre créateur de CV ?",
+  "cv_importance": "Votre CV est la première impression que vous laissez à un employeur. Nous vous aidons à le rendre unique grâce à des outils et modèles professionnels.",
+  "easy_to_use": "Notre plateforme est simple et intuitive — créez votre CV en quelques minutes, même sans expérience en design.",
+  "ready_to_start": "Commencez maintenant gratuitement, créez votre CV en ligne et partagez-le facilement à tout moment et depuis n’importe quel appareil."
 }

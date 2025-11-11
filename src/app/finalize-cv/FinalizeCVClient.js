@@ -10,7 +10,7 @@ import {
   IoInformationCircle,
   IoPencil,
 } from "react-icons/io5";
-import { useLanguage } from "@/hooks/useLanguage";
+import { useLanguage } from "@/context/LanguageContext";
 import { Globe } from "lucide-react";
 
 export default function FinalizeCV() {
