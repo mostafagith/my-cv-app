@@ -408,5 +408,9 @@
   "italian": "Italienisch",
   "portuguese": "Portugiesisch",
   "no_downloads_yet": "Noch keine Downloads.",
-  "download":"Herunterladen"
+  "download":"Herunterladen",
+  "confirm_delete": "Möchten Sie wirklich löschen",
+    "yes": "Ja",
+    "no": "Nein",
+    "deleted_success": "Datei erfolgreich gelöscht!"
 }

@@ -408,5 +408,9 @@
   "italian": "Italiano",
   "portuguese": "Portoghese",
   "no_downloads_yet": "Nessun download ancora.",
-  "download":"Scarica"
+  "download":"Scarica",
+  "confirm_delete": "Sei sicuro di voler eliminare",
+    "yes": "Sì",
+    "no": "No",
+    "deleted_success": "File eliminato con successo!"
 }

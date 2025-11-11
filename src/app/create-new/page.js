@@ -191,7 +191,9 @@ const resetCV = () => {
     };
     return <span className="text-xl">{map[name] || "📋"}</span>;
   };
-  const handleBack = () => router.back();
+  const handleBack = () => {
+    router.push('/create'); // يروح للصفحة الرئيسية
+  };
 const [openLang, setOpenLang] = useState(false);
 
   const toggleLangMenu = () => setOpenLang(!openLang);

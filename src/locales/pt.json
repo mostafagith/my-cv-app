@@ -408,5 +408,9 @@
   "italian": "Italiano",
   "portuguese": "Português",
   "no_downloads_yet": "Nenhum download ainda.",
-  "download":"Baixar"
+  "download":"Baixar",
+   "confirm_delete": "Tem certeza de que deseja excluir",
+    "yes": "Sim",
+    "no": "Não",
+    "deleted_success": "Arquivo excluído com sucesso!"
 }

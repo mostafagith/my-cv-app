@@ -406,5 +406,9 @@
   "italian": "Italian",
   "portuguese": "Portuguese",
   "no_downloads_yet": "No downloads yet.",
-  "download":"Download"
+  "download":"Download",
+  "confirm_delete": "Are you sure you want to delete",
+    "yes": "Yes",
+    "no": "No",
+    "deleted_success": "File deleted successfully!"
 }

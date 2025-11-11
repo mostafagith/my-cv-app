@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { IoDownloadOutline, IoTrashOutline } from "react-icons/io5";
 import Navbar from "@/components/Navbar";
 import { useLanguage } from "@/hooks/useLanguage";
+import toast from "react-hot-toast";
 
 // استيراد react-pdf بشكل ديناميكي (client-side only)
 const Document = dynamic(
@@ -41,6 +42,7 @@ function PdfPreview({ pdfData }) {
     setMounted(true);
     // استيراد CSS بعد ما الكومبوننت يحمل
     import('react-pdf/dist/Page/TextLayer.css');
+    import('react-pdf/dist/Page/AnnotationLayer.css');
   }, []);
 
   if (!mounted) {
@@ -78,12 +80,42 @@ export default function DownloadsPage() {
     document.body.removeChild(link);
   };
 
-  const handleDelete = (index) => {
-    const updated = [...downloads];
-    updated.splice(index, 1);
-    setDownloads(updated);
-    safeSetItem("downloads", JSON.stringify(updated));
-  };
+
+const handleDelete = (index) => {
+  const itemName = downloads[index].fileName;
+
+  // عرض Toast للتأكيد
+  toast(
+    (tb) => (
+      <div className="flex flex-col gap-2">
+        <span>{t.confirm_delete}  "{itemName}"؟</span>
+        <div className="flex gap-2 mt-2">
+          <button
+            className="px-2 py-1 bg-red-600 text-white rounded hover:bg-red-700 text-sm cursor-pointer"
+            onClick={() => {
+              const updated = [...downloads];
+              updated.splice(index, 1);
+              setDownloads(updated);
+              safeSetItem("downloads", JSON.stringify(updated));
+              toast.dismiss(tb.id); // إغلاق الـ toast
+              toast.success(tb.deleted_success);
+            }}
+          >
+            {t.yes}
+          </button>
+          <button
+            className="px-2 py-1 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 text-sm cursor-pointer"
+            onClick={() => toast.dismiss(tb.id)} // إلغاء الحذف
+          >
+            {t.no}
+          </button>
+        </div>
+      </div>
+    ),
+    { duration: 5000 }
+  );
+};
+
 
   return (
     <>
@@ -110,13 +142,13 @@ export default function DownloadsPage() {
                   <div className="flex gap-2">
                     <button
                       onClick={() => handleDownload(item)}
-                      className="flex-1 flex items-center justify-center gap-1 px-2 py-1 rounded-lg bg-teal-600 text-white hover:bg-teal-700 text-sm"
+                      className="flex-1 flex items-center justify-center gap-1 px-2 py-1 rounded-lg bg-teal-600 text-white hover:bg-teal-700 text-sm cursor-pointer"
                     >
                       <IoDownloadOutline size={16} /> {t.download}
                     </button>
                     <button
                       onClick={() => handleDelete(index)}
-                      className="flex-1 flex items-center justify-center gap-1 px-2 py-1 rounded-lg bg-red-600 text-white hover:bg-red-700 text-sm"
+                      className="flex-1 flex items-center justify-center gap-1 px-2 py-1 rounded-lg bg-red-600 text-white hover:bg-red-700 text-sm cursor-pointer"
                     >
                       <IoTrashOutline size={16} /> {t.delete}
                     </button>
