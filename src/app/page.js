@@ -2,6 +2,8 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Globe, Share2, Gift, Bell, Settings, ArrowRight } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
+
 import { useLanguage } from "@/context/LanguageContext";
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
@@ -114,7 +116,11 @@ const templates = [
       <div className="flex justify-around bg-orange-50 py-4 px-2 shadow-md">
         <IconButton icon={<Share2 />} label={t.share} onClick={handleShare} />
         <IconButton icon={<Gift />} label={t.reward} onClick={() => console.log("Rewarded Ad")} />
-        <IconButton icon={<Bell />} label={t.notifications} />
+        <IconButton
+          icon={<FaWhatsapp className="w-6  h-6" />}
+          label={t.contact_whatsapp}
+          onClick={() => window.open("https://wa.me/201234567890", "_blank")}
+        />
         <IconButton icon={<Settings />} label={t.settings} onClick={()=> router.push("/setting")} />
       </div>
 
