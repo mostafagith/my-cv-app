@@ -6,11 +6,13 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas-pro";
 import toast from "react-hot-toast";
 import { useLanguage } from "@/hooks/useLanguage";
+import { useCVLanguage } from "@/hooks/useCVLanguage";
 
 export default function PdfPreview() {
   const [cvData, setCvData] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
-const { t } = useLanguage();
+  const { t } = useLanguage();
+  const { cvT } = useCVLanguage();
   const safeGetItem = (key) => {
   try {
     return localStorage.getItem(key) || sessionStorage.getItem(key);
@@ -228,7 +230,7 @@ useEffect(() => {
         <button onClick={handleBack} className="p-1 hover:bg-teal-700 rounded cursor-pointer">
           <IoArrowBack size={18} />
         </button>
-        <h1 className="font-bold text-sm md:text-base ">CV Preview</h1>
+        <h1 className="font-bold text-sm md:text-base ">{t["cv_preview"]}</h1>
         <button
           onClick={handleGenerateAndDownload}
           disabled={isGenerating}
@@ -237,7 +239,7 @@ useEffect(() => {
           }`}
         >
           <IoDownloadOutline size={16} />
-          {isGenerating ? "Generating..." : "Download PDF"}
+          {isGenerating ? t["generating"] : t["download_share_file"]}
         </button>
       </header>
 
@@ -304,7 +306,7 @@ useEffect(() => {
                   textTransform: "uppercase",
                 }}
               >
-                PROFESSIONAL SUMMARY
+                {cvT.professional_summary}
               </div>
               <div
                 style={{
@@ -339,7 +341,7 @@ useEffect(() => {
                   textTransform: "uppercase",
                 }}
               >
-                WORK EXPERIENCE
+                {cvT.work_experience}
               </div>
               <div
                 style={{
@@ -417,7 +419,7 @@ useEffect(() => {
                   textTransform: "uppercase",
                 }}
               >
-                EDUCATION
+                {cvT.education}
               </div>
               <div
                 style={{
@@ -511,7 +513,7 @@ useEffect(() => {
                   textTransform: "uppercase",
                 }}
               >
-                SKILLS
+                {cvT.skills}
               </div>
               <div
                 style={{
@@ -557,7 +559,7 @@ useEffect(() => {
                   textTransform: "uppercase",
                 }}
               >
-                CERTIFICATIONS
+                {cvT.certifications}
               </div>
               <div
                 style={{
@@ -603,7 +605,7 @@ useEffect(() => {
                   textTransform: "uppercase",
                 }}
               >
-                PROJECTS
+                {cvT.projects}
               </div>
               <div
                 style={{
@@ -679,7 +681,7 @@ useEffect(() => {
                   textTransform: "uppercase",
                 }}
               >
-                ADDITIONAL INFORMATION
+                {cvT.additional_information}
               </div>
               <div
                 style={{
@@ -693,13 +695,13 @@ useEffect(() => {
               <div style={{ fontSize: "14px", lineHeight: 1.6 }}>
                 {languages?.length > 0 && (
                   <div style={{ marginBottom: "5px" }}>
-                    <span style={{ fontWeight: "bold" }}>Languages:</span>{" "}
+                    <span style={{ fontWeight: "bold" }}>{cvT.languages}:</span>{" "}
                     {languages.map((lang) => lang.name).join(", ")}
                   </div>
                 )}
                 {awardsActivities?.length > 0 && (
                   <div style={{ marginBottom: "5px" }}>
-                    <span style={{ fontWeight: "bold" }}>Awards/Activities:</span>{" "}
+                    <span style={{ fontWeight: "bold" }}>{cvT.awards_activities}:</span>{" "}
                     {awardsActivities.map((award) => award.name).join(", ")}
                   </div>
                 )}

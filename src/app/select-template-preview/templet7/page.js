@@ -6,11 +6,13 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas-pro";
 import toast from "react-hot-toast";
 import { useLanguage } from "@/hooks/useLanguage";
+import { useCVLanguage } from "@/hooks/useCVLanguage";
 
 export default function PdfPreview() {
-const [cvData, setCvData] = useState(null);
+  const [cvData, setCvData] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
-const { t } = useLanguage();
+  const { t } = useLanguage();
+  const { cvT } = useCVLanguage();
   const safeGetItem = (key) => {
   try {
     return localStorage.getItem(key) || sessionStorage.getItem(key);
@@ -252,7 +254,7 @@ useEffect(() => {
         <button onClick={handleBack} className="cursor-pointer p-1 hover:bg-teal-700 rounded cursor-pointer">
           ← Back
         </button>
-        <h1 className="font-bold text-sm md:text-base ">CV Preview</h1>
+        <h1 className="font-bold text-sm md:text-base ">{t["cv_preview"]}</h1>
         <button
           onClick={handleGenerateAndDownload}
           disabled={isGenerating}
@@ -260,7 +262,7 @@ useEffect(() => {
             isGenerating ? "opacity-60" : "hover:bg-teal-50"
           }`}
         >
-          📥 {isGenerating ? "Generating..." : "Download PDF"}
+          📥 {isGenerating ? t["generating"] : t["download_share_file"]}
         </button>
       </header>
 
@@ -307,10 +309,10 @@ useEffect(() => {
               {personalDetails?.jobTitle || ""}
             </div>
             <div
-              className="header-divider"
+              className="header-divider bg-teal-500"
               style={{
                 height: "2px",
-                backgroundColor: "#699d91",
+                // backgroundColor: "#699d91",
                 marginBottom: "10px",
                 width: "100%",
               }}
@@ -332,7 +334,7 @@ useEffect(() => {
                   textAlign: "center",
                 }}
               >
-                PROFESSIONAL SUMMARY
+                {cvT.professional_summary}
               </div>
               <div
                 className="summary-text"
@@ -376,15 +378,15 @@ useEffect(() => {
                     }}
                   >
                     <span
-                      className="contact-label"
+                      className="contact-label text-teal-500"
                       style={{
                         fontSize: "14px",
                         fontWeight: "bold",
-                        color: "#206955",
+                        // color: "#206955",
                         marginBottom: 0,
                       }}
                     >
-                      Phone:
+                      {cvT.phone}:
                     </span>
                     <span
                       className="contact-value"
@@ -413,15 +415,15 @@ useEffect(() => {
                     }}
                   >
                     <span
-                      className="contact-label"
+                      className="contact-label text-teal-500"
                       style={{
                         fontSize: "14px",
                         fontWeight: "bold",
-                        color: "#206955",
+                        // color: "#206955",
                         marginBottom: 0,
                       }}
                     >
-                      Email:
+                      {cvT.email}:
                     </span>
                     <span
                       className="contact-value"
@@ -450,15 +452,15 @@ useEffect(() => {
                     }}
                   >
                     <span
-                      className="contact-label"
+                      className="contact-label text-teal-500"
                       style={{
                         fontSize: "14px",
                         fontWeight: "bold",
-                        color: "#206955",
+                        // color: "#206955",
                         marginBottom: 0,
                       }}
                     >
-                      Address:
+                      {cvT.address}:
                     </span>
                     <span
                       className="contact-value"
@@ -482,17 +484,17 @@ useEffect(() => {
           {education?.length > 0 && (
             <div className="section" style={{ marginBottom: "18px" }}>
               <div
-                className="section-title"
+                className="section-title text-teal-500"
                 style={{
                   fontSize: "18px",
                   fontWeight: "bold",
                   marginBottom: "4px",
-                  color: "#206955",
+                  // color: "#206955",
                   textTransform: "uppercase",
                   marginTop: "15px",
                 }}
               >
-                EDUCATION
+                {cvT.education}
               </div>
 
               {education.map((edu, i) => (
@@ -528,10 +530,10 @@ useEffect(() => {
                     </div>
                   </div>
                   <div
-                    className="education-school"
+                    className="education-school text-teal-400"
                     style={{
                       fontSize: "15px",
-                      color: "#01745dff",
+                      // color: "#01745dff",
                       marginBottom: "6px",
                     }}
                   >
@@ -624,17 +626,17 @@ useEffect(() => {
           {experience?.length > 0 && (
             <div className="section" style={{ marginBottom: "18px" }}>
               <div
-                className="section-title"
+                className="section-title text-teal-400"
                 style={{
                   fontSize: "18px",
                   fontWeight: "bold",
                   marginBottom: "4px",
-                  color: "#206955",
+                  // color: "#206955",
                   textTransform: "uppercase",
                   marginTop: "15px",
                 }}
               >
-                RESEARCH EXPERIENCE
+                {cvT.research_experience}
               </div>
 
               {experience.map((exp, i) => (
@@ -669,10 +671,10 @@ useEffect(() => {
                     </div>
                   </div>
                   <div
-                    className="company"
+                    className="company text-teal-500"
                     style={{
                       fontSize: "15px",
-                      color: "#206955",
+                      // color: "#206955",
                       marginBottom: "6px",
                     }}
                   >
@@ -726,17 +728,17 @@ useEffect(() => {
           {projects?.length > 0 && (
             <div className="section" style={{ marginBottom: "18px" }}>
               <div
-                className="section-title"
+                className="section-title text-teal-500"
                 style={{
                   fontSize: "18px",
                   fontWeight: "bold",
                   marginBottom: "4px",
-                  color: "#206955",
+                  // color: "#206955",
                   textTransform: "uppercase",
                   marginTop: "15px",
                 }}
               >
-                PROJECTS
+                {cvT.projects}
               </div>
 
               {projects.map((project, i) => (
@@ -836,17 +838,17 @@ useEffect(() => {
           {awardsActivities?.length > 0 && (
             <div className="section" style={{ marginBottom: "18px" }}>
               <div
-                className="section-title"
+                className="section-title text-teal-500"
                 style={{
                   fontSize: "18px",
                   fontWeight: "bold",
                   marginBottom: "4px",
-                  color: "#206955",
+                  // color: "#206955",
                   textTransform: "uppercase",
                   marginTop: "15px",
                 }}
               >
-                NOTABLE AWARDS
+                {cvT.notable_awards}
               </div>
               <div className="awards-container" style={{ marginLeft: "16px" }}>
                 {awardsActivities.map((award, i) => (
@@ -893,17 +895,17 @@ useEffect(() => {
           {skills?.length > 0 && (
             <div className="section" style={{ marginBottom: "18px" }}>
               <div
-                className="section-title"
+                className="section-title text-teal-500"
                 style={{
                   fontSize: "18px",
                   fontWeight: "bold",
                   marginBottom: "4px",
-                  color: "#206955",
+                  // color: "#206955",
                   textTransform: "uppercase",
                   marginTop: "15px",
                 }}
               >
-                SKILLS
+                {cvT.skills}
               </div>
               <div
                 className="skills-container"
@@ -957,17 +959,17 @@ useEffect(() => {
           {certificates?.length > 0 && (
             <div className="section" style={{ marginBottom: "18px" }}>
               <div
-                className="section-title"
+                className="section-title text-teal-500"
                 style={{
                   fontSize: "18px",
                   fontWeight: "bold",
                   marginBottom: "4px",
-                  color: "#206955",
+                  // color: "#206955",
                   textTransform: "uppercase",
                   marginTop: "15px",
                 }}
               >
-                COURSE & CERTIFICATION
+                {cvT.courses_certifications}
               </div>
               <div className="certificates-container" style={{ marginLeft: "16px" }}>
                 {certificates.map((cert, i) => (
@@ -1031,17 +1033,17 @@ useEffect(() => {
           {languages?.length > 0 && (
             <div className="section" style={{ marginBottom: "18px" }}>
               <div
-                className="section-title"
+                className="section-title text-teal-500"
                 style={{
                   fontSize: "18px",
                   fontWeight: "bold",
                   marginBottom: "4px",
-                  color: "#206955",
+                  // color: "#206955",
                   textTransform: "uppercase",
                   marginTop: "15px",
                 }}
               >
-                LANGUAGES
+                {cvT.languages}
               </div>
               <div className="languages-container" style={{ marginLeft: "16px" }}>
                 {languages.map((lang, i) => (

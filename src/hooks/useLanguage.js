@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-// استيراد كل ملفات الترجمة
 import en from "@/locales/en.json";
 import ar from "@/locales/ar.json";
 import fr from "@/locales/fr.json";
@@ -15,15 +14,19 @@ export function useLanguage() {
   const [lang, setLang] = useState("en");
   const [t, setT] = useState(en);
 
-  // خريطة اللغات
   const translations = { en, ar, fr, es, de, it, pt };
 
   useEffect(() => {
-    const savedLang = localStorage.getItem("lang");
+    let savedLang = null;
+    try {
+      savedLang = localStorage.getItem("lang") || sessionStorage.getItem("lang");
+    } catch (e) {
+      console.warn("Could not access storage:", e);
+    }
+
     if (savedLang && translations[savedLang]) {
       changeLang(savedLang);
     } else {
-      // أول مرة يفتح الموقع
       document.documentElement.dir = "ltr";
       document.documentElement.lang = "en";
     }
@@ -33,9 +36,14 @@ export function useLanguage() {
     const selected = translations[newLang] || en;
     setLang(newLang);
     setT(selected);
-    localStorage.setItem("lang", newLang);
 
-    // اللغة العربية فقط تكون RTL
+    try {
+      localStorage.setItem("lang", newLang);
+      sessionStorage.setItem("lang", newLang);
+    } catch (e) {
+      console.warn("Could not save language to storage:", e);
+    }
+
     document.documentElement.dir = newLang === "ar" ? "rtl" : "ltr";
     document.documentElement.lang = newLang;
   }

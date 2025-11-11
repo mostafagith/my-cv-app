@@ -6,12 +6,13 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas-pro";
 import toast from "react-hot-toast";
 import { useLanguage } from "@/hooks/useLanguage";
+import { useCVLanguage } from "@/hooks/useCVLanguage";
 
 export default function PdfPreview() {
   const [cvData, setCvData] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
-const { t } = useLanguage();
-
+  const { t } = useLanguage();
+  const { cvT } = useCVLanguage();
   const safeGetItem = (key) => {
   try {
     return localStorage.getItem(key) || sessionStorage.getItem(key);
@@ -263,7 +264,7 @@ try {
         <button onClick={handleBack} className="p-1 hover:bg-teal-700 rounded cursor-pointer">
           <IoArrowBack size={18} />
         </button>
-        <h1 className="font-bold text-sm md:text-base">CV Preview</h1>
+        <h1 className="font-bold text-sm md:text-base">{t["cv_preview"]}</h1>
 
         <button
           onClick={handleGenerateAndDownload}
@@ -273,7 +274,7 @@ try {
           }`}
         >
           <IoDownloadOutline size={16} />
-          {isGenerating ? "Generating..." : "Download PDF"}
+          {isGenerating ? t["generating"] : t["download_share_file"]}
         </button>
       </header>
 
@@ -309,16 +310,16 @@ try {
 
               <div className="mt-2 space-y-1 text-sm">
                 <div>
-                  <b>Address:</b> {personalDetails.address || ""}
+                  <b>{cvT.address}:</b> {personalDetails.address || ""}
                 </div>
                 <div>
-                  <b>Phone:</b> {personalDetails.phone || ""}
+                  <b>{cvT.phone}:</b> {personalDetails.phone || ""}
                 </div>
                 <div>
-                  <b>Email:</b> {personalDetails.email || ""}
+                  <b>{cvT.email}:</b> {personalDetails.email || ""}
                 </div>
                 <div>
-                  <b>Website:</b> {personalDetails.website || ""}
+                  <b>{cvT.website}:</b> {personalDetails.website || ""}
                 </div>
               </div>
             </div>
@@ -330,7 +331,7 @@ try {
           {personalDetails.summary && (
             <div className="mb-4">
               <h2 className="text-lg font-bold uppercase" style={{ color: "#063a6c" }}>
-                Summary
+                {cvT.summary}
               </h2>
               <div
                 className="h-[1.5px] w-full mb-2"
@@ -344,7 +345,7 @@ try {
           {experience.length > 0 && (
             <div className="mb-4">
               <h2 className="text-lg font-bold uppercase" style={{ color: "#063a6c" }}>
-                Work Experience
+                {cvT.work_experience}
               </h2>
               <div
                 className="h-[1.5px] w-full mb-2"
@@ -378,7 +379,7 @@ try {
           {projects.length > 0 && (
             <div className="mb-4">
               <h2 className="text-lg font-bold uppercase" style={{ color: "#063a6c" }}>
-                Projects
+                {cvT.projects}
               </h2>
               <div
                 className="h-[1.5px] w-full mb-2"
@@ -414,7 +415,7 @@ try {
           {education.length > 0 && (
             <div className="mb-4">
               <h2 className="text-lg font-bold uppercase" style={{ color: "#063a6c" }}>
-                Education
+                {cvT.education}
               </h2>
               <div
                 className="h-[1.5px] w-full mb-2"
@@ -437,7 +438,7 @@ try {
           {/* ADDITIONAL INFO */}
           <div>
             <h2 className="text-lg font-bold uppercase" style={{ color: "#063a6c" }}>
-              Additional Information
+              {cvT.additional_info}
             </h2>
             <div
               className="h-[1.5px] w-full mb-2"
@@ -445,22 +446,22 @@ try {
             />
             {skills.length > 0 && (
               <div className="text-[12px] mb-1">
-                <b>Technical Skills:</b> {skills.map((s) => s.name).join(", ")}
+                <b>{cvT.technical_skills}:</b> {skills.map((s) => s.name).join(", ")}
               </div>
             )}
             {languages.length > 0 && (
               <div className="text-[12px] mb-1">
-                <b>Languages:</b> {languages.map((l) => l.name).join(", ")}
+                <b>{cvT.languages}:</b> {languages.map((l) => l.name).join(", ")}
               </div>
             )}
             {certificates.length > 0 && (
               <div className="text-[12px] mb-1">
-                <b>Certifications:</b> {certificates.map((c) => c.name).join(", ")}
+                <b>{cvT.certifications}:</b> {certificates.map((c) => c.name).join(", ")}
               </div>
             )}
             {awardsActivities.length > 0 && (
               <div className="text-[12px] mb-1">
-                <b>Awards/Activities:</b> {awardsActivities.map((a) => a.name).join(", ")}
+                <b>{cvT.awards_activities}:</b> {awardsActivities.map((a) => a.name).join(", ")}
               </div>
             )}
           </div>

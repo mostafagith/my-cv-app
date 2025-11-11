@@ -6,11 +6,13 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas-pro";
 import toast from "react-hot-toast";
 import { useLanguage } from "@/hooks/useLanguage";
+import { useCVLanguage } from "@/hooks/useCVLanguage";
 
 export default function PdfPreview() {
   const [cvData, setCvData] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
-const { t } = useLanguage();
+  const { t } = useLanguage();
+  const { cvT } = useCVLanguage();
   const safeGetItem = (key) => {
   try {
     return localStorage.getItem(key) || sessionStorage.getItem(key);
@@ -309,7 +311,7 @@ useEffect(() => {
         }}>
           <IoArrowBack size={18} />
         </button>
-        <h1 style={{ fontWeight: 'bold', fontSize: '1rem', margin: 0 }}>CV Preview</h1>
+        <h1 style={{ fontWeight: 'bold', fontSize: '1rem', margin: 0 }}>{t["cv_preview"]}</h1>
         <button
           onClick={handleGenerateAndDownload}
           disabled={isGenerating}
@@ -329,7 +331,7 @@ useEffect(() => {
           }}
         >
           <IoDownloadOutline size={16} />
-          {isGenerating ? "Generating..." : "Download PDF"}
+          {isGenerating ? t["generating"] : t["download_share_file"]}
         </button>
       </header>
 
@@ -383,7 +385,7 @@ useEffect(() => {
               color: 'white',
               textAlign: 'center',
               textTransform: "capitalize"
-            }}>{personalDetails?.fullName || 'Your Name'}</div>
+            }}>{personalDetails?.fullName }</div>
             <div className="title" style={{
               fontSize: '16px',
               color: '#3498db',
@@ -392,7 +394,7 @@ useEffect(() => {
               textAlign: 'center',
               textTransform: "capitalize"
 
-            }}>{personalDetails?.jobTitle || 'Software Engineer'}</div>
+            }}>{personalDetails?.jobTitle }</div>
             
             {/* CONTACT */}
             <div id="contact-section" className="contact-section section" style={{ marginBottom: "25px" }}>
@@ -403,8 +405,9 @@ useEffect(() => {
                 color: "white",
                 textAlign: "left",
                 paddingBottom: "5px",
+                textTransform: "uppercase",
               }}>
-                CONTACT
+                {cvT.contact}
               </div>
               {personalDetails?.phone && (
                 <div className="previewContact contact-item" style={{ 
@@ -467,9 +470,10 @@ useEffect(() => {
                   marginBottom: "0px",
                   color: "white",
                   paddingBottom: "5px",
-                  textAlign: "left"
+                  textAlign: "left",
+                  textTransform: "uppercase",
                 }}>
-                  SKILLS
+                  {cvT.skills}
                 </div>
                 <div className="skills-list">
                   {skills.map((skill, index) => (
@@ -498,8 +502,9 @@ useEffect(() => {
                   marginBottom: '15px',
                   color: 'white',
                   paddingBottom: '5px',
-                  textAlign: 'left'
-                }}>LANGUAGES</div>
+                  textAlign: 'left',
+                  textTransform: "uppercase",
+                }}>{cvT.languages}</div>
                 <div className="languages-list">
                   {languages.map((lang, index) => (
                     <div key={index} className="language-item" style={{ display: 'flex', alignItems: 'center', marginBottom: '4px' }}>
@@ -533,8 +538,9 @@ useEffect(() => {
                   fontWeight: 'bold',
                   marginBottom: '0px',
                   color: '#2c3e50',
-                  paddingBottom: '5px'
-                }}>PROFILE</div>
+                  paddingBottom: '5px',
+                  textTransform: "uppercase",
+                }}>{cvT.summary}</div>
                 <div className="item-description" style={{ fontSize: '14px', color: '#555', lineHeight: 1.5 }}>{summary}</div>
               </div>
             )}
@@ -547,8 +553,9 @@ useEffect(() => {
                   fontWeight: 'bold',
                   marginBottom: '0px',
                   color: '#2c3e50',
-                  paddingBottom: '5px'
-                }}>WORK EXPERIENCE</div>
+                  paddingBottom: '5px',
+                  textTransform: "uppercase",
+                }}>{cvT.work_experience}</div>
                 {experience.map((exp, index) => (
                   <div key={index} className="item" style={{ marginBottom: '15px' }}>
                     <div className="item-header" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
@@ -580,8 +587,9 @@ useEffect(() => {
                   fontWeight: 'bold',
                   marginBottom: '0px',
                   color: '#2c3e50',
-                  paddingBottom: '5px'
-                }}>PROJECTS</div>
+                  paddingBottom: '5px',
+                  textTransform: "uppercase",
+                }}>{cvT.projects}</div>
                 {projects.map((project, index) => (
                   <div key={index} className="project-item" style={{ marginBottom: '15px' }}>
                     <div className="project-title" style={{ fontWeight: 'bold', fontSize: '16px', color: '#2c3e50', marginBottom: '5px' }}>
@@ -615,8 +623,9 @@ useEffect(() => {
                   fontWeight: 'bold',
                   marginBottom: '0px',
                   color: '#2c3e50',
-                  paddingBottom: '5px'
-                }}>EDUCATION</div>
+                  paddingBottom: '5px',
+                  textTransform: "uppercase",
+                }}>{cvT.education}</div>
                 {education.map((edu, index) => (
                   <div key={index} className="education-item" style={{ marginBottom: '15px' }}>
                     <div className="education-header" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
@@ -653,8 +662,9 @@ useEffect(() => {
                   fontWeight: 'bold',
                   marginBottom: '15px',
                   color: '#2c3e50',
-                  paddingBottom: '5px'
-                }}>objective</div>
+                  paddingBottom: '5px',
+                  textTransform: "uppercase",
+                }}>{cvT.objective}</div>
                 <div className="item-description" style={{ fontSize: '14px', color: '#555', lineHeight: 1.5 }}>{objective}</div>
               </div>
             )}

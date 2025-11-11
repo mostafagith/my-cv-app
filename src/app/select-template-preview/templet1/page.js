@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { IoArrowBack, IoDownloadOutline } from "react-icons/io5";
 import jsPDF from "jspdf";
 import { useLanguage } from "@/hooks/useLanguage";
+import { useCVLanguage } from "@/hooks/useCVLanguage";
 
 import html2canvas from "html2canvas-pro";
 import toast from "react-hot-toast";
@@ -11,8 +12,8 @@ import toast from "react-hot-toast";
 export default function PdfPreview() {
   const [cvData, setCvData] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
-const { t } = useLanguage();
-
+  const { t } = useLanguage();
+  const { cvT } = useCVLanguage();
   // ---------------- Safe Storage ----------------
 const safeGetItem = (key) => {
   try {
@@ -255,7 +256,7 @@ const existing = safeGetItem("downloads");
         <button onClick={handleBack} className="p-1 hover:bg-teal-700 rounded cursor-pointer">
           <IoArrowBack size={18} />
         </button>
-        <h1 className="font-bold text-sm md:text-base">CV Preview</h1>
+        <h1 className="font-bold text-sm md:text-base">{t["cv_preview"]}</h1>
 
         <div className="flex gap-2">
           <button
@@ -264,10 +265,10 @@ const existing = safeGetItem("downloads");
             className={`flex cursor-pointer items-center gap-1 bg-white text-teal-600 px-2 py-1 md:px-3 md:py-1.5 rounded-lg text-xs font-semibold transition ${
               isGenerating ? "opacity-60" : "hover:bg-teal-50"
             }`}
-            title="Download PDF to Share"
+            title={t["download_pdf_to_share"]}
           >
             <IoDownloadOutline size={16} />
-            {isGenerating ? "Generating..." : "Download & Share File"}
+            {isGenerating ? t["generating"] : t["download_share_file"]}
           </button>
         </div>
       </header>
@@ -281,20 +282,20 @@ const existing = safeGetItem("downloads");
           {/* Personal Details */}
           <div className="border-b border-b-2 border-[#009689] text-left mb-2">
             <h1 className="text-xl md:text-3xl lg:text-4xl font-bold text-[#009689] capitalize">
-              {cvData.personalDetails?.fullName || "Unnamed"}
+              {cvData.personalDetails?.fullName || ""}
             </h1>
           </div>
           <p className="contact-info text-gray-500 text-[10px] md:text-sm lg:text-base text-left mb-3">
             {cvData.personalDetails?.address || ""} |
             {" " + cvData.personalDetails?.phone || ""} |
-            {" " + cvData.personalDetails?.email || "No Email"}
+            {" " + cvData.personalDetails?.email || ""}
           </p>
 
           {/* Summary */}
           {cvData.personalDetails.summary && (
             <section className="mb-3 md:mb-4">
               <h2 className="font-semibold text-sm md:text-lg lg:text-xl text-teal-600 mb-1 md:mb-2">
-                Profile
+                {cvT.profile}
               </h2>
               <p className="text-gray-700 text-[10px] md:text-sm lg:text-base leading-relaxed">
                 {cvData.personalDetails.summary}
@@ -306,7 +307,7 @@ const existing = safeGetItem("downloads");
           {cvData.experience?.length > 0 && (
             <section className="mb-3 md:mb-4">
               <h2 className="font-semibold text-sm md:text-lg lg:text-xl text-teal-600 mb-1 md:mb-2">
-                Experience
+                {cvT.experience}
               </h2>
               <div className="space-y-3 md:space-y-4">
                 {cvData.experience.map((exp, i) => (
@@ -339,7 +340,7 @@ const existing = safeGetItem("downloads");
           {cvData.education?.length > 0 && (
             <section className="mb-3 md:mb-4">
               <h2 className="font-semibold text-sm md:text-lg lg:text-xl text-teal-600 mb-1 md:mb-2">
-                Education
+                 {cvT.education}
               </h2>
               <div className="space-y-2">
                 {cvData.education.map((edu, i) => (
@@ -360,7 +361,7 @@ const existing = safeGetItem("downloads");
           {cvData.skills?.length > 0 && (
             <section className="mb-3 md:mb-4">
               <h2 className="font-semibold text-sm md:text-lg lg:text-xl text-teal-600 mb-1 md:mb-2">
-                Skills
+                {cvT.skills}
               </h2>
               <ul className="grid grid-cols-2 gap-x-3 gap-y-1">
                 {cvData.skills.map((s, i) => (
@@ -380,7 +381,7 @@ const existing = safeGetItem("downloads");
           {cvData.certificates?.length > 0 && (
             <section className="mb-3 md:mb-4">
               <h2 className="font-semibold text-sm md:text-lg lg:text-xl text-teal-600 mb-1 md:mb-2">
-                Courses & Certifications
+                {cvT.courses_certifications}
               </h2>
               <ul className="space-y-1 ml-4 md:ml-5">
                 {cvData.certificates.map((l, i) => (
@@ -404,7 +405,7 @@ const existing = safeGetItem("downloads");
           {cvData.languages?.length > 0 && (
             <section className="mb-2">
               <h2 className="font-semibold text-sm md:text-lg lg:text-xl text-teal-600 mb-1 md:mb-2">
-                Languages
+                {cvT.languages}
               </h2>
               <ul className="space-y-1 ml-4 md:ml-5">
                 {cvData.languages.map((l, i) => (

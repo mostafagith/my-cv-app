@@ -5,16 +5,17 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { IoArrowBack, IoInformationCircle, IoCheckmark } from "react-icons/io5";
 import { useLanguage } from "@/hooks/useLanguage";
+import { useCVLanguage } from "@/hooks/useCVLanguage";
+
 import { Globe } from "lucide-react";
 
 export default function SelectTemplate() {
   const router = useRouter();
   const { t, lang,changeLang } = useLanguage();
-
+  const { cvT, cvLang, changeCvLang } = useCVLanguage();
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [cvData, setCvData] = useState(null);
-const [openLang, setOpenLang] = useState(false);
-
+  const [openLang, setOpenLang] = useState(false);
   const toggleLangMenu = () => setOpenLang(!openLang);
   // ---------------- Safe Storage ----------------
 const safeSetItem = (key, value) => {
@@ -179,6 +180,28 @@ useEffect(() => {
       <div className="flex-1 overflow-y-auto py-3 px-5 md:py-6 md:px-20">
         <h2 className="text-2xl font-bold text-gray-800 text-center mb-2">{t["select_cv_template"]}</h2>
         <p className="text-gray-500 text-center mb-8">{t["choose_from_templates"]}</p>
+        <div className="mb-6">
+  <label
+    htmlFor="cvLangSelect"
+    className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-200"
+  >
+    {t.select_cv_language}
+  </label>
+  <select
+    id="cvLangSelect"
+    value={cvLang}
+    onChange={(e) => changeCvLang(e.target.value)}
+    className="w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:text-white dark:border-gray-600"
+  >
+    <option value="en">{t.english}</option>
+    <option value="ar">{t.arabic}</option>
+    <option value="fr">{t.french}</option>
+    <option value="es">{t.spanish}</option>
+    <option value="de">{t.german}</option>
+    <option value="it">{t.italian}</option>
+    <option value="pt">{t.portuguese}</option>
+  </select>
+</div>
 
         {/* Templates Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 ">

@@ -6,11 +6,13 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas-pro";
 import toast from "react-hot-toast";
 import { useLanguage } from "@/hooks/useLanguage";
+import { useCVLanguage } from "@/hooks/useCVLanguage";
 
 export default function PdfPreview() {
   const [cvData, setCvData] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
-const { t } = useLanguage();
+  const { t } = useLanguage();
+  const { cvT } = useCVLanguage();
   const safeGetItem = (key) => {
   try {
     return localStorage.getItem(key) || sessionStorage.getItem(key);
@@ -366,7 +368,7 @@ useEffect(() => {
         <button onClick={handleBack} className="p-1 hover:bg-teal-700 rounded  cursor-pointer">
           ← Back
         </button>
-        <h1 className="font-bold text-sm md:text-base">CV Preview</h1>
+        <h1 className="font-bold text-sm md:text-base">{t["cv_preview"]}</h1>
         <button
           onClick={handleGenerateAndDownload}
           disabled={isGenerating}
@@ -374,7 +376,7 @@ useEffect(() => {
             isGenerating ? "opacity-60" : "hover:bg-teal-50"
           }`}
         >
-          📥 {isGenerating ? "Generating..." : "Download PDF"}
+          📥 {isGenerating ? t["generating"] :t["download_share_file"]}
         </button>
       </header>
 
@@ -634,7 +636,7 @@ useEffect(() => {
                       paddingBottom: "5px",
                     }}
                   >
-                    SKILLS
+                    {cvT.skills}
                   </div>
                   {skills.map((skill, i) => (
                     <div
@@ -688,7 +690,7 @@ useEffect(() => {
                       paddingBottom: "5px",
                     }}
                   >
-                    LANGUAGES
+                    {cvT.languages}
                   </div>
                   {languages.map((lang, i) => (
                     <div
@@ -750,7 +752,7 @@ useEffect(() => {
                   textTransform: "uppercase",
                 }}
               >
-                {personalDetails?.fullName || "FULL NAME"}
+                {personalDetails?.fullName }
               </div>
               <div
                 className="job-title"
@@ -761,7 +763,7 @@ useEffect(() => {
                   fontWeight: 600,
                 }}
               >
-                {personalDetails?.jobTitle || "JOB TITLE"}
+                {personalDetails?.jobTitle }
               </div>
 
               {/* Professional Summary */}
@@ -779,7 +781,7 @@ useEffect(() => {
                       paddingBottom: "5px",
                     }}
                   >
-                    PROFESSIONAL SUMMARY
+                    {cvT.professional_summary}
                   </div>
                   <div
                     className="summary-text"
@@ -810,7 +812,7 @@ useEffect(() => {
                       paddingBottom: "5px",
                     }}
                   >
-                    WORK EXPERIENCE
+                    {cvT.work_experience}
                   </div>
                   {experience.map((exp, i) => (
                     <div key={i} className="experience-item" style={{ marginBottom: "20px" }}>
@@ -895,7 +897,7 @@ useEffect(() => {
                       paddingBottom: "5px",
                     }}
                   >
-                    EDUCATION
+                    {cvT.education}
                   </div>
                   {education.map((edu, i) => (
                     <div key={i} className="education-item" style={{ marginBottom: "18px" }}>
@@ -985,7 +987,7 @@ useEffect(() => {
                       paddingBottom: "5px",
                     }}
                   >
-                    PROJECTS
+                    {cvT.projects}
                   </div>
                   {projects.map((project, i) => (
                     <div key={i} className="project-item" style={{ marginBottom: "18px" }}>
@@ -1073,7 +1075,7 @@ useEffect(() => {
                       paddingBottom: "5px",
                     }}
                   >
-                    AWARDS & ACTIVITIES
+                    {cvT.awards_activities}
                   </div>
                   {awardsActivities.map((award, i) => (
                     <div
@@ -1109,7 +1111,7 @@ useEffect(() => {
                       paddingBottom: "5px",
                     }}
                   >
-                    COURSE & CERTIFICATION
+                    {cvT.courses_certifications}
                   </div>
                   {certificates.map((cert, i) => (
                     <div

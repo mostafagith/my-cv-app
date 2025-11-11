@@ -6,11 +6,13 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas-pro";
 import toast from "react-hot-toast";
 import { useLanguage } from "@/hooks/useLanguage";
+import { useCVLanguage } from "@/hooks/useCVLanguage";
 
 export default function PdfPreview() {
   const [cvData, setCvData] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
-const { t } = useLanguage();
+  const { t } = useLanguage();
+  const { cvT } = useCVLanguage();
   const safeGetItem = (key) => {
   try {
     return localStorage.getItem(key) || sessionStorage.getItem(key);
@@ -303,7 +305,7 @@ useEffect(() => {
         }}>
           <IoArrowBack size={18} />
         </button>
-        <h1 style={{ fontWeight: 'bold', fontSize: '1rem', margin: 0 }}>CV Preview</h1>
+        <h1 style={{ fontWeight: 'bold', fontSize: '1rem', margin: 0 }}>{t["cv_preview"]}</h1>
         <button
           onClick={handleGenerateAndDownload}
           disabled={isGenerating}
@@ -323,7 +325,7 @@ useEffect(() => {
           }}
         >
           <IoDownloadOutline size={16} />
-          {isGenerating ? "Generating..." : "Download PDF"}
+          {isGenerating ? t["generating"] : t["download_share_file"]}
         </button>
       </header>
 
@@ -378,9 +380,10 @@ useEffect(() => {
                   color: "#7b7b7b",
                   textAlign: "left",
                   paddingBottom: "5px",
-                  letterSpacing: "5px"
+                  letterSpacing: "5px",
+                  textTransform: "uppercase",
                 }}>
-                  ABOUT ME
+                  {cvT.about_me}
                 </div>
                 <div className="item-description" style={{ 
                   color: '#7b7b7b', 
@@ -402,9 +405,10 @@ useEffect(() => {
                   color: "#7b7b7b",
                   paddingBottom: "5px",
                   textAlign: "left",
-                  letterSpacing: "5px"
+                  letterSpacing: "5px",
+                  textTransform: "uppercase",
                 }}>
-                  SKILLS
+                  {cvT.skills}
                 </div>
                 <div className="skills-list">
                   {skills.map((skill, index) => {
@@ -457,8 +461,9 @@ useEffect(() => {
                   color: '#7b7b7b',
                   paddingBottom: '5px',
                   textAlign: 'left',
-                  letterSpacing: "5px"
-                }}>LANGUAGES</div>
+                  letterSpacing: "5px",
+                  textTransform: "uppercase",
+                }}>{cvT.languages}</div>
                 <div className="languages-list">
                   {languages.map((lang, index) => (
                     <div key={index} className="language-item" style={{ 
@@ -512,7 +517,7 @@ useEffect(() => {
                   margin: 0,
                   padding: 0
                 }}>
-                  {personalDetails?.fullName || 'YOUR NAME'}
+                  {personalDetails?.fullName}
                 </h1>
                 <div className="name-underline" style={{
                   position: 'absolute',
@@ -546,8 +551,9 @@ useEffect(() => {
                   marginBottom: '15px',
                   color: '#2c3e50',
                   paddingBottom: '5px',
-                  letterSpacing: "5px"
-                }}>EXPERIENCE</div>
+                  letterSpacing: "5px",
+                  textTransform: "uppercase",
+                }}>{cvT.experience}</div>
                 {experience.map((exp, index) => (
                   <div key={index} className="item" style={{ marginBottom: '15px' }}>
                     <div className="item-header" style={{ display: 'flex', justifyContent: '', marginBottom: '5px' }}>
@@ -577,8 +583,9 @@ useEffect(() => {
                   marginBottom: '15px',
                   color: '#2c3e50',
                   paddingBottom: '5px',
-                  letterSpacing: "5px"
-                }}>PROJECTS</div>
+                  letterSpacing: "5px",
+                  textTransform: "uppercase",
+                }}>{cvT.projects}</div>
                 {projects.map((project, index) => (
                   <div key={index} className="project-item" style={{ marginBottom: '35px' }}>
                     <div className="project-title" style={{ fontWeight: 'bold', fontSize: '16px', color: '#9d9d9d', marginBottom: '5px' }}>
@@ -613,8 +620,9 @@ useEffect(() => {
                   marginBottom: '15px',
                   color: '#2c3e50',
                   paddingBottom: '5px',
-                  letterSpacing: "5px"
-                }}>EDUCATION</div>
+                  letterSpacing: "5px",
+                  textTransform: "uppercase",
+                }}>{cvT.education}</div>
                 {education.map((edu, index) => (
                   <div key={index} className="education-item" style={{ marginBottom: '15px' }}>
                     <div className="education-header" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>

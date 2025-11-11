@@ -6,11 +6,13 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas-pro";
 import toast from "react-hot-toast";
 import { useLanguage } from "@/hooks/useLanguage";
+import { useCVLanguage } from "@/hooks/useCVLanguage";
 
 export default function PdfPreview() {
   const [cvData, setCvData] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
-const { t } = useLanguage();
+  const { t } = useLanguage();
+  const { cvT } = useCVLanguage();
 
   const safeGetItem = (key) => {
   try {
@@ -327,7 +329,7 @@ useEffect(() => {
         }}>
           <IoArrowBack size={18} />
         </button>
-        <h1 style={{ fontWeight: 'bold', fontSize: '1rem', margin: 0 }}>CV Preview</h1>
+        <h1 style={{ fontWeight: 'bold', fontSize: '1rem', margin: 0 }}>{t["cv_preview"]}</h1>
         <button
           onClick={handleGenerateAndDownload}
           disabled={isGenerating}
@@ -347,7 +349,7 @@ useEffect(() => {
           }}
         >
           <IoDownloadOutline size={16} />
-          {isGenerating ? "Generating..." : "Download PDF"}
+          {isGenerating ? t["generating"] : t["download_share_file"]}
         </button>
       </header>
 
@@ -410,9 +412,10 @@ useEffect(() => {
             textAlign: "left",
             borderBottom: "2px solid #f9ffff",
             paddingBottom: "5px",
+            textTransform: "uppercase",
           }}
         >
-          CONTACT
+          {cvT.contact}
           {console.log(personalDetails)}
         </div>
         {personalDetails?.phone && (
@@ -444,8 +447,9 @@ useEffect(() => {
                   marginBottom: '12px',
                   color: '#f9ffff',
                   borderBottom: '2px solid #f9ffff',
-                  paddingBottom: '5px'
-                }}>EDUCATION</div>
+                  paddingBottom: '5px',
+                  textTransform: "uppercase",
+                }}>{cvT.education}</div>
                 {education.map((edu, index) => (
                   <div key={index} style={{ marginBottom: '20px' }}>
                     <div style={{ fontSize: '13px', color: '#ecfdff', marginBottom: '8px', textAlign: 'left' }}>
@@ -496,9 +500,10 @@ useEffect(() => {
               color: "#f9ffff",
               borderBottom: "2px solid #f9ffff",
               paddingBottom: "5px",
+              textTransform: "uppercase",
             }}
           >
-            SKILLS
+            {cvT.skills}
           </div>
           {skills.map((skill, index) => (
             <div key={index} className="skillText" id={`skill-${index}`} style={{ display: "flex", alignItems: "center", marginBottom: "8px" }}>
@@ -526,8 +531,9 @@ useEffect(() => {
                   marginBottom: '12px',
                   color: '#f9ffff',
                   borderBottom: '2px solid #f9ffff',
-                  paddingBottom: '5px'
-                }}>LANGUAGES</div>
+                  paddingBottom: '5px',
+                  textTransform: "uppercase",
+                }}>{cvT.languages}</div>
                 {languages.map((lang, index) => (
                   <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
                     <div style={{
@@ -555,12 +561,12 @@ useEffect(() => {
                 fontWeight: 'bold',
                 marginBottom: '5px',
                 color: '#565656'
-              }}>{personalDetails?.fullName || 'RICHARD SANCHEZ'}</div>
+              }}>{personalDetails?.fullName }</div>
               <div  style={{
                 fontSize: '16px',
                 color: '#474747',
                 marginBottom: '10px'
-              }}>{personalDetails?.jobTitle || 'MARKETING MANAGER'}</div>
+              }}>{personalDetails?.jobTitle }</div>
               <div id="previewJobTitle" className="previewJobTitle" style={{
                 width: '70px',
                 height: '6px',
@@ -578,8 +584,9 @@ useEffect(() => {
                   marginBottom: '12px',
                   color: '#143852',
                   borderBottom: '2px solid #143852',
-                  paddingBottom: '5px'
-                }}>PROFILE</div>
+                  paddingBottom: '5px',
+                  textTransform: "uppercase",
+                }}>{cvT.profile}</div>
                 <div style={{ fontSize: '14px', color: '#555', lineHeight: 1.6 }}>{objective}</div>
               </div>
             )}
@@ -593,8 +600,9 @@ useEffect(() => {
                   marginBottom: '12px',
                   color: '#143852',
                   borderBottom: '2px solid #143852',
-                  paddingBottom: '5px'
-                }}>WORK EXPERIENCE</div>
+                  paddingBottom: '5px',
+                  textTransform: "uppercase",
+                }}>{cvT.work_experience}</div>
                 <div style={{ display: 'flex', marginBottom: '20px' }}>
                   <div style={{
                     margin: '5px 0',
@@ -667,8 +675,9 @@ useEffect(() => {
                   marginBottom: '12px',
                   color: '#143852',
                   borderBottom: '2px solid #143852',
-                  paddingBottom: '5px'
-                }}>REFERENCE</div>
+                  paddingBottom: '5px',
+                  textTransform: "uppercase",
+                }}>{cvT.reference}</div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
                   {references.map((ref, index) => (
                     <div key={index} style={{ width: '48%', marginBottom: '20px' }}>
@@ -706,8 +715,9 @@ useEffect(() => {
                   marginBottom: '12px',
                   color: '#143852',
                   borderBottom: '2px solid #143852',
-                  paddingBottom: '5px'
-                }}>PROJECTS</div>
+                  paddingBottom: '5px',
+                  textTransform: "uppercase",
+                }}>{cvT.projects}</div>
                 {projects.map((project, index) => (
                   <div key={index} style={{ marginBottom: '15px' }}>
                     <div style={{ fontWeight: 'bold', fontSize: '16px', color: '#2c3e50', marginBottom: '5px' }}>

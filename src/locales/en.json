@@ -392,5 +392,17 @@
   "We value your trust and are committed to transparency in how we collect, store, and use your information.",
   "If you have any questions or concerns about our privacy policy, our support team is always available to assist you promptly."
 ],
-"share":"share"
+  "share":"share",
+  "cv_preview": "CV Preview",
+  "download_share_file": "Download & Share File",
+  "generating": "Generating...",
+  "download_pdf_to_share": "Download PDF to Share",
+  "select_cv_language": "Select CV Language",
+  "english": "English",
+  "arabic": "Arabic",
+  "french": "French",
+  "spanish": "Spanish",
+  "german": "German",
+  "italian": "Italian",
+  "portuguese": "Portuguese"
 }
