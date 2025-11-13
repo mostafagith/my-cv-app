@@ -14,7 +14,7 @@ const translations = { en, ar, fr, es, de, it, pt };
 const LanguageContext = createContext();
 
 export function LanguageProvider({ children }) {
-  const [lang, setLang] = useState("en");
+  const [lang, setLang] = useState("");
   const [t, setT] = useState(en);
   const router = useRouter();
   const pathname = usePathname();
