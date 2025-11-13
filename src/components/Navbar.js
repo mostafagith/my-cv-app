@@ -11,12 +11,12 @@ export default function Navbar() {
   const [openLang, setOpenLang] = useState(false);
 
   const links = [
-    { href: "/", label: t.home },
-    { href: "/create", label: t.create },
-    { href: "/downloads", label: t.downloads },
-    { href: "/cv-tips", label: t.cv_tips },
-    { href: "/ats-system", label: t.ats_system },
-    { href: "/about", label: t.about_us },
+    { href: `/${lang}`, label: t.home },
+    { href: `/${lang}/create`, label: t.create },
+    { href: `/${lang}/downloads`, label: t.downloads },
+    { href: `/${lang}/cv-tips`, label: t.cv_tips },
+    { href: `/${lang}/ats-system`, label: t.ats_system },
+    { href: `/${lang}/about`, label: t.about_us },
   ];
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
@@ -29,7 +29,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
         {/* Logo */}
-        <Link href="/" className="text-xl font-bold text-white tracking-wide">
+        <Link href={`/${lang}`} className="text-xl font-bold text-white tracking-wide">
           CV Builder
         </Link>
 

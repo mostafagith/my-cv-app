@@ -14,7 +14,7 @@ export default function SettingsPage() {
   const [openLangMenu, setOpenLangMenu] = useState(false);
   const toggleLangMenu = () => setOpenLangMenu(!openLangMenu);
 
-  const handleBack = () => router.push("/"); // للصفحة الرئيسية
+  const handleBack = () => router.push(`/${lans}/`);
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">

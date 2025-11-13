@@ -98,7 +98,7 @@ const handleDelete = (index) => {
               setDownloads(updated);
               safeSetItem("downloads", JSON.stringify(updated));
               toast.dismiss(tb.id); // إغلاق الـ toast
-              toast.success(tb.deleted_success);
+              toast.success(t.deleted_success);
             }}
           >
             {t.yes}

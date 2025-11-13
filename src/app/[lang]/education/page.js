@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { ChevronRight, CheckCircle, ClipboardList } from 'lucide-react';
-import { useLanguage } from '@/hooks/useLanguage';
+import { useLanguage } from '@/context/LanguageContext';
+
 import toast from "react-hot-toast";
 
 export default function EducationDetails() {

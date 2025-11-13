@@ -134,7 +134,7 @@ const handleSaveCV = () => {
 
   // توجيه للصفحة التالية
   router.push(
-    `/select-template?cvTitle=${encodeURIComponent(cvTitle)}&isEditMode=${isEditMode}`
+    `/${lang}/select-template?cvTitle=${encodeURIComponent(cvTitle)}&isEditMode=${isEditMode}`
   );
 };
 

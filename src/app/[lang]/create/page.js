@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -9,7 +10,7 @@ import Navbar from "@/components/Navbar";
 
 export default function CreatePage() {
     const { t, lang, changeLang } = useLanguage();
-
+  const router = useRouter();
   const [cvs, setCvs] = useState([]);
   const [menuIndex, setMenuIndex] = useState(null);
 const [openLang, setOpenLang] = useState(false);
@@ -62,13 +63,13 @@ function handleDelete(index) {
 // تعديل CV → نحفظه كـ currentCV وندخل على صفحة التعديل
 function handleEdit(cv) {
   safeSetItem("currentCV", JSON.stringify(cv));
-  window.location.href = "/create-new?isEditMode=true";
+  router.push(`/${lang}/create-new?isEditMode=true`);
 }
 
 // إنشاء CV جديد
 function handleCreateNew() {
   safeSetItem("currentCV", ""); // امسح الـ CV الحالي
-  window.location.href = "/create-new";
+  router.push(`/${lang}/create-new`);
 }
 
 

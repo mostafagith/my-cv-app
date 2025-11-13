@@ -141,7 +141,7 @@ const openSection = (sectionKey) => {
   const cvToSave = currentCV || makeEmptyCV();
   cvToSave.lastUpdated = new Date().toISOString();
   safeSetItem("currentCV", JSON.stringify(cvToSave));
-  router.push(`/${encodeURIComponent(sectionKey)}`);
+  router.push(`/${lang}/${encodeURIComponent(sectionKey)}`);
 };
 
 // finalize and save CV
@@ -159,7 +159,7 @@ const finalizeAndSave = () => {
     safeSetItem("cvs", JSON.stringify(list));
     safeSetItem("currentCV", JSON.stringify(cvToSave));
 
-    router.push("/finalize-cv");
+    router.push(`/${lang}/finalize-cv`);
   } catch (err) {
     console.error("Failed to finalize/save CV", err);
     alert(t.failed_to_save_cv || "Failed to save CV");
@@ -192,7 +192,7 @@ const resetCV = () => {
     return <span className="text-xl">{map[name] || "📋"}</span>;
   };
   const handleBack = () => {
-    router.push('/create'); // يروح للصفحة الرئيسية
+    router.push(`/${lang}/create`);
   };
 const [openLang, setOpenLang] = useState(false);
 

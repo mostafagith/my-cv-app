@@ -75,7 +75,7 @@ useEffect(() => {
     }
 
     setSelectedTemplate(template.id);
-    router.push(`/select-template-preview/${template.page}`);
+    router.push(`/${lang}/select-template-preview/${template.page}`);
   };
 
   return (

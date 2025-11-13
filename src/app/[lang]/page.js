@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Globe, Share2, Gift, Bell, Settings, ArrowRight } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 import { useLanguage } from "@/context/LanguageContext";
 import { useState, useEffect } from "react";
@@ -110,7 +109,6 @@ const templates = [
         fontFamily: lang === "ar" ? "Cairo, sans-serif" : "Poppins, sans-serif",
       }}
     >
-      {/* <LanguageSwitcher /> */}
       {/* Header */}
       <Navbar />
 
@@ -297,7 +295,7 @@ const templates = [
     </p>
     <div className="mt-6">
       <Link
-        href="/create-new"
+        href={`${lang}/create-new`}
         className="flex-1 bg-teal-600 hover:bg-teal-700 transition text-center p-4 rounded-xl shadow-xl text-white font-bold text-lg"
       >
         <span>{t.create}</span>
