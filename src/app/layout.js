@@ -50,12 +50,10 @@ export const metadata = {
         alt: "Create CV Master - صانع السيرة الذاتية",
       },
     ],
-    locale: "ar_EG",
+    locale: "en_US",
     type: "website",
   },
 };
-
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
