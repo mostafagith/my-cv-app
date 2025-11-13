@@ -122,7 +122,7 @@ const handleSave = () => {
 
   toast.success(t.saved_successfully || "Saved successfully!");
   setTimeout(() => {
-    router.push(`${lang}/create-new`);
+    router.push(`/${lang}/create-new`);
   }, 1000);
 };
 

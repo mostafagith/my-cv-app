@@ -14,19 +14,71 @@ const translations = { en, ar, fr, es, de, it, pt };
 const LanguageContext = createContext();
 
 export function LanguageProvider({ children }) {
-  const [lang, setLang] = useState("");
+  const [lang, setLang] = useState("en");
   const [t, setT] = useState(en);
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
-    // جلب اللغة المحفوظة
-    const savedLang = localStorage.getItem("lang") || sessionStorage.getItem("lang") || "en";
-    if (savedLang && translations[savedLang]) {
-      setLang(savedLang);
-      setT(translations[savedLang]);
+  // تحديد اللغة من مصادر مختلفة مع الأولوية للرابط
+  const getInitialLang = () => {
+    // 1. الأولوية للغة من الرابط (URL) - إذا كنا في المتصفح
+    if (typeof window !== "undefined") {
+      const pathSegments = window.location.pathname.split('/').filter(Boolean);
+      const urlLang = pathSegments[0];
+      
+      // تحقق إذا كانت اللغة من الرابط مدعومة
+      if (urlLang && translations[urlLang]) {
+        console.log("🌐 Using language from URL:", urlLang);
+        return urlLang;
+      }
     }
-  }, []);
+
+    // 2. إذا مفيش لغة في الرابط، جيب من localStorage
+    const savedLang = localStorage.getItem("lang");
+    if (savedLang && translations[savedLang]) {
+      console.log("💾 Using language from localStorage:", savedLang);
+      return savedLang;
+    }
+
+    // 3. إذا مفيش في localStorage، جيب من sessionStorage
+    const sessionLang = sessionStorage.getItem("lang");
+    if (sessionLang && translations[sessionLang]) {
+      console.log("🔐 Using language from sessionStorage:", sessionLang);
+      return sessionLang;
+    }
+
+    // 4. إذا مفيش أي حاجة، استخدم en
+    console.log("⚡ Using default language: en");
+    return "en";
+  };
+
+  const initialLang = getInitialLang();
+  
+  // غير اللغة فقط إذا كانت مختلفة عن الحالية
+  if (initialLang && initialLang !== lang) {
+    console.log("🎯 Setting initial language:", initialLang);
+    setLang(initialLang);
+    setT(translations[initialLang]);
+    
+    // تحديث الـ HTML attributes
+    if (typeof document !== "undefined") {
+      document.documentElement.dir = initialLang === "ar" ? "rtl" : "ltr";
+      document.documentElement.lang = initialLang;
+    }
+
+    // إذا كانت اللغة من الرابط مختلفة عن المحفوظة، حدث التخزين
+    if (typeof window !== "undefined") {
+      const pathSegments = window.location.pathname.split('/').filter(Boolean);
+      const urlLang = pathSegments[0];
+      
+      if (urlLang && translations[urlLang] && urlLang !== initialLang) {
+        localStorage.setItem("lang", urlLang);
+        sessionStorage.setItem("lang", urlLang);
+      }
+    }
+  }
+}, []); // مرة واحدة عند التحميل الأول
 
   const changeLang = (newLang) => {
     if (!translations[newLang]) return;

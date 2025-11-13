@@ -24,7 +24,6 @@ export default function HomePage() {
   const { t, lang } = useLanguage();
   const router = useRouter();
   const [openLang, setOpenLang] = useState(false);
-  const [cvs, setCvs] = useState([]);
   const [showShareModal, setShowShareModal] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -32,16 +31,26 @@ export default function HomePage() {
   const [pageTitle, setPageTitle] = useState("");
 
   // Load CVs from localStorage
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const savedCvs = JSON.parse(localStorage.getItem("cvs") || "[]");
-      setCvs(savedCvs);
+  const [cvs, setCvs] = useState([]);
 
-      // Share data
-      setShareUrl(window.location.href);
-      setPageTitle(document.title);
+useEffect(() => {
+  if (typeof window !== "undefined") {
+    try {
+      const saved = localStorage.getItem("cvs") || sessionStorage.getItem("cvs");
+      console.log("📦 Raw saved CVs:", saved); // شوف إذا فيه بيانات
+      
+      if (saved) {
+        const parsedCVs = JSON.parse(saved);
+        console.log("✅ Parsed CVs:", parsedCVs); // شوف البيانات بعد التحليل
+        setCvs(parsedCVs);
+      } else {
+        console.log("❌ No CVs found in storage");
+      }
+    } catch (err) {
+      console.error("🚨 Error loading CVs:", err);
     }
-  }, []);
+  }
+}, []);
 
   const toggleLangMenu = () => setOpenLang(!openLang);
 
@@ -139,12 +148,13 @@ const templates = [
           </h2>
 
           <div className="flex flex-col sm:flex-row gap-4 mt-4">
+            {console.log(cvs.length,"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDdd")}
             {cvs.length > 0 ? (
               <Link
                 href={`${lang}/create`}
                 className="flex-1 bg-teal-600 hover:bg-teal-700 transition p-4 rounded-xl flex items-center justify-between shadow-xl text-white font-bold text-lg"
               >
-                <span>{t.create}</span>
+                <span>{t.create}</span> 
                 <ArrowRight size={24} />
               </Link>
             ) : (
@@ -152,7 +162,7 @@ const templates = [
                 href={`${lang}/create-new`}
                 className="flex-1 bg-teal-600 hover:bg-teal-700 transition p-4 rounded-xl flex items-center justify-between shadow-xl text-white font-bold text-lg"
               >
-                <span>{t.create}</span>
+                <span>{t.create}</span> 
                 <ArrowRight size={24} />
               </Link>
             )}
@@ -294,13 +304,24 @@ const templates = [
       {t.ready_to_start}
     </p>
     <div className="mt-6">
-      <Link
-        href={`${lang}/create-new`}
-        className="flex-1 bg-teal-600 hover:bg-teal-700 transition text-center p-4 rounded-xl shadow-xl text-white font-bold text-lg"
-      >
-        <span>{t.create}</span>
-        {/* <ArrowRight size={24} /> */}
-      </Link>
+      {cvs.length>0?
+        <Link
+          href={`${lang}/create`}
+          className="flex-1 bg-teal-600 hover:bg-teal-700 transition text-center p-4 rounded-xl shadow-xl text-white font-bold text-lg"
+        >
+            <span>{t.create}</span>
+          {/* <ArrowRight size={24} /> */}
+        </Link>      
+      :
+        <Link
+          href={`${lang}/create-new`}
+          className="flex-1 bg-teal-600 hover:bg-teal-700 transition text-center p-4 rounded-xl shadow-xl text-white font-bold text-lg"
+        >
+            <span>{t.create}</span>
+          {/* <ArrowRight size={24} /> */}
+        </Link>
+      }
+      
     </div>
   </div>
 </section>
