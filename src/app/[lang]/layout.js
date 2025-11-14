@@ -57,7 +57,14 @@ export async function generateMetadata({ params }) {
     title: meta.title,
     description: meta.description,
     keywords: "CV, Resume Builder, سيرة ذاتية, إنشاء CV, Create CV Online, قوالب سيرة ذاتية, Create CV Master, سيرة ذاتية مجانية, Free CV, تحميل PDF, PDF سيره ذاتيه, Free Resume PDF, انشاء سيرة ذاتية PDF, CV مجاني, CV PDF, Resume PDF",
-    
+    icons: {
+      icon: '/icon.png',
+      shortcut: '/icon.png',
+      apple: '/icon.png',
+    },
+    verification: {
+      google: "nflu1RK_Kt_Qi6OnVXQwmqBrr0Y1MmfG5hfJnoWTLbI",
+    },
     openGraph: {
       title: meta.title,
       description: meta.description,
