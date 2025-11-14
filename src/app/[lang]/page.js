@@ -55,44 +55,60 @@ useEffect(() => {
   const toggleLangMenu = () => setOpenLang(!openLang);
 
   const handleShare = async () => {
-    if (!shareUrl || !pageTitle) return;
+  // جيب الـ URL والعنوان مباشرة
+  const currentUrl = typeof window !== "undefined" ? window.location.href : "";
+  const title = typeof document !== "undefined" ? document.title : "CV Builder";
 
-    const shareData = {
-      title: pageTitle,
-      text: pageTitle,
-      url: shareUrl,
-    };
 
-    if (navigator.share) {
-      try {
-        await navigator.share(shareData);
-        return;
-      } catch (err) {
-        console.debug("Share cancelled or failed:", err);
-      }
-    }
-
-    setShowShareModal(true);
+  const shareData = {
+    title: title,
+    text: title,
+    url: currentUrl,
   };
 
-  const copyLink = async () => {
+  // جرب الـ Native Share الأول (للموبايل)
+  if (navigator.share) {
     try {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        await navigator.clipboard.writeText(shareUrl);
-      } else {
-        const ta = document.createElement("textarea");
-        ta.value = shareUrl;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand("copy");
-        document.body.removeChild(ta);
-      }
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (e) {
-      alert("فشل النسخ — حاول يدوياً");
+      await navigator.share(shareData);
+      return;
+    } catch (err) {
+      console.debug("Share cancelled or failed:", err);
     }
-  };
+  }
+
+  // لو مفيش Native Share، افتح الـ Modal
+  setShareUrl(currentUrl);
+  setPageTitle(title);
+  setShowShareModal(true);
+};
+
+const copyLink = async () => {
+  const currentUrl = typeof window !== "undefined" ? window.location.href : "";
+  
+  try {
+    // جرب الطريقة الحديثة
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(currentUrl);
+    } 
+    // Fallback للمتصفحات القديمة
+    else {
+      const ta = document.createElement("textarea");
+      ta.value = currentUrl;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+    }
+    
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  } catch (e) {
+    console.error("Copy failed:", e);
+    alert(lang === "ar" ? "فشل النسخ — حاول يدوياً" : "Copy failed — try manually");
+  }
+};
 
   const encoded = encodeURIComponent(shareUrl);
   const encodedTitle = encodeURIComponent(pageTitle);
@@ -259,7 +275,7 @@ const templates = [
       )}
 
       {/* Templates Grid */}
-            <div className="text-center py-10 bg-gradient-to-b from-gray-50 to-white">
+            <div className="text-center py-10 bg-gradient-to-b from-gray-50 to-white px-4">
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
                 {t.choose_your_template}
               </h2>
@@ -289,7 +305,7 @@ const templates = [
                   </div>
                 ))}
               </div>
-<section className="py-12 bg-gray-50 text-center">
+<section className="py-12 bg-gray-50 text-center ">
   <div className="max-w-4xl mx-auto px-4">
     <h3 className="text-2xl font-bold text-gray-900 mb-4">
       {t.why_our_cv_builder}
