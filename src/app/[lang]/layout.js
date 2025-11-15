@@ -110,11 +110,6 @@ export async function generateMetadata({ params }) {
       index: true,
       follow: true,
     },
-
-    // إضافة verification tags لو عندك
-    // verification: {
-    //   google: 'your-google-verification-code',
-    // },
   };
 }
 
@@ -125,6 +120,9 @@ export default async function RootLayout({ children, params }) {
 
   return (
     <html lang={currentLang} dir={direction}>
+    <head>
+        <meta name="google-site-verification" content="nflu1RK_Kt_Qi6OnVXQwmqBrr0Y1MmfG5hfJnoWTLbI" />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         
         <Providers lang={currentLang}>
