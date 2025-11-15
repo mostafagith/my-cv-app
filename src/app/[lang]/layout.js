@@ -65,6 +65,9 @@ export async function generateMetadata({ params }) {
     verification: {
       google: "nflu1RK_Kt_Qi6OnVXQwmqBrr0Y1MmfG5hfJnoWTLbI",
     },
+    other: [
+      { name: "google-adsense-account", content: "ca-pub-4523960515520353" }
+    ],
     openGraph: {
       title: meta.title,
       description: meta.description,
@@ -123,11 +126,7 @@ export default async function RootLayout({ children, params }) {
   return (
     <html lang={currentLang} dir={direction}>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4523960515520353"
-          crossOrigin="anonymous"
-        />
+        
         <Providers lang={currentLang}>
           {children}
         </Providers>
