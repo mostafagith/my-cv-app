@@ -14,7 +14,7 @@ export default function SettingsPage() {
   const [openLangMenu, setOpenLangMenu] = useState(false);
   const toggleLangMenu = () => setOpenLangMenu(!openLangMenu);
 
-  const handleBack = () => router.push(`/${lans}/`);
+  const handleBack = () => router.push(`/${lang}/`);
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -22,7 +22,7 @@ export default function SettingsPage() {
       <div className="bg-teal-500 py-4 px-6 flex items-center justify-between shadow-md">
         <button
           onClick={handleBack}
-          className="text-white p-2 hover:bg-teal-600 rounded-full transition"
+          className="text-white p-2 hover:bg-teal-600 rounded-full transition cursor-pointer"
         >
           <IoArrowBack size={22} />
         </button>

@@ -140,11 +140,11 @@ const templates = [
       {/* Icons Row */}
       <div className="flex justify-around bg-orange-50 py-4 px-2 shadow-md">
         <IconButton icon={<Share2 />} label={t.share} onClick={handleShare} />
-        <IconButton icon={<Gift />} label={t.reward} onClick={() => console.log("Rewarded Ad")} />
+        {/*<IconButton icon={<Gift />} label={t.reward} onClick={() => console.log("Rewarded Ad")} />*/}
         <IconButton
           icon={<FaWhatsapp className="w-6  h-6" />}
           label={t.contact_whatsapp}
-          onClick={() => window.open("https://wa.me/201234567890", "_blank")}
+          onClick={() => window.open("https://wa.me/201016495415", "_blank")}
         />
         <IconButton icon={<Settings />} label={t.settings} onClick={()=> router.push(`/${lang}/setting`)} />
       </div>
