@@ -126,7 +126,9 @@ export default async function RootLayout({ children, params }) {
   return (
     <html lang={currentLang} dir={direction}>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        
+        <Head>
+          <meta name="google-adsense-account" content="ca-pub-4523960515520353" />
+        </Head>
         <Providers lang={currentLang}>
           {children}
         </Providers>
