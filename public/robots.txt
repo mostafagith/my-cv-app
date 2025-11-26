@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.createcvmaster.com
+
+# Sitemaps
+Sitemap: https://www.createcvmaster.com/sitemap.xml
