@@ -367,7 +367,7 @@ const templates = [
               </li>
               <li>
                 <a
-                  href="https://wa.me/YOUR_NUMBER"
+                  href="https://wa.me/201016495415"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-yellow-300 transition-colors"
