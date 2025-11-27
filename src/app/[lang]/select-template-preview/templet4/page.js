@@ -12,7 +12,7 @@ export default function PdfPreview() {
   const [cvData, setCvData] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const { t } = useLanguage();
-  const { cvT } = useCVLanguage();
+  const { cvT,cvLang } = useCVLanguage();
 
   const safeGetItem = (key) => {
   try {
@@ -360,7 +360,7 @@ useEffect(() => {
         justifyContent: 'center', 
         padding: '1rem',
         overflowY: 'auto'
-      }} dir="ltr">
+      }} dir={cvLang == "ar" ? "rtl": cvLang}>
         <div id="cv-template"
     className="cv-template" style={{
           display: 'flex',

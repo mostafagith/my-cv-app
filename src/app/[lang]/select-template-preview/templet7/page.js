@@ -12,7 +12,7 @@ export default function PdfPreview() {
   const [cvData, setCvData] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const { t } = useLanguage();
-  const { cvT } = useCVLanguage();
+  const { cvT,cvLang } = useCVLanguage();
   const safeGetItem = (key) => {
   try {
     return localStorage.getItem(key) || sessionStorage.getItem(key);
@@ -267,7 +267,7 @@ useEffect(() => {
       </header>
 
       {/* MAIN */}
-      <main className="flex-1 flex justify-center py-2 px-1 md:py-4 md:px-8 overflow-y-auto" dir="ltr">
+      <main className="flex-1 flex justify-center py-2 px-1 md:py-4 md:px-8 overflow-y-auto" dir={cvLang == "ar" ? "rtl": cvLang}>
         <div
           id="cv-template"
           className="container"

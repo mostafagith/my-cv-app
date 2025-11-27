@@ -13,7 +13,7 @@ export default function PdfPreview() {
   const [cvData, setCvData] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const { t } = useLanguage();
-  const { cvT } = useCVLanguage();
+  const { cvT,cvLang } = useCVLanguage();
   // ---------------- Safe Storage ----------------
 const safeGetItem = (key) => {
   try {
@@ -274,18 +274,18 @@ const existing = safeGetItem("downloads");
       </header>
 
       {/* CV Content */}
-      <main className="flex-1 flex justify-center py-2 px-1 md:py-4 md:px-8 overflow-y-auto" dir="ltr">
+      <main className="flex-1 flex justify-center py-2 px-1 md:py-4 md:px-8 overflow-y-auto" dir={cvLang == "ar" ? "rtl": cvLang}>
         <div
           id="cv-preview"
           className="w-full max-w-4xl bg-white shadow-lg rounded-lg p-3 md:p-8 border border-gray-200"
         >
           {/* Personal Details */}
-          <div className="border-b border-b-2 border-[#009689] text-left mb-2">
+          <div className="border-b border-b-2 border-[#009689]  mb-2">
             <h1 className="text-xl md:text-3xl lg:text-4xl font-bold text-[#009689] capitalize">
               {cvData.personalDetails?.fullName || ""}
             </h1>
           </div>
-          <p className="contact-info text-gray-500 text-[10px] md:text-sm lg:text-base text-left mb-3">
+          <p className="contact-info text-gray-500 text-[10px] md:text-sm lg:text-base  mb-3">
             {cvData.personalDetails?.address || ""} |
             {" " + cvData.personalDetails?.phone || ""} |
             {" " + cvData.personalDetails?.email || ""}
@@ -323,7 +323,7 @@ const existing = safeGetItem("downloads");
                         .map((line, i) => (
                           <li
                             key={i}
-                            className="text-gray-700 text-[10px] md:text-sm lg:text-base text-left"
+                            className="text-gray-700 text-[10px] md:text-sm lg:text-base "
                           >
                             <span className="text-gray-600 pr-1">•</span>
                             <span>{line.replace(/^-\s*/, "")}</span>
@@ -367,7 +367,7 @@ const existing = safeGetItem("downloads");
                 {cvData.skills.map((s, i) => (
                   <li
                     key={i}
-                    className="py-0.5 rounded-md text-[10px] md:text-sm lg:text-base text-left text-gray-700"
+                    className="py-0.5 rounded-md text-[10px] md:text-sm lg:text-base  text-gray-700"
                   >
                     <span className="text-gray-600 pr-0.5">•</span>
                     <span>{s.name}</span>

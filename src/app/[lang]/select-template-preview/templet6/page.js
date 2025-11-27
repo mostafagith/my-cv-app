@@ -12,7 +12,7 @@ export default function PdfPreview() {
   const [cvData, setCvData] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const { t } = useLanguage();
-  const { cvT } = useCVLanguage();
+  const { cvT,cvLang } = useCVLanguage();
   const safeGetItem = (key) => {
   try {
     return localStorage.getItem(key) || sessionStorage.getItem(key);
@@ -336,7 +336,7 @@ useEffect(() => {
         justifyContent: 'center', 
         padding: '1rem',
         overflowY: 'auto'
-      }} dir="ltr">
+      }} dir={cvLang == "ar" ? "rtl": cvLang}>
         <div id="cv-template" className="cv-template" style={{
           display: 'flex',
           width: '100%',
@@ -378,7 +378,7 @@ useEffect(() => {
                   fontWeight: "500",
                   marginBottom: "15px",
                   color: "#7b7b7b",
-                  textAlign: "left",
+                  // textAlign: "left",
                   paddingBottom: "5px",
                   letterSpacing: "5px",
                   textTransform: "uppercase",
@@ -404,7 +404,7 @@ useEffect(() => {
                   marginBottom: "15px",
                   color: "#7b7b7b",
                   paddingBottom: "5px",
-                  textAlign: "left",
+                  // textAlign: "left",
                   letterSpacing: "5px",
                   textTransform: "uppercase",
                 }}>
@@ -460,7 +460,7 @@ useEffect(() => {
                   marginBottom: '15px',
                   color: '#7b7b7b',
                   paddingBottom: '5px',
-                  textAlign: 'left',
+                  // textAlign: 'left',
                   letterSpacing: "5px",
                   textTransform: "uppercase",
                 }}>{cvT.languages}</div>
