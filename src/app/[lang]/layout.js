@@ -134,6 +134,18 @@ export default async function RootLayout({ children, params }) {
             gtag('config', 'G-SZPN97RL4W');
           `}
         </Script>
+        <Script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=AW-355178450"
+/>
+<Script id="google-ads-tag">
+  {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-355178450');
+  `}
+</Script>
         <meta name="google-site-verification" content="nflu1RK_Kt_Qi6OnVXQwmqBrr0Y1MmfG5hfJnoWTLbI" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
