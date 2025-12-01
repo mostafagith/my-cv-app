@@ -317,12 +317,12 @@ const [openLang, setOpenLang] = useState(false);
                 <button
                   onClick={finalizeAndSave}
                   className={`flex items-center cursor-pointer justify-center gap-2 px-4 py-2 rounded-lg text-white w-full sm:w-auto ${
-                      percentage < 50 ? "bg-gray-400 cursor-not-allowed" : "bg-teal-600 hover:bg-teal-700"
+                      percentage < 10 ? "bg-gray-400 cursor-not-allowed" : "bg-teal-600 hover:bg-teal-700"
                   }`}
-                  disabled={percentage < 50}
+                  disabled={percentage < 10}
                 >
                 <CheckCircle size={18} />
-                <span>{isNaN(percentage) ? t['save'] : (percentage < 50 ? t['completeMore'] : t['finalizeSave'])}</span>
+                <span>{isNaN(percentage) ? t['save'] : (percentage < 10 ? t['completeMore'] : t['finalizeSave'])}</span>
                 </button>
             </div>
         </header>
