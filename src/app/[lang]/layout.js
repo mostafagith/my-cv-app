@@ -195,17 +195,21 @@ export default async function RootLayout({ children, params }) {
           `}
         </Script>
         <Script
-  async
-  src="https://www.googletagmanager.com/gtag/js?id=AW-355178450"
-/>
-<Script id="google-ads-tag">
-  {`
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'AW-355178450');
-  `}
-</Script>
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=AW-355178450"
+        />
+        <Script id="google-ads-tag">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-355178450');
+          `}
+        </Script>
+
+        <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4523960515520353"
+            crossorigin="anonymous">
+        </Script>
         <meta name="google-site-verification" content="nflu1RK_Kt_Qi6OnVXQwmqBrr0Y1MmfG5hfJnoWTLbI" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
