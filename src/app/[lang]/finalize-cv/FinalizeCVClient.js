@@ -333,9 +333,9 @@ const handlePreview = () => {
         {/* Save Button */}
         <button
           onClick={handleSaveCV}
-          disabled={completionStatus.percentage < 50 || isSaving}
+          disabled={completionStatus.percentage < 10 || isSaving}
           className={`w-full flex items-center cursor-pointer justify-center gap-2 py-3 rounded-xl text-white font-semibold transition ${
-            completionStatus.percentage < 50 || isSaving
+            completionStatus.percentage < 10 || isSaving
               ? "bg-gray-400 cursor-not-allowed"
               : "bg-teal-600 hover:bg-teal-700"
           }`}
