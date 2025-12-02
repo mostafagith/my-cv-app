@@ -436,35 +436,37 @@ try {
           )}
 
           {/* ADDITIONAL INFO */}
-          <div>
-            <h2 className="text-lg font-bold uppercase" style={{ color: "#063a6c" }}>
-              {cvT.additional_info}
-            </h2>
-            <div
-              className="h-[1.5px] w-full mb-2"
-              style={{ backgroundColor: "#1e4468aa",height:"1.5px" }}
-            />
-            {skills.length > 0 && (
-              <div className="text-[12px] mb-1">
-                <b>{cvT.technical_skills}:</b> {skills.map((s) => s.name).join(", ")}
-              </div>
-            )}
-            {languages.length > 0 && (
-              <div className="text-[12px] mb-1">
-                <b>{cvT.languages}:</b> {languages.map((l) => l.name).join(", ")}
-              </div>
-            )}
-            {certificates.length > 0 && (
-              <div className="text-[12px] mb-1">
-                <b>{cvT.certifications}:</b> {certificates.map((c) => c.name).join(", ")}
-              </div>
-            )}
-            {awardsActivities.length > 0 && (
-              <div className="text-[12px] mb-1">
-                <b>{cvT.awards_activities}:</b> {awardsActivities.map((a) => a.name).join(", ")}
-              </div>
-            )}
-          </div>
+          {cvT.additional_info &&
+            <div>
+              <h2 className="text-lg font-bold uppercase" style={{ color: "#063a6c" }}>
+                {cvT.additional_info}
+              </h2>
+              <div
+                className="h-[1.5px] w-full mb-2"
+                style={{ backgroundColor: "#1e4468aa",height:"1.5px" }}
+              />
+              {skills.length > 0 && (
+                <div className="text-[12px] mb-1">
+                  <b>{cvT.technical_skills}:</b> {skills.map((s) => s.name).join(", ")}
+                </div>
+              )}
+              {languages.length > 0 && (
+                <div className="text-[12px] mb-1">
+                  <b>{cvT.languages}:</b> {languages.map((l) => l.name).join(", ")}
+                </div>
+              )}
+              {certificates.length > 0 && (
+                <div className="text-[12px] mb-1">
+                  <b>{cvT.certifications}:</b> {certificates.map((c) => c.name).join(", ")}
+                </div>
+              )}
+              {awardsActivities.length > 0 && (
+                <div className="text-[12px] mb-1">
+                  <b>{cvT.awards_activities}:</b> {awardsActivities.map((a) => a.name).join(", ")}
+                </div>
+              )}
+            </div>
+          }
         </div>
       </main>
     </div>
