@@ -436,7 +436,7 @@ try {
           )}
 
           {/* ADDITIONAL INFO */}
-          {cvT.additional_info &&
+          {skills.length || languages.length || certificates.length || awardsActivities.length &&
             <div>
               <h2 className="text-lg font-bold uppercase" style={{ color: "#063a6c" }}>
                 {cvT.additional_info}

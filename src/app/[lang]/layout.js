@@ -20,30 +20,90 @@ const metadata = {
   en: {
     title: "Create CV Master | Professional CV Builder",
     description: "Create your CV for free in minutes with professional templates. Download as PDF or share online easily.",
+    keywords: [
+      "Resume Builder",
+      "Free CV maker",
+      "Professional Resume templates",
+      "Create CV online",
+      "Download Resume PDF",
+      "Free Resume PDF no watermark",
+      "Best online CV builder",
+      "Create CV Master", // اسم علامتك التجارية مهم
+    ],
   },
   ar: {
     title: "Create CV Master | صانع السيرة الذاتية الاحترافي",
     description: "أنشئ سيرتك الذاتية مجانًا باحترافية عالية في دقائق. اختر من بين عشرات القوالب الجاهزة وشارك سيرتك بسهولة.",
+    keywords: [
+      "سيرة ذاتية",
+      "إنشاء سيرة ذاتية",
+      "قوالب سيرة ذاتية مجانية",
+      "صانع سيرة ذاتية احترافي",
+      "تحميل سيرة ذاتية PDF",
+      "أفضل موقع لعمل CV",
+      "سيرة ذاتية مجانية بدون علامة مائية",
+      "Create CV Master",
+    ],
   },
   fr: {
-    title: "Create CV Master | Créateur de CV Professionnel",
+    title: "Créateur de CV Professionnel",
     description: "Créez votre CV gratuitement en quelques minutes avec des modèles professionnels. Téléchargez en PDF ou partagez en ligne facilement.",
+    keywords: [
+      "Créateur de CV",
+      "CV gratuit en ligne",
+      "Modèles de CV professionnels",
+      "Télécharger CV PDF gratuit",
+      "Faire un CV en ligne facile",
+      "Create CV Master",
+    ],
   },
   es: {
-    title: "Create CV Master | Creador de CV Profesional",
+    title: "Creador de CV Profesional",
     description: "Crea tu CV gratis en minutos con plantillas profesionales. Descarga en PDF o comparte en línea fácilmente.",
+    keywords: [
+      "Creador de CV",
+      "CV gratis",
+      "Plantillas de CV profesionales",
+      "Hacer CV online",
+      "Descargar CV en PDF",
+      "Create CV Master",
+    ],
   },
   de: {
-    title: "Create CV Master | Professioneller Lebenslauf-Builder",
+    title: "Professioneller Lebenslauf-Builder",
     description: "Erstellen Sie Ihren Lebenslauf in Minuten kostenlos mit professionellen Vorlagen. Laden Sie als PDF herunter oder teilen Sie online.",
+    keywords: [
+      "Lebenslauf erstellen kostenlos",
+      "Professioneller Lebenslauf-Generator",
+      "Lebenslauf-Vorlagen",
+      "CV-Vorlagen kostenlos herunterladen",
+      "Online CV erstellen ohne Anmeldung",
+      "Create CV Master",
+    ],
   },
   it: {
-    title: "Create CV Master | Creatore di CV Professionale",
+    title: "Creatore di CV Professionale",
     description: "Crea il tuo CV gratis in pochi minuti con modelli professionali. Scarica in PDF o condividi online facilmente.",
+    keywords: [
+      "Crea CV gratis online",
+      "Modelli di Curriculum Vitae professionali",
+      "Creatore di CV facile",
+      "Scarica CV in PDF",
+      "Curriculum Vitae Europass",
+      "Create CV Master",
+    ],
   },
   pt: {
-    title: "Create CV Master | Criador de CV Profissional",
+    title: "Criador de CV Profissional",
     description: "Crie seu CV gratuitamente em minutos com modelos profissionais. Baixe em PDF ou compartilhe online facilmente.",
+    keywords: [
+      "Criar CV online grátis",
+      "Modelos de Curriculum Vitae profissionais",
+      "Editor de CV fácil",
+      "Gerador de CV em PDF",
+      "Fazer Curriculo sem pagar",
+      "Create CV Master",
+    ],
   },
 };
 
@@ -57,7 +117,7 @@ export async function generateMetadata({ params }) {
   return {
     title: meta.title,
     description: meta.description,
-    keywords: "CV, Resume Builder, سيرة ذاتية, إنشاء CV, Create CV Online, قوالب سيرة ذاتية, Create CV Master, سيرة ذاتية مجانية, Free CV, تحميل PDF, PDF سيره ذاتيه, Free Resume PDF, انشاء سيرة ذاتية PDF, CV مجاني, CV PDF, Resume PDF",
+    keywords: meta.keywords.join(", "),
     icons: {
       icon: '/icon.png',
       shortcut: '/icon.png',
