@@ -348,7 +348,7 @@ const handlePreview = () => {
             : t["Choose Template & Save"]}
         </button>
 
-        {completionStatus.percentage < 50 && (
+        {completionStatus.percentage < 10 && (
           <p className="text-xs text-red-500 text-center">
             {t["Complete at least 50% of sections to save your CV"]}
           </p>
