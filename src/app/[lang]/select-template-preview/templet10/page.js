@@ -56,6 +56,7 @@ useEffect(() => {
 }, []);
 
   const handleGenerateAndDownload = async () => {
+    window.print();
     try {
       setIsGenerating(true);
       const content = document.getElementById("cv-template");
@@ -144,7 +145,7 @@ useEffect(() => {
         content.style[key] = originalStyles[key];
       });
 
-      pdf.save(fileName);
+    // pdf.save(fileName);
       
       try {
   const existing = safeGetItem("downloads");

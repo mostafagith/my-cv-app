@@ -60,6 +60,8 @@ useEffect(() => {
 
   // ✅ دالة توليد وتحميل PDF مع حل مشكلة padding بين الصفحات
   const handleGenerateAndDownload = async () => {
+    window.print();
+    
     try {
       setIsGenerating(true);
       const content = document.getElementById("cv-preview");
@@ -167,7 +169,7 @@ useEffect(() => {
       });
       content.style.width = "";
 
-      pdf.save(fileName);
+      // pdf.save(fileName);
 
       try {
 const existing = safeGetItem("downloads");
@@ -187,15 +189,10 @@ const existing = safeGetItem("downloads");
   safeSetItem("downloads", JSON.stringify(existingDownloads));
   toast.success(t["PDF saved successfully!"] || "PDF saved successfully!");
 } catch (err) {
-  console.error("Failed to save PDF to downloads", err);
   toast.error(t["Failed to save PDF"] || "Failed to save PDF");
 }
 
-      setTimeout(() => {
-        alert(
-          "✅ Success! The PDF has been downloaded.\nYou can find it in your Downloads folder."
-        );
-      }, 500);
+      
     } catch (err) {
       console.error("PDF generation/download failed:", err);
       alert(
@@ -236,7 +233,7 @@ const existing = safeGetItem("downloads");
             box-shadow: none !important;
             border: none !important;
             border-radius: 0 !important;
-            padding: 15mm 20mm !important;
+            padding: 5mm 10mm !important;
             margin: 0 auto !important;
           }
           header {
@@ -246,7 +243,7 @@ const existing = safeGetItem("downloads");
             padding: 0 !important;
           }
           @page {
-            margin: 15mm 0;
+            margin: 5mm 0;
           }
         }
       `}</style>

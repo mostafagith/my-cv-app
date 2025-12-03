@@ -18,7 +18,7 @@ const supportedLanguages = ["en", "ar", "fr", "es", "de", "it", "pt"];
 
 const metadata = {
   en: {
-    title: "Create CV Master | Professional CV Builder",
+    title: "Create CV Master | Free Professional CV Builder",
     description: "Create your CV for free in minutes with professional templates. Download as PDF or share online easily.",
     keywords: [
       "Resume Builder",
@@ -29,6 +29,9 @@ const metadata = {
       "Free Resume PDF no watermark",
       "Best online CV builder",
       "Create CV Master", // اسم علامتك التجارية مهم
+      "Create CV",
+      "Free CV",
+      "Free resume"
     ],
   },
   ar: {
