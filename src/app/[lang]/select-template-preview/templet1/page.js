@@ -219,6 +219,9 @@ const existing = safeGetItem("downloads");
         @media print {
           body * {
             visibility: hidden;
+            width: 148mm;
+            height: 210mm;
+            margin: 0;
           }
           #cv-preview,
           #cv-preview * {

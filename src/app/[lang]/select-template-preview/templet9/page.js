@@ -56,7 +56,7 @@ useEffect(() => {
 }, []);
 
   const handleGenerateAndDownload = async () => {
-    //window.print();
+    window.print();
     try {
       setIsGenerating(true);
       const content = document.getElementById("cv-template");
@@ -145,7 +145,7 @@ useEffect(() => {
         content.style[key] = originalStyles[key];
       });
 
-    pdf.save(fileName);
+    //pdf.save(fileName);
       
       try {
         const existing = safeGetItem("downloads");
@@ -159,10 +159,10 @@ useEffect(() => {
         console.error("Failed to save download info:", err);
       }
 
-      alert("✅ PDF generated successfully!");
+      // alert("✅ PDF generated successfully!");
     } catch (err) {
       console.error("PDF generation failed:", err);
-      alert(`Error generating PDF: ${err.message}`);
+      // alert(`Error generating PDF: ${err.message}`);
     } finally {
       setIsGenerating(false);
     }
@@ -194,14 +194,17 @@ useEffect(() => {
         @media (max-width: 640px) {
           #cv-template {
             padding: 12px !important;
-            font-size: 12px;
+            font-size: 16px;
           }
-          #cv-template h1 { font-size: 20px !important; }
-          #cv-template h2 { font-size: 14px !important; }
+          #cv-template h1 { font-size: 24px !important; }
+          #cv-template h2 { font-size: 18px !important; }
           #cv-template p, #cv-template li, #cv-template span, #cv-template div {
-            font-size: 11px !important;
+            font-size: 15px !important;
             line-height: 1.4;
           }
+          #cv-template  .name{
+              font-size: 28px !important;
+            }
         }
 
         @media print {
@@ -216,7 +219,7 @@ useEffect(() => {
             box-shadow: none !important;
             border: none !important;
             border-radius: 0 !important;
-            padding: 15mm 20mm !important;
+            padding: 5mm 10mm !important;
             margin: 0 auto !important;
           }
           header { display: none !important; }
@@ -261,6 +264,7 @@ useEffect(() => {
           <div style={{ marginBottom: "6px" }}>
             <div style={{ display: "flex", alignItems: "center", width: "100%", marginBottom: "2px" }}>
               <div
+              className="name"
                 style={{
                   fontSize: "32px",
                   fontWeight: "bold",
@@ -269,7 +273,7 @@ useEffect(() => {
                   textTransform: "uppercase",
                 }}
               >
-                {personalDetails?.fullName || "ESTELLE DARCY"}
+                {personalDetails?.fullName }
               </div>
               <div
                 style={{

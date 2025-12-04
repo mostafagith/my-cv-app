@@ -56,7 +56,7 @@ useEffect(() => {
 }, []);
 
   const handleGenerateAndDownload = async () => {
-    //window.print();
+    window.print();
     try {
       setIsGenerating(true);
       const content = document.getElementById("cv-template");
@@ -145,7 +145,7 @@ useEffect(() => {
         content.style[key] = originalStyles[key];
       });
 
-    pdf.save(fileName);
+    //pdf.save(fileName);
       
       try {
         const existing = safeGetItem("downloads");
@@ -161,10 +161,10 @@ useEffect(() => {
         console.error("Failed to save download info:", err);
       }
 
-      alert("✅ PDF generated successfully!");
+      // alert("✅ PDF generated successfully!");
     } catch (err) {
       console.error("PDF generation failed:", err);
-      alert(`Error generating PDF: ${err.message}`);
+      // alert(`Error generating PDF: ${err.message}`);
     } finally {
       setIsGenerating(false);
     }

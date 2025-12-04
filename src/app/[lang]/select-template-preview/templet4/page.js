@@ -56,7 +56,7 @@ useEffect(() => {
 }, []);
 
   const handleGenerateAndDownload = async () => {
-    //window.print();
+    window.print();
     try {
       setIsGenerating(true);
       const content = document.getElementById("cv-template");
@@ -145,7 +145,7 @@ useEffect(() => {
         content.style[key] = originalStyles[key];
       });
 
-    pdf.save(fileName);
+    //pdf.save(fileName);
       
       try {
         const existing = safeGetItem("downloads");
@@ -161,10 +161,8 @@ useEffect(() => {
         console.error("Failed to save download info:", err);
       }
 
-      alert("✅ PDF generated successfully!");
     } catch (err) {
       console.error("PDF generation failed:", err);
-      alert(`Error generating PDF: ${err.message}`);
     } finally {
       setIsGenerating(false);
     }
@@ -195,37 +193,37 @@ useEffect(() => {
 @media (max-width: 640px) {
   #cv-template {
     padding: 12px !important;
-    font-size: 12px;
+    font-size: 16px;
   }
 
   #cv-template h1 {
-    font-size: 16px !important;
+    font-size: 20px !important;
   }
 
   #cv-template h2 {
-    font-size: 14px !important;
+    font-size: 18px !important;
   }
 
   #cv-template h3 {
-    font-size: 9px !important;
+    font-size: 12px !important;
   }
 
   #cv-template p,
   #cv-template li,
   #cv-template span,
   #cv-template div {
-    font-size: 7px !important;
+    font-size: 10px !important;
     line-height: 1.4;
   }
 
   #cv-template .left-column {
     width: 35% !important;
-    padding: 25px 8px !important;
+    padding: 25px 20px !important;
   }
 
   #cv-template .right-column {
     width: 65% !important;
-    padding: 35px 8px !important;
+    padding: 35px 30px !important;
   }
 
   #cv-template .profile-image {
@@ -240,21 +238,24 @@ useEffect(() => {
   }
 
   #cv-template .previewJobTitle {
-    width: 20px !important;
-    height: 3px !important;
+    width: 40px !important;
+    height: 4px !important;
     margin-bottom: 10px !important;
   }
+    .jobTitle{
+        margin-bottom: 5px !important;
+    }
 
   #cv-template .previewSectionTitle {
-    font-size: 10px !important;
+    font-size: 14px !important;
   }
 
   #cv-template .previewSectionTitleDark {
-    font-size: 10px !important;
+    font-size: 14px !important;
   }
 
   #cv-template .previewContact {
-    font-size: 5px !important;
+    font-size: 11px !important;
   }
 
   #cv-template .educationItem {
@@ -262,36 +263,38 @@ useEffect(() => {
   }
 
   #cv-template .projectTitle {
-    font-size: 9px !important;
+    font-size: 12px !important;
   }
 
   #cv-template .projectDescription {
-    font-size: 7px !important;
+    font-size: 9px !important;
     line-height: 9px !important;
   }
 
   #cv-template .languageName {
-    font-size: 6px !important;
+    font-size: 8px !important;
   }
 
   #cv-template .languageProficiency {
-    font-size: 5px !important;
+    font-size: 7px !important;
   }
 
   #cv-template .skillText {
-    font-size: 6px !important;
+    font-size: 8px !important;
   }
 
   #cv-template .referenceName {
-    font-size: 7px !important;
+    font-size: 9px !important;
   }
-
+  .references{
+      margin-bottom: 10px !important;
+  }
   #cv-template .referenceContact {
-    font-size: 5px !important;
+    font-size: 7px !important;
   }
 
   #cv-template .previewObjective {
-    font-size: 7px !important;
+    font-size: 9px !important;
     line-height: 10px !important;
   }
     .cc{
@@ -303,6 +306,36 @@ useEffect(() => {
     .contact-section{
         margin-bottom: 15px !important;
     }
+        @media print {
+          body * {
+            visibility: hidden;
+          }
+          #cv-template,
+          #cv-template * {
+            visibility: visible;
+          }
+          #cv-template {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 650px !important;
+            max-width: 650px  !important;
+            box-shadow: none !important;
+            border: none !important;
+            border-radius: 0 !important;
+            padding: 5mm 10mm !important;
+            margin: 0 auto !important;
+          }
+          header {
+            display: none !important;
+          }
+          main {
+            padding: 0 !important;
+          }
+          @page {
+            margin: 5mm 0;
+          }
+      }
 }
 
 
@@ -561,12 +594,14 @@ useEffect(() => {
                 fontSize: '28px',
                 fontWeight: 'bold',
                 marginBottom: '5px',
-                color: '#565656'
+                color: '#565656',
+                textTransform:"uppercase"
               }}>{personalDetails?.fullName }</div>
-              <div  style={{
+              <div className="jobTitle"  style={{
                 fontSize: '16px',
                 color: '#474747',
-                marginBottom: '10px'
+                marginBottom: '10px',
+                textTransform:"uppercase"
               }}>{personalDetails?.jobTitle }</div>
               <div id="previewJobTitle" className="previewJobTitle" style={{
                 width: '70px',
@@ -669,7 +704,7 @@ useEffect(() => {
             
             {/* REFERENCES */}
             {references?.length > 0 && (
-              <div style={{ marginBottom: '30px' }}>
+              <div className="references" style={{ marginBottom: '30px' }}>
                 <div style={{
                   fontSize: '18px',
                   fontWeight: 'bold',

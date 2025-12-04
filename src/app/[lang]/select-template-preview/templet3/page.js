@@ -55,7 +55,7 @@ useEffect(() => {
 
   // ✅ دالة التوليد المحترفة مع padding بين الصفحات
   const handleGenerateAndDownload = async () => {
-    //window.print();
+    window.print();
     try {
       setIsGenerating(true);
       const content = document.getElementById("cv-template");
@@ -149,7 +149,7 @@ useEffect(() => {
         content.style[key] = originalStyles[key];
       });
 
-    pdf.save(fileName);
+    //pdf.save(fileName);
       try {
         const existing = safeGetItem("downloads");
   const existingDownloads = existing ? JSON.parse(existing):[];
@@ -233,12 +233,12 @@ useEffect(() => {
             position: absolute;
             left: 0;
             top: 0;
-            width: 600px !important;
-            max-width: 600px  !important;
+            width: 650px !important;
+            max-width: 650px  !important;
             box-shadow: none !important;
             border: none !important;
             border-radius: 0 !important;
-            padding: 15mm 20mm !important;
+            padding: 5mm 10mm !important;
             margin: 0 auto !important;
           }
           header {
@@ -248,7 +248,7 @@ useEffect(() => {
             padding: 0 !important;
           }
           @page {
-            margin: 15mm 0;
+            margin: 5mm 0;
           }
         }
       `}</style>
@@ -299,7 +299,7 @@ useEffect(() => {
                 textTransform: "uppercase",
                 }}
             >
-                {personalDetails?.fullName || "ESTELLE DARCY"}
+                {personalDetails?.fullName}
             </h1>
             <div
                 className="title"
@@ -323,11 +323,11 @@ useEffect(() => {
             >
                 {personalDetails?.address
                 ? personalDetails.address + " | "
-                : "123 Anywhere St., Any City | "}
+                : ""}
                 {personalDetails?.email
                 ? personalDetails.email + " | "
-                : "hello@reallygreatsite.com | "}
-                {personalDetails?.phone || "www.reallygreatsite.com"}
+                : ""}
+                {personalDetails?.phone }
             </div>
             </div>
 
