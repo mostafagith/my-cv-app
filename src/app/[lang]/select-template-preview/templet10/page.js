@@ -193,6 +193,19 @@ useEffect(() => {
       
       <style jsx>{`
         @media (max-width: 640px) {
+          #cv-template {
+            padding: 12px !important;
+            font-size: 12px;
+          }
+          #cv-template h1 { font-size: 20px !important; }
+          #cv-template h2 { font-size: 14px !important; }
+          #cv-template p, #cv-template li, #cv-template span, #cv-template div {
+            font-size: 11px !important;
+            line-height: 1.4;
+          }
+        }
+
+        @media print {
         .name{
           font-size: 28px !important;
         }
@@ -206,9 +219,6 @@ useEffect(() => {
             font-size: 13px !important;
             line-height: 1.4;
           }
-        }
-
-        @media print {
           body * { visibility: hidden; }
           #cv-template, #cv-template * { visibility: visible; }
           #cv-template {
