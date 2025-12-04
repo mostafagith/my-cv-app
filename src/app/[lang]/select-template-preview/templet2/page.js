@@ -49,7 +49,7 @@ useEffect(() => {
   if (parsedCV && Object.keys(parsedCV).length > 0) {
     setCvData(parsedCV);
   } else {
-    // alert(t["No CV data found!"] || "No CV data found!");
+    alert(t["No CV data found!"] || "No CV data found!");
     if (typeof window !== "undefined" && window.history.length > 1) {
       window.history.back();
     }
@@ -58,7 +58,7 @@ useEffect(() => {
 
   // ✅ دالة التوليد المحترفة مع padding بين الصفحات
   const handleGenerateAndDownload = async () => {
-    window.print();
+    //window.print();
     try {
       setIsGenerating(true);
       const content = document.getElementById("cv-template");
@@ -152,7 +152,7 @@ useEffect(() => {
         content.style[key] = originalStyles[key];
       });
 
-    //pdf.save(fileName);
+    pdf.save(fileName);
       
 
 try {
@@ -245,7 +245,7 @@ try {
             box-shadow: none !important;
             border: none !important;
             border-radius: 0 !important;
-            padding: 5mm 10mm !important;
+            padding: 15mm 20mm !important;
             margin: 0 auto !important;
           }
           header {
@@ -255,7 +255,7 @@ try {
             padding: 0 !important;
           }
           @page {
-            margin: 5mm 0;
+            margin: 15mm 0;
           }
         }
       `}</style>

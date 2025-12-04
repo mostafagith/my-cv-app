@@ -60,7 +60,7 @@ useEffect(() => {
 
   // ✅ دالة توليد وتحميل PDF مع حل مشكلة padding بين الصفحات
   const handleGenerateAndDownload = async () => {
-    window.print();
+    //window.print();
     
     try {
       setIsGenerating(true);
@@ -169,7 +169,7 @@ useEffect(() => {
       });
       content.style.width = "";
 
-      // pdf.save(fileName);
+      pdf.save(fileName);
 
       try {
 const existing = safeGetItem("downloads");
@@ -219,9 +219,6 @@ const existing = safeGetItem("downloads");
         @media print {
           body * {
             visibility: hidden;
-            width: 148mm;
-            height: 210mm;
-            margin: 0;
           }
           #cv-preview,
           #cv-preview * {

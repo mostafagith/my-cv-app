@@ -55,7 +55,7 @@ useEffect(() => {
 }, []);
 
   const handleGenerateAndDownload = async () => {
-    window.print();
+    //window.print();
     try {
       setIsGenerating(true);
       const content = document.getElementById("cv-template");
@@ -144,7 +144,7 @@ useEffect(() => {
         content.style[key] = originalStyles[key];
       });
 
-    //pdf.save(fileName);
+    pdf.save(fileName);
       
       try {
         const existing = safeGetItem("downloads");
@@ -160,10 +160,10 @@ useEffect(() => {
         console.error("Failed to save download info:", err);
       }
 
-      // alert("✅ PDF generated successfully!");
+      alert("✅ PDF generated successfully!");
     } catch (err) {
       console.error("PDF generation failed:", err);
-      // alert(`Error generating PDF: ${err.message}`);
+      alert(`Error generating PDF: ${err.message}`);
     } finally {
       setIsGenerating(false);
     }
@@ -194,38 +194,38 @@ useEffect(() => {
       <style>{`
 @media (max-width: 640px) {
   #cv-template {
-    padding: 16px !important;
-    font-size: 16px;
+    padding: 12px !important;
+    font-size: 12px;
   }
 
   #cv-template h1 {
-    font-size: 20px !important;
+    font-size: 16px !important;
   }
 
   #cv-template h2 {
-    font-size: 18px !important;
+    font-size: 14px !important;
   }
 
   #cv-template h3 {
-    font-size: 12px !important;
+    font-size: 9px !important;
   }
 
   #cv-template p,
   #cv-template li,
   #cv-template span,
   #cv-template div {
-    font-size: 12px !important;
+    font-size: 7px !important;
     line-height: 1.4;
   }
 
   #cv-template .left-column {
     width: 35% !important;
-    padding: 25px 15px !important;
+    padding: 25px 8px !important;
   }
 
   #cv-template .right-column {
     width: 65% !important;
-    padding: 35px 30px !important;
+    padding: 35px 8px !important;
   }
 
   #cv-template .profile-image {
@@ -236,19 +236,19 @@ useEffect(() => {
   }
 
   #cv-template .name {
-    font-size: 16px !important;
+    font-size: 12px !important;
   }
 
   #cv-template .title {
-    font-size: 13px !important;
+    font-size: 10px !important;
   }
 
   #cv-template .section-title {
-    font-size: 13px !important;
+    font-size: 10px !important;
   }
 
   #cv-template .contact-item {
-    font-size: 9px !important;
+    font-size: 5px !important;
   }
 
   #cv-template .education-item {
@@ -256,31 +256,33 @@ useEffect(() => {
   }
 
   #cv-template .project-title {
-    font-size: 12px !important;
-  }
-
-  #cv-template .project-description {
-    font-size: 10px !important;
-  }
-
-  #cv-template .language-name {
-    font-size: 8px !important;
-  }
-
-  #cv-template .language-proficiency {
-    font-size: 7px !important;
-  }
-
-  #cv-template .skill-name {
-    font-size: 8px !important;
-  }
-
-  #cv-template .item-title {
     font-size: 9px !important;
   }
 
+  #cv-template .project-description {
+    font-size: 7px !important;
+    line-height: 9px !important;
+  }
+
+  #cv-template .language-name {
+    font-size: 6px !important;
+  }
+
+  #cv-template .language-proficiency {
+    font-size: 5px !important;
+  }
+
+  #cv-template .skill-name {
+    font-size: 6px !important;
+  }
+
+  #cv-template .item-title {
+    font-size: 7px !important;
+  }
+
   #cv-template .item-description {
-    font-size: 10px !important;
+    font-size: 7px !important;
+    line-height: 10px !important;
   }
 
   #cv-template .section {

@@ -56,7 +56,7 @@ useEffect(() => {
 }, []);
 
   const handleGenerateAndDownload = async () => {
-    window.print();
+    //window.print();
     try {
       setIsGenerating(true);
       const content = document.getElementById("cv-template");
@@ -145,7 +145,7 @@ useEffect(() => {
         content.style[key] = originalStyles[key];
       });
 
-    // pdf.save(fileName);
+    pdf.save(fileName);
       
       try {
         const existing = safeGetItem("downloads");
@@ -161,10 +161,10 @@ useEffect(() => {
         console.error("Failed to save download info:", err);
       }
 
-      // alert("✅ PDF generated successfully!");
+      alert("✅ PDF generated successfully!");
     } catch (err) {
       console.error("PDF generation failed:", err);
-      // alert(`Error generating PDF: ${err.message}`);
+      alert(`Error generating PDF: ${err.message}`);
     } finally {
       setIsGenerating(false);
     }
@@ -203,7 +203,7 @@ useEffect(() => {
         @media (max-width: 640px) {
           #cv-template {
             padding: 0 !important;
-            font-size: 10px !important;
+            font-size: 7px !important;
           }
           .container {
             flex-direction: row !important;
@@ -212,67 +212,72 @@ useEffect(() => {
           .left-column {
             width: 35% !important;
             min-width: 100px !important;
-            padding: 40px 20px !important;
+            padding: 10px 6px !important;
             min-height: auto !important;
           }
           .right-column {
             width: 65% !important;
-            padding: 60px 30px !important;
+            padding: 10px 8px !important;
           }
           .profile-image,
           .profile-image-container {
-            width: 120px !important;
-            height: 120px !important;
-            margin-bottom: 16px !important;
-            font-size: 20px !important;
+            width: 45px !important;
+            height: 45px !important;
+            margin-bottom: 8px !important;
+            font-size: 16px !important;
             border-width: 2px !important;
           }
           .contact-item {
             margin-bottom: 5px !important;
+            font-size: 7px !important;
           }
           .contact-icon {
-            width: 32px !important;
-            height: 32px !important;
-            margin-right: 8px !important;
-            font-size: 16px !important;
+            width: 12px !important;
+            height: 12px !important;
+            margin-right: 4px !important;
+            font-size: 6px !important;
           }
           .contact-text {
-            font-size: 12px !important;
+            font-size: 7px !important;
             line-height: 1.2 !important;
           }
           .section-title-left {
-            font-size: 20px !important;
+            font-size: 9px !important;
             margin-bottom: 5px !important;
             padding-bottom: 2px !important;
             border-bottom-width: 1px !important;
           }
-          .skill-text,
-          .language-text {
+          .skill-item,
+          .language-item {
             margin-bottom: 3px !important;
-            font-size: 16px !important;
+            font-size: 7px !important;
           }
           .bullet-dot {
-            font-size: 14px !important;
+            font-size: 10px !important;
             margin-right: 3px !important;
             line-height: 10px !important;
           }
-          
+          .skill-text,
+          .language-text {
+            font-size: 7px !important;
+            line-height: 1.2 !important;
+          }
           .name {
-            font-size: 22px !important;
+            font-size: 14px !important;
             margin-bottom: 3px !important;
           }
           .job-title {
-            font-size: 16px !important;
+            font-size: 9px !important;
             margin-bottom: 8px !important;
           }
           .section-title-right {
-            font-size: 18px !important;
+            font-size: 10px !important;
             margin-bottom: 5px !important;
             padding-bottom: 2px !important;
             border-bottom-width: 1px !important;
           }
           .summary-text {
-            font-size: 14px !important;
+            font-size: 7px !important;
             line-height: 1.3 !important;
           }
           .experience-item,
@@ -284,23 +289,23 @@ useEffect(() => {
           .job-title-right,
           .education-degree,
           .project-title {
-            font-size: 15px !important;
+            font-size: 8px !important;
           }
           .job-date,
           .education-date,
           .project-date {
-            font-size: 13px !important;
+            font-size: 7px !important;
             margin-bottom: 3px !important;
           }
           .education-school,
           .project-organization {
-            font-size: 13px !important;
+            font-size: 7px !important;
             margin-bottom: 3px !important;
           }
           .bullet-point,
           .award-item,
           .certificate-item {
-            font-size: 13px !important;
+            font-size: 7px !important;
             line-height: 1.2 !important;
             margin-bottom: 3px !important;
           }
@@ -344,7 +349,7 @@ useEffect(() => {
             box-shadow: none !important;
             border: none !important;
             border-radius: 0 !important;
-            padding: 5mm 10mm !important;
+            padding: 15mm 20mm !important;
             margin: 0 auto !important;
           }
           header {
