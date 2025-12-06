@@ -413,41 +413,59 @@ useEffect(() => {
                 </div>
                 <div className="skills-list">
                   {skills.map((skill, index) => {
-                    const skillLevel = skill.level || 3;
-                    const percentage = (skillLevel / 5) * 100;
-                    
-                    return (
-                      <div key={index} className="skill-item" style={{ 
-                        display: "flex", 
-                        alignItems: "center", 
-                        marginBottom: "8px" 
-                      }}>
-                        <div className="skill-name" style={{ 
-                          color: "#7b7b7b", 
-                          fontSize: "14px",
-                          flex: '0 0 50%',
-                          marginBottom: '3px'
-                        }}>
-                          {skill.name || "Skill"}
-                        </div>
-                        <div className="skill-bar-container" style={{
-                          flex: '0 0 50%',
-                          height: '6px',
-                          borderRadius: '3px',
-                          background: '#2c3e50',
-                          overflow: 'hidden',
-                          marginTop: '2px'
-                        }}>
-                          <div className="skill-bar" style={{
-                            height: '100%',
-                            background: '#9e9f97',
-                            borderRadius: '3px',
-                            width: `${percentage}%`
-                          }}></div>
-                        </div>
-                      </div>
-                    );
-                  })}
+  const skillLevel = skill.level || 3;
+  const percentage = (skillLevel / 5) * 100;
+
+  return (
+    <div
+      key={index}
+      className="skill-item"
+      style={{
+        display: "flex",
+        alignItems: "center",
+        marginBottom: "8px",
+        gap: "8px", // مسافة بين النص والبار
+        flexWrap: "wrap", // النص ينزل لو طويل
+      }}
+    >
+      <div
+        className="skill-name"
+        style={{
+          color: "#7b7b7b",
+          fontSize: "14px",
+          flex: "1 1 50%", // يقدر ينكمش أو يكبر حسب النص
+          wordBreak: "break-word", // لف النص الطويل
+        }}
+      >
+        {skill.name || "Skill"}
+      </div>
+      <div
+        className="skill-bar-container"
+        style={{
+          flex: "1 1 50%", // نفس flex للنص
+          height: "6px",
+          borderRadius: "3px",
+          background: "#2c3e50",
+          overflow: "hidden",
+          marginTop: "2px",
+          minWidth: "80px", // ضمان حجم بار صغير لا يختفي
+        }}
+      >
+        <div
+          className="skill-bar"
+          style={{
+            height: "100%",
+            background: "#9e9f97",
+            borderRadius: "3px",
+            width: `${percentage}%`,
+            transition: "width 0.3s ease",
+          }}
+        ></div>
+      </div>
+    </div>
+  );
+})}
+
                 </div>
               </div>
             )}

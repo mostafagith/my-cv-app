@@ -420,20 +420,20 @@ useEffect(() => {
           {console.log(personalDetails)}
         </div>
         {personalDetails?.phone && (
-          <div className="previewContact" style={{ marginBottom: "8px", fontSize: "14px", color: "#f3f9f9" }}>
+          <div className="previewContact" style={{overflowWrap: "break-word", marginBottom: "8px", fontSize: "14px", color: "#f3f9f9" }}>
             {personalDetails.phone}
           </div>
         )}
         {personalDetails?.email && (
-          <div className="previewContact" style={{ marginBottom: "8px", fontSize: "14px", color: "#f3f9f9" }}>
+          <div className="previewContact" style={{overflowWrap: "break-word", marginBottom: "8px", fontSize: "14px", color: "#f3f9f9" }}>
             {personalDetails.email}
           </div>
         )}{personalDetails?.address && (
-          <div className="previewContact" style={{ marginBottom: "8px", fontSize: "14px", color: "#f3f9f9" }}>
+          <div className="previewContact" style={{overflowWrap: "break-word", marginBottom: "8px", fontSize: "14px", color: "#f3f9f9" }}>
             {personalDetails.address}
           </div>
         )}{personalDetails?.website && (
-          <div className="previewContact" style={{ marginBottom: "8px", fontSize: "14px", color: "#f3f9f9" }}>
+          <div className="previewContact" style={{overflowWrap: "break-word", marginBottom: "8px", fontSize: "14px", color: "#f3f9f9" }}>
             {personalDetails.website}
           </div>
         )}
@@ -453,34 +453,36 @@ useEffect(() => {
                 }}>{cvT.education}</div>
                 {education.map((edu, index) => (
                   <div key={index} style={{ marginBottom: '20px' }}>
-                    <div style={{ fontSize: '13px', color: '#ecfdff', marginBottom: '8px', textAlign: 'left' }}>
+                    <div style={{overflowWrap: "break-word", fontSize: '13px', color: '#ecfdff', marginBottom: '8px', textAlign: 'left' }}>
                       {edu.startDate || ''} {edu.endDate ? ` - ${edu.endDate}` : ''}
                     </div>
-                    <div style={{ fontSize: '15px', color: '#ecfdff', fontWeight: 'bold', marginBottom: '5px' }}>
+                    <div style={{overflowWrap: "break-word", fontSize: '15px', color: '#ecfdff', fontWeight: 'bold', marginBottom: '5px' }}>
                       {edu.institution || 'Institution'}
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                       <div style={{
+                        overflowWrap: "break-word",
                         width: '4px',
                         height: '4px',
                         borderRadius: '4px',
                         background: 'white',
                         marginRight: '10px'
                       }}></div>
-                      <div style={{ fontSize: '14px', fontWeight: '300', color: 'white' }}>
+                      <div style={{overflowWrap: "break-word", fontSize: '14px', fontWeight: '300', color: 'white' }}>
                         {edu.degree || 'Degree'}
                       </div>
                     </div>
                     {edu.grade && (
                       <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                         <div style={{
+                          overflowWrap: "break-word",
                           width: '4px',
                           height: '4px',
                           borderRadius: '4px',
                           background: 'white',
                           marginRight: '10px'
                         }}></div>
-                        <div style={{ fontSize: '13px', color: '#dddcdc' }}>{edu.grade}</div>
+                        <div style={{overflowWrap: "break-word", fontSize: '13px', color: '#dddcdc' }}>{edu.grade}</div>
                       </div>
                     )}
                   </div>
@@ -507,19 +509,43 @@ useEffect(() => {
             {cvT.skills}
           </div>
           {skills.map((skill, index) => (
-            <div key={index} className="skillText" id={`skill-${index}`} style={{ display: "flex", alignItems: "center", marginBottom: "8px" }}>
-              <div
-                style={{
-                  width: "4px",
-                  height: "4px",
-                  borderRadius: "4px",
-                  background: "#f2fbff",
-                  marginRight: "10px",
-                }}
-              ></div>
-              <div style={{ color: "#f2fbff", fontSize: "14px" }}>{skill.name || "Skill"}</div>
-            </div>
-          ))}
+  <div
+    key={index}
+    className="skillText"
+    id={`skill-${index}`}
+    style={{
+      display: "flex",
+      alignItems: "flex-start", // النص يبدأ من فوق لو طويل
+      marginBottom: "8px",
+      gap: "10px", // بدل marginRight للنقطة
+      wordBreak: "break-word",
+      overflowWrap: "break-word",
+    }}
+  >
+    <div
+      style={{
+        width: "4px",
+        height: "4px",
+        borderRadius: "50%",
+        background: "#f2fbff",
+        marginTop: "6px", // النقطة تبقى في منتصف الخط
+        flexShrink: 0, // تمنع النقطة من التقلص
+      }}
+    ></div>
+    <div
+      style={{
+        color: "#f2fbff",
+        fontSize: "14px",
+        wordBreak: "break-word",
+        overflowWrap: "break-word",
+        flex: 1,
+      }}
+    >
+      {skill.name || "Skill"}
+    </div>
+  </div>
+))}
+
         </div>
       )}
             

@@ -506,34 +506,38 @@ useEffect(() => {
                     className="contact-item"
                     style={{
                       display: "flex",
-                      alignItems: "center",
+                      alignItems: "flex-start", // مهم جداً
                       marginBottom: "12px",
                       fontSize: "12px",
+                      gap: "10px",
                     }}
                   >
                     <div
                       className="contact-icon"
                       style={{
-                        width: "20px",
+                        minWidth: "20px",
                         height: "20px",
                         borderRadius: "50%",
                         background: "#000",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        marginRight: "10px",
                         color: "#f4ebe2",
                         fontSize: "10px",
+                        marginTop: "2px", // يخليها في النص
                       }}
                     >
                       ✉
                     </div>
+
                     <div
                       className="contact-text"
                       style={{
                         flex: 1,
                         color: "#201f1dff",
                         fontSize: "12px",
+                        wordBreak: "break-all",        // 👈 أهم سطر
+                        overflowWrap: "break-word",     // 👈 احتياطي
                       }}
                     >
                       {personalDetails.email}
@@ -541,39 +545,44 @@ useEffect(() => {
                   </div>
                 )}
 
+
                 {personalDetails?.website && (
                   <div
                     className="contact-item"
                     style={{
                       display: "flex",
-                      alignItems: "center",
+                      alignItems: "flex-start",
                       marginBottom: "12px",
                       fontSize: "12px",
+                      gap: "10px",
                     }}
                   >
                     <div
                       className="contact-icon"
                       style={{
-                        width: "20px",
+                        minWidth: "20px",
                         height: "20px",
                         borderRadius: "50%",
                         background: "#000",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        marginRight: "10px",
                         color: "#f4ebe2",
                         fontSize: "10px",
+                        marginTop: "2px",
                       }}
                     >
                       🌐
                     </div>
+
                     <div
                       className="contact-text"
                       style={{
                         flex: 1,
                         color: "#201f1dff",
                         fontSize: "12px",
+                        wordBreak: "break-all",
+                        overflowWrap: "break-word",
                       }}
                     >
                       {personalDetails.website}
@@ -581,45 +590,51 @@ useEffect(() => {
                   </div>
                 )}
 
+
                 {personalDetails?.address && (
                   <div
                     className="contact-item"
                     style={{
                       display: "flex",
-                      alignItems: "center",
+                      alignItems: "flex-start",
                       marginBottom: "12px",
                       fontSize: "12px",
+                      gap: "10px",
                     }}
                   >
                     <div
                       className="contact-icon"
                       style={{
-                        width: "20px",
+                        minWidth: "20px",
                         height: "20px",
                         borderRadius: "50%",
                         background: "#000",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        marginRight: "10px",
                         color: "#f4ebe2",
                         fontSize: "10px",
+                        marginTop: "2px",
                       }}
                     >
                       📍
                     </div>
+
                     <div
                       className="contact-text"
                       style={{
                         flex: 1,
                         color: "#201f1dff",
                         fontSize: "12px",
+                        wordBreak: "break-all",
+                        overflowWrap: "break-word",
                       }}
                     >
                       {personalDetails.address}
                     </div>
                   </div>
                 )}
+
               </div>
 
               {/* Skills Section */}
@@ -655,8 +670,9 @@ useEffect(() => {
                         style={{
                           fontSize: "16px",
                           color: "#201f1dff",
+                          lineHeight: "1.4",
+                          flexShrink: 0, // تمنع النقطة من الانكماش
                           marginRight: "8px",
-                          lineHeight: "14px",
                         }}
                       >
                         •
@@ -667,12 +683,17 @@ useEffect(() => {
                           color: "#201f1dff",
                           fontSize: "12px",
                           lineHeight: 1.4,
+                          flex: 1,         // ياخد كل المساحة المتاحة
+                          minWidth: 0,     // مهم جداً عشان flex element يقدر ينكسر
+                          wordBreak: "break-word", // تكسر النص لو طويل
                         }}
                       >
                         {skill.name}
                       </div>
                     </div>
                   ))}
+
+
                 </div>
               )}
 

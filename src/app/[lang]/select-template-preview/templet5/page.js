@@ -380,6 +380,7 @@ useEffect(() => {
             )}
             
             <div className="name" style={{
+              overflowWrap: "break-word",
               fontSize: '28px',
               fontWeight: 'bold',
               marginBottom: '5px',
@@ -388,6 +389,7 @@ useEffect(() => {
               textTransform: "capitalize"
             }}>{personalDetails?.fullName }</div>
             <div className="title" style={{
+              overflowWrap: "break-word",
               fontSize: '16px',
               color: '#3498db',
               marginBottom: '20px',
@@ -412,10 +414,11 @@ useEffect(() => {
               </div>
               {personalDetails?.phone && (
                 <div className="previewContact contact-item" style={{ 
+                  overflowWrap: "break-word",
                   marginBottom: "8px", 
                   fontSize: "14px", 
                   color: "#dddcdc",
-                  display: 'flex',
+                  // display: 'flex',
                   alignItems: 'center',
                   textAlign: 'left'
                 }}>
@@ -424,10 +427,11 @@ useEffect(() => {
               )}
               {personalDetails?.email && (
                 <div className="previewContact contact-item" style={{ 
+                  overflowWrap: "break-word",
                   marginBottom: "8px", 
                   fontSize: "14px", 
                   color: "#dddcdc",
-                  display: 'flex',
+                  // display: 'flex',
                   alignItems: 'center',
                   textAlign: 'left'
                 }}>
@@ -436,10 +440,11 @@ useEffect(() => {
               )}
               {personalDetails?.address && (
                 <div className="previewContact contact-item" style={{ 
+                  overflowWrap: "break-word",
                   marginBottom: "8px", 
                   fontSize: "14px", 
                   color: "#dddcdc",
-                  display: 'flex',
+                  // display: 'flex',
                   alignItems: 'center',
                   textAlign: 'left'
                 }}>
@@ -448,10 +453,11 @@ useEffect(() => {
               )}
               {personalDetails?.website && (
                 <div className="previewContact contact-item" style={{ 
+                  overflowWrap: "break-word",
                   marginBottom: "8px", 
                   fontSize: "14px", 
                   color: "#dddcdc",
-                  display: 'flex',
+                  // display: 'flex',
                   alignItems: 'center',
                   textAlign: 'left'
                 }}>
@@ -478,18 +484,46 @@ useEffect(() => {
                 </div>
                 <div className="skills-list">
                   {skills.map((skill, index) => (
-                    <div key={index} className="skillText skill-item" id={`skill-${index}`} style={{ display: "flex", alignItems: "center", marginBottom: "4px" }}>
-                      <div className="skill-circle" style={{
-                        width: "8px",
-                        height: "8px",
-                        borderRadius: "50%",
-                        border: "1.5px solid #dddcdc",
-                        background: "transparent",
-                        marginRight: "8px",
-                      }}></div>
-                      <div className="skill-name" style={{ color: "#dddcdc", fontSize: "14px" }}>{skill.name || "Skill"}</div>
+                    <div
+                      key={index}
+                      className="skillText skill-item"
+                      id={`skill-${index}`}
+                      style={{
+                        display: "flex",
+                        alignItems: "flex-start", // النص يبدأ من فوق
+                        marginBottom: "4px",
+                        gap: "8px", // بدل marginRight
+                        wordBreak: "break-word",
+                        overflowWrap: "break-word",
+                      }}
+                    >
+                      <div
+                        className="skill-circle"
+                        style={{
+                          width: "8px",
+                          height: "8px",
+                          borderRadius: "50%",
+                          border: "1.5px solid #dddcdc",
+                          background: "transparent",
+                          marginTop: "4px", // النقطة تبقى في منتصف أول سطر
+                          flexShrink: 0,
+                        }}
+                      ></div>
+                      <div
+                        className="skill-name"
+                        style={{
+                          color: "#dddcdc",
+                          fontSize: "14px",
+                          wordBreak: "break-word",
+                          overflowWrap: "break-word",
+                          flex: 1,
+                        }}
+                      >
+                        {skill.name || "Skill"}
+                      </div>
                     </div>
                   ))}
+
                 </div>
               </div>
             )}
