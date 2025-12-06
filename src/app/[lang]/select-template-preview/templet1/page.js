@@ -65,7 +65,7 @@ useEffect(() => {
     try {
       setIsGenerating(true);
       const content = document.getElementById("cv-preview");
-      const fileName = `${cvData?.personalDetails?.fullName || "MyCV"}.pdf`;
+      const fileName = `${cvData?.title || "MyCV"}.pdf`;
 
       // حفظ الـ styles الأصلية
       const originalStyles = {

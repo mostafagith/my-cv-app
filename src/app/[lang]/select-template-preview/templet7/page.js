@@ -59,7 +59,7 @@ useEffect(() => {
     try {
       setIsGenerating(true);
       const content = document.getElementById("cv-template");
-      const fileName = `${cvData?.personalDetails?.fullName || "MyCV"}.pdf`;
+      const fileName = `${cvData?.title || "MyCV"}.pdf`;
 
       const originalStyles = {
         boxShadow: content.style.boxShadow,
