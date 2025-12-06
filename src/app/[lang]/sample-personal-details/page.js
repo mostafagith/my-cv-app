@@ -4,10 +4,12 @@ import { useLanguage } from "@/context/LanguageContext";
 import { Globe } from "lucide-react";
 import { useState } from "react";
 import { IoArrowBack, IoTrashOutline, IoAddCircleOutline, IoCheckmarkCircle } from "react-icons/io5";
+import { useRouter } from "next/navigation";
 
 export default function SamplePersonalDetailsPage() {
   const { t, lang, changeLang } = useLanguage();
   const [openLang, setOpenLang] = useState(false);
+  const router = useRouter();
 
   const toggleLangMenu = () => setOpenLang(!openLang);
 const handleBack = () => router.back();
