@@ -242,7 +242,7 @@ const handleSave = () => {
           onClick={() => router.push(`/${lang}/EducationDetails-sample`)}
           className="mb-4 cursor-pointer bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition"
         >
-          {t.demo_example || "View Education Example"}
+          {t.viewEducationExample || "View Education Example"}
         </button>
         <h2 className="text-lg font-bold text-gray-800">{t['educationInformation']}</h2>
         <p className="text-gray-500 text-sm mb-4">{t['addYourEducationalBackground']}</p>

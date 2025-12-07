@@ -1,59 +1,41 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-
-import { ChevronRight } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { IoArrowBack } from "react-icons/io5";
 import { useLanguage } from '@/context/LanguageContext';
 import { Globe} from "lucide-react";
+import { useState } from 'react';
 
-export default function EducationExample() {
-    const router = useRouter();
+export default function SkillsExample() {
     const { t, lang, changeLang } = useLanguage();
     const [openLang, setOpenLang] = useState(false);
     const toggleLangMenu = () => setOpenLang(!openLang);
-
-  // 3 أمثلة جاهزة للتعليم
-  const exampleEducations = [
-    {
-      course: t.computerScience,
-      degree: t.bachelor,
-      institution: t.cairoUniversity,
-      grade: t.gpa38,
-      startDate: t.sep2018,
-      endDate: t.jun2022,
-      isCurrentlyStudying: false
-    },
-    {
-      course: t.softwareEngineering,
-      degree: t.master,
-      institution: t.ainShamsUniversity,
-      grade: t.gpa40,
-      startDate: t.sep2022,
-      endDate: t.jun2024,
-      isCurrentlyStudying: true
-    },
-    {
-      course: t.dataScience,
-      degree: t.phd,
-      institution: t.mit,
-      grade: '',
-      startDate: t.sep2024,
-      endDate: '',
-      isCurrentlyStudying: true
-    },
+  const exampleSkills = [
+    { id: "1", name: "JavaScript", level: 4 },
+    { id: "2", name: "React.js", level: 5 },
+    { id: "3", name: "Next.js", level: 4 },
+    { id: "4", name: "HTML & CSS", level: 5 },
+    { id: "5", name: "Problem Solving", level: 3 },
   ];
 
-  const handleBack = () => router.back();
+  const getLevelDescription = (level) => {
+    switch (level) {
+      case 1: return "Beginner";
+      case 2: return "Basic";
+      case 3: return "Intermediate";
+      case 4: return "Advanced";
+      case 5: return "Expert";
+      default: return "Not Rated";
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="bg-teal-500 px-5 py-4 flex items-center justify-between">
-        <button onClick={handleBack} className="text-white cursor-pointer text-xl">
-          <ChevronRight />
+      <div className="flex items-center justify-between bg-teal-600 text-white p-4 mb-6">
+        <button onClick={() => history.back()}>
+          <IoArrowBack size={24} />
         </button>
-        <h1 className="text-white font-bold text-xl text-center flex-1">{t['educationExample'] || 'Education Example'}</h1>
+        <h1 className="text-xl font-bold">Skills Example</h1>
         <div className="relative">
             <button
               onClick={toggleLangMenu}
@@ -141,24 +123,44 @@ export default function EducationExample() {
               </div>
             )}
           </div>
-        <div className="w-6" /> {/* placeholder */}
+        {/* <div className="w-6" /> */}
       </div>
 
-      {/* Content */}
-      <div className="p-5 space-y-6">
-        <h2 className="text-lg font-bold text-gray-800">{t['exampleEducationInformation'] || 'Example Educational Background'}</h2>
+      <div className="space-y-6 p-4 md:p-8">
+        {exampleSkills.map((skill, idx) => (
+          <div key={skill.id} className="bg-gray-100 p-4 rounded-md border border-gray-200">
 
-        {exampleEducations.map((edu, index) => (
-          <div key={index} className="bg-gray-50 border border-gray-200 rounded-lg p-4 space-y-2">
-            <h3 className="font-bold text-teal-500">{t['education']} {index + 1}</h3>
-            <p><span className="font-semibold">{t['courseFieldOfStudy'] || 'Course:'}</span> {edu.course}</p>
-            <p><span className="font-semibold">{t['degree'] || 'Degree:'}</span> {edu.degree}</p>
-            <p><span className="font-semibold">{t['schoolUniversity'] || 'Institution:'}</span> {edu.institution}</p>
-            <p><span className="font-semibold">{t['gradeScore'] || 'Grade:'}</span> {edu.grade || '-'}</p>
-            <p>
-              <span className="font-semibold">{t['startDate'] || 'Start Date:'}</span> {edu.startDate} | 
-              <span className="font-semibold ml-2">{t['endDate'] || 'End Date:'}</span> {edu.isCurrentlyStudying ? t['present'] || 'Present' : edu.endDate}
+            <h2 className="font-semibold text-teal-600 mb-3">
+              Skill {idx + 1}
+            </h2>
+
+            {/* Skill Name (Read Only) */}
+            <input
+              type="text"
+              value={skill.name}
+              readOnly
+              className="w-full border rounded-md p-2 mb-3 bg-gray-200 text-gray-700"
+            />
+
+            {/* Level Buttons (Disabled) */}
+            <div className="flex space-x-2 mb-2">
+              {[1,2,3,4,5].map(lvl => (
+                <button
+                  key={lvl}
+                  disabled
+                  className={`w-10 h-10 flex items-center justify-center border rounded-md 
+                    ${skill.level === lvl ? 'bg-teal-600 text-white' : 'bg-white'}
+                  `}
+                >
+                  {lvl}
+                </button>
+              ))}
+            </div>
+
+            <p className="text-teal-600 text-sm">
+              {getLevelDescription(skill.level)}
             </p>
+
           </div>
         ))}
       </div>

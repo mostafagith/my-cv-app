@@ -5,10 +5,13 @@ import { useRouter } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
 import { IoArrowBack, IoBulbOutline, IoCheckmarkCircle } from "react-icons/io5";
 import toast from "react-hot-toast";
+import { Globe } from "lucide-react";
 
 export default function Hopes() {
   const router = useRouter();
-  const { t } = useLanguage();
+  const { t, lang, changeLang } = useLanguage();
+  const [openLang, setOpenLang] = useState(false);
+  const toggleLangMenu = () => setOpenLang(!openLang);
 
   const [hopes, setHopes] = useState("");
   const [isSaved, setIsSaved] = useState(false);
@@ -95,10 +98,53 @@ const handleBack = () => {
           <IoArrowBack size={22} />
         </button>
         <h1 className="text-lg font-bold">{t["Hopes & Aspirations"]}</h1>
-        <div className="w-6" />
+        <div className="relative">
+          <button
+            onClick={toggleLangMenu}
+            className="p-2 bg-white/20 cursor-pointer rounded-full hover:bg-white/30 transition"
+          >
+            <Globe size={22} className="text-white" />
+          </button>
+
+          {openLang && (
+            <div
+              className={`w-[160px] absolute mt-2 ${
+                lang === "ar" ? "left-0" : "right-0"
+              } bg-white shadow-lg rounded-xl overflow-hidden border border-gray-200 z-50 text-black`}
+            >
+              {["en", "ar", "fr", "es", "de", "it", "pt"].map((lng) => (
+                <button
+                  key={lng}
+                  onClick={() => {
+                    changeLang(lng);
+                    setOpenLang(false);
+                  }}
+                  className={`block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer ${
+                    lng === "ar" ? "text-right" : "text-left"
+                  }`}
+                >
+                  {lng === "en" && "🇺🇸 English"}
+                  {lng === "ar" && "🇸🇦 عربي"}
+                  {lng === "fr" && "🇫🇷 Français"}
+                  {lng === "es" && "🇪🇸 Español"}
+                  {lng === "de" && "🇩🇪 Deutsch"}
+                  {lng === "it" && "🇮🇹 Italiano"}
+                  {lng === "pt" && "🇵🇹 Português"}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+        {/* <div className="w-6" /> */}
       </div>
 
       <div className="flex-1 overflow-y-auto p-6 space-y-6">
+        <button
+          onClick={() => router.push(`/${lang}/hopes-example`)}
+          className="mb-4 cursor-pointer bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition"
+        >
+          {t.viewHopesExample || "View hopes Example"}
+        </button>
         {/* Instructions */}
         <div className="flex items-start bg-green-50 border border-green-200 p-4 rounded-xl">
           <IoBulbOutline size={24} className="text-green-600 mt-1" />

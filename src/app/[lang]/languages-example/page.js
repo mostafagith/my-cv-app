@@ -1,59 +1,33 @@
-'use client';
+"use client";
+import { useEffect, useState } from "react";
 
-import { useState, useEffect } from 'react';
-
-import { ChevronRight } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useLanguage } from '@/context/LanguageContext';
+import { IoArrowBack } from "react-icons/io5";
+import { useRouter } from "next/navigation";
+import { useLanguage } from "@/context/LanguageContext";
 import { Globe} from "lucide-react";
 
-export default function EducationExample() {
+export default function LanguagesExamplePage() {
     const router = useRouter();
     const { t, lang, changeLang } = useLanguage();
     const [openLang, setOpenLang] = useState(false);
     const toggleLangMenu = () => setOpenLang(!openLang);
 
-  // 3 أمثلة جاهزة للتعليم
-  const exampleEducations = [
-    {
-      course: t.computerScience,
-      degree: t.bachelor,
-      institution: t.cairoUniversity,
-      grade: t.gpa38,
-      startDate: t.sep2018,
-      endDate: t.jun2022,
-      isCurrentlyStudying: false
-    },
-    {
-      course: t.softwareEngineering,
-      degree: t.master,
-      institution: t.ainShamsUniversity,
-      grade: t.gpa40,
-      startDate: t.sep2022,
-      endDate: t.jun2024,
-      isCurrentlyStudying: true
-    },
-    {
-      course: t.dataScience,
-      degree: t.phd,
-      institution: t.mit,
-      grade: '',
-      startDate: t.sep2024,
-      endDate: '',
-      isCurrentlyStudying: true
-    },
+  // ثابتة – 3 لغات
+  const exampleLanguages = [
+    { id: "1", name: "English", proficiency: t["Advanced"] },
+    { id: "2", name: "French", proficiency: t["Intermediate"] },
+    { id: "3", name: "Arabic", proficiency: t["Native"] },
   ];
-
-  const handleBack = () => router.back();
 
   return (
     <div className="min-h-screen bg-white">
+      
       {/* Header */}
-      <div className="bg-teal-500 px-5 py-4 flex items-center justify-between">
-        <button onClick={handleBack} className="text-white cursor-pointer text-xl">
-          <ChevronRight />
+      <div className="bg-teal-600 text-white flex items-center justify-between px-6 py-5">
+        <button onClick={() => router.back()} className="p-2 cursor-pointer">
+          <IoArrowBack size={24} />
         </button>
-        <h1 className="text-white font-bold text-xl text-center flex-1">{t['educationExample'] || 'Education Example'}</h1>
+        <h1 className="text-xl font-bold">{t["Languages Example"] || "Languages Example"}</h1>
         <div className="relative">
             <button
               onClick={toggleLangMenu}
@@ -141,24 +115,23 @@ export default function EducationExample() {
               </div>
             )}
           </div>
-        <div className="w-6" /> {/* placeholder */}
       </div>
 
       {/* Content */}
-      <div className="p-5 space-y-6">
-        <h2 className="text-lg font-bold text-gray-800">{t['exampleEducationInformation'] || 'Example Educational Background'}</h2>
+      <div className="max-w-3xl mx-auto p-6">
+        <h2 className="text-2xl font-bold mb-4 text-gray-800">
+          {t["Example of Languages Section"]}
+        </h2>
 
-        {exampleEducations.map((edu, index) => (
-          <div key={index} className="bg-gray-50 border border-gray-200 rounded-lg p-4 space-y-2">
-            <h3 className="font-bold text-teal-500">{t['education']} {index + 1}</h3>
-            <p><span className="font-semibold">{t['courseFieldOfStudy'] || 'Course:'}</span> {edu.course}</p>
-            <p><span className="font-semibold">{t['degree'] || 'Degree:'}</span> {edu.degree}</p>
-            <p><span className="font-semibold">{t['schoolUniversity'] || 'Institution:'}</span> {edu.institution}</p>
-            <p><span className="font-semibold">{t['gradeScore'] || 'Grade:'}</span> {edu.grade || '-'}</p>
-            <p>
-              <span className="font-semibold">{t['startDate'] || 'Start Date:'}</span> {edu.startDate} | 
-              <span className="font-semibold ml-2">{t['endDate'] || 'End Date:'}</span> {edu.isCurrentlyStudying ? t['present'] || 'Present' : edu.endDate}
-            </p>
+        {exampleLanguages.map((lang) => (
+          <div
+            key={lang.id}
+            className="flex justify-between items-center bg-gray-50 border border-gray-200 rounded-lg p-4 mb-3"
+          >
+            <div>
+              <p className="font-bold text-gray-800">{lang.name}</p>
+              <p className="text-gray-500 text-sm">{lang.proficiency}</p>
+            </div>
           </div>
         ))}
       </div>

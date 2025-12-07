@@ -15,31 +15,31 @@ export default function ExperienceExample() {
   // 3 أمثلة جاهزة للخبرات
   const exampleExperiences = [
     {
-      company: 'Tech Solutions Ltd.',
-      jobTitle: 'Frontend Developer',
-      startDate: 'Jan 2020',
-      endDate: 'Dec 2021',
-      details: 'Developed multiple web applications using React and Next.js.',
-      location: 'Cairo, Egypt',
-      employmentType: 'Full-time'
+      company: t.company1,
+      jobTitle: t.position1,
+      startDate: t.startDate1,
+      endDate: t.endDate1,
+      details: t.description1,
+      location: t.location1,
+      employmentType: t.type1
     },
     {
-      company: 'Innovatech',
-      jobTitle: 'Software Engineer',
-      startDate: 'Feb 2022',
-      endDate: 'Present',
-      details: 'Worked on backend APIs and integrated them with frontend applications.',
-      location: 'Giza, Egypt',
-      employmentType: 'Full-time'
+      company: t.company2,
+      jobTitle: t.position2,
+      startDate: t.startDate2,
+      endDate: t.endDate2,
+      details: t.description2,
+      location: t.location2,
+      employmentType: t.type2
     },
     {
-      company: 'Freelance',
-      jobTitle: 'UI/UX Designer',
-      startDate: 'Mar 2019',
-      endDate: 'Dec 2019',
-      details: 'Designed user-friendly interfaces for small business websites.',
-      location: 'Remote',
-      employmentType: 'Part-time'
+      company: t.company3,
+      jobTitle: t.position3,
+      startDate: t.startDate3,
+      endDate: t.endDate3,
+      details: t.description3,
+      location: t.location3,
+      employmentType: t.type3
     },
   ];
 

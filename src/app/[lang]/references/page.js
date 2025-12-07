@@ -4,10 +4,13 @@ import { IoArrowBack, IoTrashOutline, IoAddCircleOutline, IoCheckmarkCircle } fr
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
 import toast from "react-hot-toast";
+import { Globe } from "lucide-react";
 
 export default function ReferencesPage() {
   const router = useRouter();
-  const { t, lang } = useLanguage();
+  const { t, lang, changeLang } = useLanguage();
+  const [openLang, setOpenLang] = useState(false);
+  const toggleLangMenu = () => setOpenLang(!openLang);
 
   const [references, setReferences] = useState([]);
 
@@ -140,10 +143,53 @@ const handleSave = () => {
           <IoArrowBack size={24} className="cursor-pointer" />
         </button>
         <h1 className="text-xl font-bold">{t["References"]}</h1>
-        <div className="w-6" />
+        <div className="relative">
+          <button
+            onClick={toggleLangMenu}
+            className="p-2 bg-white/20 cursor-pointer rounded-full hover:bg-white/30 transition"
+          >
+            <Globe size={22} className="text-white" />
+          </button>
+
+          {openLang && (
+            <div
+              className={`w-[160px] absolute mt-2 ${
+                lang === "ar" ? "left-0" : "right-0"
+              } bg-white shadow-lg rounded-xl overflow-hidden border border-gray-200 z-50 text-black`}
+            >
+              {["en", "ar", "fr", "es", "de", "it", "pt"].map((lng) => (
+                <button
+                  key={lng}
+                  onClick={() => {
+                    changeLang(lng);
+                    setOpenLang(false);
+                  }}
+                  className={`block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer ${
+                    lng === "ar" ? "text-right" : "text-left"
+                  }`}
+                >
+                  {lng === "en" && "🇺🇸 English"}
+                  {lng === "ar" && "🇸🇦 عربي"}
+                  {lng === "fr" && "🇫🇷 Français"}
+                  {lng === "es" && "🇪🇸 Español"}
+                  {lng === "de" && "🇩🇪 Deutsch"}
+                  {lng === "it" && "🇮🇹 Italiano"}
+                  {lng === "pt" && "🇵🇹 Português"}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+        {/* <div className="w-6" /> */}
       </div>
 
       <div className="max-w-3xl mx-auto p-6">
+        <button
+          onClick={() => router.push(`/${lang}/references-example`)}
+          className="mb-4 cursor-pointer bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition"
+        >
+          {t.demo_example || "View references Example"}
+        </button>
         <h2 className="text-2xl font-bold mb-2 text-gray-800">{t["Professional References"]}</h2>
         <p className="text-gray-500 mb-6">{t["Add people who can recommend you professionally"]}</p>
 

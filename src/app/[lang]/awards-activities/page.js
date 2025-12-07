@@ -1,12 +1,15 @@
 "use client";
 import { useState, useEffect } from "react";
-import { IoTrophyOutline, IoPeople, IoHeart, IoMedal, IoTrash, IoPencil, IoCheckmarkCircle } from "react-icons/io5";
+import { IoArrowBack,IoTrophyOutline, IoPeople, IoHeart, IoMedal, IoTrash, IoPencil, IoCheckmarkCircle } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
 import toast from "react-hot-toast";
+import { Globe } from "lucide-react";
 
 export default function AwardsActivities() {
-  const { t, lang } = useLanguage();
+  const { t, lang, changeLang } = useLanguage();
+  const [openLang, setOpenLang] = useState(false);
+  const toggleLangMenu = () => setOpenLang(!openLang);
   const router = useRouter();
 
   const [awardsActivities, setAwardsActivities] = useState([]);
@@ -170,122 +173,175 @@ const handleSaveAll = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white p-4 md:p-8">
-      <h1 className="text-2xl font-bold text-teal-600 mb-6">{t["Awards & Activities"]}</h1>
-
-      {/* Form */}
-      <div className="bg-gray-50 border p-4 rounded-xl mb-6">
-        <h2 className="font-semibold text-lg mb-3">
-          {editingId ? t["Edit Item"] : t["Add New Award/Activity"]}
-        </h2>
-
-        <div className="flex flex-wrap gap-2 mb-4">
-          {["Award", "Activity", "Volunteer", "Competition"].map((typeOption) => (
-            <button
-              key={typeOption}
-              className={`px-3 py-2 rounded-lg border flex items-center cursor-pointer gap-2 ${
-                type === typeOption
-                  ? "bg-teal-600 text-white"
-                  : "border-gray-300 text-gray-700"
-              }`}
-              onClick={() => setType(typeOption)}
-            >
-              {getTypeIcon(typeOption)}
-              <span>{t[typeOption]}</span>
-            </button>
-          ))}
-        </div>
-
-        <input
-          className="w-full border p-2 rounded mb-3"
-          placeholder={t["Name"]}
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          className="w-full border p-2 rounded mb-3"
-          placeholder={t["Organization"]}
-          value={organization}
-          onChange={(e) => setOrganization(e.target.value)}
-        />
-        <input
-          className="w-full border p-2 rounded mb-3"
-          placeholder={t["Date (optional)"]}
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-        />
-        <textarea
-          className="w-full border p-2 rounded mb-3"
-          rows={3}
-          placeholder={t["Description (optional)"]}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-
-        <div className="flex gap-2">
-          {editingId && (
-            <button
-              onClick={resetForm}
-              className="flex-1 bg-gray-500 text-white cursor-pointer py-2 rounded"
-            >
-              {t["Cancel"]}
-            </button>
-          )}
-          <button
-            onClick={handleAddAwardActivity}
-            className="flex-1 cursor-pointer bg-teal-600 text-white py-2 cursor-pointer rounded"
-          >
-            {editingId ? t["Update"] : t["Add"]}
-          </button>
-        </div>
-      </div>
-
-      {/* List */}
-      {awardsActivities.length > 0 ? (
-        <div>
-          <h2 className="font-semibold text-lg mb-3">
-            {t["Your Awards & Activities"]} ({awardsActivities.length})
-          </h2>
-          <div className="space-y-3">
-            {awardsActivities.map((item) => (
-              <div
-                key={item.id}
-                className="border p-4 rounded-xl flex justify-between items-start"
-              >
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    {getTypeIcon(item.type)}
-                    <span className="font-semibold">{item.name}</span>
+    <div className="min-h-screen bg-white">
+      {/* Header */}
+            <header className="bg-teal-500 text-white py-4 px-6 flex justify-between items-center">
+              <button onClick={() => router.back()} className="p-2 hover:bg-teal-600 cursor-pointer rounded-full">
+                <IoArrowBack size={22} />
+              </button>
+              <h1 className="text-xl font-bold">{t["Certificates"]}</h1>
+              <div className="relative">
+                <button
+                  onClick={toggleLangMenu}
+                  className="p-2 bg-white/20 cursor-pointer rounded-full hover:bg-white/30 transition"
+                >
+                  <Globe size={22} className="text-white" />
+                </button>
+      
+                {openLang && (
+                  <div
+                    className={`w-[160px] absolute mt-2 ${
+                      lang === "ar" ? "left-0" : "right-0"
+                    } bg-white shadow-lg rounded-xl overflow-hidden border border-gray-200 z-50 text-black`}
+                  >
+                    {["en", "ar", "fr", "es", "de", "it", "pt"].map((lng) => (
+                      <button
+                        key={lng}
+                        onClick={() => {
+                          changeLang(lng);
+                          setOpenLang(false);
+                        }}
+                        className={`block px-4 py-2 hover:bg-gray-100 w-full cursor-pointer ${
+                          lng === "ar" ? "text-right" : "text-left"
+                        }`}
+                      >
+                        {lng === "en" && "🇺🇸 English"}
+                        {lng === "ar" && "🇸🇦 عربي"}
+                        {lng === "fr" && "🇫🇷 Français"}
+                        {lng === "es" && "🇪🇸 Español"}
+                        {lng === "de" && "🇩🇪 Deutsch"}
+                        {lng === "it" && "🇮🇹 Italiano"}
+                        {lng === "pt" && "🇵🇹 Português"}
+                      </button>
+                    ))}
                   </div>
-                  <p className="text-gray-600 text-sm">{item.organization}</p>
-                  {item.date && <p className="text-gray-500 text-xs">{item.date}</p>}
-                  {item.description && (
-                    <p className="text-gray-700 text-sm mt-1">{item.description}</p>
-                  )}
-                </div>
-                <div className="flex gap-2">
-                  <button onClick={() => handleEdit(item)}>
-                    <IoPencil className="text-teal-600 cursor-pointer" />
-                  </button>
-                  <button onClick={() => handleDelete(item.id)}>
-                    <IoTrash className="text-red-500 cursor-pointer" />
-                  </button>
-                </div>
+                )}
               </div>
-            ))}
-          </div>
-        </div>
-      ) : (
-        <p className="text-gray-500">{t["No items added yet."]}</p>
-      )}
+            </header>
+            <div className="p-4 md:p-8">
+              <button
+                onClick={() => router.push(`/${lang}/awards-example`)}
+                className="mb-4 cursor-pointer bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition"
+              >
+                {t.viewAwardsExample}
+              </button>
 
-      <button
-        onClick={handleSaveAll}
-        className="mt-8 bg-teal-600 text-white cursor-pointer px-6 py-3 rounded-lg flex items-center gap-2"
-      >
-        <IoCheckmarkCircle />
-        {t["Save & Finish"]}
-      </button>
+                <h1 className="text-2xl font-bold text-teal-600 mb-6">{t["Awards & Activities"]}</h1>
+
+                {/* Form */}
+                <div className="bg-gray-50 border p-4 rounded-xl mb-6">
+                  <h2 className="font-semibold text-lg mb-3">
+                    {editingId ? t["Edit Item"] : t["Add New Award/Activity"]}
+                  </h2>
+
+                  {/* <div className="flex flex-wrap gap-2 mb-4">
+                    {["Award", "Activity", "Volunteer", "Competition"].map((typeOption) => (
+                      <button
+                        key={typeOption}
+                        className={`px-3 py-2 rounded-lg border flex items-center cursor-pointer gap-2 ${
+                          type === typeOption
+                            ? "bg-teal-600 text-white"
+                            : "border-gray-300 text-gray-700"
+                        }`}
+                        onClick={() => setType(typeOption)}
+                      >
+                        {getTypeIcon(typeOption)}
+                        <span>{t[typeOption]}</span>
+                      </button>
+                    ))}
+                  </div> */}
+
+                  <input
+                    className="w-full border p-2 rounded mb-3"
+                    placeholder={t["Name"]}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                  <input
+                    className="w-full border p-2 rounded mb-3"
+                    placeholder={t["Organization"]}
+                    value={organization}
+                    onChange={(e) => setOrganization(e.target.value)}
+                  />
+                  <input
+                    className="w-full border p-2 rounded mb-3"
+                    placeholder={t["Date (optional)"]}
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                  />
+                  <textarea
+                    className="w-full border p-2 rounded mb-3"
+                    rows={3}
+                    placeholder={t["Description (optional)"]}
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
+
+                  <div className="flex gap-2">
+                    {editingId && (
+                      <button
+                        onClick={resetForm}
+                        className="flex-1 bg-gray-500 text-white cursor-pointer py-2 rounded"
+                      >
+                        {t["Cancel"]}
+                      </button>
+                    )}
+                    <button
+                      onClick={handleAddAwardActivity}
+                      className="flex-1 cursor-pointer bg-teal-600 text-white py-2 cursor-pointer rounded"
+                    >
+                      {editingId ? t["Update"] : t["Add"]}
+                    </button>
+                  </div>
+                </div>
+
+                {/* List */}
+                {awardsActivities.length > 0 ? (
+                  <div>
+                    <h2 className="font-semibold text-lg mb-3">
+                      {t["Your Awards & Activities"]} ({awardsActivities.length})
+                    </h2>
+                    <div className="space-y-3">
+                      {awardsActivities.map((item) => (
+                        <div
+                          key={item.id}
+                          className="border p-4 rounded-xl flex justify-between items-start"
+                        >
+                          <div>
+                            <div className="flex items-center gap-2 mb-1">
+                              {getTypeIcon(item.type)}
+                              <span className="font-semibold">{item.name}</span>
+                            </div>
+                            <p className="text-gray-600 text-sm">{item.organization}</p>
+                            {item.date && <p className="text-gray-500 text-xs">{item.date}</p>}
+                            {item.description && (
+                              <p className="text-gray-700 text-sm mt-1">{item.description}</p>
+                            )}
+                          </div>
+                          <div className="flex gap-2">
+                            <button onClick={() => handleEdit(item)}>
+                              <IoPencil className="text-teal-600 cursor-pointer" />
+                            </button>
+                            <button onClick={() => handleDelete(item.id)}>
+                              <IoTrash className="text-red-500 cursor-pointer" />
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <p className="text-gray-500">{t["No items added yet."]}</p>
+                )}
+
+                <button
+                  onClick={handleSaveAll}
+                  className="mt-8 bg-teal-600 text-white cursor-pointer px-6 py-3 rounded-lg flex items-center gap-2"
+                >
+                  <IoCheckmarkCircle />
+                  {t["Save & Finish"]}
+                </button>
+            </div>
     </div>
   );
 }
