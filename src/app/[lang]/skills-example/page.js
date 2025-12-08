@@ -19,12 +19,12 @@ export default function SkillsExample() {
 
   const getLevelDescription = (level) => {
     switch (level) {
-      case 1: return "Beginner";
-      case 2: return "Basic";
-      case 3: return "Intermediate";
-      case 4: return "Advanced";
-      case 5: return "Expert";
-      default: return "Not Rated";
+      case 1: return t.beginner;
+      case 2: return t.basic;
+      case 3: return t.intermediate;
+      case 4: return t.advanced;
+      case 5: return t.expert;
+      default: return t.notRated;
     }
   };
 
@@ -35,7 +35,7 @@ export default function SkillsExample() {
         <button onClick={() => history.back()}>
           <IoArrowBack size={24} />
         </button>
-        <h1 className="text-xl font-bold">Skills Example</h1>
+        <h1 className="text-xl font-bold">{t.skillsExample}</h1>
         <div className="relative">
             <button
               onClick={toggleLangMenu}
@@ -131,7 +131,7 @@ export default function SkillsExample() {
           <div key={skill.id} className="bg-gray-100 p-4 rounded-md border border-gray-200">
 
             <h2 className="font-semibold text-teal-600 mb-3">
-              Skill {idx + 1}
+              {t.skill} {idx + 1}
             </h2>
 
             {/* Skill Name (Read Only) */}

@@ -15,27 +15,27 @@ export default function ReferencesExamplePage() {
   const examples = [
     {
       id: "1",
-      name: "Ahmed Hassan",
-      jobTitle: "Senior Software Engineer",
-      company: "Microsoft",
-      email: "ahmed.hassan@microsoft.com",
-      phone: "+20 100 123 4567",
+      name: t.ref1Job,
+      jobTitle: t.ref1Job,
+      company:  t.ref1Company,
+      email: t.ref1Email,
+      phone: t.ref1Phone,
     },
     {
       id: "2",
-      name: "Sarah Ali",
-      jobTitle: "Project Manager",
-      company: "Vodafone",
-      email: "sarah.ali@vodafone.com",
-      phone: "+20 115 987 6543",
+      name: t.ref2Job,
+      jobTitle: t.ref2Job,
+      company:  t.ref2Company,
+      email: t.ref2Email,
+      phone: t.ref2Phone,
     },
     {
       id: "3",
-      name: "John Miller",
-      jobTitle: "Team Leader",
-      company: "IBM",
-      email: "john.miller@ibm.com",
-      phone: "+1 202 555 0198",
+      name: t.ref3Job,
+      jobTitle: t.ref3Job,
+      company:  t.ref3Company,
+      email: t.ref3Email,
+      phone: t.ref3Phone,
     },
   ];
 
@@ -48,7 +48,7 @@ export default function ReferencesExamplePage() {
         </button>
 
         <h1 className="text-xl font-bold">
-          {t["References Example"] || "References Example"}
+          {t["referencesExample"] || "References Example"}
         </h1>
 
         <div className="relative">
@@ -92,7 +92,7 @@ export default function ReferencesExamplePage() {
 
       <div className="max-w-3xl mx-auto p-6">
         <h2 className="text-2xl font-bold mb-2 text-gray-800">
-          {t["Professional References"] || "Professional References"}
+          {t["professionalReferences"] || "Professional References"}
         </h2>
         <p className="text-gray-500 mb-6">
           {t["Add people who can recommend you professionally"] ||

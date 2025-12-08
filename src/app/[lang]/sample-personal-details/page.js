@@ -15,14 +15,13 @@ export default function SamplePersonalDetailsPage() {
 const handleBack = () => router.back();
   // 🔥 بيانات جاهزة (Demo)
   const sampleData = {
-    fullName: "John Michael Carter",
-    email: "john.carter@example.com",
-    phone: "+1 202 555 0147",
-    address: "New York, 5th Avenue, USA",
-    website: "https://johnportfolio.com",
-    jobTitle: "Senior Front-End Developer",
-    summary:
-      "Experienced Front-End Developer with 6+ years building modern, responsive, and scalable web applications using React, Next.js, Tailwind, and TypeScript.",
+    fullName: t.fullName,
+    email: t.emailex,
+    phone: t.phoneex,
+    address: t.addressex,
+    website: t.websiteex,
+    jobTitle: t.jobTitleex,
+    summary: t.bio,
     photoPreview:"https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
   };
 

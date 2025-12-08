@@ -14,9 +14,9 @@ export default function LanguagesExamplePage() {
 
   // ثابتة – 3 لغات
   const exampleLanguages = [
-    { id: "1", name: "English", proficiency: t["Advanced"] },
-    { id: "2", name: "French", proficiency: t["Intermediate"] },
-    { id: "3", name: "Arabic", proficiency: t["Native"] },
+    { id: "1", name: t.english, proficiency: t["Advanced"] },
+    { id: "2", name: t.french, proficiency: t["Intermediate"] },
+    { id: "3", name: t.arabic, proficiency: t["Native"] },
   ];
 
   return (
@@ -27,7 +27,7 @@ export default function LanguagesExamplePage() {
         <button onClick={() => router.back()} className="p-2 cursor-pointer">
           <IoArrowBack size={24} />
         </button>
-        <h1 className="text-xl font-bold">{t["Languages Example"] || "Languages Example"}</h1>
+        <h1 className="text-xl font-bold">{t["languagesExample"] || "Languages Example"}</h1>
         <div className="relative">
             <button
               onClick={toggleLangMenu}

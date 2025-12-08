@@ -14,36 +14,32 @@ export default function ProjectsExamplePage() {
 
   const examples = [
     {
-      title: "E-Commerce Web App",
-      description:
-        "A complete online store with product browsing, cart system, order tracking, and secure payment integration using Stripe.",
-      technologies: "React, Next.js, Node.js, MongoDB, Stripe API",
-      url: "https://github.com/username/ecommerce",
-      date: "2023",
+      title: t.project1_title,
+      description: t.project1_description,
+      technologies: t.project1_technologies,
+      url: t.project1_url,
+      date: t.project1_year,
     },
     {
-      title: "Real-Time Chat Application",
-      description:
-        "A real-time chat platform supporting private rooms, user authentication, and instant message updates using WebSockets.",
-      technologies: "React, Firebase, Socket.io, TailwindCSS",
-      url: "https://github.com/username/chat-app",
-      date: "2024",
+      title: t.project2_title,
+      description: t.project2_description,
+      technologies: t.project2_technologies,
+      url: t.project2_url,
+      date: t.project2_year,
     },
     {
-      title: "Task Management Dashboard",
-      description:
-        "A Kanban-style dashboard for task tracking with drag-and-drop, analytics, and role-based permissions.",
-      technologies: "Next.js, Prisma, PostgreSQL, Zustand",
-      url: "https://github.com/username/task-manager",
-      date: "2023",
+      title: t.project3_title,
+      description: t.project3_description,
+      technologies: t.project3_technologies,
+      url: t.project3_url,
+      date: t.project3_year,
     },
     {
-      title: "Portfolio Website",
-      description:
-        "A modern responsive personal portfolio showing projects, skills, and contact form with email integration.",
-      technologies: "Next.js, TailwindCSS, Framer Motion",
-      url: "https://github.com/username/portfolio",
-      date: "2024",
+      title: t.project4_title,
+      description: t.project4_description,
+      technologies: t.project4_technologies,
+      url: t.project4_url,
+      date: t.project4_year,
     },
   ];
 
@@ -61,7 +57,7 @@ export default function ProjectsExamplePage() {
           <IoArrowBack size={24} className="cursor-pointer" />
         </button>
         <h1 className="text-xl font-bold">
-          {t["Projects Example"] || "Projects Examples"}
+          {t["projectsExamples"] || "Projects Examples"}
         </h1>
 
         <div className="relative">
@@ -106,11 +102,11 @@ export default function ProjectsExamplePage() {
       {/* Content */}
       <div className="p-5 max-w-2xl mx-auto">
         <h2 className="text-2xl font-bold text-gray-800 mb-3">
-          {t["Projects Examples"] || "Sample Projects"}
+          {t["projectsExamples"] || "Sample Projects"}
         </h2>
 
         <p className="text-gray-600 mb-6">
-          {t["Here are some professional project examples"] ||
+          {t["projectsSubtext"] ||
             "Here are 4 ready examples you can use for your CV:"}
         </p>
 
@@ -127,13 +123,13 @@ export default function ProjectsExamplePage() {
 
             <p className="text-gray-600 mt-2">
               <span className="font-semibold">
-                {t["Technologies"] || "Technologies"}:
+                {t["technologies"] || "Technologies"}:
               </span>{" "}
               {p.technologies}
             </p>
 
             <p className="text-gray-600 mt-1">
-              <span className="font-semibold">{t["Year"] || "Year"}:</span>{" "}
+              <span className="font-semibold">{t["year"] || "Year"}:</span>{" "}
               {p.date}
             </p>
 
@@ -154,7 +150,7 @@ export default function ProjectsExamplePage() {
           onClick={() => router.back()}
           className="w-full bg-teal-500 text-white py-3 rounded-lg font-bold cursor-pointer hover:bg-teal-600 transition"
         >
-          {t["Back"] || "Back"}
+          {t["back"] || "Back"}
         </button>
       </div>
     </div>

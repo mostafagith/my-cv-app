@@ -202,7 +202,7 @@ const handleBack = () => {
           onClick={() => router.push(`/${lang}/object-example`)}
           className="mb-4 cursor-pointer bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition"
         >
-          {t.demo_example || "View object Example"}
+          {t.viewObjectExample || "View object Example"}
         </button>
         <div>
           <label className="block text-gray-700 font-semibold mb-2">

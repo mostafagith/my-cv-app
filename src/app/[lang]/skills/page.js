@@ -204,7 +204,7 @@ const handleSave = () => {
           onClick={() => router.push(`/${lang}/skills-example`)}
           className="mb-4 cursor-pointer bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition"
         >
-          {t.demo_example || "View Skill Example"}
+          {t.viewSkillExample || "View Skill Example"}
         </button>
         {skills.map((skill, idx) => (
           <div key={skill.id} className="bg-gray-100 p-4 rounded-md border border-gray-200">

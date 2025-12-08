@@ -229,7 +229,7 @@ const removeLanguage = (id) => {
           onClick={() => router.push(`/${lang}/languages-example`)}
           className="mb-4 cursor-pointer bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition"
         >
-          {t.demo_example || "View languages Example"}
+          {t.viewLanguagesExample || "View languages Example"}
         </button>
         <h2 className="text-2xl font-bold mb-4 text-gray-800">
           {editingId ? t["Edit Language"] : t["Add Language"]}

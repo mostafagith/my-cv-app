@@ -232,7 +232,7 @@ const handleSave = () => {
           onClick={() => router.push(`/${lang}/projects-example`)}
           className="mb-4 cursor-pointer bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition"
         >
-          {t.demo_example || "View projects Example"}
+          {t.viewProjectsExample || "View projects Example"}
         </button>
         <h2 className="text-2xl font-bold text-gray-800 mb-2">
           {t["Personal Projects"]}

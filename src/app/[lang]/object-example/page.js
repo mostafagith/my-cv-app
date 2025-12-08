@@ -13,15 +13,15 @@ export default function ObjectiveExamplePage() {
   const toggleLangMenu = () => setOpenLang(!openLang);
 
   const examples = [
-    t["example1"] ||
+    t["objective1"] ||
       "Seeking a challenging position in software development where I can utilize my programming skills and contribute to innovative projects.",
-    t["example2"] ||
+    t["objective2"] ||
       "To obtain a marketing manager position where I can apply my experience to drive brand growth and build effective marketing strategies.",
-    t["example3"] ||
+    t["objective3"] ||
       "Looking for an accounting role in a reputable company to apply analytical skills and maintain accurate financial records.",
-    t["example4"] ||
+    t["objective4"] ||
       "Seeking a customer service position where I can enhance customer satisfaction using strong communication and problem-solving skills.",
-    t["example5"] ||
+    t["objective5"] ||
       "To join a dynamic team as a graphic designer where I can use my creativity and design experience to deliver impactful visuals.",
   ];
 
@@ -45,7 +45,7 @@ export default function ObjectiveExamplePage() {
         </button>
 
         <h1 className="text-xl font-bold">
-          {t["objectiveExamples"] || "Career Objective Examples"}
+          {t["careerObjectiveExamples"] || "Career Objective Examples"}
         </h1>
 
         <div className="relative">
@@ -92,7 +92,7 @@ export default function ObjectiveExamplePage() {
       {/* Content */}
       <main className="flex-1 overflow-y-auto p-6 space-y-6">
         <h2 className="text-lg font-semibold text-gray-800">
-          {t["chooseExample"] || "Choose an example you like:"}
+          {t["chooseExampleYouLike"] || "Choose an example you like:"}
         </h2>
 
         <div className="space-y-4">

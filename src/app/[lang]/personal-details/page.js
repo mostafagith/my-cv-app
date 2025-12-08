@@ -238,7 +238,7 @@ const handleBack = () => router.back();
           onClick={() => router.push(`/${lang}/sample-personal-details`)}
           className="mb-4 cursor-pointer bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition"
         >
-          {t.demo_example || "View Personal Details Example"}
+          {t.viewPersonalDetailsExample || "View Personal Details Example"}
         </button>
         <div className="bg-white rounded-2xl shadow-md p-6 border border-gray-200">
           {/* Image Upload */}

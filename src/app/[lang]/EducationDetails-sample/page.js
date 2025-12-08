@@ -146,7 +146,7 @@ export default function EducationExample() {
 
       {/* Content */}
       <div className="p-5 space-y-6">
-        <h2 className="text-lg font-bold text-gray-800">{t['exampleEducationInformation'] || 'Example Educational Background'}</h2>
+        <h2 className="text-lg font-bold text-gray-800">{t['exampleEducationalBackground'] || 'Example Educational Background'}</h2>
 
         {exampleEducations.map((edu, index) => (
           <div key={index} className="bg-gray-50 border border-gray-200 rounded-lg p-4 space-y-2">

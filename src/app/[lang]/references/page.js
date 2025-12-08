@@ -188,7 +188,7 @@ const handleSave = () => {
           onClick={() => router.push(`/${lang}/references-example`)}
           className="mb-4 cursor-pointer bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition"
         >
-          {t.demo_example || "View references Example"}
+          {t.viewReferencesExample || "View references Example"}
         </button>
         <h2 className="text-2xl font-bold mb-2 text-gray-800">{t["Professional References"]}</h2>
         <p className="text-gray-500 mb-6">{t["Add people who can recommend you professionally"]}</p>
