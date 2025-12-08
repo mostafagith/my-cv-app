@@ -236,7 +236,7 @@ const removeLanguage = (id) => {
         </h2>
 
         <input
-          className="w-full border border-gray-300 rounded-md p-3 mb-3"
+          className="w-full border border-gray-300 rounded-md p-3 mb-3 text-gray-700"
           placeholder={t["Language (e.g., English, French)"]}
           value={languageName}
           onChange={(e) => setLanguageName(e.target.value)}

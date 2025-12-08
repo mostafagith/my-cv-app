@@ -104,7 +104,7 @@ const handleBack = () => router.back();
             <label className="block text-gray-700 font-semibold mb-2">
               {t.summary}
             </label>
-            <div className="p-6 border border-gray-300 rounded-lg bg-gray-50">
+            <div className="p-6 border border-gray-300 rounded-lg bg-gray-50 text-gray-700">
               {sampleData.summary}
             </div>
           </div>

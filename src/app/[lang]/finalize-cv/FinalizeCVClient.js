@@ -292,7 +292,7 @@ const handlePreview = () => {
           </label>
           <input
             type="text"
-            className="w-full border border-gray-300 rounded-lg p-3 text-sm"
+            className="w-full border border-gray-300 rounded-lg p-3 text-sm text-gray-700" 
             placeholder={t["Please enter a title for your CV"]}
             value={cvTitle}
             onChange={(e) => setCvTitle(e.target.value)}

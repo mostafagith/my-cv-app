@@ -344,7 +344,7 @@ const templates = [
 
       {/* Footer */}
       <footer className="bg-gradient-to-r from-teal-800 to-teal-600 text-white py-10 mt-20">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 items-center text-center md:text-left">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
           <div>
             <h2 className="text-3xl font-bold mb-3 tracking-wide">CV Builder</h2>
             <p className="text-gray-200 text-sm leading-relaxed max-w-sm mx-auto md:mx-0">

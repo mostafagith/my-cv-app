@@ -222,7 +222,7 @@ const handleSave = () => {
               placeholder={t.skillNamePlaceholder}
               value={skill.name}
               onChange={(e) => handleSkillChange(idx, "name", e.target.value)}
-              className="w-full border rounded-md p-2 mb-3"
+              className="w-full border rounded-md p-2 mb-3 text-gray-700"
             />
 
             <div className="flex space-x-2 mb-2">
@@ -230,7 +230,7 @@ const handleSave = () => {
                 <button
                   key={lvl}
                   onClick={() => handleSkillChange(idx, "level", lvl)}
-                  className={` cursor-pointer w-10 h-10 flex items-center justify-center border rounded-md ${skill.level === lvl ? 'bg-teal-600 text-white' : 'bg-white'}`}
+                  className={`text-black cursor-pointer w-10 h-10 flex items-center justify-center border rounded-md ${skill.level === lvl ? 'bg-teal-600 text-white' : 'bg-white'}`}
                 >
                   {lvl}
                 </button>

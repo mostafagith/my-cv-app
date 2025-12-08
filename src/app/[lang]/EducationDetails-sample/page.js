@@ -151,11 +151,11 @@ export default function EducationExample() {
         {exampleEducations.map((edu, index) => (
           <div key={index} className="bg-gray-50 border border-gray-200 rounded-lg p-4 space-y-2">
             <h3 className="font-bold text-teal-500">{t['education']} {index + 1}</h3>
-            <p><span className="font-semibold">{t['courseFieldOfStudy'] || 'Course:'}</span> {edu.course}</p>
-            <p><span className="font-semibold">{t['degree'] || 'Degree:'}</span> {edu.degree}</p>
-            <p><span className="font-semibold">{t['schoolUniversity'] || 'Institution:'}</span> {edu.institution}</p>
-            <p><span className="font-semibold">{t['gradeScore'] || 'Grade:'}</span> {edu.grade || '-'}</p>
-            <p>
+            <p className='text-black'><span className="font-semibold">{t['courseFieldOfStudy'] || 'Course:'}</span> {edu.course}</p>
+            <p className='text-black'><span className="font-semibold">{t['degree'] || 'Degree:'}</span> {edu.degree}</p>
+            <p className='text-black'><span className="font-semibold">{t['schoolUniversity'] || 'Institution:'}</span> {edu.institution}</p>
+            <p className='text-black'><span className="font-semibold">{t['gradeScore'] || 'Grade:'}</span> {edu.grade || '-'}</p>
+            <p className='text-black'>
               <span className="font-semibold">{t['startDate'] || 'Start Date:'}</span> {edu.startDate} | 
               <span className="font-semibold ml-2">{t['endDate'] || 'End Date:'}</span> {edu.isCurrentlyStudying ? t['present'] || 'Present' : edu.endDate}
             </p>

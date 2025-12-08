@@ -249,7 +249,7 @@ const handleSave = () => {
                 value={exp.company}
                 onChange={e => handleChange(index, 'company', e.target.value)}
                 placeholder={t['companyName']}
-                className="w-full border border-gray-300 rounded-md px-3 py-2"
+                className="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700"
               />
             </div>
 
@@ -262,7 +262,7 @@ const handleSave = () => {
                 value={exp.jobTitle}
                 onChange={e => handleChange(index, 'jobTitle', e.target.value)}
                 placeholder={t['jobTitle']}
-                className="w-full border border-gray-300 rounded-md px-3 py-2"
+                className="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700"
               />
             </div>
 
@@ -274,7 +274,7 @@ const handleSave = () => {
                   value={exp.employmentType}
                   onChange={e => handleChange(index, 'employmentType', e.target.value)}
                   placeholder="Full-time / Part-time"
-                  className="w-full border border-gray-300 rounded-md px-3 py-2"
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700"
                 />
               </div>
               <div className="flex-1 space-y-2">
@@ -284,7 +284,7 @@ const handleSave = () => {
                   value={exp.location}
                   onChange={e => handleChange(index, 'location', e.target.value)}
                   placeholder="Cairo, Egypt"
-                  className="w-full border border-gray-300 rounded-md px-3 py-2"
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700"
                 />
               </div>
             </div>
@@ -297,7 +297,7 @@ const handleSave = () => {
                   value={exp.startDate}
                   onChange={e => handleChange(index, 'startDate', e.target.value)}
                   placeholder="Jan 2022"
-                  className="w-full border border-gray-300 rounded-md px-3 py-2"
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700"
                 />
               </div>
               <div className="flex-1 space-y-2">
@@ -307,7 +307,7 @@ const handleSave = () => {
                   value={exp.endDate}
                   onChange={e => handleChange(index, 'endDate', e.target.value)}
                   placeholder="Dec 2023 / Present"
-                  className="w-full border border-gray-300 rounded-md px-3 py-2"
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700"
                 />
               </div>
             </div>
@@ -318,7 +318,7 @@ const handleSave = () => {
                 value={exp.details}
                 onChange={e => handleChange(index, 'details', e.target.value)}
                 placeholder="Describe your responsibilities, achievements..."
-                className="w-full border border-gray-300 rounded-md px-3 py-2 h-32"
+                className="w-full border border-gray-300 rounded-md px-3 py-2 h-32 text-gray-700"
               />
               <p className="text-right text-gray-500 text-sm">{exp.details?.length || 0}/500</p>
             </div>

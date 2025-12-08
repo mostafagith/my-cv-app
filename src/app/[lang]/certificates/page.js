@@ -213,7 +213,7 @@ const handleDelete = (id) => {
 
         {/* Form */}
         <div className="bg-gray-50 border p-5 rounded-xl space-y-4">
-          <h3 className="font-bold text-lg">
+          <h3 className="font-bold text-lg text-black">
             {editingId ? t["Edit Certificate"] : t["Add New Certificate"]}
           </h3>
 
@@ -224,7 +224,7 @@ const handleDelete = (id) => {
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full mt-1 p-2 border rounded-lg"
+              className="w-full mt-1 p-2 border rounded-lg text-gray-700"
               placeholder={t["e.g., Google Analytics Certification"]}
             />
           </div>
@@ -236,7 +236,7 @@ const handleDelete = (id) => {
             <input
               value={issuer}
               onChange={(e) => setIssuer(e.target.value)}
-              className="w-full mt-1 p-2 border rounded-lg"
+              className="w-full mt-1 p-2 border rounded-lg text-gray-700"
               placeholder={t["e.g., Google, Microsoft, Coursera"]}
             />
           </div>
@@ -246,7 +246,7 @@ const handleDelete = (id) => {
             <input
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full mt-1 p-2 border rounded-lg"
+              className="w-full mt-1 p-2 border rounded-lg text-gray-700"
               placeholder={t["e.g., June 2023"]}
             />
           </div>
@@ -256,7 +256,7 @@ const handleDelete = (id) => {
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full mt-1 p-2 border rounded-lg"
+              className="w-full mt-1 p-2 border rounded-lg text-gray-700"
               placeholder={t["Brief description of the certificate or skills gained..."]}
             />
           </div>

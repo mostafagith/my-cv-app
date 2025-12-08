@@ -317,6 +317,7 @@ const handleBack = () => router.back();
               onChange={(e) => handleInputChange("website", e.target.value)}
             />
             <InputField
+              className="text-black"
               label={t.job_title}
               value={formData.jobTitle||""}
               onChange={(e) => handleInputChange("jobTitle", e.target.value)}
@@ -332,7 +333,7 @@ const handleBack = () => router.back();
               value={formData.summary}
               onChange={(e) => handleInputChange("summary", e.target.value)}
               rows="4"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal-500 resize-none"
+              className="w-full p-3 text-black border-gray-300 rounded-lg focus:outline-none focus:border-teal-500 resize-none"
               placeholder={t.summary_placeholder}
             ></textarea>
           </div>
@@ -366,7 +367,7 @@ function InputField({ label, value, onChange, type = "text" }) {
         type={type}
         value={value}
         onChange={onChange}
-        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal-500"
+        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-teal-500 text-gray-700"
       />
     </div>
   );

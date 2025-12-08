@@ -267,7 +267,7 @@ const handleSave = () => {
     value={edu.course}
     onChange={e => handleEducationChange(index, 'course', e.target.value)}
     placeholder="e.g. Computer Science"
-    className="w-full border border-gray-300 rounded-md px-3 py-2"
+    className="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700"
   />
 </div>
 
@@ -280,7 +280,7 @@ const handleSave = () => {
     value={edu.degree}
     onChange={e => handleEducationChange(index, 'degree', e.target.value)}
     placeholder="e.g. Bachelor's"
-    className="w-full border border-gray-300 rounded-md px-3 py-2"
+    className="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700"
   />
 </div>
 
@@ -293,7 +293,7 @@ const handleSave = () => {
     value={edu.institution}
     onChange={e => handleEducationChange(index, 'institution', e.target.value)}
     placeholder="e.g. Cairo University"
-    className="w-full border border-gray-300 rounded-md px-3 py-2"
+    className="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700"
   />
 </div>
 
@@ -307,7 +307,7 @@ const handleSave = () => {
       value={edu.startDate}
       onChange={e => handleEducationChange(index, 'startDate', e.target.value)}
       placeholder="e.g. Sep 2020"
-      className="w-full border border-gray-300 rounded-md px-3 py-2"
+      className="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700"
     />
   </div>
   <div className="flex-1 space-y-2">
@@ -320,11 +320,11 @@ const handleSave = () => {
       onChange={e => handleEducationChange(index, 'endDate', e.target.value)}
       placeholder={edu.isCurrentlyStudying ? t['present'] : 'e.g. Jun 2024'}
       disabled={edu.isCurrentlyStudying}
-      className={`w-full border border-gray-300 rounded-md px-3 py-2 ${edu.isCurrentlyStudying ? 'bg-gray-200 text-gray-500' : ''}`}
+      className={`w-full border border-gray-300 rounded-md px-3 text-gray-700 py-2 ${edu.isCurrentlyStudying ? 'bg-gray-200 text-gray-500' : ''}`}
     />
   </div>
 </div>
-<div className="space-y-2"> <label className="font-semibold text-gray-700">{t['gradeScore']}</label> <input type="text" value={edu.grade} onChange={e => handleEducationChange(index, 'grade', e.target.value)} placeholder="e.g. 3.8 GPA" className="w-full border border-gray-300 rounded-md px-3 py-2" /> </div>
+<div className="space-y-2"> <label className="font-semibold text-gray-700">{t['gradeScore']}</label> <input type="text" value={edu.grade} onChange={e => handleEducationChange(index, 'grade', e.target.value)} placeholder="e.g. 3.8 GPA" className="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700" /> </div>
 
           </div>
         ))}

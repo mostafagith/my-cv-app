@@ -126,7 +126,7 @@ export default function AwardsExamplePage() {
               <div>
                 <div className="flex items-center gap-2 mb-1">
                   {getTypeIcon(item.type)}
-                  <span className="font-semibold">{item.name}</span>
+                  <span className="font-semibold text-black">{item.name}</span>
                 </div>
                 <p className="text-gray-600 text-sm">{item.organization}</p>
                 {item.date && <p className="text-gray-500 text-xs">{item.date}</p>}

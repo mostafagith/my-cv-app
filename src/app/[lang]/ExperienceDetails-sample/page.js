@@ -150,15 +150,15 @@ export default function ExperienceExample() {
         {exampleExperiences.map((exp, index) => (
           <div key={index} className="bg-gray-50 border border-gray-200 rounded-lg p-4 space-y-2">
             <h3 className="font-bold text-teal-500">{t['experience']} {index + 1}</h3>
-            <p><span className="font-semibold">{t['companyName'] || 'Company:'}</span> {exp.company}</p>
-            <p><span className="font-semibold">{t['jobTitle'] || 'Job Title:'}</span> {exp.jobTitle}</p>
-            <p><span className="font-semibold">{t['employmentType'] || 'Employment Type:'}</span> {exp.employmentType}</p>
-            <p><span className="font-semibold">{t['location'] || 'Location:'}</span> {exp.location}</p>
-            <p>
+            <p className='text-black'><span className="font-semibold">{t['companyName'] || 'Company:'}</span> {exp.company}</p>
+            <p className='text-black'><span className="font-semibold">{t['jobTitle'] || 'Job Title:'}</span> {exp.jobTitle}</p>
+            <p className='text-black'><span className="font-semibold">{t['employmentType'] || 'Employment Type:'}</span> {exp.employmentType}</p>
+            <p className='text-black'><span className="font-semibold">{t['location'] || 'Location:'}</span> {exp.location}</p>
+            <p className='text-black'>
               <span className="font-semibold">{t['startDate'] || 'Start Date:'}</span> {exp.startDate} | 
               <span className="font-semibold ml-2">{t['endDate'] || 'End Date:'}</span> {exp.endDate}
             </p>
-            <p><span className="font-semibold">{t['responsibilitiesAchievements'] || 'Responsibilities & Achievements:'}</span> {exp.details}</p>
+            <p className='text-black'><span className="font-semibold">{t['responsibilitiesAchievements'] || 'Responsibilities & Achievements:'}</span> {exp.details}</p>
           </div>
         ))}
       </div>

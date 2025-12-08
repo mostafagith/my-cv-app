@@ -179,7 +179,7 @@ const handleSaveAll = () => {
               <button onClick={() => router.back()} className="p-2 hover:bg-teal-600 cursor-pointer rounded-full">
                 <IoArrowBack size={22} />
               </button>
-              <h1 className="text-xl font-bold">{t["Certificates"]}</h1>
+              <h1 className="text-xl font-bold">{t["awards"]}</h1>
               <div className="relative">
                 <button
                   onClick={toggleLangMenu}
@@ -230,7 +230,7 @@ const handleSaveAll = () => {
 
                 {/* Form */}
                 <div className="bg-gray-50 border p-4 rounded-xl mb-6">
-                  <h2 className="font-semibold text-lg mb-3">
+                  <h2 className="font-semibold text-lg mb-3 text-black">
                     {editingId ? t["Edit Item"] : t["Add New Award/Activity"]}
                   </h2>
 
@@ -252,25 +252,25 @@ const handleSaveAll = () => {
                   </div> */}
 
                   <input
-                    className="w-full border p-2 rounded mb-3"
+                    className="w-full border p-2 rounded mb-3 text-gray-700"
                     placeholder={t["Name"]}
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                   />
                   <input
-                    className="w-full border p-2 rounded mb-3"
+                    className="w-full border p-2 rounded mb-3 text-gray-700"
                     placeholder={t["Organization"]}
                     value={organization}
                     onChange={(e) => setOrganization(e.target.value)}
                   />
                   <input
-                    className="w-full border p-2 rounded mb-3"
+                    className="w-full border p-2 rounded mb-3 text-gray-700"
                     placeholder={t["Date (optional)"]}
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
                   />
                   <textarea
-                    className="w-full border p-2 rounded mb-3"
+                    className="w-full border p-2 rounded mb-3 text-gray-700"
                     rows={3}
                     placeholder={t["Description (optional)"]}
                     value={description}
@@ -298,7 +298,7 @@ const handleSaveAll = () => {
                 {/* List */}
                 {awardsActivities.length > 0 ? (
                   <div>
-                    <h2 className="font-semibold text-lg mb-3">
+                    <h2 className="font-semibold text-lg mb-3 text-black">
                       {t["Your Awards & Activities"]} ({awardsActivities.length})
                     </h2>
                     <div className="space-y-3">
@@ -310,7 +310,7 @@ const handleSaveAll = () => {
                           <div>
                             <div className="flex items-center gap-2 mb-1">
                               {getTypeIcon(item.type)}
-                              <span className="font-semibold">{item.name}</span>
+                              <span className="font-semibold text-black">{item.name}</span>
                             </div>
                             <p className="text-gray-600 text-sm">{item.organization}</p>
                             {item.date && <p className="text-gray-500 text-xs">{item.date}</p>}

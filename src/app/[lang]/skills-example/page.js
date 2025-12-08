@@ -148,7 +148,7 @@ export default function SkillsExample() {
                 <button
                   key={lvl}
                   disabled
-                  className={`w-10 h-10 flex items-center justify-center border rounded-md 
+                  className={`text-black w-10 h-10 flex items-center justify-center border rounded-md 
                     ${skill.level === lvl ? 'bg-teal-600 text-white' : 'bg-white'}
                   `}
                 >

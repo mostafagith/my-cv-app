@@ -212,7 +212,7 @@ const handleSave = () => {
                   {t["Reference's Name"]} <span className="text-red-500">*</span>
               </label>
                 <input
-                  className="w-full border border-gray-300 rounded-md p-2 mt-1"
+                  className="w-full border border-gray-300 rounded-md p-2 mt-1 text-gray-700"
                   placeholder={t["Enter full name"]}
                   value={ref.name}
                   onChange={(e) => handleChange(index, "name", e.target.value)}
@@ -224,7 +224,7 @@ const handleSave = () => {
                   {t["Job Title"]} <span className="text-red-500">*</span>
                 </label>
                 <input
-                  className="w-full border border-gray-300 rounded-md p-2 mt-1"
+                  className="w-full border border-gray-300 rounded-md p-2 mt-1 text-gray-700"
                   placeholder={t["Enter job title"]}
                   value={ref.jobTitle}
                   onChange={(e) => handleChange(index, "jobTitle", e.target.value)}
@@ -236,7 +236,7 @@ const handleSave = () => {
                   {t["Company Name"]} <span className="text-red-500">*</span>
                 </label>
                 <input
-                  className="w-full border border-gray-300 rounded-md p-2 mt-1"
+                  className="w-full border border-gray-300 rounded-md p-2 mt-1 text-gray-700"
                   placeholder={t["Enter company name"]}
                   value={ref.company}
                   onChange={(e) => handleChange(index, "company", e.target.value)}
@@ -246,7 +246,7 @@ const handleSave = () => {
               <div>
                 <label className="font-medium text-sm text-gray-700">{t["Email Address"]}</label>
                 <input
-                  className="w-full border border-gray-300 rounded-md p-2 mt-1"
+                  className="w-full border border-gray-300 rounded-md p-2 mt-1 text-gray-700"
                   placeholder={t["Enter email address"]}
                   type="email"
                   value={ref.email}
@@ -257,7 +257,7 @@ const handleSave = () => {
               <div>
                 <label className="font-medium text-sm text-gray-700">{t["Phone Number"]}</label>
                 <input
-                  className="w-full border border-gray-300 rounded-md p-2 mt-1"
+                  className="w-full border border-gray-300 rounded-md p-2 mt-1 text-gray-700"
                   placeholder={t["Enter phone number"]}
                   value={ref.phone}
                   onChange={(e) => handleChange(index, "phone", e.target.value)}

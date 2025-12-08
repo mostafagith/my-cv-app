@@ -8,7 +8,7 @@ export default function CvTipsPage() {
   return (
     <>
       <Navbar />
-      <div className="max-w-4xl mx-auto p-6 leading-relaxed">
+      <div className="max-w-4xl mx-auto p-6 leading-relaxed bg-white">
         <h1 className="text-3xl font-bold text-teal-700 mb-4">
           {t.cv_tips_title}
         </h1>

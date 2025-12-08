@@ -134,7 +134,7 @@ function handleCreateNew() {
                   </div>
 
                   {/* الاسم */}
-                  <h3 className="font-bold text-lg">
+                  <h3 className="font-bold text-lg text-gray-900">
                     {cv.personalDetails?.fullName || cv.title || t.unknown}
                   </h3>
 
@@ -156,7 +156,7 @@ function handleCreateNew() {
                       }
                       className="p-2 cursor-pointer rounded-full hover:bg-gray-100 transition"
                     >
-                      <MoreVertical size={18} />
+                      <MoreVertical className="text-black" size={18} />
                     </button>
 
                     {/* القائمة */}

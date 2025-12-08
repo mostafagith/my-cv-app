@@ -267,7 +267,7 @@ const handleSave = () => {
                 </label>
                 
                 <input
-                  className="w-full border rounded-lg p-2"
+                  className="w-full border rounded-lg p-2 text-gray-700"
                   value={project.title}
                   onChange={(e) =>
                     handleChange(index, "title", e.target.value)
@@ -281,7 +281,7 @@ const handleSave = () => {
                   {t["Project Description"]} <span className="text-red-500">*</span>
                 </label>
                 <textarea
-                  className="w-full border rounded-lg p-2 h-28 resize-none"
+                  className="w-full border rounded-lg p-2 h-28 resize-none text-gray-700"
                   value={project.description}
                   onChange={(e) =>
                     handleChange(index, "description", e.target.value)
@@ -296,11 +296,11 @@ const handleSave = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold mb-1">
+                <label className="block text-sm font-semibold mb-1 text-black">
                   {t["Technologies Used"]}
                 </label>
                 <input
-                  className="w-full border rounded-lg p-2"
+                  className="w-full border rounded-lg p-2 text-gray-700"
                   value={project.technologies}
                   onChange={(e) =>
                     handleChange(index, "technologies", e.target.value)
@@ -311,11 +311,11 @@ const handleSave = () => {
 
               <div className="flex gap-3">
                 <div className="flex-1">
-                  <label className="block text-sm font-semibold mb-1">
+                  <label className="block text-sm font-semibold mb-1 text-black">
                     {t["Start Date"]}
                   </label>
                   <input
-                    className="w-full border rounded-lg p-2"
+                    className="w-full border rounded-lg p-2 text-gray-700"
                     value={project.startDate}
                     onChange={(e) =>
                       handleChange(index, "startDate", e.target.value)
@@ -324,11 +324,11 @@ const handleSave = () => {
                   />
                 </div>
                 <div className="flex-1">
-                  <label className="block text-sm font-semibold mb-1">
+                  <label className="block text-sm font-semibold mb-1 text-black">
                     {t["End Date"]}
                   </label>
                   <input
-                    className="w-full border rounded-lg p-2"
+                    className="w-full border rounded-lg p-2 text-gray-700 text-black"
                     value={project.endDate}
                     onChange={(e) =>
                       handleChange(index, "endDate", e.target.value)
@@ -339,11 +339,11 @@ const handleSave = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold mb-1">
+                <label className="block text-sm font-semibold mb-1 text-black">
                   {t["Project URL (Optional)"]}
                 </label>
                 <input
-                  className="w-full border rounded-lg p-2"
+                  className="w-full border rounded-lg p-2 text-gray-700"
                   value={project.projectUrl}
                   onChange={(e) =>
                     handleChange(index, "projectUrl", e.target.value)

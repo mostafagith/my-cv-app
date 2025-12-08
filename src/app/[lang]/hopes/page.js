@@ -166,7 +166,7 @@ const handleBack = () => {
             {t["Your Hopes & Aspirations"]}
           </label>
           <textarea
-            className={`w-full border ${
+            className={`w-full border text-gray-700 ${
               hopes.length > 0 ? "border-teal-500" : "border-gray-300"
             } rounded-lg p-3 text-sm min-h-[120px] focus:outline-none`}
             placeholder={t[
