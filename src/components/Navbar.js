@@ -68,7 +68,7 @@ export default function Navbar() {
                 >
                   {[
                     { code: "en", label: "🇺🇸 English" },
-                    { code: "ar", label: "🇸🇦 عربي" },
+                    { code: "ar", label: "🇸🇦 اللغه العربية" },
                     { code: "fr", label: "🇫🇷 Français" },
                     { code: "es", label: "🇪🇸 Español" },
                     { code: "de", label: "🇩🇪 Deutsch" },
@@ -81,7 +81,7 @@ export default function Navbar() {
                         changeLang(langItem.code);
                         setOpenLang(false);
                       }}
-                      className={`block w-full px-4 py-2 hover:bg-gray-100 cursor-pointer ${
+                      className={`block w-full px-4 py-2 hover:bg-gray-100 cursor-pointer text-black ${
                         langItem.code === "ar" ? "text-right" : "text-left"
                       }`}
                     >
@@ -145,7 +145,7 @@ export default function Navbar() {
                   >
                     {[
                       { code: "en", label: "🇺🇸 English" },
-                      { code: "ar", label: "🇸🇦 عربي" },
+                      { code: "ar", label: "🇸🇦 اللغه العربية" },
                       { code: "fr", label: "🇫🇷 Français" },
                       { code: "es", label: "🇪🇸 Español" },
                       { code: "de", label: "🇩🇪 Deutsch" },
@@ -159,7 +159,7 @@ export default function Navbar() {
                           setOpenLang(false);
                           setMenuOpen(false);
                         }}
-                        className="block w-full px-4 py-2 hover:bg-gray-100 text-black cursor-pointer"
+                        className="block w-full px-4 py-2 hover:bg-gray-100 text-black cursor-pointer text-black"
                       >
                         {langItem.label}
                       </button>
