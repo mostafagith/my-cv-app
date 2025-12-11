@@ -2,7 +2,7 @@
 export function getSiteMetadata(lang = 'en') {
   const siteMetadata = {
   title: {
-    en: "Create CV Master | Professional Free CV Builder",
+    en: "Make CV Master | Professional Free CV Builder",
     ar: "صانع السيرة الذاتية الاحترافي مجانًا",
     fr: "Créateur de CV Professionnel Gratuit",
     es: "Creador de CV Profesional Gratis",

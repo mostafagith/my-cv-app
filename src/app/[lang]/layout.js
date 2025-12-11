@@ -18,7 +18,7 @@ const supportedLanguages = ["en", "ar", "fr", "es", "de", "it", "pt"];
 
 const metadata = {
   en: {
-    title: "Create CV Master | Free Professional CV Builder",
+    title: "Make CV Master | Free Professional CV Builder",
     description: "Create your CV for free in minutes with professional templates. Download as PDF or share online easily.",
     keywords: [
       "Resume Builder",
