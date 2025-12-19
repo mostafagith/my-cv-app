@@ -185,19 +185,24 @@ export default async function RootLayout({ children, params }) {
   return (
     <html lang={currentLang} dir={direction}>
       <head>
-        <Script strategy="beforeInteractive" data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js"></Script>
+        <Script
+          async="async"
+          data-cfasync="false"
+          src="https://pl28293521.effectivegatecpm.com/8e7eb342208347d0285973fbe19d2f68/invoke.js"
+        ></Script>
+        {/* <Script strategy="beforeInteractive" data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js"></Script>
         <Script strategy="beforeInteractive" data-cfasync="false" src="https://the.gatekeeperconsent.com/cmp.min.js"></Script>
-<Script
-  strategy="beforeInteractive"
-  src="//www.ezojs.com/ezoic/sa.min.js"
-/>
+        <Script
+          strategy="beforeInteractive"
+          src="//www.ezojs.com/ezoic/sa.min.js"
+        />
 
-<Script strategy="beforeInteractive">
-  {`
-    window.ezstandalone = window.ezstandalone || {};
-    ezstandalone.cmd = ezstandalone.cmd || [];
-  `}
-</Script>
+        <Script strategy="beforeInteractive">
+          {`
+            window.ezstandalone = window.ezstandalone || {};
+            ezstandalone.cmd = ezstandalone.cmd || [];
+          `}
+        </Script> */}
 
         <Script
           async
@@ -230,7 +235,7 @@ export default async function RootLayout({ children, params }) {
         <meta name="google-site-verification" content="nflu1RK_Kt_Qi6OnVXQwmqBrr0Y1MmfG5hfJnoWTLbI" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        
+        <div id="container-8e7eb342208347d0285973fbe19d2f68"></div>
         <Providers lang={currentLang}>
           {children}
         </Providers>
