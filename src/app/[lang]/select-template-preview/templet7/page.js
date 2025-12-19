@@ -7,11 +7,15 @@ import html2canvas from "html2canvas-pro";
 import toast from "react-hot-toast";
 import { useLanguage } from "@/context/LanguageContext";
 import { useCVLanguage } from "@/hooks/useCVLanguage";
-
+import Footer from "@/components/Footer";
+import { blogPostsData } from "@/data/blogData";
+import { ArrowRight,Calendar } from "lucide-react";
+import Link from "next/link";
 export default function PdfPreview() {
   const [cvData, setCvData] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
-  const { t } = useLanguage();
+const { t, lang, changeLang } = useLanguage();
+  const trendingPosts = blogPostsData.slice(0, 6);
   const { cvT,cvLang } = useCVLanguage();
   const safeGetItem = (key) => {
   try {
@@ -268,7 +272,7 @@ useEffect(() => {
       </header>
 
       {/* MAIN */}
-      <main className="flex-1 flex justify-center py-2 px-1 md:py-4 md:px-8 overflow-y-auto" dir={cvLang == "ar" ? "rtl": cvLang}>
+      <main className="flex-1 flex justify-center py-2 px-1 md:py-4 md:px-8 overflow-y-auto" dir={cvLang == "ar" ? "rtl": "ltr"}>
         <div
           id="cv-template"
           className="container"
@@ -1106,6 +1110,101 @@ useEffect(() => {
           )}
         </div>
       </main>
+      <section className="py-16 bg-gray-50 px-4 md:px-20">
+                <div className="max-w-4xl mx-auto">
+                  <h2 className="text-3xl font-bold text-center text-gray-900 mb-10">
+                    {t.faq_main_title}
+                  </h2>
+                  <div className="space-y-4">
+                    {/* هنا بنعمل Loop على الـ 20 سؤال */}
+                    {Array.from({ length: 20 }).map((_, i) => (
+                      <details 
+                        key={i} 
+                        className="group bg-white border border-gray-200 rounded-xl shadow-sm transition-all overflow-hidden"
+                      >
+                        <summary className={`flex items-center justify-between p-4 cursor-pointer list-none font-bold text-gray-800 hover:text-teal-600 transition-colors ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                          <span className="text-base md:text-lg">{t[`faq_q_${i + 1}`]}</span>
+                          <span className="text-teal-500 group-open:rotate-180 transition-transform duration-300">
+                            <ArrowRight size={18} className="rotate-90" />
+                          </span>
+                        </summary>
+                        <div className={`px-4 pb-5 text-gray-600 border-t border-gray-50 pt-4 leading-relaxed text-sm md:text-base ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                          {t[`faq_a_${i + 1}`]}
+                        </div>
+                      </details>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              {/* --- قسم نصائح ذهبية للـ CV --- */}
+              <section className="py-16 bg-white px-4 md:px-20">
+                {/* 2. أهم المقالات */}
+                      <section className="mb-12">
+                        <div className="flex items-center justify-between mb-8">
+                          <h3 className="text-2xl md:text-3xl font-black text-gray-900">
+                              {t.trending_posts}
+                          </h3>
+                          <Link href={`/${lang}/blogs`} className="text-teal-600 font-bold flex items-center gap-1 hover:underline">
+                            {t.view_all} <ArrowRight size={16} className={lang === 'ar' ? 'rotate-180' : ''} />
+                          </Link>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                          {trendingPosts.map((post) => (
+                            <Link 
+                              href={`/${lang}/blogs/${post.slug}`} 
+                              key={post.id}
+                              className="group flex flex-col bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-teal-900/5 transition-all"
+                            >
+                              <div className="aspect-video overflow-hidden">
+                                <img src={post.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt={t[post.titleKey]} />
+                              </div>
+                              <div className="p-4 flex-grow flex flex-col">
+                                <span className="text-teal-600 text-[10px] font-black uppercase tracking-tighter mb-2">{t[post.categoryKey]}</span>
+                                <h5 className="font-bold text-gray-900 line-clamp-2 group-hover:text-teal-600 transition-colors text-lg mb-4">
+                                  {t[post.titleKey]}
+                                </h5>
+                                <div className="mt-auto pt-3 border-t border-gray-50 flex items-center justify-between text-gray-400 text-xs">
+                                  <span className="flex items-center gap-1"><Calendar size={12} /> {post.date}</span>
+                                  <ArrowRight size={14} className={`group-hover:translate-x-1 transition-transform ${lang === 'ar' ? 'rotate-180 group-hover:-translate-x-1' : ''}`} />
+                                </div>
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      </section>
+                <div className="max-w-6xl mx-auto text-center mb-12">
+                  <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                    {t.cv_tips_title}
+                  </h2>
+                  <p className="text-gray-600 text-lg">
+                    {t.cv_tips_subtitle}
+                  </p>
+                </div>
+
+                
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {Array.from({ length: 20 }).map((_, i) => (
+                    <div 
+                      key={i} 
+                      className={`p-6 bg-orange-50 rounded-2xl border border-orange-100 hover:shadow-lg transition-all duration-300 ${lang === 'ar' ? 'text-right' : 'text-left'}`}
+                    >
+                      <div className={`w-10 h-10 bg-teal-600 text-white rounded-full flex items-center justify-center font-black mb-4 ${lang === 'ar' ? 'mr-0' : 'ml-0'} mx-auto sm:mx-0`}>
+                        {i + 1}
+                      </div>
+                      <h4 className="font-bold text-gray-900 mb-2 text-lg">
+                        {t[`tip_title_${i + 1}`]}
+                      </h4>
+                      <p className="text-sm text-gray-600 leading-relaxed">
+                        {t[`tip_desc_${i + 1}`]}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+      <Footer/>
     </div>
   );
 }

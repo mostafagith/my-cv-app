@@ -8,6 +8,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { useCVLanguage } from "@/hooks/useCVLanguage";
 
 import { Globe } from "lucide-react";
+import Footer from "@/components/Footer";
 
 export default function SelectTemplate() {
   const router = useRouter();
@@ -90,7 +91,7 @@ useEffect(() => {
           <div className="relative flex-shrink-0">
             <button
               onClick={toggleLangMenu}
-              className="p-2 bg-white/20 cursor-pointer rounded-full hover:bg-white/30 transition"
+              className="p-2 bg-white/20 cursor-pointer rounded-full hover:bg-white/30 transition text-black"
             >
               <Globe size={22} className="text-white" />
             </button>
@@ -100,7 +101,7 @@ useEffect(() => {
               <div
                 className={`w-[160px] absolute mt-2 ${
                   lang === "ar" ? "left-0" : "right-0"
-                } bg-white shadow-lg rounded-xl overflow-hidden border border-gray-200 z-50`}
+                } bg-white shadow-lg rounded-xl overflow-hidden border border-gray-200 z-50 text-black`}
               >
                 <button
                   onClick={() => {
@@ -183,7 +184,7 @@ useEffect(() => {
         <div className="mb-6">
   <label
     htmlFor="cvLangSelect"
-    className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-200"
+    className="block mb-2 text-sm font-medium text-gray-700 text-black"
   >
     {t.select_cv_language}
   </label>
@@ -191,7 +192,7 @@ useEffect(() => {
     id="cvLangSelect"
     value={cvLang}
     onChange={(e) => changeCvLang(e.target.value)}
-    className="w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:text-white dark:border-gray-600"
+    className="w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500  text-black"
   >
     <option value="en">{t.english}</option>
     <option value="ar">{t.arabic}</option>
@@ -241,6 +242,7 @@ useEffect(() => {
           <span className="text-gray-700 text-sm">{t["you_can_change_template_later"]}</span>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }
