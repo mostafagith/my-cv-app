@@ -1,13 +1,14 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Globe, Share2, Gift, Bell, Settings, ArrowRight,Facebook, Linkedin } from "lucide-react";
+import { Globe,Calendar, Share2, Gift, Bell, Settings, ArrowRight,Facebook, Linkedin } from "lucide-react";
 import { FaTelegram, FaWhatsapp } from "react-icons/fa";
 // import { Facebook, Linkedin } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { blogPostsData } from "@/data/blogData";
 
 function AdMobBannerPlaceholder() {
   return (
@@ -33,7 +34,7 @@ export default function HomePage() {
 
   // Load CVs from localStorage
   const [cvs, setCvs] = useState([]);
-
+  const trendingPosts = blogPostsData.slice(0, 6);
 useEffect(() => {
   if (typeof window !== "undefined") {
     try {
@@ -452,6 +453,42 @@ const templates = [
       {t.cv_tips_subtitle}
     </p>
   </div>
+
+  {/* 2. أهم المقالات */}
+        <section className="mb-12">
+          <div className="flex items-center justify-between mb-8">
+            <h3 className="text-2xl md:text-3xl font-black text-gray-900">
+                {t.trending_posts}
+            </h3>
+            <Link href={`/${lang}/blogs`} className="text-teal-600 font-bold flex items-center gap-1 hover:underline">
+              {t.view_all} <ArrowRight size={16} className={lang === 'ar' ? 'rotate-180' : ''} />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {trendingPosts.map((post) => (
+              <Link 
+                href={`/${lang}/blogs/${post.slug}`} 
+                key={post.id}
+                className="group flex flex-col bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-teal-900/5 transition-all"
+              >
+                <div className="aspect-video overflow-hidden">
+                  <img src={post.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt={t[post.titleKey]} />
+                </div>
+                <div className="p-4 flex-grow flex flex-col">
+                  <span className="text-teal-600 text-[10px] font-black uppercase tracking-tighter mb-2">{t[post.categoryKey]}</span>
+                  <h5 className="font-bold text-gray-900 line-clamp-2 group-hover:text-teal-600 transition-colors text-lg mb-4">
+                    {t[post.titleKey]}
+                  </h5>
+                  <div className="mt-auto pt-3 border-t border-gray-50 flex items-center justify-between text-gray-400 text-xs">
+                    <span className="flex items-center gap-1"><Calendar size={12} /> {post.date}</span>
+                    <ArrowRight size={14} className={`group-hover:translate-x-1 transition-transform ${lang === 'ar' ? 'rotate-180 group-hover:-translate-x-1' : ''}`} />
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
   
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
     {Array.from({ length: 20 }).map((_, i) => (

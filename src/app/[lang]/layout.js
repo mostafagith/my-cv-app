@@ -187,10 +187,16 @@ export default async function RootLayout({ children, params }) {
       <head>
         <Script strategy="beforeInteractive" data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js"></Script>
         <Script strategy="beforeInteractive" data-cfasync="false" src="https://the.gatekeeperconsent.com/cmp.min.js"></Script>
-<Script async src="//www.ezojs.com/ezoic/sa.min.js"></Script>
-<Script>
-  window.ezstandalone = window.ezstandalone || {};
-  ezstandalone.cmd = ezstandalone.cmd || [];
+<Script
+  strategy="beforeInteractive"
+  src="//www.ezojs.com/ezoic/sa.min.js"
+/>
+
+<Script strategy="beforeInteractive">
+  {`
+    window.ezstandalone = window.ezstandalone || {};
+    ezstandalone.cmd = ezstandalone.cmd || [];
+  `}
 </Script>
 
         <Script
