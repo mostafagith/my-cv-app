@@ -5,6 +5,7 @@ import { IoArrowBack } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
 import { Globe} from "lucide-react";
+import Footer from "@/components/Footer";
 
 export default function LanguagesExamplePage() {
     const router = useRouter();
@@ -116,9 +117,23 @@ export default function LanguagesExamplePage() {
             )}
           </div>
       </div>
+      {/* Languages Examples Intro Section */}
+      <section className="max-w-4xl mx-auto mt-8 bg-white border border-gray-200 rounded-xl p-6 mb-6">
+        <h2 className="text-2xl font-bold text-gray-800 mb-3">
+          {t.languages_examples_title}
+        </h2>
+
+        <p className="text-gray-600 leading-relaxed mb-4">
+          {t.languages_examples_intro}
+        </p>
+
+        <p className="text-gray-600 leading-relaxed">
+          {t.languages_examples_note}
+        </p>
+      </section>
 
       {/* Content */}
-      <div className="max-w-3xl mx-auto p-6">
+      <div className="max-w-4xl mx-auto p-6">
         <h2 className="text-2xl font-bold mb-4 text-gray-800">
           {t["Example of Languages Section"]}
         </h2>
@@ -135,6 +150,19 @@ export default function LanguagesExamplePage() {
           </div>
         ))}
       </div>
+      {/* Languages Tips */}
+      <section className="max-w-4xl mx-auto mt-8 bg-teal-50 border border-teal-200 rounded-xl p-6 mb-8">
+        <h3 className="text-xl font-bold text-teal-700 mb-4">
+          {t.languages_tips_title}
+        </h3>
+
+        <ul className="list-disc list-inside space-y-2 text-gray-700 text-sm">
+          <li>{t.languages_tip_one}</li>
+          <li>{t.languages_tip_two}</li>
+          <li>{t.languages_tip_three}</li>
+        </ul>
+      </section>
+      <Footer/>
     </div>
   );
 }

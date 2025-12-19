@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { IoArrowBack } from "react-icons/io5";
 import { Globe } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import Footer from "@/components/Footer";
 
 export default function ObjectiveExamplePage() {
   const router = useRouter();
@@ -27,7 +28,7 @@ export default function ObjectiveExamplePage() {
 
   return (
     <div
-      className={`min-h-screen flex flex-col bg-white ${
+      className={`min-h-screen bg-white ${
         lang === "ar" ? "text-right" : "text-left"
       }`}
       dir={lang === "ar" ? "rtl" : "ltr"}
@@ -88,9 +89,22 @@ export default function ObjectiveExamplePage() {
           )}
         </div>
       </header>
+      {/* Profile Summary Examples Intro Section */}
+      <section className="max-w-4xl mx-auto mt-8 bg-white border border-gray-200 rounded-xl p-6 mb-6">
+        <h2 className="text-2xl font-bold text-gray-800 mb-3">
+          {t.summary_examples_title}
+        </h2>
 
+        <p className="text-gray-600 leading-relaxed mb-4">
+          {t.summary_examples_intro}
+        </p>
+
+        <p className="text-gray-600 leading-relaxed">
+          {t.summary_examples_note}
+        </p>
+      </section>
       {/* Content */}
-      <main className="flex-1 overflow-y-auto p-6 space-y-6">
+      <main className="max-w-4xl mx-auto flex-1 overflow-y-auto p-6 space-y-6">
         <h2 className="text-lg font-semibold text-gray-800">
           {t["chooseExampleYouLike"] || "Choose an example you like:"}
         </h2>
@@ -110,8 +124,6 @@ export default function ObjectiveExamplePage() {
             </div>
           ))}
         </div>
-      </main>
-
       {/* Back Button */}
       <div className="p-5 border-t border-gray-200 bg-white">
         <button
@@ -121,6 +133,21 @@ export default function ObjectiveExamplePage() {
           {t["back"] || "Back"}
         </button>
       </div>
+      </main>
+
+      {/* Profile Summary Tips */}
+      <section className="max-w-4xl mx-auto mt-8 bg-teal-50 border border-teal-200 rounded-xl p-6 mb-8">
+        <h3 className="text-xl font-bold text-teal-700 mb-4">
+          {t.summary_tips_title}
+        </h3>
+
+        <ul className="list-disc list-inside space-y-2 text-gray-700 text-sm">
+          <li>{t.summary_tip_one}</li>
+          <li>{t.summary_tip_two}</li>
+          <li>{t.summary_tip_three}</li>
+        </ul>
+      </section>
+      <Footer/>
     </div>
   );
 }

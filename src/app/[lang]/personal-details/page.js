@@ -6,6 +6,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import toast from "react-hot-toast";
 import { Globe} from "lucide-react";
 import { IoArrowBack, IoTrashOutline, IoAddCircleOutline, IoCheckmarkCircle } from "react-icons/io5";
+import Footer from "@/components/Footer";
 
 export default function SectionDetailsPage() {
   const { t, lang, changeLang } = useLanguage();
@@ -233,7 +234,7 @@ const handleBack = () => router.back();
       </header>
 
       {/* Content */}
-      <main className="container mx-auto p-6">
+      <main className="max-w-4xl mx-auto container mx-auto p-6">
         <button
           onClick={() => router.push(`/${lang}/sample-personal-details`)}
           className="mb-4 cursor-pointer bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition"
@@ -253,7 +254,7 @@ const handleBack = () => router.back();
                   alt="Profile"
                   width={120}
                   height={120}
-                  className="rounded-[50%] border-4 border-teal-500 object-cover"
+                  className="rounded-[50%] border-4 border-teal-500 object-cover !h-[120px]"
                 />
                 <div className="flex gap-3">
                   <label className="bg-teal-500 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-teal-600 transition">
@@ -333,7 +334,7 @@ const handleBack = () => router.back();
               value={formData.summary}
               onChange={(e) => handleInputChange("summary", e.target.value)}
               rows="4"
-              className="w-full p-3 text-black border-gray-300 rounded-lg focus:outline-none focus:border-teal-500 resize-none"
+              className="w-full border-1 p-3 text-black border-black-300 rounded-lg focus:outline-none focus:border-black-500 resize-none"
               placeholder={t.summary_placeholder}
             ></textarea>
           </div>
@@ -355,6 +356,123 @@ const handleBack = () => router.back();
           </div>
         </div>
       </main>
+      {/* ---------------- Personal Info Guidance Section ---------------- */}
+      <div className="max-w-4xl mx-auto mt-10 bg-gray-100 p-6">
+        <h2 className="text-2xl font-bold mb-4 text-teal-600">{t.personal_info_title}</h2>
+        <p className="text-gray-700 mb-6">{t.personal_info_text}</p>
+
+        <div className="space-y-6">
+          <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+            <h3 className="text-lg font-semibold text-teal-600 mb-2">{t.photo_title}</h3>
+            <p className="text-gray-700">{t.photo_text}</p>
+          </div>
+
+          <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+            <h3 className="text-lg font-semibold text-teal-600 mb-2">{t.full_name_title}</h3>
+            <p className="text-gray-700">{t.full_name_text}</p>
+          </div>
+
+          <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+            <h3 className="text-lg font-semibold text-teal-600 mb-2">{t.phone_title}</h3>
+            <p className="text-gray-700">{t.phone_text}</p>
+          </div>
+
+          <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+            <h3 className="text-lg font-semibold text-teal-600 mb-2">{t.email_title}</h3>
+            <p className="text-gray-700">{t.email_text}</p>
+          </div>
+
+          <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+            <h3 className="text-lg font-semibold text-teal-600 mb-2">{t.address_title}</h3>
+            <p className="text-gray-700">{t.address_text}</p>
+          </div>
+
+          <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+            <h3 className="text-lg font-semibold text-teal-600 mb-2">{t.website_title}</h3>
+            <p className="text-gray-700">{t.website_text}</p>
+          </div>
+
+          <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+            <h3 className="text-lg font-semibold text-teal-600 mb-2">{t.job_title_title}</h3>
+            <p className="text-gray-700">{t.job_title_text}</p>
+          </div>
+
+          <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+            <h3 className="text-lg font-semibold text-teal-600 mb-2">{t.summary_title}</h3>
+            <p className="text-gray-700">{t.summary_text}</p>
+          </div>
+        </div>
+      </div>
+      <section className="max-w-4xl mx-auto mt-8 bg-teal-50 border border-teal-200 rounded-xl p-6 mb-8">
+        <h3 className="text-xl font-bold text-teal-700 mb-4">
+          {t.personal_tips_title}
+        </h3>
+
+        <ul className="list-disc list-inside space-y-2 text-gray-700 text-sm">
+          <li>{t.personal_tip_one}</li>
+          <li>{t.personal_tip_two}</li>
+          <li>{t.personal_tip_three}</li>
+        </ul>
+      </section>
+      {/* FAQ Section */}
+      <section className="max-w-4xl mx-auto mt-10 mb-10 px-4">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+          <span className="w-2 h-8 bg-teal-500 rounded-full"></span>
+          {t.faq_title}
+        </h2>
+        
+        <div className="space-y-4">
+          {[
+            { q: t.faq_1_q, a: t.faq_1_a },
+            { q: t.faq_2_q, a: t.faq_2_a },
+            { q: t.faq_3_q, a: t.faq_3_a },
+          ].map((item, index) => (
+            <details key={index} className="group bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm transition-all duration-300">
+              <summary className="flex items-center justify-between p-4 cursor-pointer hover:bg-gray-50 list-none">
+                <span className="font-semibold text-gray-700">{item.q}</span>
+                <span className="text-teal-500 transition-transform duration-300 group-open:rotate-180">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+              </summary>
+              <div className="px-4 pb-4 text-gray-600 text-sm leading-relaxed border-t border-gray-50 pt-3">
+                {item.a}
+              </div>
+            </details>
+          ))}
+        </div>
+      </section>
+      {/* Common Mistakes Section */}
+      <section className="max-w-4xl mx-auto mt-8 mb-12 px-4">
+        <div className="bg-red-50 border border-red-100 rounded-2xl p-6">
+          <h2 className="text-xl font-bold text-red-700 mb-6 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            {t.mistakes_title}
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              { t: t.mistake_1_t, d: t.mistake_1_d },
+              { t: t.mistake_2_t, d: t.mistake_2_d },
+              { t: t.mistake_3_t, d: t.mistake_3_d },
+            ].map((item, index) => (
+              <div key={index} className="bg-white p-4 rounded-xl border border-red-50 shadow-sm hover:shadow-md transition-shadow">
+                <h3 className="font-bold text-gray-800 text-sm mb-2 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+                  {item.t}
+                </h3>
+                <p className="text-gray-600 text-xs leading-relaxed">
+                  {item.d}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <Footer/>
     </div>
   );
 }

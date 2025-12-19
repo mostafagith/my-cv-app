@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
 import { IoArrowBack, IoBulbOutline } from "react-icons/io5";
 import { Globe } from "lucide-react";
+import Footer from "@/components/Footer";
 
 export default function HopesExample() {
   const router = useRouter();
@@ -25,7 +26,7 @@ export default function HopesExample() {
   ];
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-white">
       {/* Header */}
       <div className="bg-teal-500 text-white py-5 px-6 flex items-center justify-between">
         <button onClick={() => router.back()} className="p-2 cursor-pointer">
@@ -75,8 +76,23 @@ export default function HopesExample() {
         </div>
       </div>
 
+      {/* Hopes & Aspirations Examples Intro Section */}
+      <section className="max-w-4xl mx-auto mt-8 bg-white border border-gray-200 rounded-xl p-6 mb-6">
+        <h2 className="text-2xl font-bold text-gray-800 mb-3">
+          {t.hopes_examples_title}
+        </h2>
+
+        <p className="text-gray-600 leading-relaxed mb-4">
+          {t.hopes_examples_intro}
+        </p>
+
+        <p className="text-gray-600 leading-relaxed">
+          {t.hopes_examples_note}
+        </p>
+      </section>
+
       {/* Content */}
-      <div className="flex-1 overflow-y-auto p-6 space-y-6">
+      <div className="max-w-4xl mx-auto flex-1 overflow-y-auto p-6 space-y-6">
         {/* Info box */}
         <div className="flex items-start bg-green-50 border border-green-200 p-4 rounded-xl">
           <IoBulbOutline size={24} className="text-green-600 mt-1" />
@@ -104,21 +120,23 @@ export default function HopesExample() {
             <p className="text-gray-800 text-sm leading-6">{example}</p>
           </div>
         ))}
-
-        {/* Tips section (نفس نسخة صفحة Hopes بالظبط) */}
-        <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-xl">
-          <h3 className="font-bold text-yellow-800 mb-2">
-            💡 {t["Tips for Writing Hopes:"]}
-          </h3>
-          <ul className="text-yellow-700 text-sm space-y-1 list-disc list-inside">
-            <li>{t["Be specific about your career goals"]}</li>
-            <li>{t["Mention skills you want to develop"]}</li>
-            <li>{t["Connect your aspirations to the role"]}</li>
-            <li>{t["Keep it professional and realistic"]}</li>
-            <li>{t["Show enthusiasm and motivation"]}</li>
-          </ul>
-        </div>
       </div>
+      {/* Hopes & Aspirations Tips */}
+      <section className="max-w-4xl mx-auto mt-8 bg-teal-50 border border-teal-200 rounded-xl p-6 mb-8">
+        <h3 className="text-xl font-bold text-teal-700 mb-4">
+          {t.hopes_tips_title}
+        </h3>
+
+        <ul className="list-disc list-inside space-y-2 text-gray-700 text-sm">
+          <li>{t.hopes_tip_one}</li>
+          <li>{t.hopes_tip_two}</li>
+          <li>{t.hopes_tip_three}</li>
+          <li>{t["Be specific about your career goals"]}</li>
+          <li>{t["Mention skills you want to develop"]}</li>
+          <li>{t["Show enthusiasm and motivation"]}</li>
+        </ul>
+      </section>
+      <Footer/>
     </div>
   );
 }

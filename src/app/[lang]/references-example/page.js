@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
 import { useState } from "react";
 import { Globe } from "lucide-react";
+import Footer from "@/components/Footer";
 
 export default function ReferencesExamplePage() {
   const router = useRouter();
@@ -90,7 +91,22 @@ export default function ReferencesExamplePage() {
         </div>
       </div>
 
-      <div className="max-w-3xl mx-auto p-6">
+      {/* References Examples Intro Section */}
+      <section className="max-w-4xl mx-auto mt-8 bg-white border border-gray-200 rounded-xl p-6 mb-6">
+        <h2 className="text-2xl font-bold text-gray-800 mb-3">
+          {t.references_examples_title}
+        </h2>
+
+        <p className="text-gray-600 leading-relaxed mb-4">
+          {t.references_examples_intro}
+        </p>
+
+        <p className="text-gray-600 leading-relaxed">
+          {t.references_examples_note}
+        </p>
+      </section>
+
+      <div className="max-w-4xl mx-auto p-6">
         <h2 className="text-2xl font-bold mb-2 text-gray-800">
           {t["professionalReferences"] || "Professional References"}
         </h2>
@@ -135,6 +151,19 @@ export default function ReferencesExamplePage() {
           </div>
         ))}
       </div>
+      {/* References Tips */}
+      <section className="max-w-4xl mx-auto mt-8 bg-teal-50 border border-teal-200 rounded-xl p-6 mb-8">
+        <h3 className="text-xl font-bold text-teal-700 mb-4">
+          {t.references_tips_title}
+        </h3>
+
+        <ul className="list-disc list-inside space-y-2 text-gray-700 text-sm">
+          <li>{t.references_tip_one}</li>
+          <li>{t.references_tip_two}</li>
+          <li>{t.references_tip_three}</li>
+        </ul>
+      </section>
+      <Footer/>
     </div>
   );
 }

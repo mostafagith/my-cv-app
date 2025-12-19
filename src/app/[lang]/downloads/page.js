@@ -6,6 +6,8 @@ import { IoDownloadOutline, IoTrashOutline } from "react-icons/io5";
 import Navbar from "@/components/Navbar";
 import { useLanguage } from "@/context/LanguageContext";
 import toast from "react-hot-toast";
+import Footer from "@/components/Footer";
+import Link from "next/link";
 
 // استيراد react-pdf بشكل ديناميكي (client-side only)
 const Document = dynamic(
@@ -64,7 +66,7 @@ function PdfPreview({ pdfData }) {
 
 export default function DownloadsPage() {
   const [downloads, setDownloads] = useState([]);
-  const { t } = useLanguage();
+  const { t, lang, changeLang } = useLanguage();
 
   useEffect(() => {
     const stored = safeGetItem("downloads");
@@ -127,12 +129,25 @@ const handleDelete = (index) => {
         }
       `}</style>
       <Navbar />
+      <div className=" bg-white p-6 shadow-md space-y-4 py-3 px-5 md:py-6 md:px-20">
+        <h2 className=" text-xl font-bold text-gray-800">{t["downloads_content_title"]}</h2>
+        {t["downloads_content_paragraphs"]?.map((p, i) => (
+          <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
+        ))}
+      </div>
       {downloads.length === 0 ? (
         <div className="min-h-screen flex items-center justify-center text-gray-500">
           {t.no_downloads_yet}
+          <div className="my-16 p-8 bg-teal-600 rounded-3xl text-white text-center">
+            <h3 className="text-2xl font-bold mb-4">{t.cv_cta_title}</h3>
+            <p className="mb-6 opacity-90">{t.cv_cta_subtitle}</p>
+            <Link href={`/${lang}/create`} className="inline-block bg-white text-teal-600 px-8 py-3 rounded-full font-bold hover:bg-teal-50 transition-colors">
+                {t.cv_cta_button}
+            </Link>
+        </div>
         </div>
       ) : (
-        <div className="min-h-screen bg-gray-50 py-8 px-4">
+        <div className="min-h-screen  bg-gray-50 py-8 px-4">
           <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {downloads.map((item, index) => (
               <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col">
@@ -157,8 +172,17 @@ const handleDelete = (index) => {
               </div>
             ))}
           </div>
+              <div className="max-w-5xl mx-auto my-16 p-8 bg-teal-600 rounded-3xl text-white text-center">
+                    <h3 className="text-2xl font-bold mb-4">{t.cv_cta_title}</h3>
+                    <p className="mb-6 opacity-90">{t.cv_cta_subtitle}</p>
+                    <Link href={`/${lang}/create`} className="inline-block bg-white text-teal-600 px-8 py-3 rounded-full font-bold hover:bg-teal-50 transition-colors">
+                        {t.cv_cta_button}
+                    </Link>
+              </div>
         </div>
       )}
+      
+      <Footer/>
     </>
   );
 }

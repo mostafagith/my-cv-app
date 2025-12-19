@@ -1,12 +1,13 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Globe, Share2, Gift, Bell, Settings, ArrowRight } from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa";
-
+import { Globe, Share2, Gift, Bell, Settings, ArrowRight,Facebook, Linkedin } from "lucide-react";
+import { FaTelegram, FaWhatsapp } from "react-icons/fa";
+// import { Facebook, Linkedin } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 function AdMobBannerPlaceholder() {
   return (
@@ -305,84 +306,176 @@ const templates = [
                   </div>
                 ))}
               </div>
-<section className="py-12 bg-gray-50 text-center ">
-  <div className="max-w-4xl mx-auto px-4">
-    <h3 className="text-2xl font-bold text-gray-900 mb-4">
-      {t.why_our_cv_builder}
-    </h3>
-    <p className="text-gray-600 leading-relaxed mb-3">
-      {t.cv_importance}
-    </p>
-    <p className="text-gray-600 leading-relaxed mb-3">
-      {t.easy_to_use}
-    </p>
-    <p className="text-gray-600 leading-relaxed">
-      {t.ready_to_start}
-    </p>
-    <div className="mt-6">
-      {cvs.length>0?
-        <Link
-          href={`${lang}/create`}
-          className="flex-1 bg-teal-600 hover:bg-teal-700 transition text-center p-4 rounded-xl shadow-xl text-white font-bold text-lg"
+              <section className="py-12 bg-gray-50 text-center ">
+                <div className="max-w-4xl mx-auto px-4">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                    {t.why_our_cv_builder}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed mb-3">
+                    {t.cv_importance}
+                  </p>
+                  <p className="text-gray-600 leading-relaxed mb-3">
+                    {t.easy_to_use}
+                  </p>
+                  <p className="text-gray-600 leading-relaxed">
+                    {t.ready_to_start}
+                  </p>
+                  <div className="mt-6">
+                    {cvs.length>0?
+                      <Link
+                        href={`${lang}/create`}
+                        className="flex-1 bg-teal-600 hover:bg-teal-700 transition text-center p-4 rounded-xl shadow-xl text-white font-bold text-lg"
+                      >
+                          <span>{t.create}</span>
+                        {/* <ArrowRight size={24} /> */}
+                      </Link>      
+                    :
+                      <Link
+                        href={`${lang}/create-new`}
+                        className="flex-1 bg-teal-600 hover:bg-teal-700 transition text-center p-4 rounded-xl shadow-xl text-white font-bold text-lg"
+                      >
+                          <span>{t.create}</span>
+                        {/* <ArrowRight size={24} /> */}
+                      </Link>
+                    }
+                    
+                  </div>
+                </div>
+              </section>
+
+              <section className="bg-white py-20 px-4 md:px-20">
+                <div className="max-w-4xl mx-auto space-y-16">
+
+                  {/* Main Title */}
+                  <div className="text-center space-y-6">
+                    <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
+                      {t.main_title}
+                    </h2>
+                    <p className="text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                      {t.main_intro}
+                    </p>
+                  </div>
+
+                  {/* What is CV */}
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div className="bg-gray-50 rounded-2xl p-8 shadow-sm">
+                      <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                        {t.what_is_cv_title}
+                      </h3>
+                      <p className="text-gray-600 leading-relaxed">
+                        {t.what_is_cv_desc}
+                      </p>
+                    </div>
+
+                    <div className="bg-gray-50 rounded-2xl p-8 shadow-sm">
+                      <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                        {t.cv_definition_title}
+                      </h3>
+                      <p className="text-gray-600 leading-relaxed">
+                        {t.cv_definition_desc}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Sections */}
+                  <div className="space-y-10">
+                    <h3 className="text-3xl font-bold text-center text-gray-900">
+                      {t.cv_sections_title}
+                    </h3>
+
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {t.sections?.map((item, index) => (
+                        <div
+                          key={index}
+                          className="bg-white border rounded-xl p-6 shadow-sm hover:shadow-md transition"
+                        >
+                          <h4 className="font-bold text-gray-900 mb-2">
+                            {item.title}
+                          </h4>
+                          <p className="text-gray-600 text-sm leading-relaxed">
+                            {item.desc}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Why Choose Us */}
+                  <div className="bg-gradient-to-r from-teal-600 to-teal-500 rounded-3xl p-10 text-white text-center space-y-4">
+                    <h3 className="text-3xl font-bold">
+                      {t.why_choose_us_title}
+                    </h3>
+                    <p className="max-w-3xl mx-auto leading-relaxed">
+                      {t.why_choose_us_desc}
+                    </p>
+                  </div>
+
+                </div>
+              </section>
+
+
+{/* --- قسم الأسئلة الشائعة (FAQ) --- */}
+<section className="py-16 bg-gray-50 px-4 md:px-20">
+  <div className="max-w-4xl mx-auto">
+    <h2 className="text-3xl font-bold text-center text-gray-900 mb-10">
+       {t.faq_main_title}
+    </h2>
+    <div className="space-y-4">
+      {/* هنا بنعمل Loop على الـ 20 سؤال */}
+      {Array.from({ length: 20 }).map((_, i) => (
+        <details 
+          key={i} 
+          className="group bg-white border border-gray-200 rounded-xl shadow-sm transition-all overflow-hidden"
         >
-            <span>{t.create}</span>
-          {/* <ArrowRight size={24} /> */}
-        </Link>      
-      :
-        <Link
-          href={`${lang}/create-new`}
-          className="flex-1 bg-teal-600 hover:bg-teal-700 transition text-center p-4 rounded-xl shadow-xl text-white font-bold text-lg"
-        >
-            <span>{t.create}</span>
-          {/* <ArrowRight size={24} /> */}
-        </Link>
-      }
-      
+          <summary className={`flex items-center justify-between p-4 cursor-pointer list-none font-bold text-gray-800 hover:text-teal-600 transition-colors ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+            <span className="text-base md:text-lg">{t[`faq_q_${i + 1}`]}</span>
+            <span className="text-teal-500 group-open:rotate-180 transition-transform duration-300">
+              <ArrowRight size={18} className="rotate-90" />
+            </span>
+          </summary>
+          <div className={`px-4 pb-5 text-gray-600 border-t border-gray-50 pt-4 leading-relaxed text-sm md:text-base ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+            {t[`faq_a_${i + 1}`]}
+          </div>
+        </details>
+      ))}
     </div>
   </div>
 </section>
 
+{/* --- قسم نصائح ذهبية للـ CV --- */}
+<section className="py-16 bg-white px-4 md:px-20">
+  <div className="max-w-6xl mx-auto text-center mb-12">
+    <h2 className="text-3xl font-bold text-gray-900 mb-4">
+      {t.cv_tips_title}
+    </h2>
+    <p className="text-gray-600 text-lg">
+      {t.cv_tips_subtitle}
+    </p>
+  </div>
+  
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    {Array.from({ length: 20 }).map((_, i) => (
+      <div 
+        key={i} 
+        className={`p-6 bg-orange-50 rounded-2xl border border-orange-100 hover:shadow-lg transition-all duration-300 ${lang === 'ar' ? 'text-right' : 'text-left'}`}
+      >
+        <div className={`w-10 h-10 bg-teal-600 text-white rounded-full flex items-center justify-center font-black mb-4 ${lang === 'ar' ? 'mr-0' : 'ml-0'} mx-auto sm:mx-0`}>
+          {i + 1}
+        </div>
+        <h4 className="font-bold text-gray-900 mb-2 text-lg">
+          {t[`tip_title_${i + 1}`]}
+        </h4>
+        <p className="text-sm text-gray-600 leading-relaxed">
+          {t[`tip_desc_${i + 1}`]}
+        </p>
+      </div>
+    ))}
+  </div>
+</section>
+
       {/* Footer */}
-      <footer className="bg-gradient-to-r from-teal-800 to-teal-600 text-white py-10 mt-20">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
-          <div>
-            <h2 className="text-3xl font-bold mb-3 tracking-wide">CV Builder</h2>
-            <p className="text-gray-200 text-sm leading-relaxed max-w-sm mx-auto md:mx-0">
-              {t.footer_description}
-            </p>
-          </div>
+      <Footer/>
 
-          <div>
-            <h3 className="text-lg font-semibold mb-4">{t.quick_links}</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href={`${lang}/about`} className="hover:text-yellow-300 transition-colors">
-                  {t.about_us}
-                </Link>
-              </li>
-              <li>
-                <Link href={`${lang}/privacy`} className="hover:text-yellow-300 transition-colors">
-                  {t.privacy_policy}
-                </Link>
-              </li>
-              <li>
-                <a
-                  href="https://wa.me/201016495415"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-yellow-300 transition-colors"
-                >
-                  {t.contact_us}
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="border-t border-teal-500 mt-10 pt-4 text-center text-xs text-gray-200">
-          © {new Date().getFullYear()} <span className="font-semibold">CV Builder</span>. {t.all_rights_reserved}
-        </div>
-      </footer>
     </div>
   );
 }

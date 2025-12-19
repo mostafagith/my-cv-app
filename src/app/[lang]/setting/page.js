@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Globe } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useCVLanguage } from "@/hooks/useCVLanguage";
+import Footer from "@/components/Footer";
 
 export default function SettingsPage() {
   const router = useRouter();
@@ -30,6 +31,15 @@ export default function SettingsPage() {
         <div className="w-8"></div>
       </div>
 
+      <div className="mt-8 bg-white p-6 rounded-lg shadow-md space-y-4">
+  <h2 className="text-xl font-bold text-gray-800">{t["content_title"]}</h2>
+  {t["content_paragraphs"]?.map((p, index) => (
+    <p key={index} className="text-gray-700 leading-relaxed">
+      {p}
+    </p>
+  ))}
+</div>
+
       {/* Content */}
       <div className="flex-1 p-6">
         {/* Site Language */}
@@ -40,7 +50,7 @@ export default function SettingsPage() {
           <div className="relative">
             <button
               onClick={toggleLangMenu}
-              className="w-full border border-gray-300 rounded-lg p-2 flex justify-between items-center shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full text-black border border-gray-300 rounded-lg p-2 flex justify-between items-center shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
             >
               <span>{lang}</span>
               <Globe size={20} />
@@ -48,7 +58,7 @@ export default function SettingsPage() {
             {openLangMenu && (
               <div className="absolute mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-50">
                 <button
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-black"
                   onClick={() => {
                     changeLang("en");
                     setOpenLangMenu(false);
@@ -57,7 +67,7 @@ export default function SettingsPage() {
                   {t["english"]}
                 </button>
                 <button
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-black"
                   onClick={() => {
                     changeLang("ar");
                     setOpenLangMenu(false);
@@ -66,7 +76,7 @@ export default function SettingsPage() {
                   {t["arabic"]}
                 </button>
                 <button
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-black"
                   onClick={() => {
                     changeLang("fr");
                     setOpenLangMenu(false);
@@ -75,7 +85,7 @@ export default function SettingsPage() {
                   {t["french"]}
                 </button>
                 <button
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-black"
                   onClick={() => {
                     changeLang("es");
                     setOpenLangMenu(false);
@@ -84,7 +94,7 @@ export default function SettingsPage() {
                   {t["spanish"]}
                 </button>
                 <button
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-black"
                   onClick={() => {
                     changeLang("de");
                     setOpenLangMenu(false);
@@ -93,7 +103,7 @@ export default function SettingsPage() {
                   {t["german"]}
                 </button>
                 <button
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-black"
                   onClick={() => {
                     changeLang("it");
                     setOpenLangMenu(false);
@@ -102,7 +112,7 @@ export default function SettingsPage() {
                   {t["italian"]}
                 </button>
                 <button
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-black"
                   onClick={() => {
                     changeLang("pt");
                     setOpenLangMenu(false);
@@ -123,7 +133,7 @@ export default function SettingsPage() {
           <select
             value={cvLang}
             onChange={(e) => changeCvLang(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="w-full text-black p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
           >
             <option value="en">{t["english"] || "English"}</option>
             <option value="ar">{t["arabic"] || "Arabic"}</option>
@@ -135,6 +145,8 @@ export default function SettingsPage() {
           </select>
         </div>
       </div>
+      <Footer/>
     </div>
+
   );
 }

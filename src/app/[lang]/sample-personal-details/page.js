@@ -5,6 +5,7 @@ import { Globe } from "lucide-react";
 import { useState } from "react";
 import { IoArrowBack, IoTrashOutline, IoAddCircleOutline, IoCheckmarkCircle } from "react-icons/io5";
 import { useRouter } from "next/navigation";
+import Footer from "@/components/Footer";
 
 export default function SamplePersonalDetailsPage() {
   const { t, lang, changeLang } = useLanguage();
@@ -57,7 +58,7 @@ const handleBack = () => router.back();
                       changeLang(lng);
                       setOpenLang(false);
                     }}
-                    className="block px-4 py-2 hover:bg-gray-100 w-full text-left cursor-pointer"
+                    className="block px-4 py-2 hover:bg-gray-100 w-full text-left cursor-pointer text-black"
                   >
                     {lng}
                   </button>
@@ -68,8 +69,23 @@ const handleBack = () => router.back();
         </div>
       </header>
 
+      {/* Personal Details Examples Intro Section */}
+<section className="max-w-4xl mx-auto mt-8 bg-white border border-gray-200 rounded-xl p-6 mb-6">
+  <h2 className="text-2xl font-bold text-gray-800 mb-3">
+    {t.personal_examples_title}
+  </h2>
+
+  <p className="text-gray-600 leading-relaxed mb-4">
+    {t.personal_examples_intro}
+  </p>
+
+  <p className="text-gray-600 leading-relaxed">
+    {t.personal_examples_note}
+  </p>
+</section>
+
       {/* Page Content */}
-      <main className="container mx-auto p-6">
+      <main className="max-w-4xl mx-auto container mx-auto p-6">
         <div className="bg-white rounded-2xl shadow-md p-6 border border-gray-200">
           
           {/* Profile Photo */}
@@ -110,6 +126,49 @@ const handleBack = () => router.back();
           </div>
         </div>
       </main>
+      
+<section className="max-w-4xl mx-auto bg-white rounded-2xl shadow-md p-6 border border-gray-200 space-y-6 mb-8">
+      {/* عنوان القسم */}
+      <div>
+        <h2 className="text-2xl font-bold text-teal-600 mb-2">{t.personal_info_best_title}</h2>
+        <p className="text-gray-700">{t.personal_info_best_intro}</p>
+      </div>
+
+      {/* التلميحات */}
+      <Tip text={t.tip_photo} />
+      <Tip text={t.tip_fullName} />
+      <Tip text={t.tip_email} />
+      <Tip text={t.tip_phone} />
+      <Tip text={t.tip_address} />
+      <Tip text={t.tip_website} />
+      <Tip text={t.tip_jobTitle} />
+      <Tip text={t.tip_summary} />
+
+      {/* نص إضافي */}
+      <div className="bg-gray-50 p-4 rounded-lg border border-gray-300 text-gray-700">
+        {t.personal_info_extra}
+      </div>
+    </section>
+      <section className="max-w-4xl mx-auto mt-8 bg-teal-50 border border-teal-200 rounded-xl p-6 mb-8">
+        <h3 className="text-xl font-bold text-teal-700 mb-4">
+          {t.personal_tips_title}
+        </h3>
+
+        <ul className="list-disc list-inside space-y-2 text-gray-700 text-sm">
+          <li>{t.personal_tip_one}</li>
+          <li>{t.personal_tip_two}</li>
+          <li>{t.personal_tip_three}</li>
+        </ul>
+      </section>
+      <Footer/>
+    </div>
+  );
+}
+
+function Tip({ text }) {
+  return (
+    <div className="bg-gray-50 p-4 rounded-lg border border-gray-300 text-gray-700">
+      {text}
     </div>
   );
 }

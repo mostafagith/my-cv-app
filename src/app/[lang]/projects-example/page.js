@@ -5,6 +5,7 @@ import { IoArrowBack } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
 import { Globe } from "lucide-react";
+import Footer from "@/components/Footer";
 
 export default function ProjectsExamplePage() {
   const router = useRouter();
@@ -98,9 +99,22 @@ export default function ProjectsExamplePage() {
           )}
         </div>
       </div>
+      {/* Projects Examples Intro Section */}
+      <section className="max-w-4xl mx-auto mt-8 bg-white border border-gray-200 rounded-xl p-6 mb-6">
+        <h2 className="text-2xl font-bold text-gray-800 mb-3">
+          {t.projects_examples_title}
+        </h2>
 
+        <p className="text-gray-600 leading-relaxed mb-4">
+          {t.projects_examples_intro}
+        </p>
+
+        <p className="text-gray-600 leading-relaxed">
+          {t.projects_examples_note}
+        </p>
+      </section>
       {/* Content */}
-      <div className="p-5 max-w-2xl mx-auto">
+      <div className="max-w-4xl mx-auto p-5 max-w-2xl mx-auto">
         <h2 className="text-2xl font-bold text-gray-800 mb-3">
           {t["projectsExamples"] || "Sample Projects"}
         </h2>
@@ -142,8 +156,6 @@ export default function ProjectsExamplePage() {
             </a>
           </div>
         ))}
-      </div>
-
       {/* Back Button */}
       <div className="p-5 border-t bg-white">
         <button
@@ -153,6 +165,21 @@ export default function ProjectsExamplePage() {
           {t["back"] || "Back"}
         </button>
       </div>
+      </div>
+
+      {/* Projects Tips */}
+      <section className="max-w-4xl mx-auto mt-8 bg-teal-50 border border-teal-200 rounded-xl p-6 mb-8">
+        <h3 className="text-xl font-bold text-teal-700 mb-4">
+          {t.projects_tips_title}
+        </h3>
+
+        <ul className="list-disc list-inside space-y-2 text-gray-700 text-sm">
+          <li>{t.projects_tip_one}</li>
+          <li>{t.projects_tip_two}</li>
+          <li>{t.projects_tip_three}</li>
+        </ul>
+      </section>
+      <Footer/>
     </div>
   );
 }

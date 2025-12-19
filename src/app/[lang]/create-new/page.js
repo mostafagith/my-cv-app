@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { ChevronRight, CheckCircle, ClipboardList } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { Globe } from "lucide-react";
+import Footer from "@/components/Footer";
 
 
 const SECTION_DEFINITIONS = [
@@ -380,6 +381,74 @@ const [openLang, setOpenLang] = useState(false);
         </section>
         
       </div>
+      {/* --- محتوى تعليمي للصفحة قبل عرض الأقسام --- */}
+<div className="max-w-5xl mx-auto mb-8 bg-white p-6 rounded-xl shadow-md space-y-6">
+  {/* مقدمة عن الصفحة */}
+  <h2 className="text-2xl font-bold text-teal-700">{t.page_intro_title || "Welcome to Your CV Builder"}</h2>
+  {t.page_intro_paragraphs.map((p, i) => (
+    <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
+  ))}
+
+  {/* تعريف الأقسام */}
+  <h2 className="text-2xl font-bold text-teal-700">{t.sections_intro_title || "Explore CV Sections"}</h2>
+  <ul className="list-disc list-inside space-y-2 text-gray-700">
+    <li><strong>{t.personal}</strong>: {t.personal_desc}</li>
+    <li><strong>{t.education}</strong>: {t.education_desc}</li>
+    <li><strong>{t.experience}</strong>: {t.experience_desc}</li>
+    <li><strong>{t.skills}</strong>: {t.skills_desc}</li>
+    <li><strong>{t.languages}</strong>: {t.languages_desc}</li>
+    <li><strong>{t.objective}</strong>: {t.objective_desc}</li>
+    <li><strong>{t.projects}</strong>: {t.projects_desc}</li>
+    <li><strong>{t.certificates}</strong>: {t.certificates_desc}</li>
+    <li><strong>{t.awards}</strong>: {t.awards_desc}</li>
+    <li><strong>{t.references}</strong>: {t.references_desc}</li>
+    <li><strong>{t.hopes}</strong>: {t.hopes_desc}</li>
+  </ul>
+
+  {/* أهمية الصفحة والسهولة */}
+  <h2 className="text-2xl font-bold text-teal-700">{t.page_advantages_title || "Why This Page Helps You"}</h2>
+  {t.page_advantages_paragraphs.map((p, i) => (
+    <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
+  ))}
+</div>
+<section className="max-w-5xl mx-auto mb-6 bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+  <h2 className="text-xl font-bold text-teal-700 mb-4">{t.page_info_title}</h2>
+
+  <div className="space-y-4 text-gray-700">
+    {/* نصائح CV */}
+    <div>
+      <h3 className="font-semibold mb-1">{t.tips_title}</h3>
+      <p>{t.tips_text}</p>
+    </div>
+
+    {/* لماذا استخدام هذه الأداة */}
+    <div>
+      <h3 className="font-semibold mb-1">{t.why_use_title}</h3>
+      <p>{t.why_use_text}</p>
+    </div>
+
+    {/* خطوات سهلة لإنهاء CV */}
+    <div>
+      <h3 className="font-semibold mb-1">{t.steps_title}</h3>
+      <p>{t.steps_text}</p>
+    </div>
+
+    {/* ميزة المراجعة والإكمال التلقائي */}
+    <div>
+      <h3 className="font-semibold mb-1">{t.review_title}</h3>
+      <p>{t.review_text}</p>
+    </div>
+
+    {/* فقرة تحفيزية */}
+    <div>
+      <h3 className="font-semibold mb-1">{t.motivation_title}</h3>
+      <p>{t.motivation_text}</p>
+    </div>
+  </div>
+</section>
+{/* معلومات إضافية عن الصفحة */}
+
+      <Footer/>
     </div>
   );
 }

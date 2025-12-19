@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
 import toast from "react-hot-toast";
 import { Globe} from "lucide-react";
+import Footer from "@/components/Footer";
 
 export default function ProjectsDetails() {
   const router = useRouter();
@@ -227,7 +228,7 @@ const handleSave = () => {
           </div>
       </div>
 
-      <div className="p-5 max-w-2xl mx-auto">
+      <div className="p-5 max-w-4xl mx-auto">
         <button
           onClick={() => router.push(`/${lang}/projects-example`)}
           className="mb-4 cursor-pointer bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition"
@@ -370,6 +371,61 @@ const handleSave = () => {
           {t["Save Projects"]}
         </button>
       </div>
+      {/* Projects Tips */}
+      <section className="max-w-4xl mx-auto mt-8 bg-teal-50 border border-teal-200 rounded-xl p-6 mb-8">
+        <h3 className="text-xl font-bold text-teal-700 mb-4">
+          {t.projects_tips_title}
+        </h3>
+
+        <ul className="list-disc list-inside space-y-2 text-gray-700 text-sm">
+          <li>{t.projects_tip_one}</li>
+          <li>{t.projects_tip_two}</li>
+          <li>{t.projects_tip_three}</li>
+        </ul>
+      </section>
+      {/* FAQ Section */}
+      <section className="max-w-4xl mx-auto mt-10 px-5">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+          <span className="w-2 h-8 bg-teal-500 rounded-full"></span>
+          {t.proj_faq_title}
+        </h2>
+        <div className="space-y-4">
+          {[1, 2, 3, 4, 5].map((num) => (
+            <details key={num} className="group bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm transition-all">
+              <summary className="flex items-center justify-between p-4 cursor-pointer hover:bg-gray-50 list-none">
+                <span className="font-semibold text-gray-700">{t[`proj_faq_${num}_q`]}</span>
+                <span className="text-teal-500 transition-transform group-open:rotate-180">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+                </span>
+              </summary>
+              <div className="px-4 pb-4 text-gray-600 text-sm leading-relaxed border-t border-gray-50 pt-3">
+                {t[`proj_faq_${num}_a`]}
+              </div>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      {/* Common Mistakes Section */}
+      <section className="max-w-4xl mx-auto mt-10 mb-12 px-5">
+        <div className="bg-red-50 border border-red-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
+          <h2 className="text-xl font-bold text-red-700 mb-6 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+            {t.proj_mistakes_title}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[1, 2, 3, 4, 5].map((num) => (
+              <div key={num} className="bg-white p-4 rounded-xl border border-red-50">
+                <h3 className="font-bold text-gray-800 text-sm mb-2">
+                  {t[`proj_mistake_${num}_t`]}
+                </h3>
+                <p className="text-gray-600 text-xs leading-relaxed">{t[`proj_mistake_${num}_d`]}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <Footer/>
     </div>
   );
 }

@@ -7,6 +7,7 @@ import { MoreVertical, Trash2, Edit, PlusCircle } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { Globe, Share2, Gift, Bell, Settings, ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export default function CreatePage() {
     const { t, lang, changeLang } = useLanguage();
@@ -108,81 +109,133 @@ function handleCreateNew() {
 
           {/* المحتوى */}
           {cvs.length === 0 ? (
-            <p className="text-gray-600 text-center mt-20">
-              {t.noCvs || "No CVs saved yet."}
-            </p>
+            <>
+              {/* --- محتوى تعليمي قبل عرض الـ CVs --- */}
+<div className="max-w-5xl mx-auto mb-8 bg-white p-6 rounded-xl shadow-md space-y-6">
+  <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title1}</h2>
+  {t.downloads_content_paragraphs1.map((p, i) => (
+    <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
+  ))}
+
+  <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title2}</h2>
+  {t.downloads_content_paragraphs2.map((p, i) => (
+    <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
+  ))}
+
+  <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title3}</h2>
+  {t.downloads_content_paragraphs3.map((p, i) => (
+    <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
+  ))}
+
+  <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title4}</h2>
+  {t.downloads_content_paragraphs4.map((p, i) => (
+    <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
+  ))}
+</div>
+
+              <p className="text-gray-600 text-center mt-20">
+                {t.noCvs || "No CVs saved yet."}
+              </p>
+            </>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {cvs.map((cv, index) => (
-                <div
-                  key={cv.id || index}
-                  className="relative bg-white rounded-xl shadow-md p-5 flex flex-col items-center text-center border border-gray-100 hover:shadow-xl transition"
-                >
-                  {/* الصورة */}
-                  <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-teal-500 mb-4">
-                    {cv?.personalDetails?.photoPreview ? (
-                      <img
-                        src={cv.personalDetails.photoPreview}
-                        alt={cv.personalDetails.fullName}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-teal-100 text-teal-700 text-3xl font-bold">
-                        {cv.title?.charAt(0).toUpperCase() || "?"}
-                      </div>
-                    )}
+            <>
+            <div className="max-w-5xl mx-auto mb-8 bg-white p-6 rounded-xl shadow-md space-y-6">
+  <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title1}</h2>
+  {t.downloads_content_paragraphs1.map((p, i) => (
+    <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
+  ))}
+
+  <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title2}</h2>
+  {t.downloads_content_paragraphs2.map((p, i) => (
+    <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
+  ))}
+
+  <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title3}</h2>
+  {t.downloads_content_paragraphs3.map((p, i) => (
+    <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
+  ))}
+
+  <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title4}</h2>
+  {t.downloads_content_paragraphs4.map((p, i) => (
+    <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
+  ))}
+</div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {cvs.map((cv, index) => (
+                  <div
+                    key={cv.id || index}
+                    className="relative bg-white rounded-xl shadow-md p-5 flex flex-col items-center text-center border border-gray-100 hover:shadow-xl transition"
+                  >
+                    {/* الصورة */}
+                    <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-teal-500 mb-4">
+                      {cv?.personalDetails?.photoPreview ? (
+                        <img
+                          src={cv.personalDetails.photoPreview}
+                          alt={cv.personalDetails.fullName}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-teal-100 text-teal-700 text-3xl font-bold">
+                          {cv.title?.charAt(0).toUpperCase() || "?"}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* الاسم */}
+                    <h3 className="font-bold text-lg text-gray-900">
+                      {cv.personalDetails?.fullName || cv.title || t.unknown}
+                    </h3>
+
+                    {/* الوظيفة */}
+                    <p className="text-gray-600 text-sm mb-2">
+                      {cv.personalDetails?.jobTitle || "No Job Title"}
+                    </p>
+
+                    {/* تاريخ آخر تعديل */}
+                    <p className="text-xs text-gray-500 mb-4">
+                      Last updated: {formatDate(cv.lastUpdated)}
+                    </p>
+
+                    {/* زر الثلاث نقاط */}
+                    <div className="absolute top-3 right-3">
+                      <button
+                        onClick={() =>
+                          setMenuIndex(menuIndex === index ? null : index)
+                        }
+                        className="p-2 cursor-pointer rounded-full hover:bg-gray-100 transition"
+                      >
+                        <MoreVertical className="text-black" size={18} />
+                      </button>
+
+                      {/* القائمة */}
+                      {menuIndex === index && (
+                        <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                          <button
+                            onClick={() => handleEdit(cv)}
+                            className="flex cursor-pointer items-center gap-2 w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          >
+                            <Edit size={16} /> {t.edit || "Edit"}
+                          </button>
+                          <button
+                            onClick={() => handleDelete(index)}
+                            className="flex cursor-pointer items-center gap-2 w-full px-3 py-2 text-sm text-red-600 hover:bg-gray-100"
+                          >
+                            <Trash2 size={16} /> {t.delete || "Delete"}
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
+                ))}
+              </div>
+              {/* --- محتوى تعليمي قبل عرض الـ CVs --- */}
 
-                  {/* الاسم */}
-                  <h3 className="font-bold text-lg text-gray-900">
-                    {cv.personalDetails?.fullName || cv.title || t.unknown}
-                  </h3>
 
-                  {/* الوظيفة */}
-                  <p className="text-gray-600 text-sm mb-2">
-                    {cv.personalDetails?.jobTitle || "No Job Title"}
-                  </p>
-
-                  {/* تاريخ آخر تعديل */}
-                  <p className="text-xs text-gray-500 mb-4">
-                    Last updated: {formatDate(cv.lastUpdated)}
-                  </p>
-
-                  {/* زر الثلاث نقاط */}
-                  <div className="absolute top-3 right-3">
-                    <button
-                      onClick={() =>
-                        setMenuIndex(menuIndex === index ? null : index)
-                      }
-                      className="p-2 cursor-pointer rounded-full hover:bg-gray-100 transition"
-                    >
-                      <MoreVertical className="text-black" size={18} />
-                    </button>
-
-                    {/* القائمة */}
-                    {menuIndex === index && (
-                      <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
-                        <button
-                          onClick={() => handleEdit(cv)}
-                          className="flex cursor-pointer items-center gap-2 w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        >
-                          <Edit size={16} /> {t.edit || "Edit"}
-                        </button>
-                        <button
-                          onClick={() => handleDelete(index)}
-                          className="flex cursor-pointer items-center gap-2 w-full px-3 py-2 text-sm text-red-600 hover:bg-gray-100"
-                        >
-                          <Trash2 size={16} /> {t.delete || "Delete"}
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
+            </>
           )}
         </div>
       </div>
+      <Footer/>
     </>
   );
 }

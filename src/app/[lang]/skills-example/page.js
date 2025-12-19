@@ -4,6 +4,7 @@ import { IoArrowBack } from "react-icons/io5";
 import { useLanguage } from '@/context/LanguageContext';
 import { Globe} from "lucide-react";
 import { useState } from 'react';
+import Footer from "@/components/Footer";
 
 export default function SkillsExample() {
     const { t, lang, changeLang } = useLanguage();
@@ -125,8 +126,22 @@ export default function SkillsExample() {
           </div>
         {/* <div className="w-6" /> */}
       </div>
+      {/* Skills Examples Intro Section */}
+<section className="max-w-4xl mx-auto mt-8 bg-white border border-gray-200 rounded-xl p-6 mb-6">
+  <h2 className="text-2xl font-bold text-gray-800 mb-3">
+    {t.skills_examples_title}
+  </h2>
 
-      <div className="space-y-6 p-4 md:p-8">
+  <p className="text-gray-600 leading-relaxed mb-4">
+    {t.skills_examples_intro}
+  </p>
+
+  <p className="text-gray-600 leading-relaxed">
+    {t.skills_examples_note}
+  </p>
+</section>
+
+      <div className="max-w-4xl mx-auto space-y-6 p-4 md:p-8">
         {exampleSkills.map((skill, idx) => (
           <div key={skill.id} className="bg-gray-100 p-4 rounded-md border border-gray-200">
 
@@ -164,6 +179,20 @@ export default function SkillsExample() {
           </div>
         ))}
       </div>
+      {/* Skills Tips */}
+      <section className="max-w-4xl mx-auto mt-8 bg-teal-50 border border-teal-200 rounded-xl p-6 mb-8">
+        <h3 className="text-xl font-bold text-teal-700 mb-4">
+          {t.skills_tips_title}
+        </h3>
+
+        <ul className="list-disc list-inside space-y-2 text-gray-700 text-sm">
+          <li>{t.skills_tip_one}</li>
+          <li>{t.skills_tip_two}</li>
+          <li>{t.skills_tip_three}</li>
+        </ul>
+      </section>
+
+      <Footer/>
     </div>
   );
 }

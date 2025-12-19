@@ -13,10 +13,11 @@ export default function Navbar() {
   const links = [
     { href: `/${lang}`, label: t.home },
     { href: `/${lang}/create`, label: t.create },
+    { href: `/${lang}/blogs`, label: t.blogs },
+    { href: `/${lang}/about`, label: t.about_us },
     { href: `/${lang}/downloads`, label: t.downloads },
     { href: `/${lang}/cv-tips`, label: t.cv_tips },
     { href: `/${lang}/ats-system`, label: t.ats_system },
-    { href: `/${lang}/about`, label: t.about_us },
   ];
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
@@ -47,7 +48,7 @@ export default function Navbar() {
           ))}
 
           {/* Language Button */}
-          <li className="relative">
+          <li className="relative ms-5">
             <button
               onClick={toggleLangMenu}
               className="p-2 bg-white/20 rounded-full cursor-pointer hover:bg-white/30 transition"

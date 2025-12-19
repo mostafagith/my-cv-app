@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
 import { Globe } from "lucide-react";
 import { useState } from "react";
+import Footer from "@/components/Footer";
 
 export default function AwardsExamplePage() {
   const router = useRouter();
@@ -111,8 +112,37 @@ export default function AwardsExamplePage() {
           )}
         </div>
       </header>
+      {/* Awards & Activities Examples Intro Section */}
+<section className="max-w-4xl mx-auto mt-8 bg-white border border-gray-200 rounded-xl p-6 mb-6">
+  <h2 className="text-2xl font-bold text-gray-800 mb-3">
+    {t.awards_examples_title}
+  </h2>
 
-      <div className="p-4 md:p-8">
+  <p className="text-gray-600 leading-relaxed mb-4">
+    {t.awards_examples_intro}
+  </p>
+
+  <p className="text-gray-600 leading-relaxed">
+    {t.awards_examples_note}
+  </p>
+</section>
+
+      {/* Awards Examples Intro Section */}
+      <section className="max-w-4xl mx-auto mt-8 bg-white border border-gray-200 rounded-xl p-6 mb-6">
+        <h2 className="text-2xl font-bold text-gray-800 mb-3">
+          {t.awards_examples_title}
+        </h2>
+
+        <p className="text-gray-600 leading-relaxed mb-4">
+          {t.awards_examples_intro}
+        </p>
+
+        <p className="text-gray-600 leading-relaxed">
+          {t.awards_examples_note}
+        </p>
+      </section>
+
+      <div className="max-w-4xl mx-auto p-4 md:p-8">
         <h1 className="text-2xl font-bold text-teal-600 mb-6">
           {t.awardsActivitiesExamples || "Awards & Activities Examples"}
         </h1>
@@ -138,6 +168,19 @@ export default function AwardsExamplePage() {
           ))}
         </div>
       </div>
+      {/* Awards & Activities Tips */}
+      <section className="max-w-4xl mx-auto mt-8 bg-teal-50 border border-teal-200 rounded-xl p-6 mb-8">
+        <h3 className="text-xl font-bold text-teal-700 mb-4">
+          {t.awards_tips_title}
+        </h3>
+
+        <ul className="list-disc list-inside space-y-2 text-gray-700 text-sm">
+          <li>{t.awards_tip_one}</li>
+          <li>{t.awards_tip_two}</li>
+          <li>{t.awards_tip_three}</li>
+        </ul>
+      </section>
+      <Footer/>
     </div>
   );
 }
