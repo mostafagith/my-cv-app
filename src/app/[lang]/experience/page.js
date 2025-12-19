@@ -1,5 +1,5 @@
 'use client';
-
+import AdBanner from '@/components/AdBanner';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { IoArrowBack, IoTrashOutline, IoAddCircleOutline } from 'react-icons/io5';
@@ -11,7 +11,7 @@ import Footer from '@/components/Footer';
 
 export default function ExperienceDetails() {
   const router = useRouter();
-  const { t, lang, changeLang } = useLanguage();
+  const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
   const [openLang, setOpenLang] = useState(false);
   const toggleLangMenu = () => setOpenLang(!openLang);
 
@@ -218,7 +218,7 @@ const handleSave = () => {
           </div>
         <div className="w-6" />
       </div>
-
+            {/* <AdBanner adKey={AD_KEY} /> */}
         {/* Content */}
         <div className="max-w-4xl mx-auto p-5 space-y-6">
           <button
@@ -352,6 +352,7 @@ const handleSave = () => {
             <li>{t.experience_tip_three}</li>
           </ul>
         </section>
+        <AdBanner adKey={AD_KEY} />
         {/* FAQ Section */}
         <section className="max-w-4xl mx-auto mt-10 px-5">
           <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
@@ -395,6 +396,7 @@ const handleSave = () => {
             </div>
           </div>
         </section>
+        <AdBanner adKey={AD_KEY} />
         <Footer/>
     </div>
   );

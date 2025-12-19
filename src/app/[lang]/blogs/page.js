@@ -1,4 +1,5 @@
-"use client";
+"use client"; import AdBanner from "@/components/AdBanner";
+;
 
 import { useState } from "react";
 import { IoArrowBack, IoSearchOutline } from "react-icons/io5";
@@ -11,7 +12,7 @@ import { blogPostsData } from "@/data/blogData";
 
 export default function BlogsPage() {
   const router = useRouter();
-  const { t, lang, changeLang } = useLanguage();
+  const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
   const [openLang, setOpenLang] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -86,7 +87,8 @@ export default function BlogsPage() {
           </div>
 
           {filteredPosts.length > 0 ? (
-            filteredPosts.map((post) => (
+            filteredPosts.map((post,i) => (
+              <>
               <Link href={`/${lang}/blogs/${post.slug}`} key={post.id} className="block">
                 <article className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all group cursor-pointer">
                   <div className="relative h-52 md:h-64 overflow-hidden">
@@ -99,7 +101,6 @@ export default function BlogsPage() {
                       {t[post.categoryKey]}
                     </span>
                   </div>
-
                   <div className="p-6">
                     <div className="flex items-center gap-4 text-xs text-gray-500 mb-4">
                       <span className="flex items-center gap-1"><Calendar size={14} /> {post.date}</span>
@@ -120,6 +121,10 @@ export default function BlogsPage() {
                   </div>
                 </article>
               </Link>
+              {i % 3==0 && i!= 0&&(
+                <AdBanner adKey={AD_KEY} />
+              )}
+              </>
             ))
           ) : (
             <div className="text-center py-20 bg-white rounded-2xl border border-dashed border-gray-300">
@@ -150,9 +155,11 @@ export default function BlogsPage() {
                 {t.cv_cta_button}
             </Link>
         </div>
+          <AdBanner adKey={AD_KEY} />
           </div>
         </aside>
       </main>
+      <AdBanner adKey={AD_KEY} />
       <Footer />
     </div>
   );

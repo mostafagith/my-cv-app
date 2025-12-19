@@ -1,4 +1,5 @@
-"use client";
+"use client"; import AdBanner from "@/components/AdBanner";
+;
 
 import { useState, useEffect } from "react";
 import { IoArrowBack, IoTrash, IoPencil, IoAdd, IoCheckmarkCircle } from "react-icons/io5";
@@ -10,7 +11,7 @@ import Footer from "@/components/Footer";
 
 export default function CertificatesPage() {
   const router = useRouter();
-  const { t, lang, changeLang } = useLanguage();
+  const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
   const [openLang, setOpenLang] = useState(false);
   const toggleLangMenu = () => setOpenLang(!openLang);
 
@@ -342,20 +343,6 @@ const handleDelete = (id) => {
           <IoCheckmarkCircle size={22} />
           {t["Save & Finish"]}
         </button>
-
-        {/* Tips
-        <div className="bg-yellow-50 border border-yellow-200 p-5 rounded-xl mt-5">
-          <h4 className="font-bold text-yellow-800 mb-2">
-            💡 {t["Tips for Certificates:"]}
-          </h4>
-          <ul className="text-yellow-700 text-sm space-y-1 list-disc pl-5">
-            <li>{t["Include relevant professional certifications"]}</li>
-            <li>{t["Mention online courses and training programs"]}</li>
-            <li>{t["Add industry-specific certifications"]}</li>
-            <li>{t["Include completion dates when available"]}</li>
-            <li>{t["Focus on certificates relevant to the job"]}</li>
-          </ul>
-        </div> */}
       </main>
       {/* Certificates Tips */}
         <section className="max-w-4xl mx-auto mt-8 bg-teal-50 border border-teal-200 rounded-xl p-6 mb-8">
@@ -374,6 +361,7 @@ const handleDelete = (id) => {
             <li>{t.certificates_tip_three}</li>
           </ul>
         </section>
+        <AdBanner adKey={AD_KEY} />
         {/* FAQ Section for Certificates */}
         <section className="max-w-4xl mx-auto mt-12 px-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
@@ -417,6 +405,7 @@ const handleDelete = (id) => {
             </div>
           </div>
         </section>
+        <AdBanner adKey={AD_KEY} />
         <Footer/>
     </div>
   );

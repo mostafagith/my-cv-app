@@ -1,4 +1,5 @@
-"use client";
+"use client"; import AdBanner from "@/components/AdBanner";
+;
 
 import { useState } from "react";
 import { IoArrowBack } from "react-icons/io5";
@@ -9,7 +10,7 @@ import Footer from "@/components/Footer";
 
 export default function ProjectsExamplePage() {
   const router = useRouter();
-  const { t, lang, changeLang } = useLanguage();
+  const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
   const [openLang, setOpenLang] = useState(false);
   const toggleLangMenu = () => setOpenLang(!openLang);
 
@@ -99,6 +100,7 @@ export default function ProjectsExamplePage() {
           )}
         </div>
       </div>
+      <AdBanner adKey={AD_KEY} />
       {/* Projects Examples Intro Section */}
       <section className="max-w-4xl mx-auto mt-8 bg-white border border-gray-200 rounded-xl p-6 mb-6">
         <h2 className="text-2xl font-bold text-gray-800 mb-3">
@@ -166,7 +168,7 @@ export default function ProjectsExamplePage() {
         </button>
       </div>
       </div>
-
+        <AdBanner adKey={AD_KEY} />
       {/* Projects Tips */}
       <section className="max-w-4xl mx-auto mt-8 bg-teal-50 border border-teal-200 rounded-xl p-6 mb-8">
         <h3 className="text-xl font-bold text-teal-700 mb-4">
@@ -179,6 +181,7 @@ export default function ProjectsExamplePage() {
           <li>{t.projects_tip_three}</li>
         </ul>
       </section>
+      <AdBanner adKey={AD_KEY} />
       <Footer/>
     </div>
   );

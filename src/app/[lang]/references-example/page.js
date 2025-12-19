@@ -1,4 +1,5 @@
-"use client";
+"use client"; import AdBanner from "@/components/AdBanner";
+;
 import { IoArrowBack } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
@@ -8,7 +9,7 @@ import Footer from "@/components/Footer";
 
 export default function ReferencesExamplePage() {
   const router = useRouter();
-  const { t, lang, changeLang } = useLanguage();
+  const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
   const [openLang, setOpenLang] = useState(false);
   const toggleLangMenu = () => setOpenLang(!openLang);
 
@@ -90,7 +91,7 @@ export default function ReferencesExamplePage() {
           )}
         </div>
       </div>
-
+          <AdBanner adKey={AD_KEY} />
       {/* References Examples Intro Section */}
       <section className="max-w-4xl mx-auto mt-8 bg-white border border-gray-200 rounded-xl p-6 mb-6">
         <h2 className="text-2xl font-bold text-gray-800 mb-3">
@@ -114,7 +115,7 @@ export default function ReferencesExamplePage() {
           {t["Add people who can recommend you professionally"] ||
             "Here are examples of professional references"}
         </p>
-
+            <AdBanner adKey={AD_KEY} />
         {/* Example Cards */}
         {examples.map((ref, index) => (
           <div key={ref.id} className="bg-gray-50 border border-gray-200 rounded-xl p-5 mb-4">
@@ -163,6 +164,7 @@ export default function ReferencesExamplePage() {
           <li>{t.references_tip_three}</li>
         </ul>
       </section>
+      <AdBanner adKey={AD_KEY} />
       <Footer/>
     </div>
   );

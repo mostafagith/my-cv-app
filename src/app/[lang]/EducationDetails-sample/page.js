@@ -1,5 +1,5 @@
 'use client';
-
+import AdBanner from '@/components/AdBanner';
 import { useState, useEffect } from 'react';
 
 import { ChevronRight } from 'lucide-react';
@@ -10,7 +10,7 @@ import Footer from '@/components/Footer';
 
 export default function EducationExample() {
     const router = useRouter();
-    const { t, lang, changeLang } = useLanguage();
+    const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
     const [openLang, setOpenLang] = useState(false);
     const toggleLangMenu = () => setOpenLang(!openLang);
 
@@ -146,7 +146,6 @@ export default function EducationExample() {
       </div>
 
       
-
       {/* Education Examples Intro Section */}
       <section className="max-w-4xl mx-auto mt-8 bg-white border border-gray-200 rounded-xl p-6 mb-6">
         <h2 className="text-2xl font-bold text-gray-800 mb-3">
@@ -181,7 +180,7 @@ export default function EducationExample() {
         ))}
 
       </div>
-      
+      <AdBanner adKey={AD_KEY} />
       {/* Education Examples Tips */}
       <section className="max-w-4xl mx-auto mt-8 bg-teal-50 border border-teal-200 rounded-xl p-6 mb-8">
         <h3 className="text-xl font-bold text-teal-700 mb-4">
@@ -194,6 +193,7 @@ export default function EducationExample() {
           <li>{t.education_examples_tip_three}</li>
         </ul>
       </section>
+      <AdBanner adKey={AD_KEY} />
       <Footer/>
     </div>
   );

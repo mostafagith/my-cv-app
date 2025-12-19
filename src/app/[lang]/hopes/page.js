@@ -1,4 +1,5 @@
-"use client";
+"use client"; 
+import AdBanner from "@/components/AdBanner";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -10,7 +11,7 @@ import Footer from "@/components/Footer";
 
 export default function Hopes() {
   const router = useRouter();
-  const { t, lang, changeLang } = useLanguage();
+  const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
   const [openLang, setOpenLang] = useState(false);
   const toggleLangMenu = () => setOpenLang(!openLang);
 
@@ -182,20 +183,6 @@ const handleBack = () => {
           </p>
         </div>
 
-        {/* Tips */}
-        {/* <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-xl">
-          <h3 className="font-bold text-yellow-800 mb-2">
-            💡 {t["Tips for Writing Hopes:"]}
-          </h3>
-          <ul className="text-yellow-700 text-sm space-y-1 list-disc list-inside">
-            <li>{t["Be specific about your career goals"]}</li>
-            <li>{t["Mention skills you want to develop"]}</li>
-            <li>{t["Connect your aspirations to the role"]}</li>
-            <li>{t["Keep it professional and realistic"]}</li>
-            <li>{t["Show enthusiasm and motivation"]}</li>
-          </ul>
-        </div> */}
-
         {/* Save Button */}
         <button
           onClick={handleSave}
@@ -210,6 +197,7 @@ const handleBack = () => {
           <span>{t["Save Hopes"]}</span>
         </button>
       </div>
+      <AdBanner adKey={AD_KEY} />
 
       {/* Hopes & Aspirations Tips */}
       <section className="max-w-4xl mx-auto mt-8 bg-teal-50 border border-teal-200 rounded-xl p-6 mb-8">
@@ -226,6 +214,7 @@ const handleBack = () => {
           <li>{t["Show enthusiasm and motivation"]}</li>
         </ul>
       </section>
+      <AdBanner adKey={AD_KEY} />
       {/* FAQ Section for Hopes & Aspirations */}
       <section className="max-w-4xl mx-auto mt-12 px-6">
         <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
@@ -269,6 +258,7 @@ const handleBack = () => {
           </div>
         </div>
       </section>
+      <AdBanner adKey={AD_KEY} />
       <Footer/>
     </div>
   );

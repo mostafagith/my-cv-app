@@ -1,4 +1,5 @@
-"use client";
+"use client"; import AdBanner from "@/components/AdBanner";
+;
 
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
@@ -66,7 +67,7 @@ function PdfPreview({ pdfData }) {
 
 export default function DownloadsPage() {
   const [downloads, setDownloads] = useState([]);
-  const { t, lang, changeLang } = useLanguage();
+  const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
 
   useEffect(() => {
     const stored = safeGetItem("downloads");

@@ -1,4 +1,6 @@
-"use client";
+"use client"; 
+import AdBanner from "@/components/AdBanner";
+
 import { useEffect, useState } from "react";
 import { IoArrowBack, IoTrashOutline, IoAdd, IoCheckmark } from "react-icons/io5";
 import { useRouter } from "next/navigation";
@@ -9,7 +11,7 @@ import Footer from "@/components/Footer";
 
 export default function LanguagesPage() {
   const router = useRouter();
-   const { t, lang, changeLang } = useLanguage();
+   const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
   const [openLang, setOpenLang] = useState(false);
   const toggleLangMenu = () => setOpenLang(!openLang);
 
@@ -318,6 +320,7 @@ const removeLanguage = (id) => {
           {t["Save Languages"]}
         </button>
       </div>
+      <AdBanner adKey={AD_KEY} />
       {/* Languages Tips */}
       <section className="max-w-4xl mx-auto mt-8 bg-teal-50 border border-teal-200 rounded-xl p-6 mb-8">
         <h3 className="text-xl font-bold text-teal-700 mb-4">
@@ -330,6 +333,7 @@ const removeLanguage = (id) => {
           <li>{t.languages_tip_three}</li>
         </ul>
       </section>
+      <AdBanner adKey={AD_KEY} />
       {/* FAQ Section */}
       <section className="max-w-4xl mx-auto mt-10 px-5">
         <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
@@ -373,6 +377,7 @@ const removeLanguage = (id) => {
           </div>
         </div>
       </section>
+      <AdBanner adKey={AD_KEY} />
       <Footer/>
     </div>
   );

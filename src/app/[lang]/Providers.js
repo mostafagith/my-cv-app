@@ -1,5 +1,6 @@
 // app/[lang]/Providers.js
-"use client";
+"use client"; import AdBanner from "@/components/AdBanner";
+;
 
 import { Toaster } from "react-hot-toast";
 import { LanguageProvider } from "@/context/LanguageContext";

@@ -1,4 +1,5 @@
-"use client";
+"use client"; import AdBanner from "@/components/AdBanner";
+;
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {Facebook, Linkedin } from "lucide-react";
@@ -7,7 +8,7 @@ import { useLanguage } from "@/context/LanguageContext";
 
 export default function Footer() {
   const router = useRouter();
-  const { t, lang } = useLanguage();
+  const { t, lang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
 
 
   return (

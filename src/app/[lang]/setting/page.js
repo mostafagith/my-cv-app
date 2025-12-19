@@ -1,4 +1,5 @@
-"use client";
+"use client"; import AdBanner from "@/components/AdBanner";
+;
 
 import { useState } from "react";
 import { IoArrowBack } from "react-icons/io5";
@@ -10,7 +11,7 @@ import Footer from "@/components/Footer";
 
 export default function SettingsPage() {
   const router = useRouter();
-  const { t, lang, changeLang } = useLanguage();
+  const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
   const { cvLang, changeCvLang } = useCVLanguage();
   const [openLangMenu, setOpenLangMenu] = useState(false);
   const toggleLangMenu = () => setOpenLangMenu(!openLangMenu);
@@ -39,7 +40,7 @@ export default function SettingsPage() {
     </p>
   ))}
 </div>
-
+<AdBanner adKey={AD_KEY} />
       {/* Content */}
       <div className="flex-1 p-6">
         {/* Site Language */}
@@ -145,6 +146,7 @@ export default function SettingsPage() {
           </select>
         </div>
       </div>
+      <AdBanner adKey={AD_KEY} />
       <Footer/>
     </div>
 

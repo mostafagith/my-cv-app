@@ -1,4 +1,5 @@
-"use client";
+"use client"; import AdBanner from "@/components/AdBanner";
+;
 import { useEffect, useState } from "react";
 
 import { IoArrowBack } from "react-icons/io5";
@@ -9,7 +10,7 @@ import Footer from "@/components/Footer";
 
 export default function LanguagesExamplePage() {
     const router = useRouter();
-    const { t, lang, changeLang } = useLanguage();
+    const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
     const [openLang, setOpenLang] = useState(false);
     const toggleLangMenu = () => setOpenLang(!openLang);
 
@@ -131,6 +132,7 @@ export default function LanguagesExamplePage() {
           {t.languages_examples_note}
         </p>
       </section>
+      <AdBanner adKey={AD_KEY} />
 
       {/* Content */}
       <div className="max-w-4xl mx-auto p-6">
@@ -150,6 +152,7 @@ export default function LanguagesExamplePage() {
           </div>
         ))}
       </div>
+      <AdBanner adKey={AD_KEY} />
       {/* Languages Tips */}
       <section className="max-w-4xl mx-auto mt-8 bg-teal-50 border border-teal-200 rounded-xl p-6 mb-8">
         <h3 className="text-xl font-bold text-teal-700 mb-4">
@@ -162,6 +165,7 @@ export default function LanguagesExamplePage() {
           <li>{t.languages_tip_three}</li>
         </ul>
       </section>
+      <AdBanner adKey={AD_KEY} />
       <Footer/>
     </div>
   );

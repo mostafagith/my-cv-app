@@ -1,9 +1,10 @@
-"use client";
+"use client"; import AdBanner from "@/components/AdBanner";
+;
 import { useLanguage } from "@/context/LanguageContext";
 import { FaWhatsapp } from "react-icons/fa";
 
 export default function ContactPage() {
-  const { t, lang } = useLanguage();
+  const { t, lang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
 
   const phoneNumber = "201234567890"; // 👈 رقمك بدون +
 

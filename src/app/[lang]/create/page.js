@@ -1,4 +1,5 @@
-"use client";
+"use client"; import AdBanner from "@/components/AdBanner";
+;
 import { useRouter } from "next/navigation";
 
 import Link from "next/link";
@@ -10,7 +11,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export default function CreatePage() {
-    const { t, lang, changeLang } = useLanguage();
+    const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
   const router = useRouter();
   const [cvs, setCvs] = useState([]);
   const [menuIndex, setMenuIndex] = useState(null);
@@ -89,7 +90,7 @@ function handleCreateNew() {
   }
 
   return (
-    <>
+    <div className="bg-white">
       <Navbar/>
       <div className="min-h-screen bg-gray-50 font-sans">
 
@@ -132,7 +133,7 @@ function handleCreateNew() {
     <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
   ))}
 </div>
-
+<AdBanner adKey={AD_KEY} />
               <p className="text-gray-600 text-center mt-20">
                 {t.noCvs || "No CVs saved yet."}
               </p>
@@ -140,26 +141,27 @@ function handleCreateNew() {
           ) : (
             <>
             <div className="max-w-5xl mx-auto mb-8 bg-white p-6 rounded-xl shadow-md space-y-6">
-  <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title1}</h2>
-  {t.downloads_content_paragraphs1.map((p, i) => (
-    <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
-  ))}
+              <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title1}</h2>
+              {t.downloads_content_paragraphs1.map((p, i) => (
+                <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
+              ))}
 
-  <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title2}</h2>
-  {t.downloads_content_paragraphs2.map((p, i) => (
-    <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
-  ))}
+              <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title2}</h2>
+              {t.downloads_content_paragraphs2.map((p, i) => (
+                <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
+              ))}
 
-  <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title3}</h2>
-  {t.downloads_content_paragraphs3.map((p, i) => (
-    <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
-  ))}
+              <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title3}</h2>
+              {t.downloads_content_paragraphs3.map((p, i) => (
+                <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
+              ))}
 
-  <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title4}</h2>
-  {t.downloads_content_paragraphs4.map((p, i) => (
-    <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
-  ))}
-</div>
+              <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title4}</h2>
+              {t.downloads_content_paragraphs4.map((p, i) => (
+                <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
+              ))}
+            </div>
+            <AdBanner adKey={AD_KEY} />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {cvs.map((cv, index) => (
                   <div
@@ -235,7 +237,8 @@ function handleCreateNew() {
           )}
         </div>
       </div>
+      <AdBanner adKey={AD_KEY} />
       <Footer/>
-    </>
+    </div>
   );
 }

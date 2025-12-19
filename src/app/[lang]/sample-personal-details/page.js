@@ -1,4 +1,6 @@
-"use client";
+"use client"; 
+import AdBanner from "@/components/AdBanner";
+
 
 import { useLanguage } from "@/context/LanguageContext";
 import { Globe } from "lucide-react";
@@ -8,7 +10,7 @@ import { useRouter } from "next/navigation";
 import Footer from "@/components/Footer";
 
 export default function SamplePersonalDetailsPage() {
-  const { t, lang, changeLang } = useLanguage();
+  const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
   const [openLang, setOpenLang] = useState(false);
   const router = useRouter();
 
@@ -83,7 +85,7 @@ const handleBack = () => router.back();
     {t.personal_examples_note}
   </p>
 </section>
-
+<AdBanner adKey={AD_KEY} />
       {/* Page Content */}
       <main className="max-w-4xl mx-auto container mx-auto p-6">
         <div className="bg-white rounded-2xl shadow-md p-6 border border-gray-200">
@@ -126,7 +128,7 @@ const handleBack = () => router.back();
           </div>
         </div>
       </main>
-      
+      <AdBanner adKey={AD_KEY} />
 <section className="max-w-4xl mx-auto bg-white rounded-2xl shadow-md p-6 border border-gray-200 space-y-6 mb-8">
       {/* عنوان القسم */}
       <div>
@@ -160,6 +162,7 @@ const handleBack = () => router.back();
           <li>{t.personal_tip_three}</li>
         </ul>
       </section>
+      <AdBanner adKey={AD_KEY} />
       <Footer/>
     </div>
   );

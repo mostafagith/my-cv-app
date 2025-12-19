@@ -1,4 +1,6 @@
-"use client";
+"use client"; 
+import AdBanner from "@/components/AdBanner";
+
 
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -12,7 +14,7 @@ import Footer from "@/components/Footer";
 
 export default function SelectTemplate() {
   const router = useRouter();
-  const { t, lang,changeLang } = useLanguage();
+  const { t, lang,changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
   const { cvT, cvLang, changeCvLang } = useCVLanguage();
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [cvData, setCvData] = useState(null);
@@ -203,7 +205,7 @@ useEffect(() => {
     <option value="pt">{t.portuguese}</option>
   </select>
 </div>
-
+<AdBanner adKey={AD_KEY} />
         {/* Templates Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 ">
           {templates.map((template) => (
@@ -242,6 +244,7 @@ useEffect(() => {
           <span className="text-gray-700 text-sm">{t["you_can_change_template_later"]}</span>
         </div>
       </div>
+      <AdBanner adKey={AD_KEY} />
       <Footer/>
     </div>
   );

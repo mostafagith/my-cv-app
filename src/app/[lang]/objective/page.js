@@ -1,4 +1,5 @@
-"use client";
+"use client"; import AdBanner from "@/components/AdBanner";
+;
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -10,7 +11,7 @@ import Footer from "@/components/Footer";
 
 export default function ObjectivePage() {
   const router = useRouter();
-  const { t, lang, changeLang } = useLanguage();
+  const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
   const [openLang, setOpenLang] = useState(false);
   const toggleLangMenu = () => setOpenLang(!openLang);
   const [objective, setObjective] = useState("");
@@ -224,33 +225,7 @@ const handleBack = () => {
             {objective.length}/500 {t["characters"] || t["characters"]}
           </p>
         </div>
-
-        {/* Tips */}
-        {/* <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
-          <h3 className="font-bold text-gray-800 mb-3">{t["tipsTitle"] || t["Tips for a great objective:"]}</h3>
-          <ul className="space-y-2">
-            {tips.map((tip, i) => (
-              <li key={i} className="flex items-center gap-2 text-gray-600">
-                <IoCheckmarkCircle size={18} className="text-teal-600" />
-                <span>{tip}</span>
-              </li>
-            ))}
-          </ul>
-        </div> */}
-
-        {/* Examples
-        <div className="bg-green-50 border-l-4 border-teal-500 p-5 rounded-xl">
-          <h3 className="font-bold text-teal-800 mb-3">{t["goodExamples"] || t["Good Examples:"]}</h3>
-          {examples.map((ex, i) => (
-            <blockquote
-              key={i}
-              className="bg-white border border-green-100 p-3 rounded-lg text-gray-700 italic mb-3"
-            >
-              “{ex}”
-            </blockquote>
-          ))}
-        </div> */}
-      {/* Save Button */}
+<AdBanner adKey={AD_KEY} />
       <div className="p-5 border-t border-gray-200 bg-white">
         <button
           onClick={handleSave}
@@ -279,6 +254,7 @@ const handleBack = () => {
           <li className="flex items-center gap-2 text-gray-600"><IoCheckmarkCircle size={18} className="text-teal-600" />{t.summary_tip_three}</li>
         </ul>
       </section>
+      <AdBanner adKey={AD_KEY} />
       {/* FAQ Section */}
       <section className="max-w-4xl mx-auto mt-10 px-5">
         <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
@@ -321,6 +297,7 @@ const handleBack = () => {
           </div>
         </div>
       </section>
+      <AdBanner adKey={AD_KEY} />
       <Footer/>
     </div>
   );

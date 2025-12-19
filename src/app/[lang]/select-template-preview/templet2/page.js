@@ -1,4 +1,5 @@
-"use client";
+"use client"; import AdBanner from "@/components/AdBanner";
+;
 
 import { useEffect, useState } from "react";
 import { IoArrowBack, IoDownloadOutline } from "react-icons/io5";
@@ -14,7 +15,7 @@ import Link from "next/link";
 export default function PdfPreview() {
   const [cvData, setCvData] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
-const { t, lang, changeLang } = useLanguage();
+const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
   const trendingPosts = blogPostsData.slice(0, 6);
   const { cvT,cvLang } = useCVLanguage();
   const safeGetItem = (key) => {
@@ -283,6 +284,7 @@ try {
           {isGenerating ? t["generating"] : t["download_share_file"]}
         </button>
       </header>
+      <AdBanner adKey={AD_KEY} />
 
       {/* MAIN */}
       <main className="flex-1 flex justify-center py-2 px-1 md:py-4 md:px-8 overflow-y-auto" dir={cvLang == "ar" ? "rtl": "ltr"}>
@@ -475,6 +477,7 @@ try {
           }
         </div>
       </main>
+      <AdBanner adKey={AD_KEY} />
       <section className="py-16 bg-gray-50 px-4 md:px-20">
                 <div className="max-w-4xl mx-auto">
                   <h2 className="text-3xl font-bold text-center text-gray-900 mb-10">
@@ -539,6 +542,7 @@ try {
                           ))}
                         </div>
                       </section>
+                      <AdBanner adKey={AD_KEY} />
                 <div className="max-w-6xl mx-auto text-center mb-12">
                   <h2 className="text-3xl font-bold text-gray-900 mb-4">
                     {t.cv_tips_title}
@@ -569,6 +573,7 @@ try {
                   ))}
                 </div>
               </section>
+              <AdBanner adKey={AD_KEY} />
       <Footer/>
     </div>
   );

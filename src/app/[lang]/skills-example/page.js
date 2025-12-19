@@ -1,4 +1,6 @@
-"use client";
+"use client"; 
+import AdBanner from "@/components/AdBanner";
+
 
 import { IoArrowBack } from "react-icons/io5";
 import { useLanguage } from '@/context/LanguageContext';
@@ -7,7 +9,7 @@ import { useState } from 'react';
 import Footer from "@/components/Footer";
 
 export default function SkillsExample() {
-    const { t, lang, changeLang } = useLanguage();
+    const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
     const [openLang, setOpenLang] = useState(false);
     const toggleLangMenu = () => setOpenLang(!openLang);
   const exampleSkills = [
@@ -127,20 +129,20 @@ export default function SkillsExample() {
         {/* <div className="w-6" /> */}
       </div>
       {/* Skills Examples Intro Section */}
-<section className="max-w-4xl mx-auto mt-8 bg-white border border-gray-200 rounded-xl p-6 mb-6">
-  <h2 className="text-2xl font-bold text-gray-800 mb-3">
-    {t.skills_examples_title}
-  </h2>
+      <section className="max-w-4xl mx-auto mt-8 bg-white border border-gray-200 rounded-xl p-6 mb-6">
+        <h2 className="text-2xl font-bold text-gray-800 mb-3">
+          {t.skills_examples_title}
+        </h2>
 
-  <p className="text-gray-600 leading-relaxed mb-4">
-    {t.skills_examples_intro}
-  </p>
+        <p className="text-gray-600 leading-relaxed mb-4">
+          {t.skills_examples_intro}
+        </p>
 
-  <p className="text-gray-600 leading-relaxed">
-    {t.skills_examples_note}
-  </p>
-</section>
-
+        <p className="text-gray-600 leading-relaxed">
+          {t.skills_examples_note}
+        </p>
+      </section>
+      <AdBanner adKey={AD_KEY} />
       <div className="max-w-4xl mx-auto space-y-6 p-4 md:p-8">
         {exampleSkills.map((skill, idx) => (
           <div key={skill.id} className="bg-gray-100 p-4 rounded-md border border-gray-200">
@@ -191,6 +193,7 @@ export default function SkillsExample() {
           <li>{t.skills_tip_three}</li>
         </ul>
       </section>
+      <AdBanner adKey={AD_KEY} />
 
       <Footer/>
     </div>

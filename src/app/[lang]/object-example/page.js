@@ -1,4 +1,5 @@
-"use client";
+"use client"; import AdBanner from "@/components/AdBanner";
+;
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -9,7 +10,7 @@ import Footer from "@/components/Footer";
 
 export default function ObjectiveExamplePage() {
   const router = useRouter();
-  const { t, lang, changeLang } = useLanguage();
+  const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
   const [openLang, setOpenLang] = useState(false);
   const toggleLangMenu = () => setOpenLang(!openLang);
 
@@ -103,6 +104,7 @@ export default function ObjectiveExamplePage() {
           {t.summary_examples_note}
         </p>
       </section>
+      <AdBanner adKey={AD_KEY} />
       {/* Content */}
       <main className="max-w-4xl mx-auto flex-1 overflow-y-auto p-6 space-y-6">
         <h2 className="text-lg font-semibold text-gray-800">
@@ -147,6 +149,7 @@ export default function ObjectiveExamplePage() {
           <li>{t.summary_tip_three}</li>
         </ul>
       </section>
+      <AdBanner adKey={AD_KEY} />
       <Footer/>
     </div>
   );

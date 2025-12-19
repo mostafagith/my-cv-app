@@ -1,5 +1,5 @@
 'use client';
-
+import AdBanner from '@/components/AdBanner';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { ChevronRight, CheckCircle, ClipboardList } from 'lucide-react';
@@ -11,7 +11,7 @@ import Footer from '@/components/Footer';
 
 export default function EducationDetails() {
   const router = useRouter();
-  const { t, lang, changeLang } = useLanguage();
+  const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
   const [openLang, setOpenLang] = useState(false);
   const toggleLangMenu = () => setOpenLang(!openLang);
   const [educations, setEducations] = useState([]);
@@ -344,6 +344,7 @@ const handleSave = () => {
           {t['saveEducation']}
         </button>
       </div>
+      <AdBanner adKey={AD_KEY} />
       {/* Education Tips Section */}
       <section className="max-w-4xl mx-auto mt-12 bg-white border border-gray-200 rounded-xl p-6 space-y-6">
         <div>
@@ -430,6 +431,7 @@ const handleSave = () => {
           <li>{t.education_examples_tip_three}</li>
         </ul>
       </section>
+      <AdBanner adKey={AD_KEY} />
 
       {/* FAQ Section */}
       <section className="max-w-4xl mx-auto mt-10 px-5">
@@ -478,6 +480,7 @@ const handleSave = () => {
           </div>
         </div>
       </section>
+      <AdBanner adKey={AD_KEY} />
       <Footer/>
     </div>
   );

@@ -1,4 +1,5 @@
-"use client";
+"use client"; import AdBanner from "@/components/AdBanner";
+;
 import { useState, useEffect } from "react";
 import { IoArrowBack, IoTrash, IoPencil, IoAdd, IoCheckmarkCircle } from "react-icons/io5";
 import { useLanguage } from "@/context/LanguageContext";
@@ -9,7 +10,7 @@ import Footer from "@/components/Footer";
 export default function ExampleCertificates() {
     const router = useRouter();
 
-    const { t, lang, changeLang } = useLanguage();
+    const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
     const [openLang, setOpenLang] = useState(false);
     const toggleLangMenu = () => setOpenLang(!openLang);
   const examples = [
@@ -115,6 +116,7 @@ export default function ExampleCertificates() {
             {t.certificates_examples_note}
           </p>
         </section>
+        <AdBanner adKey={AD_KEY} />
         <main className="max-w-4xl mx-auto flex-1 p-6 space-y-6">
         <div className="bg-white p-4 rounded-xl">
             <h3 className="text-lg font-bold mb-4 text-black">{t.exampleCertificates}</h3>
@@ -148,6 +150,7 @@ export default function ExampleCertificates() {
             <li>{t.certificates_tip_three}</li>
           </ul>
         </section>
+        <AdBanner adKey={AD_KEY} />
         <Footer/>
     </div>
   );

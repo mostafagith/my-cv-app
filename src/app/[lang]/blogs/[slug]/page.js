@@ -1,4 +1,5 @@
-"use client";
+"use client"; import AdBanner from "@/components/AdBanner";
+;
 
 import { useRouter } from "next/navigation";
 import { IoArrowBack } from "react-icons/io5";
@@ -11,7 +12,7 @@ import Link from "next/link";
 
 export default function BlogPostDetail({ params }) {
   const router = useRouter();
-  const { t, lang } = useLanguage();
+  const { t, lang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
   const { slug } = React.use(params);
   
   const postIndex = blogPostsData.findIndex((p) => p.slug === slug);
@@ -115,6 +116,7 @@ export default function BlogPostDetail({ params }) {
         <article className="max-w-none text-gray-800 leading-relaxed prose prose-xl md:prose-2xl prose-headings:text-gray-900 prose-headings:font-black prose-strong:text-teal-700 prose-blockquote:border-teal-500 prose-blockquote:bg-teal-50/50">
           <div className="blog-content" dangerouslySetInnerHTML={{ __html: t[postData.contentKey] }} />
         </article>
+        <AdBanner adKey={AD_KEY} />
 
         {/* زر إجراء سريع (CTA) - مهم جداً لـ "أدسنس" لربط المقال بخدمة الموقع */}
         <div className="my-16 p-8 bg-teal-600 rounded-3xl text-white text-center">
@@ -126,6 +128,7 @@ export default function BlogPostDetail({ params }) {
         </div>
 
         <hr className="my-16 border-gray-100" />
+        <AdBanner adKey={AD_KEY} />
 
         {/* 1. المقال المقترح */}
         <section className="mb-20">
@@ -185,7 +188,7 @@ export default function BlogPostDetail({ params }) {
           </div>
         </section>
       </main>
-
+      <AdBanner adKey={AD_KEY} />
       <Footer />
     </div>
   );

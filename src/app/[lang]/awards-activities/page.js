@@ -1,4 +1,5 @@
-"use client";
+"use client"; import AdBanner from "@/components/AdBanner";
+;
 import { useState, useEffect } from "react";
 import { IoArrowBack,IoTrophyOutline, IoPeople, IoHeart, IoMedal, IoTrash, IoPencil, IoCheckmarkCircle } from "react-icons/io5";
 import { useRouter } from "next/navigation";
@@ -8,7 +9,7 @@ import { Globe } from "lucide-react";
 import Footer from "@/components/Footer";
 
 export default function AwardsActivities() {
-  const { t, lang, changeLang } = useLanguage();
+  const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
   const [openLang, setOpenLang] = useState(false);
   const toggleLangMenu = () => setOpenLang(!openLang);
   const router = useRouter();
@@ -355,6 +356,7 @@ const handleSaveAll = () => {
                 <li>{t.awards_tip_three}</li>
               </ul>
             </section>
+            <AdBanner adKey={AD_KEY} />
             {/* FAQ Section for Awards & Activities */}
             <section className="max-w-4xl mx-auto mt-12 px-6">
               <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
@@ -377,7 +379,7 @@ const handleSaveAll = () => {
                 ))}
               </div>
             </section>
-
+            <AdBanner adKey={AD_KEY} />
             {/* Common Mistakes Section for Awards & Activities */}
             <section className="max-w-4xl mx-auto mt-12 mb-16 px-6">
               <div className="bg-red-50 border border-red-100 rounded-2xl p-6 shadow-sm">
@@ -398,6 +400,7 @@ const handleSaveAll = () => {
                 </div>
               </div>
             </section>
+            <AdBanner adKey={AD_KEY} />
             <Footer/>
     </div>
   );

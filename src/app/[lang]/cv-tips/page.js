@@ -1,10 +1,12 @@
-"use client";
+"use client"; import AdBanner from "@/components/AdBanner";
+import Footer from "@/components/Footer";
+;
 import Navbar from "@/components/Navbar";
 import { useLanguage } from "@/context/LanguageContext";
 import Link from "next/link";
 
 export default function CvTipsPage() {
-  const { t, lang, changeLang } = useLanguage();
+  const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
 
   return (
     <div className="bg-white">
@@ -36,6 +38,7 @@ export default function CvTipsPage() {
                   {t.cv_cta_button}
               </Link>
         </div>
+        <AdBanner adKey={AD_KEY} />
         <h2 className="text-2xl font-semibold text-gray-800 mt-6 mb-2">
           {t.cv_tips_education_title}
         </h2>
@@ -60,6 +63,8 @@ export default function CvTipsPage() {
         </h2>
         <p className="text-gray-700">{t.cv_tips_examples_desc}</p>
       </div>
+      <AdBanner adKey={AD_KEY} />
+      <Footer/>
     </div>
   );
 }

@@ -1,4 +1,5 @@
-"use client";
+"use client"; import AdBanner from "@/components/AdBanner";
+;
 import { IoArrowBack, IoTrophyOutline, IoPeople, IoHeart, IoMedal } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
@@ -8,7 +9,7 @@ import Footer from "@/components/Footer";
 
 export default function AwardsExamplePage() {
   const router = useRouter();
-  const { t, lang, changeLang } = useLanguage();
+  const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
   const [openLang, setOpenLang] = useState(false);
 
   const toggleLangMenu = () => setOpenLang(!openLang);
@@ -113,20 +114,19 @@ export default function AwardsExamplePage() {
         </div>
       </header>
       {/* Awards & Activities Examples Intro Section */}
-<section className="max-w-4xl mx-auto mt-8 bg-white border border-gray-200 rounded-xl p-6 mb-6">
-  <h2 className="text-2xl font-bold text-gray-800 mb-3">
-    {t.awards_examples_title}
-  </h2>
+      <section className="max-w-4xl mx-auto mt-8 bg-white border border-gray-200 rounded-xl p-6 mb-6">
+        <h2 className="text-2xl font-bold text-gray-800 mb-3">
+          {t.awards_examples_title}
+        </h2>
 
-  <p className="text-gray-600 leading-relaxed mb-4">
-    {t.awards_examples_intro}
-  </p>
+        <p className="text-gray-600 leading-relaxed mb-4">
+          {t.awards_examples_intro}
+        </p>
 
-  <p className="text-gray-600 leading-relaxed">
-    {t.awards_examples_note}
-  </p>
-</section>
-
+        <p className="text-gray-600 leading-relaxed">
+          {t.awards_examples_note}
+        </p>
+      </section>
       {/* Awards Examples Intro Section */}
       <section className="max-w-4xl mx-auto mt-8 bg-white border border-gray-200 rounded-xl p-6 mb-6">
         <h2 className="text-2xl font-bold text-gray-800 mb-3">
@@ -141,7 +141,7 @@ export default function AwardsExamplePage() {
           {t.awards_examples_note}
         </p>
       </section>
-
+      <AdBanner adKey={AD_KEY} />
       <div className="max-w-4xl mx-auto p-4 md:p-8">
         <h1 className="text-2xl font-bold text-teal-600 mb-6">
           {t.awardsActivitiesExamples || "Awards & Activities Examples"}
@@ -180,6 +180,7 @@ export default function AwardsExamplePage() {
           <li>{t.awards_tip_three}</li>
         </ul>
       </section>
+      <AdBanner adKey={AD_KEY} />
       <Footer/>
     </div>
   );

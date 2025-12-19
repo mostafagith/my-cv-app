@@ -1,5 +1,5 @@
 'use client';
-
+import AdBanner from '@/components/AdBanner';
 import { ChevronRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
@@ -9,7 +9,7 @@ import Footer from '@/components/Footer';
 
 export default function ExperienceExample() {
   const router = useRouter();
-  const { t, lang, changeLang } = useLanguage();
+  const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
   const [openLang, setOpenLang] = useState(false);
   const toggleLangMenu = () => setOpenLang(!openLang);
 
@@ -144,19 +144,20 @@ export default function ExperienceExample() {
         <div className="w-6" /> {/* placeholder */}
       </div>
             {/* Experience Examples Intro Section */}
-<section className="max-w-4xl mx-auto mt-8 bg-white border border-gray-200 rounded-xl p-6 mb-6">
-  <h2 className="text-2xl font-bold text-gray-800 mb-3">
-    {t.experience_examples_title}
-  </h2>
+      <section className="max-w-4xl mx-auto mt-8 bg-white border border-gray-200 rounded-xl p-6 mb-6">
+        <h2 className="text-2xl font-bold text-gray-800 mb-3">
+          {t.experience_examples_title}
+        </h2>
 
-  <p className="text-gray-600 leading-relaxed mb-4">
-    {t.experience_examples_intro}
-  </p>
+        <p className="text-gray-600 leading-relaxed mb-4">
+          {t.experience_examples_intro}
+        </p>
 
-  <p className="text-gray-600 leading-relaxed">
-    {t.experience_examples_note}
-  </p>
-</section>
+        <p className="text-gray-600 leading-relaxed">
+          {t.experience_examples_note}
+        </p>
+      </section>
+      <AdBanner adKey={AD_KEY} />
       {/* Content */}
       <div className="max-w-4xl mx-auto p-5 space-y-6">
         <h2 className="text-lg font-bold text-gray-800">{t['exampleWorkExperience'] || 'Example Work Experience'}</h2>
@@ -188,6 +189,7 @@ export default function ExperienceExample() {
           <li>{t.experience_tip_three}</li>
         </ul>
       </section>
+      <AdBanner adKey={AD_KEY} />
       <Footer/>
     </div>
   );

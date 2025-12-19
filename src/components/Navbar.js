@@ -1,4 +1,5 @@
-"use client";
+"use client"; import AdBanner from "@/components/AdBanner";
+;
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X, Globe } from "lucide-react";
@@ -6,7 +7,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
-  const { t, lang, changeLang } = useLanguage();
+  const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
   const [menuOpen, setMenuOpen] = useState(false);
   const [openLang, setOpenLang] = useState(false);
 

@@ -1,4 +1,5 @@
-"use client";
+"use client"; import AdBanner from "@/components/AdBanner";
+;
 import { useEffect, useState } from "react";
 import { IoArrowBack, IoTrashOutline, IoAddCircleOutline, IoCheckmarkCircle } from "react-icons/io5";
 import { useRouter } from "next/navigation";
@@ -9,7 +10,7 @@ import Footer from "@/components/Footer";
 
 export default function ReferencesPage() {
   const router = useRouter();
-  const { t, lang, changeLang } = useLanguage();
+  const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
   const [openLang, setOpenLang] = useState(false);
   const toggleLangMenu = () => setOpenLang(!openLang);
 
@@ -282,7 +283,7 @@ const handleSave = () => {
         >
           {t["Save References"]}
         </button>
-
+        <AdBanner adKey={AD_KEY} />
         {/* Tips Section */}
         {/* <div className="bg-gray-50 border border-gray-200 rounded-xl p-5 mt-8">
           <h3 className="font-semibold text-gray-800 mb-3">{t["Reference Tips:"]}</h3>
@@ -326,6 +327,7 @@ const handleSave = () => {
           <li className="flex items-center"><IoCheckmarkCircle size={16} className="text-teal-500 mx-2" />{t.references_tip_three}</li>
         </ul>
       </section>
+      <AdBanner adKey={AD_KEY} />
       {/* FAQ Section for References */}
       <section className="max-w-4xl mx-auto mt-12 px-6">
         <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
@@ -369,6 +371,7 @@ const handleSave = () => {
           </div>
         </div>
       </section>
+      <AdBanner adKey={AD_KEY} />
       <Footer/>
     </div>
   );

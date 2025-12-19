@@ -1,4 +1,5 @@
-"use client";
+"use client"; import AdBanner from "@/components/AdBanner";
+;
 
 import { Document, Page, pdfjs } from "react-pdf";
 import 'react-pdf/dist/Page/TextLayer.css';

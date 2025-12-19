@@ -1,4 +1,5 @@
-"use client";
+"use client"; 
+import AdBanner from "@/components/AdBanner";
 export const dynamic = "force-dynamic";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
@@ -22,7 +23,7 @@ export default function FinalizeCV() {
     const trendingPosts = blogPostsData.slice(0, 6);
   
 const searchParams = useSearchParams();
-const { t, lang, changeLang } = useLanguage();
+const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
 
 const [cvTitle, setCvTitle] = useState("");
 const [completionStatus, setCompletionStatus] = useState({
@@ -352,6 +353,7 @@ const handlePreview = () => {
             {t["Complete at least 50% of sections to save your CV"]}
           </p>
         )}
+        <AdBanner adKey={AD_KEY} />
 
         <div className="flex items-center gap-2 bg-gray-100 border border-gray-200 rounded-lg p-3 mt-4">
           <IoInformationCircle size={20} className="text-teal-500" />
@@ -387,6 +389,7 @@ const handlePreview = () => {
                   </div>
                 </div>
               </section>
+              <AdBanner adKey={AD_KEY} />
 
               {/* --- قسم نصائح ذهبية للـ CV --- */}
               <section className="py-16 bg-white px-4 md:px-20">
@@ -455,6 +458,7 @@ const handlePreview = () => {
                   ))}
                 </div>
               </section>
+              <AdBanner adKey={AD_KEY} />
       <Footer/>
     </div>
   );

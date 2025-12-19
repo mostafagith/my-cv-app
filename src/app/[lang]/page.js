@@ -1,4 +1,5 @@
-"use client";
+"use client"; 
+import AdBanner from "@/components/AdBanner";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Globe,Calendar, Share2, Gift, Bell, Settings, ArrowRight,Facebook, Linkedin } from "lucide-react";
@@ -23,7 +24,8 @@ function AdMobBannerPlaceholder() {
 }
 
 export default function HomePage() {
-  const { t, lang } = useLanguage();
+  const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
+  const { t, lang } = useLanguage(); 
   const router = useRouter();
   const [openLang, setOpenLang] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
@@ -343,7 +345,7 @@ const templates = [
                   </div>
                 </div>
               </section>
-
+              <AdBanner adKey={AD_KEY} />
               <section className="bg-white py-20 px-4 md:px-20">
                 <div className="max-w-4xl mx-auto space-y-16">
 
@@ -414,7 +416,7 @@ const templates = [
                 </div>
               </section>
 
-
+              <AdBanner adKey={AD_KEY} />
               {/* --- قسم الأسئلة الشائعة (FAQ) --- */}
               <section className="py-16 bg-gray-50 px-4 md:px-20">
                 <div className="max-w-4xl mx-auto">
@@ -442,44 +444,45 @@ const templates = [
                   </div>
                 </div>
               </section>
-
+              <AdBanner adKey={AD_KEY} />
               {/* --- قسم نصائح ذهبية للـ CV --- */}
               <section className="py-16 bg-white px-4 md:px-20">
                 {/* 2. أهم المقالات */}
-                      <section className="mb-12">
-                        <div className="flex items-center justify-between mb-8">
-                          <h3 className="text-2xl md:text-3xl font-black text-gray-900">
-                              {t.trending_posts}
-                          </h3>
-                          <Link href={`/${lang}/blogs`} className="text-teal-600 font-bold flex items-center gap-1 hover:underline">
-                            {t.view_all} <ArrowRight size={16} className={lang === 'ar' ? 'rotate-180' : ''} />
-                          </Link>
-                        </div>
+                <section className="mb-12">
+                  <div className="flex items-center justify-between mb-8">
+                    <h3 className="text-2xl md:text-3xl font-black text-gray-900">
+                        {t.trending_posts}
+                    </h3>
+                    <Link href={`/${lang}/blogs`} className="text-teal-600 font-bold flex items-center gap-1 hover:underline">
+                      {t.view_all} <ArrowRight size={16} className={lang === 'ar' ? 'rotate-180' : ''} />
+                    </Link>
+                  </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                          {trendingPosts.map((post) => (
-                            <Link 
-                              href={`/${lang}/blogs/${post.slug}`} 
-                              key={post.id}
-                              className="group flex flex-col bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-teal-900/5 transition-all"
-                            >
-                              <div className="aspect-video overflow-hidden">
-                                <img src={post.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt={t[post.titleKey]} />
-                              </div>
-                              <div className="p-4 flex-grow flex flex-col">
-                                <span className="text-teal-600 text-[10px] font-black uppercase tracking-tighter mb-2">{t[post.categoryKey]}</span>
-                                <h5 className="font-bold text-gray-900 line-clamp-2 group-hover:text-teal-600 transition-colors text-lg mb-4">
-                                  {t[post.titleKey]}
-                                </h5>
-                                <div className="mt-auto pt-3 border-t border-gray-50 flex items-center justify-between text-gray-400 text-xs">
-                                  <span className="flex items-center gap-1"><Calendar size={12} /> {post.date}</span>
-                                  <ArrowRight size={14} className={`group-hover:translate-x-1 transition-transform ${lang === 'ar' ? 'rotate-180 group-hover:-translate-x-1' : ''}`} />
-                                </div>
-                              </div>
-                            </Link>
-                          ))}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {trendingPosts.map((post) => (
+                      <Link 
+                        href={`/${lang}/blogs/${post.slug}`} 
+                        key={post.id}
+                        className="group flex flex-col bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-teal-900/5 transition-all"
+                      >
+                        <div className="aspect-video overflow-hidden">
+                          <img src={post.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt={t[post.titleKey]} />
                         </div>
-                      </section>
+                        <div className="p-4 flex-grow flex flex-col">
+                          <span className="text-teal-600 text-[10px] font-black uppercase tracking-tighter mb-2">{t[post.categoryKey]}</span>
+                          <h5 className="font-bold text-gray-900 line-clamp-2 group-hover:text-teal-600 transition-colors text-lg mb-4">
+                            {t[post.titleKey]}
+                          </h5>
+                          <div className="mt-auto pt-3 border-t border-gray-50 flex items-center justify-between text-gray-400 text-xs">
+                            <span className="flex items-center gap-1"><Calendar size={12} /> {post.date}</span>
+                            <ArrowRight size={14} className={`group-hover:translate-x-1 transition-transform ${lang === 'ar' ? 'rotate-180 group-hover:-translate-x-1' : ''}`} />
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+                <AdBanner adKey={AD_KEY} />
                 <div className="max-w-6xl mx-auto text-center mb-12">
                   <h2 className="text-3xl font-bold text-gray-900 mb-4">
                     {t.cv_tips_title}
@@ -508,7 +511,7 @@ const templates = [
                   ))}
                 </div>
               </section>
-
+              <AdBanner adKey={AD_KEY} />
       {/* Footer */}
       <Footer/>
 

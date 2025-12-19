@@ -1,4 +1,5 @@
-"use client";
+"use client"; import AdBanner from "@/components/AdBanner";
+;
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -9,7 +10,7 @@ import Footer from "@/components/Footer";
 
 export default function HopesExample() {
   const router = useRouter();
-  const { t, lang, changeLang } = useLanguage();
+  const { t, lang, changeLang } = useLanguage(); const AD_KEY = "39dbba6476f4f6fc7e968a32afd3c1ba";
   const [openLang, setOpenLang] = useState(false);
   const toggleLangMenu = () => setOpenLang(!openLang);
 
@@ -107,6 +108,7 @@ export default function HopesExample() {
             </p>
           </div>
         </div>
+        <AdBanner adKey={AD_KEY} />
 
         {/* Example Cards */}
         {hopesExamples.map((example, index) => (
@@ -136,6 +138,7 @@ export default function HopesExample() {
           <li>{t["Show enthusiasm and motivation"]}</li>
         </ul>
       </section>
+      <AdBanner adKey={AD_KEY} />
       <Footer/>
     </div>
   );
