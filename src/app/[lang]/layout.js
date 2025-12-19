@@ -185,6 +185,14 @@ export default async function RootLayout({ children, params }) {
   return (
     <html lang={currentLang} dir={direction}>
       <head>
+        <Script strategy="beforeInteractive" data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js"></Script>
+        <Script strategy="beforeInteractive" data-cfasync="false" src="https://the.gatekeeperconsent.com/cmp.min.js"></Script>
+<Script async src="//www.ezojs.com/ezoic/sa.min.js"></Script>
+<Script>
+  window.ezstandalone = window.ezstandalone || {};
+  ezstandalone.cmd = ezstandalone.cmd || [];
+</Script>
+
         <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-SZPN97RL4W"
