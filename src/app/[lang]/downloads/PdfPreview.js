@@ -7,7 +7,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/b
 
 export default function PdfPreview({ pdfData }) {
   return (
-    <div className="w-full h-80 flex items-center justify-center bg-gray-100 rounded-xl overflow-hidden relative">
+    <div className="w-full h-80 flex items-center justify-center bg-gray-100 rounded-xl overflow-hidden relative ">
       <Document
         file={pdfData}
         loading={<div className="text-gray-500">Loading preview...</div>}

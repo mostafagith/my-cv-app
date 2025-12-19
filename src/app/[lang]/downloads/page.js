@@ -120,7 +120,7 @@ const handleDelete = (index) => {
 
 
   return (
-    <>
+    <div className="bg-white">
       <style jsx global>{`
         .react-pdf__Page{
           position: absolute !important;
@@ -136,16 +136,18 @@ const handleDelete = (index) => {
         ))}
       </div>
       {downloads.length === 0 ? (
-        <div className="min-h-screen flex items-center justify-center text-gray-500">
+        <>
+        <div className="flex items-center justify-center text-gray-500 bg-white">
           {t.no_downloads_yet}
-          <div className="my-16 p-8 bg-teal-600 rounded-3xl text-white text-center">
+        </div>
+          <div className="max-w-4xl mx-auto my-16 p-8 bg-teal-600 rounded-3xl text-white text-center ">
             <h3 className="text-2xl font-bold mb-4">{t.cv_cta_title}</h3>
             <p className="mb-6 opacity-90">{t.cv_cta_subtitle}</p>
             <Link href={`/${lang}/create`} className="inline-block bg-white text-teal-600 px-8 py-3 rounded-full font-bold hover:bg-teal-50 transition-colors">
                 {t.cv_cta_button}
             </Link>
         </div>
-        </div>
+        </>
       ) : (
         <div className="min-h-screen  bg-gray-50 py-8 px-4">
           <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -172,7 +174,7 @@ const handleDelete = (index) => {
               </div>
             ))}
           </div>
-              <div className="max-w-5xl mx-auto my-16 p-8 bg-teal-600 rounded-3xl text-white text-center">
+              <div className="max-w-4xl mx-auto my-16 p-8 bg-teal-600 rounded-3xl text-white text-center">
                     <h3 className="text-2xl font-bold mb-4">{t.cv_cta_title}</h3>
                     <p className="mb-6 opacity-90">{t.cv_cta_subtitle}</p>
                     <Link href={`/${lang}/create`} className="inline-block bg-white text-teal-600 px-8 py-3 rounded-full font-bold hover:bg-teal-50 transition-colors">
@@ -183,6 +185,6 @@ const handleDelete = (index) => {
       )}
       
       <Footer/>
-    </>
+    </div>
   );
 }
