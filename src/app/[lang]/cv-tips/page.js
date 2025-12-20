@@ -38,7 +38,7 @@ export default function CvTipsPage() {
                   {t.cv_cta_button}
               </Link>
         </div>
-        <AdBanner adKey={AD_KEY} />
+        {/* <AdBanner adKey={AD_KEY} /> */}
         <h2 className="text-2xl font-semibold text-gray-800 mt-6 mb-2">
           {t.cv_tips_education_title}
         </h2>
@@ -63,7 +63,7 @@ export default function CvTipsPage() {
         </h2>
         <p className="text-gray-700">{t.cv_tips_examples_desc}</p>
       </div>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       <Footer/>
     </div>
   );

@@ -225,7 +225,7 @@ const handleBack = () => {
             {objective.length}/500 {t["characters"] || t["characters"]}
           </p>
         </div>
-<AdBanner adKey={AD_KEY} />
+{/* <AdBanner adKey={AD_KEY} /> */}
       <div className="p-5 border-t border-gray-200 bg-white">
         <button
           onClick={handleSave}
@@ -254,7 +254,7 @@ const handleBack = () => {
           <li className="flex items-center gap-2 text-gray-600"><IoCheckmarkCircle size={18} className="text-teal-600" />{t.summary_tip_three}</li>
         </ul>
       </section>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       {/* FAQ Section */}
       <section className="max-w-4xl mx-auto mt-10 px-5">
         <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
@@ -297,7 +297,7 @@ const handleBack = () => {
           </div>
         </div>
       </section>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       <Footer/>
     </div>
   );

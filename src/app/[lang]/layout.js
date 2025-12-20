@@ -185,7 +185,7 @@ export default async function RootLayout({ children, params }) {
   return (
     <html lang={currentLang} dir={direction}>
       <head>
-        <Script
+        {/* <Script
           async="async"
           data-cfasync="false"
           src="https://pl28293521.effectivegatecpm.com/8e7eb342208347d0285973fbe19d2f68/invoke.js"
@@ -193,7 +193,7 @@ export default async function RootLayout({ children, params }) {
         <Script
           type="text/javascript"
           src="https://pl28293619.effectivegatecpm.com/a6/e7/df/a6e7dffc6ee7a5b2abd8cb2d5a1ffcb8.js"
-        ></Script>
+        ></Script> */}
         {/* <Script strategy="beforeInteractive" data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js"></Script>
         <Script strategy="beforeInteractive" data-cfasync="false" src="https://the.gatekeeperconsent.com/cmp.min.js"></Script>
         <Script
@@ -239,13 +239,12 @@ export default async function RootLayout({ children, params }) {
         <meta name="google-site-verification" content="nflu1RK_Kt_Qi6OnVXQwmqBrr0Y1MmfG5hfJnoWTLbI" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <div 
+        {/* <div 
           id="container-8e7eb342208347d0285973fbe19d2f68" 
           className="max-h-[140px] md:max-h-[140px] overflow-hidden flex justify-center my-2 bg-gray-50"
         >
-          {/* الإعلان سيظهر هنا ولن يتمدد رأسياً ليغطي الشاشة */}
                 <div id="container-8e7eb342208347d0285973fbe19d2f68"></div>
-        </div>
+        </div> */}
         <Providers lang={currentLang}>
           {children}
         </Providers>

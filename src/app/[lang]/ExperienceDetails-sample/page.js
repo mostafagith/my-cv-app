@@ -157,7 +157,7 @@ export default function ExperienceExample() {
           {t.experience_examples_note}
         </p>
       </section>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       {/* Content */}
       <div className="max-w-4xl mx-auto p-5 space-y-6">
         <h2 className="text-lg font-bold text-gray-800">{t['exampleWorkExperience'] || 'Example Work Experience'}</h2>
@@ -189,7 +189,7 @@ export default function ExperienceExample() {
           <li>{t.experience_tip_three}</li>
         </ul>
       </section>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       <Footer/>
     </div>
   );

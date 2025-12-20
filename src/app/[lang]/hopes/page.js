@@ -197,7 +197,7 @@ const handleBack = () => {
           <span>{t["Save Hopes"]}</span>
         </button>
       </div>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
 
       {/* Hopes & Aspirations Tips */}
       <section className="max-w-4xl mx-auto mt-8 bg-teal-50 border border-teal-200 rounded-xl p-6 mb-8">
@@ -214,7 +214,7 @@ const handleBack = () => {
           <li>{t["Show enthusiasm and motivation"]}</li>
         </ul>
       </section>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       {/* FAQ Section for Hopes & Aspirations */}
       <section className="max-w-4xl mx-auto mt-12 px-6">
         <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
@@ -258,7 +258,7 @@ const handleBack = () => {
           </div>
         </div>
       </section>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       <Footer/>
     </div>
   );

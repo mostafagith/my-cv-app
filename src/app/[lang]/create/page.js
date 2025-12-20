@@ -133,7 +133,7 @@ function handleCreateNew() {
                   <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
                 ))}
               </div>
-              <AdBanner adKey={AD_KEY} />
+              {/* <AdBanner adKey={AD_KEY} /> */}
               <p className="text-gray-600 text-center mt-20">
                 {t.noCvs || "No CVs saved yet."}
               </p>
@@ -161,7 +161,7 @@ function handleCreateNew() {
                 <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
               ))}
             </div>
-            <AdBanner adKey={AD_KEY} />
+            {/* <AdBanner adKey={AD_KEY} /> */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {cvs.map((cv, index) => (
                   <div
@@ -237,7 +237,7 @@ function handleCreateNew() {
           )}
         </div>
       </div>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       <Footer/>
     </div>
   );

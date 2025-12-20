@@ -132,7 +132,7 @@ export default function LanguagesExamplePage() {
           {t.languages_examples_note}
         </p>
       </section>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
 
       {/* Content */}
       <div className="max-w-4xl mx-auto p-6">
@@ -152,7 +152,7 @@ export default function LanguagesExamplePage() {
           </div>
         ))}
       </div>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       {/* Languages Tips */}
       <section className="max-w-4xl mx-auto mt-8 bg-teal-50 border border-teal-200 rounded-xl p-6 mb-8">
         <h3 className="text-xl font-bold text-teal-700 mb-4">
@@ -165,7 +165,7 @@ export default function LanguagesExamplePage() {
           <li>{t.languages_tip_three}</li>
         </ul>
       </section>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       <Footer/>
     </div>
   );

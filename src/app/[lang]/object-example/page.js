@@ -104,7 +104,7 @@ export default function ObjectiveExamplePage() {
           {t.summary_examples_note}
         </p>
       </section>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       {/* Content */}
       <main className="max-w-4xl mx-auto flex-1 overflow-y-auto p-6 space-y-6">
         <h2 className="text-lg font-semibold text-gray-800">
@@ -149,7 +149,7 @@ export default function ObjectiveExamplePage() {
           <li>{t.summary_tip_three}</li>
         </ul>
       </section>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       <Footer/>
     </div>
   );

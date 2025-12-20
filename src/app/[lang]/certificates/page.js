@@ -361,7 +361,7 @@ const handleDelete = (id) => {
             <li>{t.certificates_tip_three}</li>
           </ul>
         </section>
-        <AdBanner adKey={AD_KEY} />
+        {/* <AdBanner adKey={AD_KEY} /> */}
         {/* FAQ Section for Certificates */}
         <section className="max-w-4xl mx-auto mt-12 px-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
@@ -405,7 +405,7 @@ const handleDelete = (id) => {
             </div>
           </div>
         </section>
-        <AdBanner adKey={AD_KEY} />
+        {/* <AdBanner adKey={AD_KEY} /> */}
         <Footer/>
     </div>
   );

@@ -142,7 +142,7 @@ export default function SkillsExample() {
           {t.skills_examples_note}
         </p>
       </section>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       <div className="max-w-4xl mx-auto space-y-6 p-4 md:p-8">
         {exampleSkills.map((skill, idx) => (
           <div key={skill.id} className="bg-gray-100 p-4 rounded-md border border-gray-200">
@@ -193,7 +193,7 @@ export default function SkillsExample() {
           <li>{t.skills_tip_three}</li>
         </ul>
       </section>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
 
       <Footer/>
     </div>

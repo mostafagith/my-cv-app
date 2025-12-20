@@ -38,7 +38,7 @@ export default function AtsSystemPage() {
                       {t.cv_cta_button}
                     </Link>
                   </div>
-                  <AdBanner adKey={AD_KEY} />
+                  {/* <AdBanner adKey={AD_KEY} /> */}
                 </>
               )}
             </div>
@@ -47,7 +47,7 @@ export default function AtsSystemPage() {
 
         <p className="mt-6 text-gray-700 italic">{t.ats_conclusion}</p>
       </div>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       <Footer/>
     </div>
   );

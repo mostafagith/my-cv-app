@@ -357,7 +357,7 @@ const handleBack = () => router.back();
           </div>
         </div>
       </main>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       {/* ---------------- Personal Info Guidance Section ---------------- */}
       <div className="max-w-4xl mx-auto mt-10 bg-gray-100 p-6">
         <h2 className="text-2xl font-bold mb-4 text-teal-600">{t.personal_info_title}</h2>
@@ -416,7 +416,7 @@ const handleBack = () => router.back();
           <li>{t.personal_tip_three}</li>
         </ul>
       </section>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       {/* FAQ Section */}
       <section className="max-w-4xl mx-auto mt-10 mb-10 px-4">
         <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
@@ -475,7 +475,7 @@ const handleBack = () => router.back();
           </div>
         </div>
       </section>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       <Footer/>
     </div>
   );

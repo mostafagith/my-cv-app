@@ -345,7 +345,7 @@ const templates = [
                   </div>
                 </div>
               </section>
-              <AdBanner adKey={AD_KEY} />
+              {/* <AdBanner adKey={AD_KEY} /> */}
               <section className="bg-white py-20 px-4 md:px-20">
                 <div className="max-w-4xl mx-auto space-y-16">
 
@@ -416,7 +416,7 @@ const templates = [
                 </div>
               </section>
 
-              <AdBanner adKey={AD_KEY} />
+              {/* <AdBanner adKey={AD_KEY} /> */}
               {/* --- قسم الأسئلة الشائعة (FAQ) --- */}
               <section className="py-16 bg-gray-50 px-4 md:px-20">
                 <div className="max-w-4xl mx-auto">
@@ -444,7 +444,7 @@ const templates = [
                   </div>
                 </div>
               </section>
-              <AdBanner adKey={AD_KEY} />
+              {/* <AdBanner adKey={AD_KEY} /> */}
               {/* --- قسم نصائح ذهبية للـ CV --- */}
               <section className="py-16 bg-white px-4 md:px-20">
                 {/* 2. أهم المقالات */}
@@ -482,7 +482,7 @@ const templates = [
                     ))}
                   </div>
                 </section>
-                <AdBanner adKey={AD_KEY} />
+                {/* <AdBanner adKey={AD_KEY} /> */}
                 <div className="max-w-6xl mx-auto text-center mb-12">
                   <h2 className="text-3xl font-bold text-gray-900 mb-4">
                     {t.cv_tips_title}
@@ -511,7 +511,7 @@ const templates = [
                   ))}
                 </div>
               </section>
-              <AdBanner adKey={AD_KEY} />
+              {/* <AdBanner adKey={AD_KEY} /> */}
       {/* Footer */}
       <Footer/>
 

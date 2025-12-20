@@ -122,7 +122,7 @@ export default function BlogsPage() {
                 </article>
               </Link>
               {i % 3==0 && i!= 0&&(
-                <AdBanner adKey={AD_KEY} />
+                {/* <AdBanner adKey={AD_KEY} /> */}
               )}
               </>
             ))
@@ -155,11 +155,11 @@ export default function BlogsPage() {
                 {t.cv_cta_button}
             </Link>
         </div>
-          <AdBanner adKey={AD_KEY} />
+          {/* <AdBanner adKey={AD_KEY} /> */}
           </div>
         </aside>
       </main>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       <Footer />
     </div>
   );

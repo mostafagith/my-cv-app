@@ -141,7 +141,7 @@ export default function AwardsExamplePage() {
           {t.awards_examples_note}
         </p>
       </section>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       <div className="max-w-4xl mx-auto p-4 md:p-8">
         <h1 className="text-2xl font-bold text-teal-600 mb-6">
           {t.awardsActivitiesExamples || "Awards & Activities Examples"}
@@ -180,7 +180,7 @@ export default function AwardsExamplePage() {
           <li>{t.awards_tip_three}</li>
         </ul>
       </section>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       <Footer/>
     </div>
   );

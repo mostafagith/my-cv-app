@@ -358,7 +358,7 @@ useEffect(() => {
           {isGenerating ? t["generating"] : t["download_share_file"]}
         </button>
       </header>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
 
       {/* MAIN */}
       <main style={{ 
@@ -780,7 +780,7 @@ useEffect(() => {
           </div>
         </div>
       </main>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       <section className="py-16 bg-gray-50 px-4 md:px-20">
                 <div className="max-w-4xl mx-auto">
                   <h2 className="text-3xl font-bold text-center text-gray-900 mb-10">
@@ -807,7 +807,7 @@ useEffect(() => {
                   </div>
                 </div>
               </section>
-                    <AdBanner adKey={AD_KEY} />
+                    {/* <AdBanner adKey={AD_KEY} /> */}
               {/* --- قسم نصائح ذهبية للـ CV --- */}
               <section className="py-16 bg-white px-4 md:px-20">
                 {/* 2. أهم المقالات */}
@@ -875,7 +875,7 @@ useEffect(() => {
                   ))}
                 </div>
               </section>
-              <AdBanner adKey={AD_KEY} />
+              {/* <AdBanner adKey={AD_KEY} /> */}
       <Footer/>
     </div>
   );

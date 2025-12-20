@@ -277,7 +277,7 @@ const existing = safeGetItem("downloads");
           </button>
         </div>
       </header>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
 
       {/* CV Content */}
       <main className="flex-1 flex justify-center py-2 px-1 md:py-4 md:px-8 overflow-y-auto" dir={cvLang == "ar" ? "rtl": "ltr"}>
@@ -431,7 +431,7 @@ const existing = safeGetItem("downloads");
           
         </div>
       </main>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
               <section className="py-16 bg-gray-50 px-4 md:px-20">
                 <div className="max-w-4xl mx-auto">
                   <h2 className="text-3xl font-bold text-center text-gray-900 mb-10">
@@ -496,7 +496,7 @@ const existing = safeGetItem("downloads");
                           ))}
                         </div>
                       </section>
-                      <AdBanner adKey={AD_KEY} />
+                      {/* <AdBanner adKey={AD_KEY} /> */}
                 <div className="max-w-6xl mx-auto text-center mb-12">
                   <h2 className="text-3xl font-bold text-gray-900 mb-4">
                     {t.cv_tips_title}
@@ -527,7 +527,7 @@ const existing = safeGetItem("downloads");
                   ))}
                 </div>
               </section>
-              <AdBanner adKey={AD_KEY} />
+              {/* <AdBanner adKey={AD_KEY} /> */}
       <Footer/>
     </div>
   );

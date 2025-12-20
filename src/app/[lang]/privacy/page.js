@@ -28,7 +28,7 @@ const [openLang, setOpenLang] = useState(false);
           </p>
         
       </div>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       <Footer/>
     </div>
   );

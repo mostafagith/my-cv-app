@@ -283,7 +283,7 @@ const handleSave = () => {
         >
           {t["Save References"]}
         </button>
-        <AdBanner adKey={AD_KEY} />
+        {/* <AdBanner adKey={AD_KEY} /> */}
         {/* Tips Section */}
         {/* <div className="bg-gray-50 border border-gray-200 rounded-xl p-5 mt-8">
           <h3 className="font-semibold text-gray-800 mb-3">{t["Reference Tips:"]}</h3>
@@ -327,7 +327,7 @@ const handleSave = () => {
           <li className="flex items-center"><IoCheckmarkCircle size={16} className="text-teal-500 mx-2" />{t.references_tip_three}</li>
         </ul>
       </section>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       {/* FAQ Section for References */}
       <section className="max-w-4xl mx-auto mt-12 px-6">
         <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
@@ -371,7 +371,7 @@ const handleSave = () => {
           </div>
         </div>
       </section>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       <Footer/>
     </div>
   );

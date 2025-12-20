@@ -40,7 +40,7 @@ export default function SettingsPage() {
     </p>
   ))}
 </div>
-<AdBanner adKey={AD_KEY} />
+{/* <AdBanner adKey={AD_KEY} /> */}
       {/* Content */}
       <div className="flex-1 p-6">
         {/* Site Language */}
@@ -146,7 +146,7 @@ export default function SettingsPage() {
           </select>
         </div>
       </div>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       <Footer/>
     </div>
 

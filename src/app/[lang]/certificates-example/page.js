@@ -116,7 +116,7 @@ export default function ExampleCertificates() {
             {t.certificates_examples_note}
           </p>
         </section>
-        <AdBanner adKey={AD_KEY} />
+        {/* <AdBanner adKey={AD_KEY} /> */}
         <main className="max-w-4xl mx-auto flex-1 p-6 space-y-6">
         <div className="bg-white p-4 rounded-xl">
             <h3 className="text-lg font-bold mb-4 text-black">{t.exampleCertificates}</h3>
@@ -150,7 +150,7 @@ export default function ExampleCertificates() {
             <li>{t.certificates_tip_three}</li>
           </ul>
         </section>
-        <AdBanner adKey={AD_KEY} />
+        {/* <AdBanner adKey={AD_KEY} /> */}
         <Footer/>
     </div>
   );

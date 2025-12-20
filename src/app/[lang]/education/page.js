@@ -344,7 +344,7 @@ const handleSave = () => {
           {t['saveEducation']}
         </button>
       </div>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       {/* Education Tips Section */}
       <section className="max-w-4xl mx-auto mt-12 bg-white border border-gray-200 rounded-xl p-6 space-y-6">
         <div>
@@ -431,7 +431,7 @@ const handleSave = () => {
           <li>{t.education_examples_tip_three}</li>
         </ul>
       </section>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
 
       {/* FAQ Section */}
       <section className="max-w-4xl mx-auto mt-10 px-5">
@@ -480,7 +480,7 @@ const handleSave = () => {
           </div>
         </div>
       </section>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       <Footer/>
     </div>
   );

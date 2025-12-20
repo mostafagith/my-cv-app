@@ -205,7 +205,7 @@ useEffect(() => {
     <option value="pt">{t.portuguese}</option>
   </select>
 </div>
-<AdBanner adKey={AD_KEY} />
+{/* <AdBanner adKey={AD_KEY} /> */}
         {/* Templates Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 ">
           {templates.map((template) => (
@@ -244,7 +244,7 @@ useEffect(() => {
           <span className="text-gray-700 text-sm">{t["you_can_change_template_later"]}</span>
         </div>
       </div>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       <Footer/>
     </div>
   );

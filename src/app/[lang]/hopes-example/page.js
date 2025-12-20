@@ -108,7 +108,7 @@ export default function HopesExample() {
             </p>
           </div>
         </div>
-        <AdBanner adKey={AD_KEY} />
+        {/* <AdBanner adKey={AD_KEY} /> */}
 
         {/* Example Cards */}
         {hopesExamples.map((example, index) => (
@@ -138,7 +138,7 @@ export default function HopesExample() {
           <li>{t["Show enthusiasm and motivation"]}</li>
         </ul>
       </section>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       <Footer/>
     </div>
   );

@@ -39,14 +39,14 @@ export default function AboutPage() {
                     {t.cv_cta_button}
                   </Link>
                 </div>
-                <AdBanner adKey={AD_KEY} />
+                {/* <AdBanner adKey={AD_KEY} /> */}
               </>
             )}
           </div>
         ))}
 
         </div>
-        <AdBanner adKey={AD_KEY} />
+        {/* <AdBanner adKey={AD_KEY} /> */}
       </div>
         <Footer/>
     </>

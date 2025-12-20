@@ -353,7 +353,7 @@ const handlePreview = () => {
             {t["Complete at least 50% of sections to save your CV"]}
           </p>
         )}
-        <AdBanner adKey={AD_KEY} />
+        {/* <AdBanner adKey={AD_KEY} /> */}
 
         <div className="flex items-center gap-2 bg-gray-100 border border-gray-200 rounded-lg p-3 mt-4">
           <IoInformationCircle size={20} className="text-teal-500" />
@@ -389,7 +389,7 @@ const handlePreview = () => {
                   </div>
                 </div>
               </section>
-              <AdBanner adKey={AD_KEY} />
+              {/* <AdBanner adKey={AD_KEY} /> */}
 
               {/* --- قسم نصائح ذهبية للـ CV --- */}
               <section className="py-16 bg-white px-4 md:px-20">
@@ -458,7 +458,7 @@ const handlePreview = () => {
                   ))}
                 </div>
               </section>
-              <AdBanner adKey={AD_KEY} />
+              {/* <AdBanner adKey={AD_KEY} /> */}
       <Footer/>
     </div>
   );

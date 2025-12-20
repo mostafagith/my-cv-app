@@ -85,7 +85,7 @@ const handleBack = () => router.back();
     {t.personal_examples_note}
   </p>
 </section>
-<AdBanner adKey={AD_KEY} />
+{/* <AdBanner adKey={AD_KEY} /> */}
       {/* Page Content */}
       <main className="max-w-4xl mx-auto container mx-auto p-6">
         <div className="bg-white rounded-2xl shadow-md p-6 border border-gray-200">
@@ -128,7 +128,7 @@ const handleBack = () => router.back();
           </div>
         </div>
       </main>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
 <section className="max-w-4xl mx-auto bg-white rounded-2xl shadow-md p-6 border border-gray-200 space-y-6 mb-8">
       {/* عنوان القسم */}
       <div>
@@ -162,7 +162,7 @@ const handleBack = () => router.back();
           <li>{t.personal_tip_three}</li>
         </ul>
       </section>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       <Footer/>
     </div>
   );

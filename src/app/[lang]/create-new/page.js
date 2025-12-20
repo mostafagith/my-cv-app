@@ -382,7 +382,7 @@ const [openLang, setOpenLang] = useState(false);
         </section>
         
       </div>
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       {/* --- محتوى تعليمي للصفحة قبل عرض الأقسام --- */}
       <div className="max-w-5xl mx-auto mb-8 bg-white p-6 rounded-xl shadow-md space-y-6">
         {/* مقدمة عن الصفحة */}
@@ -449,7 +449,7 @@ const [openLang, setOpenLang] = useState(false);
         </div>
       </section>
       {/* معلومات إضافية عن الصفحة */}
-      <AdBanner adKey={AD_KEY} />
+      {/* <AdBanner adKey={AD_KEY} /> */}
       <Footer/>
     </div>
   );
