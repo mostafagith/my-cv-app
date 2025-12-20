@@ -96,7 +96,7 @@ function handleCreateNew() {
 
         <div className="py-3 px-5 md:py-6 md:px-20">
           <div className="flex justify-between items-center mb-8">
-            <h1 className="text-xl font-extrabold text-teal-700 md:text-2xl">
+            <h1 className="lg:text-xl font-extrabold text-teal-700 md:text-xl text-sm">
               {t.createPageTitle || "My CVs"}
             </h1>
             <button
@@ -112,28 +112,28 @@ function handleCreateNew() {
           {cvs.length === 0 ? (
             <>
               {/* --- محتوى تعليمي قبل عرض الـ CVs --- */}
-<div className="max-w-5xl mx-auto mb-8 bg-white p-6 rounded-xl shadow-md space-y-6">
-  <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title1}</h2>
-  {t.downloads_content_paragraphs1.map((p, i) => (
-    <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
-  ))}
+              <div className="max-w-5xl mx-auto mb-8 bg-white p-6 rounded-xl shadow-md space-y-6">
+                <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title1}</h2>
+                {t.downloads_content_paragraphs1.map((p, i) => (
+                  <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
+                ))}
 
-  <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title2}</h2>
-  {t.downloads_content_paragraphs2.map((p, i) => (
-    <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
-  ))}
+                <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title2}</h2>
+                {t.downloads_content_paragraphs2.map((p, i) => (
+                  <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
+                ))}
 
-  <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title3}</h2>
-  {t.downloads_content_paragraphs3.map((p, i) => (
-    <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
-  ))}
+                <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title3}</h2>
+                {t.downloads_content_paragraphs3.map((p, i) => (
+                  <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
+                ))}
 
-  <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title4}</h2>
-  {t.downloads_content_paragraphs4.map((p, i) => (
-    <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
-  ))}
-</div>
-<AdBanner adKey={AD_KEY} />
+                <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title4}</h2>
+                {t.downloads_content_paragraphs4.map((p, i) => (
+                  <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
+                ))}
+              </div>
+              <AdBanner adKey={AD_KEY} />
               <p className="text-gray-600 text-center mt-20">
                 {t.noCvs || "No CVs saved yet."}
               </p>
@@ -141,22 +141,22 @@ function handleCreateNew() {
           ) : (
             <>
             <div className="max-w-5xl mx-auto mb-8 bg-white p-6 rounded-xl shadow-md space-y-6">
-              <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title1}</h2>
+              <h2 className="text-2xl font-bold text-teal-700 text-md">{t.downloads_content_title1}</h2>
               {t.downloads_content_paragraphs1.map((p, i) => (
                 <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
               ))}
 
-              <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title2}</h2>
+              <h2 className="text-2xl font-bold text-teal-700 text-md">{t.downloads_content_title2}</h2>
               {t.downloads_content_paragraphs2.map((p, i) => (
                 <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
               ))}
 
-              <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title3}</h2>
+              <h2 className="text-2xl font-bold text-teal-700 text-md">{t.downloads_content_title3}</h2>
               {t.downloads_content_paragraphs3.map((p, i) => (
                 <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
               ))}
 
-              <h2 className="text-2xl font-bold text-teal-700">{t.downloads_content_title4}</h2>
+              <h2 className="text-2xl font-bold text-teal-700 text-md">{t.downloads_content_title4}</h2>
               {t.downloads_content_paragraphs4.map((p, i) => (
                 <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
               ))}
