@@ -121,9 +121,9 @@ export default function BlogsPage() {
                   </div>
                 </article>
               </Link>
-              {i % 3==0 && i!= 0&&(
-                {/* <AdBanner adKey={AD_KEY} /> */}
-              )}
+              {/* {i % 3==0 && i!= 0&&(
+                 <AdBanner adKey={AD_KEY} /> 
+              )} */}
               </>
             ))
           ) : (
