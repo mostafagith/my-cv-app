@@ -241,7 +241,7 @@ export default async function RootLayout({ children, params }) {
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <div 
           id="container-8e7eb342208347d0285973fbe19d2f68" 
-          className="max-h-[280px] md:max-h-[280px] overflow-hidden flex justify-center my-2 bg-gray-50"
+          className="max-h-[140px] md:max-h-[140px] overflow-hidden flex justify-center my-2 bg-gray-50"
         >
           {/* الإعلان سيظهر هنا ولن يتمدد رأسياً ليغطي الشاشة */}
                 <div id="container-8e7eb342208347d0285973fbe19d2f68"></div>
