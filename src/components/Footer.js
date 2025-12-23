@@ -109,12 +109,12 @@ export default function Footer() {
       <h3 className="text-lg font-semibold mb-4">{t.quick_links}</h3>
       <ul className="space-y-2 text-sm">
         <li>
-          <Link href={`${lang}/about`} className="hover:text-yellow-300 transition-colors">
+          <Link href={`/${lang}/about`} className="hover:text-yellow-300 transition-colors">
             {t.about_us}
           </Link>
         </li>
         <li>
-          <Link href={`${lang}/privacy`} className="hover:text-yellow-300 transition-colors">
+          <Link href={`/${lang}/privacy`} className="hover:text-yellow-300 transition-colors">
             {t.privacy_policy}
           </Link>
         </li>
